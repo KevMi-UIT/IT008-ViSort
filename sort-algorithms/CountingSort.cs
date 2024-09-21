@@ -1,4 +1,4 @@
-public class CountingSort
+public static class CountingSort
 {
     public static List<int> Sort(List<int> list)
     {
