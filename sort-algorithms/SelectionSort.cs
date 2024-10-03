@@ -17,9 +17,7 @@ public static class SelectionSort {
             }
             if (min_idx != i) 
             {
-                T temp = list[i];
-                list[i] = list[min_idx];
-                list[min_idx] = temp;
+                swap (list, i, min_idx);
             }
         }
     }
