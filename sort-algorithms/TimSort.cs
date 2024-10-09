@@ -1,9 +1,4 @@
-using System.Data;
-using System.Linq.Expressions;
-using System.Security.Cryptography;
-using System.Security.Principal;
-
-public  class TimSort
+public static class TimSort
 {
     public const int Run = 32;
 
