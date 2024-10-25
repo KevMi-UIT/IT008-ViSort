@@ -1,36 +1,48 @@
-public static class QuickSort
+public class QuickSort
 {
-    private static int Partition<T>(List<T> list, int low, int high) where T : IComparable<T>
+    private List<int> _List;
+    private SortCallback _Callback;
+    private int _SleepTime;
+
+    public QuickSort(List<int> _ListIn, SortCallback _CallbackIn, in int _SleepTimeIn)
     {
-        T pivot = list[high];
+        _List = _ListIn;
+        _Callback = _CallbackIn;
+        _SleepTime = _SleepTimeIn;
+    }
+
+    private int Partition(int low, int high)
+    {
+        int pivot = _List[high];
         int i = low - 1;
         for (int j = low; j <= high - 1; j++)
         {
-            if (list[j].CompareTo(pivot) < 0)
+            if (_List[j] < pivot)
             {
                 i++;
-                swap(list, i, j);
+                Thread.Sleep(_SleepTime);
+                swap(_List, i, j);
+                _Callback(_List);
             }
         }
-        swap(list, i + 1, high);
+        Thread.Sleep(_SleepTime);
+        swap(_List, i + 1, high);
+        _Callback(_List);
         return i + 1;
     }
 
-    public static void Recursive<T>(List<T> list, int low, int high) where T : IComparable<T>
+    public void Recursive(int low, int high)
     {
         if (low < high)
         {
-            int pi = Partition(list, low, high);
-            Recursive(list, low, pi - 1);
-            Recursive(list, pi + 1, high);
+            int pi = Partition(low, high);
+            Recursive(low, pi - 1);
+            Recursive(pi + 1, high);
         }
     }
 
-    public static void Sort<T>(List<T> list) where T : IComparable<T>
+    public void Sort()
     {
-        Recursive(list, 0, list.Count - 1);
+        Recursive(0, _List.Count - 1);
     }
 }
-
-
-
