@@ -33,7 +33,7 @@ namespace ViSort.Models
         [BsonElement("score")]
         internal int Score { get; private set; }
 
-        internal UserModel(string username, string password, int score)
+        internal UserModel(string username, string password, int score = 0)
         {
             Username = username;
             Password = password;

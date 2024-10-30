@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ViSort.Models;
@@ -42,6 +43,27 @@ namespace ViSort.Database
         {
             var projection = Builders<UserModel>.Projection.Include(u => u.Username).Include(u => u.Score);
             return await UsersCollection.Find(_ => true).Project<UserModel>(projection).SortByDescending(u => u.Score).ToListAsync();
+        }
+
+        public async void DeleteUser(UserModel user)
+        {
+            var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
+            var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
+            if (existingUser != null)
+            {
+                if (UserModel.VerifyPassword(user.Password, existingUser.Password))
+                {
+                    UsersCollection.DeleteOne(filter);
+                }
+                else
+                {
+                    throw new UnauthorizedAccessException("Password does not match.");
+                }
+            }
+            else
+            {
+                throw new Exception("User not found.");
+            }
         }
     }
 }
