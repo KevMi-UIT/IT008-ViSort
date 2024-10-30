@@ -24,5 +24,12 @@ namespace ViSort
         {
             InitializeComponent();
         }
+        private void OpenGameWindow(object sender, RoutedEventArgs e)
+        {
+            var gameWindow = new GameForm.GameWindow();
+            gameWindow.Show(); // Sử dụng ShowDialog() nếu muốn dạng modal
+        }
+
+
     }
 }

@@ -1,0 +1,5 @@
+﻿C++ trên Visual Studio Code
+Đường dẫn MinGW
+Cấu trúc dữ liệu và giải thuật
+Xử lý đa luồng trong C#
+Tối ưu hóa cơ sở dữ liệu SQL
