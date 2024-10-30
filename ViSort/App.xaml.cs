@@ -11,6 +11,7 @@ namespace ViSort
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    /// new branch's first commit?
     public partial class App : Application
     {
     }
