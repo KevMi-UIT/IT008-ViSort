@@ -215,7 +215,9 @@
     <Analyzer Include="packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GameForm\question.txt" />
+    <Content Include="GameForm\question.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="mongocrypt.dll" />
   </ItemGroup>
   <ItemGroup />

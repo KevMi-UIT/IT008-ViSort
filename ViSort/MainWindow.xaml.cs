@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +27,15 @@ namespace ViSort
         }
         private void OpenGameWindow(object sender, RoutedEventArgs e)
         {
+            var QuestFilePath = "GameForm/question.txt";
+            if (!File.Exists(QuestFilePath))
+            {
+                MessageBox.Show("Không tìm thấy tệp câu hỏi. \nVui lòng kiểm tra lại đường dẫn", "Lỗi nè", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var gameWindow = new GameForm.GameWindow();
-            gameWindow.Show(); // Sử dụng ShowDialog() nếu muốn dạng modal
+            gameWindow.ShowDialog(); // Sử dụng ShowDialog() nếu muốn dạng modal
         }
 
 
