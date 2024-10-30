@@ -7,17 +7,39 @@
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
     <Grid Margin="10">
-        <Label x:Name="PracticeGame_label" Content="PRACTICE GAME" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3,1" FontSize="32"></Label>
-        <Border BorderBrush="Black" BorderThickness="2" Padding="10" Margin="5,68,5,35" CornerRadius="5">
+        <Label x:Name="PracticeGame_label" Content="PRACTICE GAME" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3,1" FontSize="32" FontFamily="Lucida Handwriting">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCBF034"/>
+                    <GradientStop Color="#FF38C850" Offset="0.598"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Border BorderBrush="Black" BorderThickness="2" Padding="10" Margin="5,68,5,35" CornerRadius="0">
             <WrapPanel>
                 <!-- Hiển thị câu hỏi -->
                 <TextBlock x:Name="QuestionTextBlock" FontSize="16" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
             </WrapPanel>
         </Border>
         <!-- Nút Quay lại -->
-            <Button x:Name="PrevQuestion_Button" Content="Quay lại" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="80" Margin="10,0,0,10" Click="PreviousQuestion" />
+        <Button x:Name="PrevQuestion_Button" Content="Quay lại" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="80" Margin="10,0,0,10" Click="PreviousQuestion" />
 
-            <!-- Nút Tiếp theo -->
-            <Button x:Name="NextQuestion_Button" Content="Tiếp theo" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" Margin="0,0,10,10" Click="NextQuestion" />
+        <!-- Nút Tiếp theo -->
+        <Button x:Name="NextQuestion_Button" Content="Tiếp theo" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" Margin="0,0,10,10" Click="NextQuestion" />
+        <!-- Wrap multiple choice-->
+
+        <WrapPanel x:Name="MultipleChoiceWrapPanel" Margin="0,276,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="716">
+            <RadioButton x:Name="Buble_RadioButton" Content="Buble Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Bucket_RadioButton" Content="Bucket Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Counting_RadioButton" Content="Counting Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Heap_RadioButton" Content="Heap Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Insertion_RadioButton" Content="Insertion Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Quick_RadioButton" Content="Quick Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Radix_RadioButton" Content="Radix Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Selection_RadioButton" Content="Selection Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Shell_RadioButton" Content="Shell Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Tim_RadioButton" Content="Tim Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="Tree_RadioButton" Content="Tree Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+        </WrapPanel>
     </Grid>
 </Window>
