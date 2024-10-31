@@ -12,26 +12,45 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ViSort.Sorts;
 
-namespace ViSort.GameForm
+namespace ViSort.QuizForm
 {
     /// <summary>
-    /// Interaction logic for GameWindow.xaml
+    /// Interaction logic for QuizWindow.xaml
     /// </summary>
-    public partial class GameWindow : Window
+    public partial class QuizWindow : Window
     {
-        public GameWindow()
+        private class Question
+        {
+            public string Content { get; set; }
+            public List<SortTypes> Answer { get; set; }
+            public SortTypes SelectedAnswer { get; set; }
+            public bool isSelected = false;
+
+            public Question(string content, List<SortTypes> answers)
+            {
+                Content = content;
+                Answer = answers;
+                SelectedAnswer = default;
+            }
+        }
+
+        List<SortTypes> ans = Enum.GetValues(typeof(SortTypes)).Cast<SortTypes>().ToList();
+
+        public QuizWindow()
         {
             InitializeComponent();
             LoadAndShuffleQuestions();
             DisplayCurrentQuestion();
         }
-        private List<string> QuestionList = new List<string>();
+
+        private List<Question> QuestionList = new List<Question>();
         private int currentQuestionIndex = 0;
 
         private void LoadAndShuffleQuestions()
         {
-            var filePath = "GameForm/question.txt";
+            var filePath = "QuizForm/question.txt";
 
             // Đọc tất cả câu hỏi từ tệp
             var questions = File.ReadAllLines(filePath).ToList();
@@ -41,9 +60,9 @@ namespace ViSort.GameForm
             questions = questions.OrderBy(x => random.Next()).ToList();
 
             // Thêm câu hỏi vào WrapPanel
-            foreach (var question in questions)
+            foreach (var q in questions)
             {
-                QuestionList.Add(question);
+                QuestionList.Add(new Question(q, ans));
             }
         }
 
@@ -51,7 +70,7 @@ namespace ViSort.GameForm
         {
             if (currentQuestionIndex >= 0 && currentQuestionIndex < QuestionList.Count)
             {
-                QuestionTextBlock.Text = QuestionList[currentQuestionIndex];
+                QuestionTextBlock.Text = QuestionList[currentQuestionIndex].Content;
             }
         }
         private void PreviousQuestion(object sender, RoutedEventArgs e)

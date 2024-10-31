@@ -27,14 +27,14 @@ namespace ViSort
         }
         private void OpenGameWindow(object sender, RoutedEventArgs e)
         {
-            var QuestFilePath = "GameForm/question.txt";
+            var QuestFilePath = "QuizForm/question.txt";
             if (!File.Exists(QuestFilePath))
             {
                 MessageBox.Show("Không tìm thấy tệp câu hỏi. \nVui lòng kiểm tra lại đường dẫn", "Lỗi nè", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            var gameWindow = new GameForm.GameWindow();
+            var gameWindow = new QuizForm.QuizWindow();
             gameWindow.ShowDialog(); // Sử dụng ShowDialog() nếu muốn dạng modal
         }
 

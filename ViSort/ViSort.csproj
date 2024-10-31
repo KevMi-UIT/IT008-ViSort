@@ -161,13 +161,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="GameForm\GameWindow.xaml.cs">
-      <DependentUpon>GameWindow.xaml</DependentUpon>
+    <Compile Include="QuizForm\QuizWindow.xaml.cs">
+      <DependentUpon>QuizWindow.xaml</DependentUpon>
     </Compile>
-	  <Compile Include="Models\UserUtils.cs" />
-	  <Compile Include="Sorts\SortTypes.cs" />
-	  <Compile Include="Utils\GenRandomList.cs" />
-	  <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Models\UserUtils.cs" />
+    <Compile Include="Sorts\SortTypes.cs" />
+    <Compile Include="Utils\GenRandomList.cs" />
+    <Compile Include="Utils\Utils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -182,7 +182,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="GameForm\GameWindow.xaml">
+    <Page Include="QuizForm\QuizWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,7 +222,7 @@
     <Analyzer Include="packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GameForm\question.txt">
+    <Content Include="QuizForm\question.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="mongocrypt.dll" />
