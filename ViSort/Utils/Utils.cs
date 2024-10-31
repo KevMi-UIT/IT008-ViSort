@@ -12,6 +12,7 @@ namespace ViSort.Utils
         {
             return Convert.ToInt32(MAX_SCORE / (1 + (steps * SCORE_SENSITIVITY * (questions / answered))));
         }
+
         internal static void Swap<T>(ref T a, ref T b)
         {
             (a, b) = (b, a);
