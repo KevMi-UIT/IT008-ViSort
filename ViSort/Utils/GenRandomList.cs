@@ -6,7 +6,7 @@ namespace ViSort.Utils
 {
     internal static class GenRandomList
     {
-        enum RandomGenType
+        enum RandomGenTypes
         {
             Normal,
             Sorted,
@@ -19,19 +19,19 @@ namespace ViSort.Utils
         private static readonly int NEARLY_SORTED_SENSITIVITY = 10;
         private static readonly Random RAND = new Random();
 
-        static List<int> GenList(int length, RandomGenType type)
+        static List<int> GenList(int length, RandomGenTypes type)
         {
             switch (type)
             {
-                case RandomGenType.Normal:
+                case RandomGenTypes.Normal:
                     return GenNormal(length);
-                case RandomGenType.Sorted:
+                case RandomGenTypes.Sorted:
                     return GenSorted(length);
-                case RandomGenType.SortedReverse:
+                case RandomGenTypes.SortedReverse:
                     return GenSortedReverse(length);
-                case RandomGenType.NearlySorted:
+                case RandomGenTypes.NearlySorted:
                     return GenNearlySorted(length);
-                case RandomGenType.Mirror:
+                case RandomGenTypes.Mirror:
                     return GenMirror(length);
                 default:
                     throw new ArgumentException("Invalid list type");

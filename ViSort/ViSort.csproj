@@ -162,8 +162,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\UserUtils.cs" />
-    <Compile Include="Sorts\Sorts.cs" />
-    <Compile Include="Sorts\SortUtils.cs" />
+    <Compile Include="Sorts\SortTypes.cs" />
     <Compile Include="Utils\GenRandomList.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Page Include="MainWindow.xaml">

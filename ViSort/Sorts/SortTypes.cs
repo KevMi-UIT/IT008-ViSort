@@ -1,6 +1,6 @@
 ﻿namespace ViSort.Sorts
 {
-    enum SortType
+    enum SortTypes
     {
         Bubble,
         Bucket,
