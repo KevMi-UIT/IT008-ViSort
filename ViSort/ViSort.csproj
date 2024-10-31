@@ -164,6 +164,10 @@
     <Compile Include="GameForm\GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
+	  <Compile Include="Models\UserUtils.cs" />
+	  <Compile Include="Sorts\SortTypes.cs" />
+	  <Compile Include="Utils\GenRandomList.cs" />
+	  <Compile Include="Utils\Utils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -172,6 +176,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Database\DatabaseConstants.cs" />
+    <Compile Include="Database\UserService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -182,6 +188,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
