@@ -10,60 +10,63 @@ namespace ViSort.Database
     {
         private readonly IMongoCollection<UserModel> UsersCollection;
 
-        public UserService()
+        internal UserService()
         {
             var client = new MongoClient(DatabaseConstants.ConnectionString);
             var database = client.GetDatabase(DatabaseConstants.Database);
             UsersCollection = database.GetCollection<UserModel>(DatabaseConstants.UsersCollection);
         }
 
-        public async Task SaveOrUpdateUser(UserModel user)
+        private static void CheckUser(UserModel user, UserModel userDB)
         {
-            var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
-            var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
-            if (existingUser != null)
+            if (userDB == null)
             {
-                if (UserModel.VerifyPassword(user.Password, existingUser.Password))
-                {
-                    var update = Builders<UserModel>.Update.Set(u => u.Score, user.Score);
-                    await UsersCollection.UpdateOneAsync(filter, update);
-                }
-                else
-                {
-                    throw new System.UnauthorizedAccessException("Password does not match.");
-                }
+                throw new UnauthorizedAccessException("User not found.");
             }
-            else
+            if (user.EncryptedPassword != userDB.EncryptedPassword)
             {
-                await UsersCollection.InsertOneAsync(user);
+                throw new UnauthorizedAccessException("Password does not match.");
             }
         }
 
-        public async Task<List<UserModel>> GetAllUsersResult()
+        private async Task AddUserAsync(UserModel user)
         {
-            var projection = Builders<UserModel>.Projection.Include(u => u.Username).Include(u => u.Score);
+            await UsersCollection.InsertOneAsync(user);
+        }
+
+        internal async Task<List<UserModel>> GetAllUsersResult()
+        {
+            var projection = Builders<UserModel>.Projection.Include(u => u.Username).Include(u => u.Score != 0);
             return await UsersCollection.Find(_ => true).Project<UserModel>(projection).SortByDescending(u => u.Score).ToListAsync();
         }
 
-        public async void DeleteUser(UserModel user)
+        internal async Task<bool> AuthUserAsync(UserModel user)
         {
             var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
             var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
-            if (existingUser != null)
+            if (existingUser == null)
             {
-                if (UserModel.VerifyPassword(user.Password, existingUser.Password))
-                {
-                    UsersCollection.DeleteOne(filter);
-                }
-                else
-                {
-                    throw new UnauthorizedAccessException("Password does not match.");
-                }
+                await AddUserAsync(user);
+                return true;
             }
-            else
-            {
-                throw new Exception("User not found.");
-            }
+            return user.EncryptedPassword == existingUser.EncryptedPassword;
+        }
+
+        internal async Task UpdateScore(UserModel user)
+        {
+            var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
+            var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
+            CheckUser(user, existingUser);
+            var update = Builders<UserModel>.Update.Set(u => u.Score, user.Score);
+            await UsersCollection.UpdateOneAsync(filter, update);
+        }
+
+        internal async void DeleteUserAsync(UserModel user)
+        {
+            var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
+            var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
+            CheckUser(user, existingUser);
+            UsersCollection.DeleteOne(filter);
         }
     }
 }

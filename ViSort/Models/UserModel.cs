@@ -17,15 +17,16 @@ namespace ViSort.Models
         [BsonElement("password")]
         internal string EncryptedPassword { get; private set; }
 
+        private string _password;
         internal string Password
         {
             get
             {
-                return Password;
+                return _password;
             }
             private set
             {
-                Password = value;
+                _password = value;
                 EncryptedPassword = EncryptPassword(value);
             }
         }
@@ -36,7 +37,18 @@ namespace ViSort.Models
         internal UserModel(string username, string password, int score = 0)
         {
             Username = username;
+            _password = password;
+            EncryptedPassword = EncryptPassword(password);
+            Score = score;
+        }
+
+        internal void UpdatePassword(string password)
+        {
             Password = password;
+        }
+
+        internal void SetScore(int score)
+        {
             Score = score;
         }
 
