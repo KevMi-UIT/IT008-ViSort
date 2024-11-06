@@ -27,7 +27,8 @@ namespace ViSort
     {
         List<int> list;
         private int threadDelay = 100;
-        private GenRandomList.RandomGenTypes selectedType = new GenRandomList.RandomGenTypes();
+        private AlgorithmBase algorithm;
+        private GenRandomList.RandomGenTypes selectedType = GenRandomList.RandomGenTypes.None;
         public MainWindow()
         {
             InitializeComponent();
@@ -80,10 +81,11 @@ namespace ViSort
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
+            
             Random rd = new Random();
             int length = rd.Next(20, 100); // Số lượng phần tử trong danh sách
 
-            List<int> list = GenRandomList.GenList(length, selectedType);
+            list = GenRandomList.GenList(length, selectedType);
 
             // Hiển thị danh sách trong TextBox hoặc ListBox, ví dụ:
             CreateResult.Text = string.Join(", ", list);

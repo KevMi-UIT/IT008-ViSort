@@ -12,7 +12,8 @@ namespace ViSort.Utils
             Sorted,
             SortedReverse,
             NearlySorted,
-            Mirror
+            Mirror,
+            None
         }
         private static readonly int MIN = 0;
         private static readonly int MAX = 999;
@@ -35,6 +36,7 @@ namespace ViSort.Utils
                     return GenMirror(length);
                 default:
                     throw new ArgumentException("Invalid list type");
+                    
             }
         }
 
