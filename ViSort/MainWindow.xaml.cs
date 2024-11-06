@@ -25,8 +25,10 @@ namespace ViSort
         {
             InitializeComponent();
         }
-        private void OpenGameWindow(object sender, RoutedEventArgs e)
+
+        private void OpenQuizWindow(object sender, RoutedEventArgs e)
         {
+
             var QuestFilePath = "QuizForm/question.txt";
             if (!File.Exists(QuestFilePath))
             {
@@ -34,8 +36,8 @@ namespace ViSort
                 return;
             }
 
-            var gameWindow = new QuizForm.QuizWindow();
-            gameWindow.ShowDialog(); // Sử dụng ShowDialog() nếu muốn dạng modal
+            var UserFillForm = new UserFillForm();
+            UserFillForm.ShowDialog();
         }
 
 

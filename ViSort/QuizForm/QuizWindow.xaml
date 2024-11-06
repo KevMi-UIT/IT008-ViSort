@@ -15,8 +15,8 @@
                 </LinearGradientBrush>
             </Label.Foreground>
         </Label>
-        <Border BorderBrush="Black" BorderThickness="2" Padding="10" Margin="5,68,5,35" CornerRadius="0">
-            <WrapPanel>
+        <Border BorderBrush="Black" BorderThickness="2" Padding="10" Margin="5,60,5,50" CornerRadius="0">
+            <WrapPanel x:Name="QuestionWrapPanel" Margin="5,5,5,100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <!-- Hiển thị câu hỏi -->
                 <TextBlock x:Name="QuestionTextBlock" FontSize="16" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
             </WrapPanel>

@@ -37,7 +37,36 @@ namespace ViSort.QuizForm
         }
 
         List<SortTypes> ans = Enum.GetValues(typeof(SortTypes)).Cast<SortTypes>().ToList();
-
+        public SortTypes ConvertSortTypes(string str)
+        {
+            switch (str)
+            {
+                case "Bubble Sort":
+                    return SortTypes.Bubble;
+                case "Bucket Sort":
+                    return SortTypes.Bucket;
+                case "Counting Sort":
+                    return SortTypes.Counting;
+                case "Selection Sort":
+                    return SortTypes.Selection;
+                case "Insertion Sort":
+                    return SortTypes.Insertion;
+                case "Merge Sort":
+                    return SortTypes.Merge;
+                case "Quick Sort":
+                    return SortTypes.Quick;
+                case "Heap Sort":
+                    return SortTypes.Heap;
+                case "Radix Sort":
+                    return SortTypes.Radix;
+                case "Shell Sort":
+                    return SortTypes.Shell;
+                case "Tim Sort":
+                    return SortTypes.Tim;
+                default:
+                    return SortTypes.Tree;
+            }
+        }
         public QuizWindow()
         {
             InitializeComponent();
@@ -59,7 +88,7 @@ namespace ViSort.QuizForm
             var random = new Random();
             questions = questions.OrderBy(x => random.Next()).ToList();
 
-            // Thêm câu hỏi vào WrapPanel
+            // Thêm câu hỏi vào list
             foreach (var q in questions)
             {
                 QuestionList.Add(new Question(q, ans));
@@ -96,6 +125,47 @@ namespace ViSort.QuizForm
         {
             // Xác định nút radio nào đã được chọn
             var selectedRadioButton = sender as RadioButton;
+            //switch (selectedRadioButton.Content)
+            //{
+            //    case "Bubble Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Bubble;
+            //        break;
+            //    case "Bucket Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Bucket;
+            //        break;
+            //    case "Counting Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Counting;
+            //        break;
+            //    case "Selection Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Selection;
+            //        break;
+            //    case "Insertion Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Insertion;
+            //        break;
+            //    case "Merge Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Merge;
+            //        break;
+            //    case "Quick Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Quick;
+            //        break;
+            //    case "Heap Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Heap;
+            //        break;
+            //    case "Radix Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Radix;
+            //        break;
+            //    case "Shell Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Shell;
+            //        break;
+            //    case "Tim Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Tim;
+            //        break;
+            //    case "Tree Sort":
+            //        QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Tree;
+            //        break;
+            //    default: break;
+
+            //}
 
             if (selectedRadioButton != null)
             {

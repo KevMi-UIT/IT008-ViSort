@@ -166,6 +166,9 @@
     </Compile>
     <Compile Include="Models\UserUtils.cs" />
     <Compile Include="Sorts\SortTypes.cs" />
+    <Compile Include="UserFillForm\UserFillForm.xaml.cs">
+      <DependentUpon>UserFillForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\GenRandomList.cs" />
     <Compile Include="Utils\Utils.cs" />
     <Page Include="MainWindow.xaml">
@@ -183,6 +186,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="QuizForm\QuizWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserFillForm\UserFillForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,41 @@
+﻿<Window x:Class="ViSort.UserFillForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViSort"
+        mc:Ignorable="d"
+        Title="User Authentication" Height="175" Width="400" Closing="Closing_window">
+    <Grid Width="400" Margin="0,0,0,20">
+
+        <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        
+            <!-- Title 2-->
+        
+
+        <!-- User name -->
+            <TextBlock Text="User name:" Margin="5" VerticalAlignment="Center" Grid.Row="1" />
+            <TextBox x:Name="UserName" Grid.Column="1" Margin="5" Grid.Row="1" TabIndex="0" />
+
+            <!-- Password -->
+        
+            <TextBlock Text="Password:" Grid.Row="2" Margin="5" VerticalAlignment="Center" />
+            <PasswordBox x:Name="PasswordBox" Grid.Row="2" Grid.Column="1" Margin="5" TabIndex="1"/>
+            <TextBox x:Name="PasswordTextBox" Grid.Row="2" Grid.Column="1" Margin="5" Visibility="Collapsed"/>
+            <CheckBox Content="Show Password" x:Name="showPasswordCheckBox" Checked="ShowPassword_Checked" Unchecked="ShowPassword_Unchecked" Grid.Row="3" Grid.Column="1" Margin="5,5,5,5"/>
+        
+
+        <!-- Nút Submit -->
+        <Button Content="Submit" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10" Click="SubmitButton_Click" />
+    </Grid>
+</Window>

@@ -17,15 +17,16 @@ namespace ViSort.Models
         [BsonElement("password")]
         internal string EncryptedPassword { get; private set; }
 
+        private string passwordValue;
         internal string Password
         {
             get
             {
-                return Password;
+                return passwordValue;
             }
             private set
             {
-                Password = value;
+                passwordValue = value;
                 EncryptedPassword = EncryptPassword(value);
             }
         }
