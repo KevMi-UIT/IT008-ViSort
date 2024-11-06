@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViSort"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+            Title="VISORT: PRACTICE" Height="800" Width="1024" Background="#FF9FE0FA" FontWeight="SemiBold" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="MainForm">
+
+        <Grid x:Name="Display" Height="800" Margin="14,4,-4,203" IsEnabled="False" Opacity="0">
+            <RichTextBox x:Name="VisualisationByColumn" Background="#FF7E7E7E" Height="611" Width="1014" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-10,3,0,0"/>
+            <RichTextBox x:Name="CodeBox" IsReadOnly="True" FontFamily="Consolas" FontSize="14" Background="#FF3F3F3F" Foreground="White" MinWidth="10" MinHeight="10" Margin="700,3,10,0"/>
+        </Grid>
+
+        <Label x:Name="Title" Content="VISORT" VerticalAlignment="Top" FontSize="120" FontFamily="Britannic Bold"  RenderTransformOrigin="0.5,0.5" Margin="503,15,112,0" AutomationProperties.IsOffscreenBehavior="FromClip" Background="{x:Null}">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF135E22" Offset="0"/>
+                    <GradientStop Color="#FFE8DD38" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-18.199"/>
+                    <TranslateTransform X="-11.671"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+
+
+        <Grid x:Name="Control" HorizontalAlignment="Left" Margin="-17,590,0,41" Width="331">
+            <Button x:Name="PlayStopButton" Content="Play/Stop" Margin="34,0,0,15" Background="#FFB9D1EA" FontFamily="Arial Black" FontSize="16" Click="PlayStopButton_Click" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100"/>
+            <Button x:Name="Create" Content="Create" Margin="44,0,0,62"  FontFamily="Arial Black" FontSize="16" Foreground="Black" BorderThickness="5" BorderBrush="#FF413E3E" Click="Create_Click" Height="77" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="80">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Fill="#FF707070" Stroke="#FF707070" StrokeThickness="10"/>
+                            <Ellipse Fill="#FFB9D1EA"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="JumpToEnd" Content="Finish" Margin="194,0,0,15" Background="#FFB9D1EA" FontFamily="Arial Black" FontSize="16" Click="JumpToEnd_Click" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100"/>
+            <TextBox x:Name="CreateResult" Margin="184,0,0,91" TextWrapping="Wrap" Text="Create Result" Height="19" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="120" IsReadOnly="True" Focusable="False" ClipToBounds="True" SnapsToDevicePixels="True" Grid.IsSharedSizeScope="True" MinHeight="20" MinWidth="20"/>
+        </Grid>
+
+        <Grid x:Name="Speed" VerticalAlignment="Top" Height="37" Margin="44,737,779,0">
+
+            <Slider x:Name="SpeedChange" Maximum="5" Minimum="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Margin="10,0,77,0" Height="27" VerticalAlignment="Top" IsMoveToPointEnabled="True" ValueChanged="SpeedChange_ValueChanged" />
+            <TextBox x:Name="CurrentSpeed" TextWrapping="Wrap" Margin="147,3,20,0" Width="20" Height="15" VerticalAlignment="Top" LostFocus="CurrentSpeed_LostFocus" KeyDown="CurrentSpeed_KeyDown" FlowDirection="RightToLeft" />
+        </Grid>
+
+        <Grid x:Name="SortType" HorizontalAlignment="Left" Margin="28,120,0,392" Grid.IsSharedSizeScope="True" Width="388" >
+            <Label x:Name="AlgorithmName" Content="EXAMPLE" Height="Auto" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,26,0,0" FontSize="32" Foreground="#FF38C6B7" FontFamily="Cambria Math" ClipToBounds="True"/>
+            <ComboBox x:Name="SelectSortAlgorithms" Text="-Select your algorithm-" Height="30" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,106,0,0" SelectionChanged="SelectSortAlgorithms_SelectionChanged">
+                <ComboBoxItem Content="Insertion Sort" />
+                <ComboBoxItem Content="Selection Sort" />
+                <ComboBoxItem Content="Bubble Sort" />
+            </ComboBox>
+            <RadioButton x:Name="NormalGenerate" Content="Normal" FontSize="20" Margin="10,156,262,0" Height="26" VerticalAlignment="Top"  Width="116" Checked="NormalGenerate_Checked"/>
+            <RadioButton x:Name="SortedGenerate" Content="Sorted" FontSize="20" Margin="202,106,70,0" Height="25" VerticalAlignment="Top" Width="116" Checked="SortedGenerate_Checked"/>
+            <RadioButton x:Name="SortedReverseGenerate" Content="Sorted Reverse" FontSize="20" Margin="202,156,15,0" Height="26" VerticalAlignment="Top" Width="171" Checked="SortedReverseGenerate_Checked"/>
+            <RadioButton x:Name="NearlySortedGenerate" Content="Nearly Sorted" FontSize="20" Margin="202,205,38,0" Height="33" VerticalAlignment="Top" Checked="NearlySortedGenerate_Checked"/>
+            <RadioButton x:Name="MirrorGenerate" Content="Mirror" FontSize="20" Margin="10,210,287,0" Height="31" VerticalAlignment="Top" Checked="MirrorGenerate_Checked"/>
+        </Grid>
+
     </Grid>
 </Window>

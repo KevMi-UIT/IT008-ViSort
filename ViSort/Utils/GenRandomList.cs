@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace ViSort.Utils
 {
-    internal static class GenRandomList
+    internal class GenRandomList
     {
-        enum RandomGenTypes
+        internal enum RandomGenTypes
         {
             Normal,
             Sorted,
@@ -19,7 +19,7 @@ namespace ViSort.Utils
         private static readonly int NEARLY_SORTED_SENSITIVITY = 10;
         private static readonly Random RAND = new Random();
 
-        static List<int> GenList(int length, RandomGenTypes type)
+        internal static List<int> GenList(int length, RandomGenTypes type)
         {
             switch (type)
             {
@@ -84,5 +84,7 @@ namespace ViSort.Utils
             }
             return list;
         }
+
     }
 }
+    
