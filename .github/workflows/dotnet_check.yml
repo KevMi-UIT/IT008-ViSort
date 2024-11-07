@@ -3,8 +3,11 @@ name: Dotnet Check
 on:
   push:
     paths:
-      - "**.cs"
-      - ".editorconfig"
+      - "**/*.cs"
+      - "**/.editorconfig"
+    branches:
+      - "**"
+  pull_request:
 
 jobs:
   check-format:
@@ -14,7 +17,7 @@ jobs:
 
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0'
+          dotnet-version: "8.0"
           cache: true
 
       - name: Install dotnet-format tool
