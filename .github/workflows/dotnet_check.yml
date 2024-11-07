@@ -16,14 +16,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0"
-          cache: true
-
-      - name: Install dotnet-format tool
-        run: dotnet tool install -g dotnet-format
-
       - name: Run dotnet format
-        working-directory: ViSort
-        run: dotnet-format.exe '.\ViSort.sln' --check -v detailed --fix-whitespace --fix-style info
+        uses: xt0rted/dotnet-format@v1
