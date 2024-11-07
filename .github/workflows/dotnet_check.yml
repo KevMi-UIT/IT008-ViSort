@@ -23,6 +23,11 @@ jobs:
       - name: Run dotnet format check
         working-directory: ViSort
         run: | 
-          dotnet format ".\ViSort.sln" style -v d --verify-no-changes
-          dotnet format ".\ViSort.sln" whitespace -v d --verify-no-changes
-          dotnet format ".\ViSort.sln" analyzers -v d --verify-no-changes
+          $output = output dotnet format ".\ViSort.sln" style --verify-no-changes
+          $output += dotnet format ".\ViSort.sln" whitespace --verify-no-changes
+          $output += dotnet format ".\ViSort.sln" analyzers --verify-no-changes
+
+          if ($output) {
+            Write-host "There's problem!!"
+            exit 1
+          }
