@@ -19,11 +19,10 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0"
-          cache: true
 
-      - name: Install dotnet-format tool
-        run: dotnet tool install -g dotnet-format
-
-      - name: Run dotnet format
+      - name: Run dotnet format check
         working-directory: ViSort
-        run: dotnet-format.exe '.\ViSort.sln' --check -v detailed --fix-whitespace --fix-style info
+        run: | 
+          dotnet format ".\ViSort.sln" style -v d --verify-no-changes
+          dotnet format ".\ViSort.sln" whitespace -v d --verify-no-changes
+          dotnet format ".\ViSort.sln" analyzers -v d --verify-no-changes
