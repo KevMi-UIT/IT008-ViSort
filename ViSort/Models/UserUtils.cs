@@ -2,18 +2,21 @@
 
 namespace ViSort.Models;
 
-internal static class UserUtils
+internal static partial class UserUtils
 {
-    private static readonly Regex UsernameRegex = new Regex(@"^[A-Za-z0-9]+$");
-    private static readonly Regex PasswordRegex = new Regex(@"^.{4,}$");
+    [GeneratedRegex(@"^[A-Za-z0-9]+$")]
+    private static partial Regex UsernameRegex();
+
+    [GeneratedRegex(@"^.{4,}$")]
+    private static partial Regex PasswordRegex();
 
     public static bool ValidateUsername(string username)
     {
-        return UsernameRegex.IsMatch(username);
+        return UsernameRegex().IsMatch(username);
     }
 
     public static bool ValidatePassword(string password)
     {
-        return PasswordRegex.IsMatch(password);
+        return PasswordRegex().IsMatch(password);
     }
 }

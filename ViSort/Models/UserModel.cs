@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -54,26 +53,22 @@ internal class UserModel
 
     internal static string EncryptPassword(string unencryptedPassword)
     {
-        using (Aes aes = Aes.Create())
-        {
-            aes.Key = GetHash(unencryptedPassword); // Create the AES key using the password's hash
-            aes.GenerateIV();
-            byte[] iv = aes.IV;
+        using Aes aes = Aes.Create();
+        aes.Key = GetHash(unencryptedPassword); // Create the AES key using the password's hash
+        aes.GenerateIV();
+        byte[] iv = aes.IV;
 
-            // Encrypt the password
-            using (ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, iv))
-            {
-                byte[] passwordBytes = Encoding.UTF8.GetBytes(unencryptedPassword);
-                byte[] encryptedPassword = encryptor.TransformFinalBlock(passwordBytes, 0, passwordBytes.Length);
+        // Encrypt the password
+        using ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, iv);
+        byte[] passwordBytes = Encoding.UTF8.GetBytes(unencryptedPassword);
+        byte[] encryptedPassword = encryptor.TransformFinalBlock(passwordBytes, 0, passwordBytes.Length);
 
-                // Combine IV and encrypted password for storage
-                byte[] result = new byte[iv.Length + encryptedPassword.Length];
-                Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
-                Buffer.BlockCopy(encryptedPassword, 0, result, iv.Length, encryptedPassword.Length);
+        // Combine IV and encrypted password for storage
+        byte[] result = new byte[iv.Length + encryptedPassword.Length];
+        Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
+        Buffer.BlockCopy(encryptedPassword, 0, result, iv.Length, encryptedPassword.Length);
 
-                return Convert.ToBase64String(result);
-            }
-        }
+        return Convert.ToBase64String(result);
     }
 
     internal static bool VerifyPassword(string inputPassword, string storedEncryptedPassword)
@@ -92,19 +87,15 @@ internal class UserModel
             Buffer.BlockCopy(fullCipher, iv.Length, encryptedPassword, 0, encryptedPassword.Length);
 
             // Decrypt password
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = GetHash(inputPassword); // Generate key from input password
-                aes.IV = iv;
+            using Aes aes = Aes.Create();
+            aes.Key = GetHash(inputPassword); // Generate key from input password
+            aes.IV = iv;
 
-                using (ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV))
-                {
-                    byte[] decryptedPasswordBytes = decryptor.TransformFinalBlock(encryptedPassword, 0, encryptedPassword.Length);
-                    string decryptedPassword = Encoding.UTF8.GetString(decryptedPasswordBytes);
+            using ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+            byte[] decryptedPasswordBytes = decryptor.TransformFinalBlock(encryptedPassword, 0, encryptedPassword.Length);
+            string decryptedPassword = Encoding.UTF8.GetString(decryptedPasswordBytes);
 
-                    return inputPassword == decryptedPassword;
-                }
-            }
+            return inputPassword == decryptedPassword;
         }
         catch
         {
@@ -115,9 +106,6 @@ internal class UserModel
     // Generates a 256-bit hash key from the password
     private static byte[] GetHash(string password)
     {
-        using (SHA256 sha256 = SHA256.Create())
-        {
-            return sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-        }
+        return SHA256.HashData(Encoding.UTF8.GetBytes(password));
     }
 }

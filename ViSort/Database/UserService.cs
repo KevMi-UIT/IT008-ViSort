@@ -1,7 +1,4 @@
 ﻿using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using ViSort.Models;
 
 namespace ViSort.Database;
@@ -12,9 +9,10 @@ internal class UserService
 
     internal UserService()
     {
-        var client = new MongoClient(DatabaseConstants.ConnectionString);
-        var database = client.GetDatabase(DatabaseConstants.Database);
-        UsersCollection = database.GetCollection<UserModel>(DatabaseConstants.UsersCollection);
+        var config = App.Config!;
+        var client = new MongoClient(config["db:connectionString"]);
+        var database = client.GetDatabase(config["db:dbName"]);
+        UsersCollection = database.GetCollection<UserModel>(config["db:userCollection"]);
     }
 
     private static void CheckUser(UserModel user, UserModel userDB)
