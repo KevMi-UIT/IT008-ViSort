@@ -32,7 +32,7 @@ jobs:
           foreach ($command in $commands) {
               $output = Invoke-Expression $command
               if ($output) {
-                  $fail = true
+                  $fail = $true
               }
           }
           
