@@ -23,11 +23,17 @@ jobs:
       - name: Run dotnet format check
         working-directory: ViSort
         run: | 
-          $output = dotnet format ".\ViSort.sln" style --verify-no-changes
-          $output += dotnet format ".\ViSort.sln" whitespace --verify-no-changes
-          $output += dotnet format ".\ViSort.sln" analyzers --verify-no-changes
+          $commands = @(
+              'dotnet format ".\ViSort.sln" style --verify-no-changes',
+              'dotnet format ".\ViSort.sln" whitespace --verify-no-changes',
+              'dotnet format ".\ViSort.sln" analyzers --verify-no-changes'
+          )
 
-          if ($output) {
-            Write-host "There's problem!!"
-            exit 1
+          foreach ($command in $commands) {
+              $output = Invoke-Expression $command
+              if ($output) {
+                  $res = true
+              }
           }
+          
+          $res && exit 1
