@@ -10,7 +10,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  release:
+    name: Release
     runs-on: windows-latest
     steps:
       - name: Checkout repo

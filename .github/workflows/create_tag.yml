@@ -1,4 +1,4 @@
-name: Create tag
+name: Create Tag
 
 on:
   workflow_dispatch:
@@ -11,7 +11,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  create:
+  create-tag:
+    name: Create Tag
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -26,4 +27,4 @@ jobs:
       - uses: fregante/setup-git-user@v2
 
       - name: Create tag
-        run: scripts/create_tag.sh
+        run: scripts/create_tag.sh "${{ steps.version.outputs.value }}"
