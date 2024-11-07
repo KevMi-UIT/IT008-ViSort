@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build
+        working-directory: ViSort
+        run: msbuild .\\ViSort.csproj /p:Configuration=Release
+
+      - name: Generate a changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: cliff.toml
+          args: -vv --latest --strip header
+        env:
+          OUTPUT: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Check pre release
+        id: prerelease
+        shell: bash
+        run: |
+          tag=${{ github.event.release.tag_name }}
+          version="${tag#v}"
+          echo "prerelease=$([[ $version =~ ^\d+\.\d+\.\d+$ ]] && echo 'false' || echo 'true')" >>"$GITHUB_OUTPUT"
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ViSort/bin/Release/ViSort.exe
+          prerelease: ${{ steps.prerelease.outputs.prerelease }}
+          body: ${{ steps.git-cliff.outputs.content }}
+          make_latest: 'true'
