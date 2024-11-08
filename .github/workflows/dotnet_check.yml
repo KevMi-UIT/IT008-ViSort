@@ -21,21 +21,4 @@ jobs:
           dotnet-version: "8.0"
 
       - name: Run dotnet format check
-        working-directory: ViSort
-        run: | 
-          $commands = @(
-              'dotnet format ".\ViSort.sln" style --verify-no-changes',
-              'dotnet format ".\ViSort.sln" whitespace --verify-no-changes',
-              'dotnet format ".\ViSort.sln" analyzers --verify-no-changes'
-          )
-
-          foreach ($command in $commands) {
-              $output = Invoke-Expression $command
-              if ($output) {
-                  $fail = $true
-              }
-          }
-          
-          if ($fail) {
-            exit 1
-          }
+        run: scripts/dotnet_format.ps1 "ViSort/ViSort.sln"
