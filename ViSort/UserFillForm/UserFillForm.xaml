@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViSort"
         mc:Ignorable="d"
-        Title="User Authentication" Height="175" Width="400" Closing="Closing_window">
-    <Grid Width="400" Margin="0,0,0,20">
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="User Authentication" Closing="Closing_window" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
+    <Grid Width="400" Margin="40,0">
 
         <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -24,18 +25,14 @@
         
 
         <!-- User name -->
-            <TextBlock Text="User name:" Margin="5" VerticalAlignment="Center" Grid.Row="1" />
-            <TextBox x:Name="UserName" Grid.Column="1" Margin="5" Grid.Row="1" TabIndex="0" />
+        <Label Content="Username" Target="{Binding ElementName=Username_Textbox}" VerticalAlignment="Center" Grid.Row="1" Foreground="Black"/>
+        <ui:TextBox x:Name="Username_Textbox" PlaceholderText="Username..." Grid.Row="1" Grid.Column="1" TabIndex="0" Margin="5"/>
 
-            <!-- Password -->
-        
-            <TextBlock Text="Password:" Grid.Row="2" Margin="5" VerticalAlignment="Center" />
-            <PasswordBox x:Name="PasswordBox" Grid.Row="2" Grid.Column="1" Margin="5" TabIndex="1"/>
-            <TextBox x:Name="PasswordTextBox" Grid.Row="2" Grid.Column="1" Margin="5" Visibility="Collapsed"/>
-            <CheckBox Content="Show Password" x:Name="showPasswordCheckBox" Checked="ShowPassword_Checked" Unchecked="ShowPassword_Unchecked" Grid.Row="3" Grid.Column="1" Margin="5,5,5,5"/>
-        
+        <!-- Password -->
+        <Label Content="Password" Target="{Binding ElementName=Password_Passwordbox}" VerticalAlignment="Center" Grid.Row="2" Foreground="Black"/>
+        <ui:PasswordBox x:Name="Password_Passwordbox" PlaceholderText="Password..."  Grid.Row="2" Grid.Column="2" TabIndex="1" Margin="5" />
 
         <!-- Nút Submit -->
-        <Button Content="Submit" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10" Click="SubmitButton_Click" />
+        <ui:Button Content="Continue" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10" Click="SubmitButton_Click" Cursor="Hand" />
     </Grid>
 </Window>

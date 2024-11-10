@@ -13,7 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ViSort.QuizForm;
 using ViSort.Sorts;
+using ViSort.Utils;
 
 
 /// <summary>
@@ -21,69 +23,35 @@ using ViSort.Sorts;
 /// </summary>
 public partial class QuizWindow : Window
 {
-    private class Question
-    {
-        public string Content { get; set; }
-        public List<SortTypes> Answer { get; set; }
-        public SortTypes SelectedAnswer { get; set; }
-        public bool isSelected = false;
-
-        public Question(string content, List<SortTypes> answers)
-        {
-            Content = content;
-            Answer = answers;
-            SelectedAnswer = default;
-        }
-    }
-
-    List<SortTypes> ans = Enum.GetValues(typeof(SortTypes)).Cast<SortTypes>().ToList();
-    public QuizWindow()
-    {
-        InitializeComponent();
-        LoadAndShuffleQuestions();
-        DisplayCurrentQuestion();
-    }
-
-    private List<Question> QuestionList = new List<Question>();
+    private List<QuizQuestion> QuestionList = [];
     private int currentQuestionIndex = 0;
 
-    private void LoadAndShuffleQuestions()
+    public QuizWindow()
     {
-        var filePath = "QuizForm/question.txt";
-
-        // Đọc tất cả câu hỏi từ tệp
-        var questions = File.ReadAllLines(filePath).ToList();
-
-        // Xáo trộn danh sách câu hỏi
-        var random = new Random();
-        questions = questions.OrderBy(x => random.Next()).ToList();
-
-        // Thêm câu hỏi vào list
-        foreach (var q in questions)
+        foreach (var question in QuizzQuestions.QUESTIONS)
         {
-            QuestionList.Add(new Question(q, ans));
+            var q = new QuizQuestion(string.Join(", ", question));
+            QuestionList.Add(q);
         }
+        Utils.Randomize(QuestionList);
+        InitializeComponent();
+        DisplayCurrentQuestion();
     }
 
     private void DisplayCurrentQuestion()
     {
-        if (currentQuestionIndex >= 0 && currentQuestionIndex < QuestionList.Count)
+        QuestionTextBlock.Text = QuestionList[currentQuestionIndex].Content;
+        var selectedAnswer = QuestionList[currentQuestionIndex].SelectedAnswer;
+        if (selectedAnswer != null)
         {
-            QuestionTextBlock.Text = QuestionList[currentQuestionIndex].Content;
-
-            var selectedAnswer = QuestionList[currentQuestionIndex].SelectedAnswer;
-            // Reset tất cả các RadioButton chưa được chọn
-            // Hiển thị lại đáp án đã chọn (nếu có)
-            if (selectedAnswer == default)
-            {
-                ResetRadioButtons();
-            }
-            else
-            {
-                SetSelectedRadioButton(selectedAnswer);
-            }
+            SetSelectedRadioButton(selectedAnswer);
+        }
+        else
+        {
+            ResetRadioButtons();
         }
     }
+
     private void PreviousQuestion(object sender, RoutedEventArgs e)
     {
         if (currentQuestionIndex > 0 && currentQuestionIndex <= QuestionList.Count)
@@ -91,7 +59,6 @@ public partial class QuizWindow : Window
             currentQuestionIndex--;
             DisplayCurrentQuestion();
         }
-
     }
 
     private void NextQuestion(object sender, RoutedEventArgs e)
@@ -109,55 +76,25 @@ public partial class QuizWindow : Window
         var selectedRadioButton = sender as RadioButton;
         if (selectedRadioButton != null)
         {
-            switch (selectedRadioButton.Content)
+            SortTypes sortTypes = selectedRadioButton.Content switch
             {
-                case "Bubble Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Bubble;
-                    break;
-                case "Bucket Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Bucket;
-                    break;
-                case "Counting Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Counting;
-                    break;
-                case "Selection Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Selection;
-                    break;
-                case "Insertion Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Insertion;
-                    break;
-                case "Merge Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Merge;
-                    break;
-                case "Quick Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Quick;
-                    break;
-                case "Heap Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Heap;
-                    break;
-                case "Radix Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Radix;
-                    break;
-                case "Shell Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Shell;
-                    break;
-                case "Tim Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Tim;
-                    break;
-                case "Tree Sort":
-                    QuestionList[currentQuestionIndex].SelectedAnswer = SortTypes.Tree;
-                    break;
-                default: break;
-            }
-        }
+                "Bubble Sort" => SortTypes.Bubble,
+                "Bucket Sort" => SortTypes.Bucket,
+                "Counting Sort" => SortTypes.Counting,
+                "Selection Sort" => SortTypes.Selection,
+                "Insertion Sort" => SortTypes.Insertion,
+                "Merge Sort" => SortTypes.Merge,
+                "Quick Sort" => SortTypes.Quick,
+                "Heap Sort" => SortTypes.Heap,
+                "Radix Sort" => SortTypes.Radix,
+                "Shell Sort" => SortTypes.Shell,
+                "Tim Sort" => SortTypes.Tim,
+                "Tree Sort" => SortTypes.Tree,
+                _ => default
+            };
 
-        if (selectedRadioButton != null)
-        {
-            string selectedAnswer = selectedRadioButton.Content.ToString();
-            // Thực hiện hành động với câu trả lời đã chọn
-            MessageBox.Show($"Bạn đã chọn: {selectedAnswer}");
-
-        }
+            QuestionList[currentQuestionIndex].SelectAnswer(sortTypes);
+        };
     }
 
     private void ResetRadioButtons()
@@ -168,18 +105,16 @@ public partial class QuizWindow : Window
         }
     }
 
-    private void SetSelectedRadioButton(SortTypes selectedAnswer)
+    private void SetSelectedRadioButton(SortTypes? selectedAnswer)
     {
+        string selectedAnswerString = $"{selectedAnswer.ToString() as string} Sort";
         foreach (var radioButton in MultipleChoiceWrapPanel.Children.OfType<RadioButton>())
         {
-            if (radioButton.Content.ToString() == selectedAnswer.ToString())
+            if (radioButton.Content.ToString() == selectedAnswerString)
             {
                 radioButton.IsChecked = true;
                 break;
             }
         }
     }
-
-
 }
-

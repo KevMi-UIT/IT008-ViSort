@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViSort.QuizForm"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Window1" WindowState="Maximized" ResizeMode="CanResize">
     <Grid Margin="10">
         <Label x:Name="PracticeGame_label" Content="PRACTICE GAME" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3,1" FontSize="32" FontFamily="Lucida Handwriting">
             <Label.Foreground>

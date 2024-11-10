@@ -13,49 +13,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ViSort.Models;
 
-namespace ViSort
+namespace ViSort;
+
+/// <summary>
+/// Interaction logic for UserFillForm.xaml
+/// </summary>
+public partial class UserFillForm : Window
 {
-    /// <summary>
-    /// Interaction logic for UserFillForm.xaml
-    /// </summary>
-    public partial class UserFillForm : Window
+    public UserFillForm()
     {
-        public UserFillForm()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
-        {
-            string password = showPasswordCheckBox.IsChecked == true ? PasswordTextBox.Text : PasswordBox.Password;
-            UserModel User = new UserModel(UserName.Text, password, 0);
-            this.Close();
-        }
+    private void SubmitButton_Click(object sender, RoutedEventArgs e)
+    {
+        string password = Password_Passwordbox.Password;
+        UserModel User = new UserModel(Username_Textbox.Text, password);
+        this.Close();
+    }
 
-        private void ShowPassword_Checked(object sender, RoutedEventArgs e)
+    private void Closing_window(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        string password = Password_Passwordbox.Password;
+        if (Username_Textbox.Text == "" && password == "")
         {
-            PasswordTextBox.Text = PasswordBox.Password;
-            PasswordBox.Visibility = Visibility.Collapsed;
-            PasswordTextBox.Visibility = Visibility.Visible;
+            MessageBox.Show("Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-
-        private void ShowPassword_Unchecked(object sender, RoutedEventArgs e)
-        {
-            PasswordBox.Password = PasswordTextBox.Text;
-            PasswordTextBox.Visibility = Visibility.Collapsed;
-            PasswordBox.Visibility = Visibility.Visible;
-        }
-
-        private void Closing_window(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            string password = showPasswordCheckBox.IsChecked == true ? PasswordTextBox.Text : PasswordBox.Password;
-            if (UserName.Text == "" && password == "")
-                MessageBox.Show("Chưa có thông tin đăng nhập. \nTiếp tục mà không đăng nhập?", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-
-            var QuizWindow = new QuizForm.QuizWindow();
-            QuizWindow.ShowDialog();
-            return;
-        }
+        var QuizWindow = new QuizForm.QuizWindow();
+        QuizWindow.ShowDialog();
     }
 }
-
