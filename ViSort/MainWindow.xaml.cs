@@ -38,7 +38,4 @@ public partial class MainWindow : Window
         var UserFillForm = new UserFillForm();
         UserFillForm.ShowDialog();
     }
-
-
 }
-

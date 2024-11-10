@@ -1,0 +1,24 @@
+name: Dotnet Check
+
+on:
+  push:
+    paths:
+      - "**/*.cs"
+      - "**/.editorconfig"
+    branches:
+      - "**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check-format:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0"
+
+      - name: Run dotnet format check
+        run: scripts/dotnet_format.ps1 "ViSort/ViSort.sln"

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ViSort.Utils;
+﻿namespace ViSort.Utils;
 
 internal static class Utils
 {

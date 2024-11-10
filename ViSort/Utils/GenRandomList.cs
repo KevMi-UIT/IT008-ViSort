@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ViSort.Utils;
+﻿namespace ViSort.Utils;
 
 internal static class GenRandomList
 {
@@ -17,25 +13,19 @@ internal static class GenRandomList
     private static readonly int MIN = 0;
     private static readonly int MAX = 999;
     private static readonly int NEARLY_SORTED_SENSITIVITY = 10;
-    private static readonly Random RAND = new Random();
+    private static readonly Random RAND = new();
 
     static List<int> GenList(int length, RandomGenTypes type)
     {
-        switch (type)
+        return type switch
         {
-            case RandomGenTypes.Normal:
-                return GenNormal(length);
-            case RandomGenTypes.Sorted:
-                return GenSorted(length);
-            case RandomGenTypes.SortedReverse:
-                return GenSortedReverse(length);
-            case RandomGenTypes.NearlySorted:
-                return GenNearlySorted(length);
-            case RandomGenTypes.Mirror:
-                return GenMirror(length);
-            default:
-                throw new ArgumentException("Invalid list type");
-        }
+            RandomGenTypes.Normal => GenNormal(length),
+            RandomGenTypes.Sorted => GenSorted(length),
+            RandomGenTypes.SortedReverse => GenSortedReverse(length),
+            RandomGenTypes.NearlySorted => GenNearlySorted(length),
+            RandomGenTypes.Mirror => GenMirror(length),
+            _ => throw new ArgumentException("Invalid list type"),
+        };
     }
 
     static List<int> GenNormal(int length)
