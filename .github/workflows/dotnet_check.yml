@@ -13,12 +13,12 @@ on:
 jobs:
   check:
     runs-on: windows-latest
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-dotnet@v4
-        env:
-          NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
         with:
           dotnet-version: "8.0"
           cache: true
