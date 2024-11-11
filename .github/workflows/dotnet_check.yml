@@ -21,4 +21,4 @@ jobs:
           dotnet-version: "8.0"
 
       - name: Run dotnet format check
-        run: scripts/dotnet_format.ps1 "ViSort/ViSort.sln"
+        run: scripts/dotnet_format_check.ps1 "ViSort/ViSort.sln"
