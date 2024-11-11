@@ -13,16 +13,40 @@ jobs:
   release:
     name: Release
     runs-on: windows-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        arch:
+          - x64
+          - x86
+          - arm64
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v2
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0"
+
+      - name: Get version and prerelease
+        id: version_prerelease
+        shell: bash
+        run: |
+          tag=${{ github.event.release.tag_name }}
+          version="${tag#v}"
+          echo "VERSION=$version" >>"$GITHUB_OUTPUT"
+          echo "PRERELEASE=$([[ $version =~ ^\d+\.\d+\.\d+$ ]] && echo 'false' || echo 'true')" >>"$GITHUB_OUTPUT"
 
       - name: Build
         working-directory: ViSort
-        run: msbuild .\\ViSort.csproj /p:Configuration=Release
+        run: dotnet publish .\\ViSort.csproj /p:Configuration=Release -p:Version=${{ steps.version_prerelease.outputs.VERSION }} --arch ${{ matrix.arch }}
+
+      - name: Rename for each arch
+        shell: bash
+        run: |
+          directory=$(compgen -G 'ViSort/bin/Release/*/win-${{ matrix.arch }}/publish/')
+          cd "$directory"
+          mv ViSort.exe ViSort-${{ matrix.arch }}.exe
 
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v4
@@ -34,18 +58,11 @@ jobs:
           OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
 
-      - name: Check pre release
-        id: prerelease
-        shell: bash
-        run: |
-          tag=${{ github.event.release.tag_name }}
-          version="${tag#v}"
-          echo "prerelease=$([[ $version =~ ^\d+\.\d+\.\d+$ ]] && echo 'false' || echo 'true')" >>"$GITHUB_OUTPUT"
-
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ViSort/bin/Release/ViSort.exe
-          prerelease: ${{ steps.prerelease.outputs.prerelease }}
+          files: |
+            ViSort/bin/Release/*/win-${{ matrix.arch }}/publish/ViSort*.exe
+          prerelease: ${{ steps.version_prerelease.outputs.PRERELEASE }}
           body: ${{ steps.git-cliff.outputs.content }}
           make_latest: 'true'
