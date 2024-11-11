@@ -6,7 +6,7 @@ on:
       - "**/*.cs"
       - "**/.editorconfig"
     branches:
-      - "**"
+      - "main"
   pull_request:
   workflow_dispatch:
 
