@@ -4,48 +4,15 @@ on:
   push:
     tags:
       - v*
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: false
 
 jobs:
-  prepare:
-    name: Prepare
-    runs-on: ubuntu-latest
-    outputs:
-      TAG: ${{ steps.version_prerelease.outputs.TAG }}
-      VERSION: ${{ steps.version_prerelease.outputs.VERSION }}
-      PRERELEASE: ${{ steps.version_prerelease.outputs.PRERELEASE }}
-      CHANGELOG: ${{ steps.git-cliff.outputs.content }}
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Get version and prerelease
-        id: version_prerelease
-        shell: bash
-        run: |
-          tag=${{ github.event.release.tag_name }}
-          version="${tag#v}"
-          {
-            echo "TAG=$tag"
-            echo "VERSION=$version"
-            echo "PRERELEASE=$([[ $version =~ ^\d+\.\d+\.\d+$ ]] && echo 'false' || echo 'true')"
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Generate a changelog
-        uses: orhun/git-cliff-action@v4
-        id: git-cliff
-        with:
-          config: cliff.toml
-          args: -vv --latest --strip header
-        env:
-          GITHUB_REPO: ${{ github.repository }}
-
   build:
     name: Build
-    needs: prepare
     runs-on: windows-latest
     env:
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
@@ -72,7 +39,7 @@ jobs:
 
       - name: Build
         working-directory: ViSort
-        run: dotnet publish ./ViSort.csproj /p:Configuration=Release -p:Version=${{ needs.prepare.outputs.VERSION }} --runtime win-${{ matrix.arch }} --self-contained true
+        run: dotnet publish ./ViSort.csproj /p:Configuration=Release --runtime win-${{ matrix.arch }} --self-contained true
 
       - name: Get publish path
         id: get_publish_path
@@ -97,18 +64,41 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs:
-      - prepare
-      - build
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Get version and prerelease
+        id: version_prerelease
+        shell: bash
+        run: |
+          tag=${{ github.event.release.tag_name }}
+          version="${tag#v}"
+          {
+            echo "TAG=$tag"
+            echo "VERSION=$version"
+            echo "PRERELEASE=$([[ $version =~ ^\d+\.\d+\.\d+$ ]] && echo 'false' || echo 'true')"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Generate a changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: cliff.toml
+          args: -vv --latest --strip header
+        env:
+          GITHUB_REPO: ${{ github.repository }}
+
       - name: Download Artifact
         uses: actions/download-artifact@v4
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ needs.prepare.outputs.TAG }}
+          tag_name: ${{ steps.version_prerelease.outputs.TAG }}
           files: ViSort*/ViSort*.exe
-          prerelease: ${{ needs.prepare.outputs.PRERELEASE == 'true' }}
-          body: ${{ needs.prepare.outputs.CHANGELOG }}
-          make_latest: ${{ needs.prepare.outputs.PRERELEASE == 'false' }}
+          prerelease: ${{ steps.version_prerelease.outputs.PRERELEASE == 'true' }}
+          body: ${{ steps.git-cliff.outputs.CHANGELOG }}
+          make_latest: ${{ steps.version_prerelease.outputs.PRERELEASE == 'false' }}
