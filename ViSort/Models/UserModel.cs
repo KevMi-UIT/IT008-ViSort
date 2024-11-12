@@ -19,10 +19,7 @@ internal class UserModel
     private string _password;
     internal string Password
     {
-        get
-        {
-            return _password;
-        }
+        get => _password;
         private set
         {
             _password = value;
