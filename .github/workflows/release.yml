@@ -100,5 +100,5 @@ jobs:
           tag_name: ${{ steps.version_prerelease.outputs.TAG }}
           files: ViSort*/ViSort*.exe
           prerelease: ${{ steps.version_prerelease.outputs.PRERELEASE == 'true' }}
-          body: ${{ steps.git-cliff.outputs.CHANGELOG }}
+          body: ${{ steps.git-cliff.outputs.content }}
           make_latest: ${{ steps.version_prerelease.outputs.PRERELEASE == 'false' }}
