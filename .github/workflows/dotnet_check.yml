@@ -26,7 +26,7 @@ jobs:
 
       - name: Restore deps
         working-directory: ViSort
-        run: dotnet restore --locked-mode
+        run: dotnet restore --locked-mode --use-lock-file
 
       - name: Run dotnet format check
         run: scripts/dotnet_format_check.ps1 "ViSort/ViSort.sln"
