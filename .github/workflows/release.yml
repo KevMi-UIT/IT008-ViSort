@@ -39,7 +39,7 @@ jobs:
 
       - name: Build
         working-directory: ViSort
-        run: dotnet publish ./ViSort.csproj /p:Configuration=Release --runtime win-${{ matrix.arch }} --self-contained true
+        run: dotnet publish ./ViSort.sln --configuration Release --runtime win-${{ matrix.arch }} --self-contained true --no-restore
 
       - name: Get publish path
         id: get_publish_path
