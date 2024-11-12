@@ -35,7 +35,7 @@ jobs:
 
       - name: Restore deps
         working-directory: ViSort
-        run: dotnet restore --locked-mode --use-lock-file --runtime win-${{ matrix.arch }}
+        run: dotnet restore --locked-mode --use-lock-file
 
       - name: Build
         working-directory: ViSort
