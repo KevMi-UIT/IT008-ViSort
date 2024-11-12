@@ -6,5 +6,6 @@ name = "csharp"
 [[analyzers]]
 name = "shell"
 
-[[transformers]]
-name = "dotnet-format"
+# [[transformers]]
+# name = "dotnet-format"
+
