@@ -10,10 +10,10 @@ internal static class GenRandomList
         NearlySorted,
         Mirror
     }
-    private static readonly int MIN = 0;
-    private static readonly int MAX = 999;
-    private static readonly int NEARLY_SORTED_SENSITIVITY = 10;
-    private static readonly Random RAND = new();
+    private const int MIN = 0;
+    private const int MAX = 999;
+    private const int NEARLY_SORTED_SENSITIVITY = 10;
+    private const Random RAND = new();
 
     static List<int> GenList(int length, RandomGenTypes type)
     {

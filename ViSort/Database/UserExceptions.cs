@@ -3,11 +3,11 @@
 internal static class UserExceptions
 {
 
-    internal class PasswordDoesNotMatch(string message) : Exception(message)
+    public class PasswordDoesNotMatch(string message) : Exception(message)
     {
     }
 
-    internal class UserNotFound(string message) : Exception(message)
+    public class UserNotFound(string message) : Exception(message)
     {
     }
 }
