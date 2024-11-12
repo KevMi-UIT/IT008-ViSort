@@ -4,25 +4,83 @@ on:
   push:
     tags:
       - v*
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: false
 
 jobs:
-  release:
-    name: Release
+  build:
+    name: Build
     runs-on: windows-latest
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+    strategy:
+      fail-fast: true
+      matrix:
+        arch:
+          - x64
+          - x86
+          - arm64
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v2
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0"
+          cache: true
+          cache-dependency-path: ViSort/packages.lock.json
+
+      - name: Restore deps
+        working-directory: ViSort
+        run: dotnet restore --locked-mode --use-lock-file
 
       - name: Build
         working-directory: ViSort
-        run: msbuild .\\ViSort.csproj /p:Configuration=Release
+        run: dotnet publish ./ViSort.csproj /p:Configuration=Release --runtime win-${{ matrix.arch }} --self-contained true
+
+      - name: Get publish path
+        id: get_publish_path
+        shell: bash
+        run: |
+          path=$(compgen -G 'ViSort/bin/Release/*/win-${{ matrix.arch }}/publish/')
+          echo "PUBLISH_PATH=$path" >> "$GITHUB_OUTPUT"
+
+      - name: Rename for each arch
+        shell: bash
+        working-directory: ${{ steps.get_publish_path.outputs.PUBLISH_PATH }}
+        run: mv ViSort.exe ViSort-${{ matrix.arch }}.exe
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ViSort-${{ matrix.arch }}
+          path: ${{ steps.get_publish_path.outputs.PUBLISH_PATH }}/ViSort-${{ matrix.arch }}.exe
+          compression-level: 6
+          retention-days: 30
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Get version and prerelease
+        id: version_prerelease
+        shell: bash
+        run: |
+          tag=${{ github.event.release.tag_name }}
+          version="${tag#v}"
+          {
+            echo "TAG=$tag"
+            echo "VERSION=$version"
+            echo "PRERELEASE=$([[ $version =~ ^\d+\.\d+\.\d+$ ]] && echo 'false' || echo 'true')"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v4
@@ -31,21 +89,16 @@ jobs:
           config: cliff.toml
           args: -vv --latest --strip header
         env:
-          OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
 
-      - name: Check pre release
-        id: prerelease
-        shell: bash
-        run: |
-          tag=${{ github.event.release.tag_name }}
-          version="${tag#v}"
-          echo "prerelease=$([[ $version =~ ^\d+\.\d+\.\d+$ ]] && echo 'false' || echo 'true')" >>"$GITHUB_OUTPUT"
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ViSort/bin/Release/ViSort.exe
-          prerelease: ${{ steps.prerelease.outputs.prerelease }}
-          body: ${{ steps.git-cliff.outputs.content }}
-          make_latest: 'true'
+          tag_name: ${{ steps.version_prerelease.outputs.TAG }}
+          files: ViSort*/ViSort*.exe
+          prerelease: ${{ steps.version_prerelease.outputs.PRERELEASE == 'true' }}
+          body: ${{ steps.git-cliff.outputs.CHANGELOG }}
+          make_latest: ${{ steps.version_prerelease.outputs.PRERELEASE == 'false' }}

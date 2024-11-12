@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using ViSort.Models;
+using static ViSort.Database.UserExceptions;
 
 namespace ViSort.Database;
 
@@ -19,11 +20,11 @@ internal class UserService
     {
         if (userDB == null)
         {
-            throw new UnauthorizedAccessException("User not found.");
+            throw new UserNotFound("User not found.");
         }
         if (user.EncryptedPassword != userDB.EncryptedPassword)
         {
-            throw new UnauthorizedAccessException("Password does not match.");
+            throw new PasswordDoesNotMatch("Password does not match.");
         }
     }
 
