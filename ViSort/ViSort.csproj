@@ -53,7 +53,6 @@
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
     <PackageReference Include="WPF-UI" Version="3.0.5" />
     <PackageReference Include="ZstdSharp.Port" Version="0.8.1" />
-    <PackageReference Include="WPF-UI" Version="3.0.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UserInfoForm.cs" />
