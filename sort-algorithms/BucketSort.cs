@@ -36,7 +36,7 @@ public static class BucketSort
 
         foreach (var item in list)
         {
-            double normalizedValue = (Convert.ToDouble(item) - Convert.ToDouble(minValue)) / 
+            double normalizedValue = (Convert.ToDouble(item) - Convert.ToDouble(minValue)) /
                                     (Convert.ToDouble(maxValue) - Convert.ToDouble(minValue));
             int bucket = (int)(normalizedValue * (num_of_bucket - 1));
             buckets[bucket].Add(normalizedValue);
@@ -48,7 +48,7 @@ public static class BucketSort
             InsertionSort(buckets[i]);
             foreach (var value in buckets[i])
             {
-                double denormalizedValue = value * (Convert.ToDouble(maxValue) - 
+                double denormalizedValue = value * (Convert.ToDouble(maxValue) -
                 Convert.ToDouble(minValue)) + Convert.ToDouble(minValue);
                 sortedArray.Add((T)Convert.ChangeType(denormalizedValue, typeof(T)));
             }

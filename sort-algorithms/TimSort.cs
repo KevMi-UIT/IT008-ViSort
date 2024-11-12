@@ -2,20 +2,20 @@ public static class TimSort
 {
     public const int Run = 32;
 
-    public static void InsertionSort<T>(List<T> list, int left, int right) where T : IComparable<T> 
-    { 
-        for (int i = left + 1; i <= right; i++) 
-        { 
-            T Temp = list[i]; 
-            int j = i - 1; 
-            while (j >= left && list[j].CompareTo(Temp) > 0) 
-            { 
-                list[j + 1] = list[j]; 
-                j--; 
-            } 
-            list[j + 1] = Temp; 
-        } 
-    } 
+    public static void InsertionSort<T>(List<T> list, int left, int right) where T : IComparable<T>
+    {
+        for (int i = left + 1; i <= right; i++)
+        {
+            T Temp = list[i];
+            int j = i - 1;
+            while (j >= left && list[j].CompareTo(Temp) > 0)
+            {
+                list[j + 1] = list[j];
+                j--;
+            }
+            list[j + 1] = Temp;
+        }
+    }
 
     public static void Merge<T>(List<T> list, int left, int mid, int right) where T : IComparable<T>
     {
@@ -30,7 +30,7 @@ public static class TimSort
         i = 0;
         j = 0;
         k = 0;
-        while (i  < Length1 && j < Length2)
+        while (i < Length1 && j < Length2)
         {
             if (LeftArr[i].CompareTo(RightArr[j]) <= 0)
             {
@@ -58,10 +58,10 @@ public static class TimSort
         }
     }
 
-    public static void Sort<T> (List<T> list) where T : IComparable<T>
+    public static void Sort<T>(List<T> list) where T : IComparable<T>
     {
         int N = list.Count;
-        for (int i = 0; i < N; i+= Run)
+        for (int i = 0; i < N; i += Run)
         {
             InsertionSort(list, i, Math.Min(i + Run - 1, (N - 1)));
         }

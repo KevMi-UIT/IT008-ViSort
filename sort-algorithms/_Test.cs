@@ -1,14 +1,14 @@
 public class ComplexType(int val) : IComparable<ComplexType>
 {
     public int Val { get; set; } = val;
-    public int CompareTo(ComplexType? other)
+public int CompareTo(ComplexType? other)
+{
+    return other switch
     {
-        return other switch
-        {
-            null => throw new ArgumentException("Object is null"),
-            _ => Val.CompareTo(other.Val)
-        };
-    }
+        null => throw new ArgumentException("Object is null"),
+        _ => Val.CompareTo(other.Val)
+    };
+}
 }
 
 public class Program

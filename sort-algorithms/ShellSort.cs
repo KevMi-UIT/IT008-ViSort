@@ -6,9 +6,9 @@ public static class ShellSort
         int i, j;
         int Increment = 3;
         T temp;
-        while(Increment > 0)
+        while (Increment > 0)
         {
-            for ( i = 0; i < N; i++)
+            for (i = 0; i < N; i++)
             {
                 j = i;
                 temp = list[i];
@@ -23,7 +23,7 @@ public static class ShellSort
                 Increment /= 2;
             else if (Increment == 1)
                 Increment = 0;
-            else  
+            else
                 Increment = 1;
         }
     }
