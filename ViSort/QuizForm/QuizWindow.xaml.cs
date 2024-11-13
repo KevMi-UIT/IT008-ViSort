@@ -107,7 +107,7 @@ public partial class QuizWindow : Window
             };
 
             QuestionList[currentQuestionIndex].SelectAnswer(sortTypes);
-        };
+        }
     }
 
     private void ResetRadioButtons()
