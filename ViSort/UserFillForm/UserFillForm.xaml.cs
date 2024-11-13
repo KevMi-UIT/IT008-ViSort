@@ -29,7 +29,6 @@ public partial class UserFillForm : Window
 
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
-
         string password = Password_Passwordbox.Password;
         UserModel User = new(Username_Textbox.Text, password);
 

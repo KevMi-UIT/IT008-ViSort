@@ -31,7 +31,6 @@ public partial class MainWindow : Window
 
     private void OpenQuizWindow(object sender, RoutedEventArgs e)
     {
-
         var QuestFilePath = "QuizForm/question.txt";
         if (!File.Exists(QuestFilePath))
         {
