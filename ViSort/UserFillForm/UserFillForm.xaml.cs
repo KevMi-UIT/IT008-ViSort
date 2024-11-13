@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ViSort.Models;
 
+
 namespace ViSort;
 
 /// <summary>
@@ -28,9 +29,25 @@ public partial class UserFillForm : Window
 
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
-        SubmitButton.IsEnabled = false;
+
         string password = Password_Passwordbox.Password;
         UserModel User = new(Username_Textbox.Text, password);
+
+        if (!UserUtils.ValidateUsername(User.Username))
+        {
+            ValidateUsername_TextBlock.Visibility = Visibility.Visible;
+            return;
+        }
+        ValidateUsername_TextBlock.Visibility = Visibility.Hidden;
+
+        if (!UserUtils.ValidatePassword(password))
+        {
+            ValidatePassword_TextBlock.Visibility = Visibility.Visible;
+            return;
+        }
+        ValidatePassword_TextBlock.Visibility = Visibility.Hidden;
+
+        SubmitButton.IsEnabled = false;
         if (await App.UserSvc!.AuthUserAsync(User))
         {
             App.User = User;
@@ -46,6 +63,5 @@ public partial class UserFillForm : Window
         {
             MessageBox.Show("Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-
     }
 }

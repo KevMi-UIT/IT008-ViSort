@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         Title="ScoreBoard" Height="450" Width="400">
+        
     <Grid>
         <Label x:Name="Label_ScoreBoard" Content="BẢNG XẾP HẠNG" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" FontWeight="Bold" FontSize="40" Margin="10"></Label>
         <ui:DataGrid x:Name="ScoreData"/>

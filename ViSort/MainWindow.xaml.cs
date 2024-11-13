@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Windows.System;
 using Wpf.Ui.Controls;
 using MessageBox = System.Windows.MessageBox;
 using MessageBoxButton = System.Windows.MessageBoxButton;
@@ -48,16 +49,17 @@ public partial class MainWindow : Window
         QuizWindow.ShowDialog();
     }
 
-    private void CheckUserLogin_Click(object sender, RoutedEventArgs e)
+    private async void CheckUserLogin_Click(object sender, RoutedEventArgs e)
     {
         if (App.User == null)
         {
             var loginWindow = new UserFillForm();
             loginWindow.ShowDialog();
 
-            if (App.User != null)
+            if (await App.UserSvc!.AuthUserAsync(App.User!))
             {
-                Login_Icon.Symbol = SymbolRegular.AccessibilityCheckmark28;
+                Login_Icon.Symbol = SymbolRegular.PeopleCheckmark24;
+                LogoutButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -67,5 +69,15 @@ public partial class MainWindow : Window
     {
         var ScoreBoard = new ScoreBoard.ScoreBoard();
         ScoreBoard.ShowDialog();
+    }
+
+    private void CheckUserLogout_Click(object sender, RoutedEventArgs e)
+    {
+        if (App.User != null)
+        {
+            App.User = null;
+            Login_Icon.Symbol = SymbolRegular.ArrowEnter20;
+            LogoutButton.Visibility = Visibility.Hidden;
+        }
     }
 }
