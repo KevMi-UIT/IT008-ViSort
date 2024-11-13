@@ -33,7 +33,7 @@ internal class UserService
         await UsersCollection.InsertOneAsync(user);
     }
 
-    internal async Task<List<UserModel>> GetAllUsersResult()
+    internal async Task<List<UserModel>> GetAllUsersResultAsync()
     {
         var projection = Builders<UserModel>.Projection.Include(u => u.Username).Include(u => u.Score != 0);
         return await UsersCollection.Find(_ => true).Project<UserModel>(projection).SortByDescending(u => u.Score).ToListAsync();
@@ -51,7 +51,7 @@ internal class UserService
         return user.EncryptedPassword == existingUser.EncryptedPassword;
     }
 
-    internal async Task UpdateScore(UserModel user)
+    internal async Task UpdateScoreAsync(UserModel user)
     {
         var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
         var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
@@ -60,7 +60,7 @@ internal class UserService
         await UsersCollection.UpdateOneAsync(filter, update);
     }
 
-    internal async void DeleteUserAsync(UserModel user)
+    internal async Task DeleteUserAsync(UserModel user)
     {
         var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
         var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
