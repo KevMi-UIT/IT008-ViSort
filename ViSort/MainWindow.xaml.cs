@@ -56,21 +56,19 @@ public partial class MainWindow : Window
             var loginWindow = new UserFillForm();
             loginWindow.ShowDialog();
 
-            if (await App.UserSvc!.AuthUserAsync(App.User!))
+            if (App.User != null)
             {
+                await App.UserSvc!.AuthUserAsync(App.User!);
                 Login_Icon.Symbol = SymbolRegular.PeopleCheckmark24;
                 LogoutButton.Visibility = Visibility.Visible;
             }
         }
-
     }
-
     private void ScoreBoard_Click(object sender, RoutedEventArgs e)
     {
         var ScoreBoard = new ScoreBoard.ScoreBoard();
         ScoreBoard.ShowDialog();
     }
-
     private void CheckUserLogout_Click(object sender, RoutedEventArgs e)
     {
         if (App.User != null)

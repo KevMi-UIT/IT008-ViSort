@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ViSort"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="User Authentication" Closing="Closing_window" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
+        Title="User Authentication" Closing="Window_Closing"  SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
     <Grid Width="400" Margin="40,0">
 
         <Grid.RowDefinitions>

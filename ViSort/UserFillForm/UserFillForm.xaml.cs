@@ -48,15 +48,17 @@ public partial class UserFillForm : Window
         ValidatePassword_TextBlock.Visibility = Visibility.Hidden;
 
         SubmitButton.IsEnabled = false;
-        if (await App.UserSvc!.AuthUserAsync(User))
+
+        if (App.User != null)
         {
+            await App.UserSvc!.AuthUserAsync(User);
             App.User = User;
         }
         SubmitButton.IsEnabled = true;
         this.Close();
     }
 
-    private void Closing_window(object sender, System.ComponentModel.CancelEventArgs e)
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         string password = Password_Passwordbox.Password;
         if (Username_Textbox.Text == "" && password == "")
