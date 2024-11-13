@@ -23,6 +23,9 @@ for tag in $tags; do
   fi
 done
 
+git config --global user.email "kevinnitro@duck.com"
+git config --global user.name "KevinNitroG"
+
 git tag "$current_tag"
 git push origin tag "$current_tag"
 

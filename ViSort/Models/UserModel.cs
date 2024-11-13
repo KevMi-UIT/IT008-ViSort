@@ -19,10 +19,7 @@ internal class UserModel
     private string _password;
     internal string Password
     {
-        get
-        {
-            return _password;
-        }
+        get => _password;
         private set
         {
             _password = value;
@@ -65,8 +62,8 @@ internal class UserModel
 
         // Combine IV and encrypted password for storage
         byte[] result = new byte[iv.Length + encryptedPassword.Length];
-        Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
-        Buffer.BlockCopy(encryptedPassword, 0, result, iv.Length, encryptedPassword.Length);
+        Buffer.BlockCopy(iv, 0, result, 0, Buffer.ByteLength(iv));
+        Buffer.BlockCopy(encryptedPassword, 0, result, iv.Length, Buffer.ByteLength(encryptedPassword));
 
         return Convert.ToBase64String(result);
     }
@@ -80,11 +77,11 @@ internal class UserModel
 
             // Extract IV from stored password
             byte[] iv = new byte[16];
-            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+            Buffer.BlockCopy(fullCipher, 0, iv, 0, Buffer.ByteLength(iv));
 
             // Extract encrypted password bytes
             byte[] encryptedPassword = new byte[fullCipher.Length - iv.Length];
-            Buffer.BlockCopy(fullCipher, iv.Length, encryptedPassword, 0, encryptedPassword.Length);
+            Buffer.BlockCopy(fullCipher, iv.Length, encryptedPassword, 0, Buffer.ByteLength(encryptedPassword));
 
             // Decrypt password
             using Aes aes = Aes.Create();

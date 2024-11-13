@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViSort"
         mc:Ignorable="d"
-        Title="DisplayWindow" Height="600" Width="800" Background="#FF140342">
+                xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="DisplayWindow" Height="600" Width="800" Background="Black">
     <Grid>
         <Grid Margin="0,76,0,-33">
             <Canvas x:Name="SortVisualisation" Height="500" Width="800" Background="#FF767575" Margin="0,10,0,31" />

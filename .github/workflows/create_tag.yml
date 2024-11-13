@@ -17,14 +17,15 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
 
       - name: Get version
         uses: sergeysova/jq-action@v2
         id: version
         with:
           cmd: jq -r .version ViSort/appsettings.json
-
-      - uses: fregante/setup-git-user@v2
 
       - name: Create tag
         run: scripts/create_tag.sh "${{ steps.version.outputs.value }}"

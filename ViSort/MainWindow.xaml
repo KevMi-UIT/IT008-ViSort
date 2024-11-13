@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViSort"
+        xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800" Background="#FFC4ECF9">
-    <Grid>
-        <Label x:Name="Tittle" Content="VISORT" Height="30" Width="120" Margin="632,40,48,514"/>
-        <Label x:Name="ChooseArrayType" Content="ARRAY TYPES" Height="30" Width="120" Margin="22,319,658,235"/>
-        <Grid Margin="10,369,0,0" Height="72" VerticalAlignment="Top" HorizontalAlignment="Left" Width="756">
+    <StackPanel>
+        <Label x:Name="Tittle" Content="VISORT" Height="30" Width="120"/>
+        <Label x:Name="ChooseArrayType" Content="ARRAY TYPES" Height="30" Width="120"/>
+        <Grid Height="72" Width="756">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -17,14 +18,14 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <RadioButton x:Name="Normal" Content="Normal" Height="30" Width="60" Grid.Column="0" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
-            <RadioButton x:Name="Sorted" Content="Sorted" Height="30" Width="60" Grid.Column="1" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
-            <RadioButton x:Name="SortedReverse" Content="SortedReverse" Height="30" Width="100" Grid.Column="2" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
-            <RadioButton x:Name="NearlySorted" Content="NearlySorted" Height="30" Width="100" Grid.Column="3" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
-            <RadioButton x:Name="Mirror" Content="Mirror" Height="30" Width="60" Grid.Column="4" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
+            <RadioButton x:Name="NormalGenButton" Content="Normal" Height="30" Width="60" Grid.Column="0" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
+            <RadioButton x:Name="SortedGenButton" Content="Sorted" Height="30" Width="60" Grid.Column="1" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
+            <RadioButton x:Name="SortedReverseGenButton" Content="Sorted Reverse" Height="30" Width="100" Grid.Column="2" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
+            <RadioButton x:Name="NearlySortedGenButton" Content="Nearly Sorted" Height="30" Width="100" Grid.Column="3" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
+            <RadioButton x:Name="MirrorGenButton" Content="Mirror" Height="30" Width="60" Grid.Column="4" Margin="5" Checked="ArrayGenerationMethod_Checked"/>
         </Grid>
-        <Label x:Name="ChooseAlgorithm" Content="ALGORITHM" Height="30" Width="120" Margin="80,75,600,479"/>
-        <Grid x:Name="SortAlgorithms" Margin="20,127,0,0" HorizontalAlignment="Left" Width="700" Height="127" VerticalAlignment="Top">
+        <Label x:Name="ChooseAlgorithm" Content="ALGORITHM" Height="30" Width="120"/>
+        <Grid x:Name="SortAlgorithms" Width="700" Height="127">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -38,25 +39,27 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <RadioButton x:Name="Bubble" Content="Bubble Sort" Height="30" Width="120" Grid.Row="0" Grid.Column="0" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Counting" Content="Counting Sort" Height="30" Width="120" Grid.Row="1" Grid.Column="0" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Insertion" Content="Insertion Sort" Height="30" Width="120" Grid.Row="2" Grid.Column="0" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Quick" Content="Quick Sort" Height="30" Width="120" Grid.Row="3" Grid.Column="0" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="BubbleButton" Content="Bubble Sort" Height="30" Width="120" Grid.Row="0" Grid.Column="0" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="CountingButton" Content="Counting Sort" Height="30" Width="120" Grid.Row="1" Grid.Column="0" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="InsertionButton" Content="Insertion Sort" Height="30" Width="120" Grid.Row="2" Grid.Column="0" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="QuickButton" Content="Quick Sort" Height="30" Width="120" Grid.Row="3" Grid.Column="0" Checked="SortAlgorithm_Checked"/>
 
             <!-- Cột 2 -->
-            <RadioButton x:Name="Bucket" Content="Bucket Sort" Height="30" Width="120" Grid.Row="0" Grid.Column="1" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Selection" Content="Selection Sort" Height="30" Width="120" Grid.Row="1" Grid.Column="1" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Merge" Content="Merge Sort" Height="30" Width="120" Grid.Row="2" Grid.Column="1" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Heap" Content="Heap Sort" Height="30" Width="120" Grid.Row="3" Grid.Column="1" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="BucketButton" Content="Bucket Sort" Height="30" Width="120" Grid.Row="0" Grid.Column="1" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="SelectionButton" Content="Selection Sort" Height="30" Width="120" Grid.Row="1" Grid.Column="1" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="MergeButton" Content="Merge Sort" Height="30" Width="120" Grid.Row="2" Grid.Column="1" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="HeapButton" Content="Heap Sort" Height="30" Width="120" Grid.Row="3" Grid.Column="1" Checked="SortAlgorithm_Checked"/>
 
-            <RadioButton x:Name="Radix" Content="Radix Sort" Height="30" Width="120" Grid.Row="0" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Shell" Content="Shell Sort" Height="30" Width="120" Grid.Row="1" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Tim" Content="Tim Sort" Height="30" Width="120" Grid.Row="2" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
-            <RadioButton x:Name="Tree" Content="Tree Sort" Height="30" Width="120" Grid.Row="3" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="RadixButton" Content="Radix Sort" Height="30" Width="120" Grid.Row="0" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="ShellButton" Content="Shell Sort" Height="30" Width="120" Grid.Row="1" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="TimButton" Content="Tim Sort" Height="30" Width="120" Grid.Row="2" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
+            <RadioButton x:Name="TreeButton" Content="Tree Sort" Height="30" Width="120" Grid.Row="3" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
         </Grid>
-        <TextBlock x:Name="SlectedSection" Text="Select array and sorting algorithm !!" Height="30" Width="200"/>
-        <Button x:Name="StartButton" Content="Start" Height="30" Width="60" Margin="662,479,78,75" Click="StartButton_Click"/>
-        <Slider x:Name="SpeedSlider" Height="30" Width="100" Minimum="1" TickPlacement="BottomRight" Margin="535,474,165,80" ValueChanged="SpeedSlider_ValueChanged"/>
-        <TextBox x:Name="SpeedTextBox" Text="CurrentSpeed" Height="40" Width="40" Margin="436,469,324,75" FontSize="16" BorderThickness="2,2,2,2" LostFocus="SpeedTextBox_LostFocus" KeyDown="SpeedTextBox_KeyDown" PreviewTextInput="SpeedTextBox_PreviewTextInput"/>
-    </Grid>
+        <TextBlock x:Name="SelectedSectionTextBlock" Text="Select array and sorting algorithm !!" Height="30" Width="200"/>
+        <Button x:Name="StartButton" Content="Start" Height="30" Width="60" Click="StartButton_Click"/>
+        <WrapPanel HorizontalAlignment="Center" >
+            <Slider x:Name="ElementCountSlider" Minimum="1" Maximum="10" TickPlacement="BottomRight" ValueChanged="ElementCountSlider_ValueChanged" Height="46" Width="102"/>
+            <TextBox x:Name="ElementCountTextBox" Text="CurrentSpeed" Height="40" Width="40" FontSize="16" BorderThickness="2,2,2,2" LostFocus="ElementCountTextBox_LostFocus" KeyDown="ElementCountTextBox_KeyDown" PreviewTextInput="ElementCountTextBox_PreviewTextInput"/>
+        </WrapPanel>
+    </StackPanel>
 </Window>

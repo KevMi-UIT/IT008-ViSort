@@ -6,19 +6,27 @@ on:
       - "**/*.cs"
       - "**/.editorconfig"
     branches:
-      - "**"
+      - "main"
   pull_request:
   workflow_dispatch:
 
 jobs:
-  check-format:
+  check:
     runs-on: windows-latest
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0"
+          cache: true
+          cache-dependency-path: ViSort/packages.lock.json
+
+      - name: Restore deps
+        working-directory: ViSort
+        run: dotnet restore --locked-mode --use-lock-file
 
       - name: Run dotnet format check
-        run: scripts/dotnet_format.ps1 "ViSort/ViSort.sln"
+        run: scripts/dotnet_format_check.ps1 "ViSort/ViSort.sln"
