@@ -11,8 +11,8 @@ internal class UserService
     internal UserService()
     {
         var config = App.Config!;
-        var client = new MongoClient(config["db:connectionString"]);
-        var database = client.GetDatabase(config["db:dbName"]);
+        MongoClient client = new(config["db:connectionString"]);
+        IMongoDatabase database = client.GetDatabase(config["db:dbName"]);
         UsersCollection = database.GetCollection<UserModel>(config["db:userCollection"]);
     }
 
@@ -35,36 +35,40 @@ internal class UserService
 
     internal async Task<List<UserModel>> GetAllUsersResultAsync()
     {
-        var projection = Builders<UserModel>.Projection.Include(u => u.Username).Include(u => u.Score != 0);
-        return await UsersCollection.Find(_ => true).Project<UserModel>(projection).SortByDescending(u => u.Score).ToListAsync();
+        FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Ne(static u => u.Score, 0);
+        ProjectionDefinition<UserModel>? projection = Builders<UserModel>.Projection.Include(static u => u.Username).Include(static u => u.Score);
+        return await UsersCollection.Find(filter).Project<UserModel>(projection).SortByDescending(static u => u.Score).ToListAsync();
     }
 
-    internal async Task<bool> AuthUserAsync(UserModel user)
+    internal async Task AuthUserAsync(UserModel user)
     {
-        var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
-        var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
+        FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
+        UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
         if (existingUser == null)
         {
             await AddUserAsync(user);
-            return true;
+            return;
         }
-        return user.EncryptedPassword == existingUser.EncryptedPassword;
+        if (user.EncryptedPassword != existingUser.EncryptedPassword)
+        {
+            throw new PasswordDoesNotMatch("Password does not match");
+        }
     }
 
     internal async Task UpdateScoreAsync(UserModel user)
     {
-        var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
-        var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
+        FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
+        UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
         CheckUser(user, existingUser);
-        var update = Builders<UserModel>.Update.Set(u => u.Score, user.Score);
-        await UsersCollection.UpdateOneAsync(filter, update);
+        UpdateDefinition<UserModel>? update = Builders<UserModel>.Update.Set(static u => u.Score, user.Score);
+        _ = await UsersCollection.UpdateOneAsync(filter, update);
     }
 
     internal async Task DeleteUserAsync(UserModel user)
     {
-        var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
-        var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
+        FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
+        UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
         CheckUser(user, existingUser);
-        UsersCollection.DeleteOne(filter);
+        _ = await UsersCollection.DeleteOneAsync(filter);
     }
 }
