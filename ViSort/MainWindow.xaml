@@ -54,7 +54,7 @@
             <RadioButton x:Name="Tim" Content="Tim Sort" Height="30" Width="120" Grid.Row="2" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
             <RadioButton x:Name="Tree" Content="Tree Sort" Height="30" Width="120" Grid.Row="3" Grid.Column="2" Checked="SortAlgorithm_Checked"/>
         </Grid>
-        <TextBlock x:Name="SlectedSection" Text="" Height="30" Width="200"/>
+        <TextBlock x:Name="SlectedSection" Text="Select array and sorting algorithm !!" Height="30" Width="200"/>
         <Button x:Name="StartButton" Content="Start" Height="30" Width="60" Margin="662,479,78,75" Click="StartButton_Click"/>
         <Slider x:Name="SpeedSlider" Height="30" Width="100" Minimum="1" TickPlacement="BottomRight" Margin="535,474,165,80" ValueChanged="SpeedSlider_ValueChanged"/>
         <TextBox x:Name="SpeedTextBox" Text="CurrentSpeed" Height="40" Width="40" Margin="436,469,324,75" FontSize="16" BorderThickness="2,2,2,2" LostFocus="SpeedTextBox_LostFocus" KeyDown="SpeedTextBox_KeyDown" PreviewTextInput="SpeedTextBox_PreviewTextInput"/>

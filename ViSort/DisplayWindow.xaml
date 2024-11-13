@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViSort"
         mc:Ignorable="d"
-        Title="DisplayWindow" Height="450" Width="800">
+        Title="DisplayWindow" Height="600" Width="800" Background="#FF140342">
     <Grid>
-        
-    </Grid>
+        <Grid Margin="0,76,0,-33">
+            <Canvas x:Name="SortVisualisation" Height="500" Width="800" Background="#FF767575" Margin="0,10,0,31" />
+            <RichTextBox x:Name="CodeDisplay" Height="80" Width="400" Margin="400,-70,0,531" />
+        </Grid>
+        <Button x:Name="PlayPauseButton" Content="Play" Height="30" Width="60" Margin="10,10,730,544" Click="PlayPauseButton_Click"/>
+        <Slider x:Name="SpeedSlider" Height="30" Width="120" Minimum="1" TickPlacement="BottomRight" Margin="10,46,670,508" ValueChanged="SpeedSlider_ValueChanged"/>
+        <TextBox x:Name="SpeedTextBox" Text="Change" Height="30" Width="30" Margin="143,46,627,508" BorderThickness="2,2,2,2" LostFocus="SpeedTextBox_LostFocus" KeyDown="SpeedTextBox_KeyDown" PreviewTextInput="SpeedTextBox_PreviewTextInput" />
+        <Label x:Name="AlgorithmName" Content="Name" Height="30" Width="60" Foreground="White" Margin="113,10,627,544"/>
+        <Label x:Name="TimeComplexity" Content="Time Complexity:" Height="30" Width="110" Foreground="White" Margin="197,7,493,547"/>
+        <Label x:Name="SpaceComplexity" Content="Space Complexity:" Height="30" Width="110" Foreground="White" Margin="197,46,493,508"/>
+        <Label x:Name="Time" Content="TimeHere" Height="20" Width="30" Margin="307,12,463,552" Foreground="White"/>
+        <Label x:Name="Space" Content="SpaceHere" Height="20" Width="30" Margin="307,51,463,513" Foreground="White"/>
+    </Grid> 
 </Window>

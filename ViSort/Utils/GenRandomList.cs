@@ -2,7 +2,7 @@
 
 internal static class GenRandomList
 {
-    enum RandomGenTypes
+    internal enum RandomGenTypes
     {
         Normal,
         Sorted,
@@ -15,7 +15,7 @@ internal static class GenRandomList
     private static readonly int NEARLY_SORTED_SENSITIVITY = 10;
     private static readonly Random RAND = new();
 
-    static List<int> GenList(int length, RandomGenTypes type)
+    internal static List<int> GenList(int length, RandomGenTypes type)
     {
         return type switch
         {

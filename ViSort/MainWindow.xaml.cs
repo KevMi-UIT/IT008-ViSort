@@ -21,6 +21,7 @@ namespace ViSort
     public partial class MainWindow : Window
     {
         private int threadDelay;
+        private int elementCount;
         private string selectedSortAlgorithm = "";
         private string selectedArrayGenerationMethod = "";
         public MainWindow()
@@ -56,8 +57,6 @@ namespace ViSort
         {
             SlectedSection.Text = $"Algorithm: {selectedSortAlgorithm}, Array: {selectedArrayGenerationMethod}";
         }
-
-
         private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // Cập nhật TextBox khi Slider thay đổi
@@ -112,12 +111,12 @@ namespace ViSort
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide();
             // Tạo và hiển thị cửa sổ DisplayWindow
-            DisplayWindow displayWindow = new DisplayWindow();
+            DisplayWindow displayWindow = new DisplayWindow(elementCount, threadDelay, selectedSortAlgorithm, selectedArrayGenerationMethod);
+            displayWindow.Closed += (s, e) => this.Show();
             displayWindow.Show();
 
-            // Đóng cửa sổ hiện tại (MainWindow)
-            this.Close();
         }
 
     }
