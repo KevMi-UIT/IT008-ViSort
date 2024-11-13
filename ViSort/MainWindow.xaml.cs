@@ -62,4 +62,10 @@ public partial class MainWindow : Window
         }
 
     }
+
+    private void ScoreBoard_Click(object sender, RoutedEventArgs e)
+    {
+        var ScoreBoard = new ScoreBoard.ScoreBoard();
+        ScoreBoard.ShowDialog();
+    }
 }

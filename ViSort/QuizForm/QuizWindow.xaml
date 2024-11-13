@@ -44,6 +44,6 @@
         </WrapPanel>
         
         <!-- Nút Nộp bài -->
-        <Button x:Name="Submit_Button" Content="Nộp bài" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="90" Margin="0,0,0,10" Click="Submit_Button_Click" />
+        <Button x:Name="Submit_Button" Content="Kết thúc" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="90" Margin="0,0,0,10" Click="SubmitButton_Click" />
     </Grid>
 </Window>

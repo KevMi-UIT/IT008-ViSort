@@ -29,7 +29,6 @@ public partial class QuizWindow : Window
 {
     private List<QuizQuestion> QuestionList = [];
     private int currentQuestionIndex = 0;
-
     public QuizWindow()
     {
         foreach (var question in QuizzQuestions.QUESTIONS)
@@ -70,6 +69,18 @@ public partial class QuizWindow : Window
     {
         currentQuestionIndex++;
         DisplayCurrentQuestion();
+    }
+    private int CountAnswer()
+    {
+        int count = 0;
+        foreach (var q in QuestionList)
+        {
+            if (q.SelectedAnswer != null)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     private void Answer_Checked(object sender, RoutedEventArgs e)
@@ -120,26 +131,15 @@ public partial class QuizWindow : Window
         }
     }
 
-    private void Submit_Button_Click(object sender, RoutedEventArgs e)
+    private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
-        //if (MessageBox.Show("If the file save fails, do you want to automatically try again?",
-        //            "Save file",
-        //            MessageBoxButton.Secondary,
-        //            MessageBoxImage.Question) == MessageBoxResult.Yes)
-        //{
-        //    // Do something here
-        //}
-    }
+        //TODO: change
+        int score = Utils.Utils.CalcScore(0, QuestionList.Count, CountAnswer());
 
-    private async Task OnOpenCustomMessageBox(object sender)
-    {
-        var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+        if (App.User != null && App.UserSvc != null)
         {
-            Title = "WPF UI Message Box",
-            Content =
-                "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",
-        };
-
-        _ = await uiMessageBox.ShowDialogAsync();
+            App.User.SetScore(score);
+            await App.UserSvc.UpdateScoreAsync(App.User);
+        }
     }
 }
