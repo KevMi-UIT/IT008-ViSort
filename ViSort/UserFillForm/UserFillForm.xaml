@@ -33,6 +33,6 @@
         <ui:PasswordBox x:Name="Password_Passwordbox" PlaceholderText="Password..."  Grid.Row="2" Grid.Column="2" TabIndex="1" Margin="5" />
 
         <!-- Nút Submit -->
-        <ui:Button Content="Continue" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10" Click="SubmitButton_Click" Cursor="Hand" />
+        <ui:Button x:Name="SubmitButton" Content="Continue" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10" Click="SubmitButton_Click" Cursor="Hand" />
     </Grid>
 </Window>

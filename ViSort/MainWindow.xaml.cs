@@ -14,8 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-namespace ViSort;
+using Wpf.Ui.Controls;
+using MessageBox = System.Windows.MessageBox;
+using MessageBoxButton = System.Windows.MessageBoxButton;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -37,7 +38,28 @@ public partial class MainWindow : Window
             return;
         }
 
-        var UserFillForm = new UserFillForm();
-        UserFillForm.ShowDialog();
+        if (App.User == null)
+        {
+            var UserFillForm = new UserFillForm();
+            UserFillForm.ShowDialog();
+        }
+
+        var QuizWindow = new QuizForm.QuizWindow();
+        QuizWindow.ShowDialog();
+    }
+
+    private void CheckUserLogin_Click(object sender, RoutedEventArgs e)
+    {
+        if (App.User == null)
+        {
+            var loginWindow = new UserFillForm();
+            loginWindow.ShowDialog();
+
+            if (App.User != null)
+            {
+                Login_Icon.Symbol = SymbolRegular.AccessibilityCheckmark28;
+            }
+        }
+
     }
 }

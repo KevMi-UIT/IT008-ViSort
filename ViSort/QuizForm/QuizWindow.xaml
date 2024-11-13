@@ -23,10 +23,10 @@
             </WrapPanel>
         </Border>
         <!-- Nút Quay lại -->
-        <Button x:Name="PrevQuestion_Button" Content="Quay lại" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="80" Margin="10,0,0,10" Click="PreviousQuestion" />
+        <Button x:Name="PrevQuestion_Button" Content="Quay lại" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Margin="10,0,0,10" Click="PreviousQuestion" />
 
         <!-- Nút Tiếp theo -->
-        <Button x:Name="NextQuestion_Button" Content="Tiếp theo" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="80" Margin="0,0,10,10" Click="NextQuestion" />
+        <Button x:Name="NextQuestion_Button" Content="Tiếp theo" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Margin="0,0,10,10" Click="NextQuestion" />
         <!-- Wrap multiple choice-->
 
         <WrapPanel x:Name="MultipleChoiceWrapPanel" Margin="0,276,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="716">
@@ -42,5 +42,8 @@
             <RadioButton x:Name="Tim_RadioButton" Content="Tim Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
             <RadioButton x:Name="Tree_RadioButton" Content="Tree Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
         </WrapPanel>
+        
+        <!-- Nút Nộp bài -->
+        <Button x:Name="Submit_Button" Content="Nộp bài" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="90" Margin="0,0,0,10" Click="Submit_Button_Click" />
     </Grid>
 </Window>

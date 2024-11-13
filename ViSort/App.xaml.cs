@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ViSort.Database;
+using ViSort.Models;
 using ZstdSharp;
 
 namespace ViSort;
@@ -16,12 +18,13 @@ namespace ViSort;
 /// </summary>
 public partial class App : Application
 {
-    internal static IConfiguration? Config { get; private set; }
-
-    internal App()
-    {
-        Config = new ConfigurationBuilder()
+    internal static IConfiguration Config { get; private set; } = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
             .Build();
+    internal static UserModel? User { get; set; } = null;
+    internal static UserService? UserSvc { get; set; } = null;
+
+    public App()
+    {
     }
 }

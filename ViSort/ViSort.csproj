@@ -22,15 +22,15 @@
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
-  <ItemGroup>
+  <!--<ItemGroup>
     <None Remove="appsettings.json" />
-  </ItemGroup>
+  </ItemGroup>-->
   <ItemGroup>
     <Content Include="QuizForm\question.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="mongocrypt.dll" />
   </ItemGroup>

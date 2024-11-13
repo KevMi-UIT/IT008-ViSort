@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Extensions.Configuration;
+using MongoDB.Driver;
 using ViSort.Models;
 using static ViSort.Database.UserExceptions;
 

@@ -9,8 +9,8 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ui:ThemesDictionary Theme="Light" />
-        <ui:ControlsDictionary />
-      </ResourceDictionary.MergedDictionaries>
+                <ui:ControlsDictionary />
+            </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
 </Application>

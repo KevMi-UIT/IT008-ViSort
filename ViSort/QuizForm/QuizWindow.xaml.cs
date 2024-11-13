@@ -1,5 +1,4 @@
-﻿namespace ViSort.QuizForm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,8 +14,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ViSort.QuizForm;
 using ViSort.Sorts;
-using ViSort.Utils;
+using Wpf.Ui.Controls;
+using static ViSort.Utils.Utils;
+using MessageBox = Wpf.Ui.Controls.MessageBox;
+using MessageBoxButton = Wpf.Ui.Controls.MessageBoxButton;
+using MessageBoxResult = Wpf.Ui.Controls.MessageBoxResult;
 
+namespace ViSort.QuizForm;
 
 /// <summary>
 /// Interaction logic for QuizWindow.xaml
@@ -33,14 +37,18 @@ public partial class QuizWindow : Window
             var q = new QuizQuestion(string.Join(", ", question));
             QuestionList.Add(q);
         }
-        Utils.Randomize(QuestionList);
+        Utils.Utils.Randomize(QuestionList);
         InitializeComponent();
         DisplayCurrentQuestion();
     }
 
     private void DisplayCurrentQuestion()
     {
+        PrevQuestion_Button.IsEnabled = currentQuestionIndex > 0;
+        NextQuestion_Button.IsEnabled = currentQuestionIndex < QuestionList.Count - 1;
+
         QuestionTextBlock.Text = QuestionList[currentQuestionIndex].Content;
+
         var selectedAnswer = QuestionList[currentQuestionIndex].SelectedAnswer;
         if (selectedAnswer != null)
         {
@@ -54,20 +62,14 @@ public partial class QuizWindow : Window
 
     private void PreviousQuestion(object sender, RoutedEventArgs e)
     {
-        if (currentQuestionIndex > 0 && currentQuestionIndex <= QuestionList.Count)
-        {
-            currentQuestionIndex--;
-            DisplayCurrentQuestion();
-        }
+        currentQuestionIndex--;
+        DisplayCurrentQuestion();
     }
 
     private void NextQuestion(object sender, RoutedEventArgs e)
     {
-        if (currentQuestionIndex >= 0 && currentQuestionIndex < QuestionList.Count - 1)
-        {
-            currentQuestionIndex++;
-            DisplayCurrentQuestion();
-        }
+        currentQuestionIndex++;
+        DisplayCurrentQuestion();
     }
 
     private void Answer_Checked(object sender, RoutedEventArgs e)
@@ -116,5 +118,28 @@ public partial class QuizWindow : Window
                 break;
             }
         }
+    }
+
+    private void Submit_Button_Click(object sender, RoutedEventArgs e)
+    {
+        //if (MessageBox.Show("If the file save fails, do you want to automatically try again?",
+        //            "Save file",
+        //            MessageBoxButton.Secondary,
+        //            MessageBoxImage.Question) == MessageBoxResult.Yes)
+        //{
+        //    // Do something here
+        //}
+    }
+
+    private async Task OnOpenCustomMessageBox(object sender)
+    {
+        var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+        {
+            Title = "WPF UI Message Box",
+            Content =
+                "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",
+        };
+
+        _ = await uiMessageBox.ShowDialogAsync();
     }
 }

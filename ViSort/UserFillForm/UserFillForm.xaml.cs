@@ -23,12 +23,19 @@ public partial class UserFillForm : Window
     public UserFillForm()
     {
         InitializeComponent();
+        App.UserSvc ??= new();
     }
 
-    private void SubmitButton_Click(object sender, RoutedEventArgs e)
+    private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
+        SubmitButton.IsEnabled = false;
         string password = Password_Passwordbox.Password;
-        UserModel User = new UserModel(Username_Textbox.Text, password);
+        UserModel User = new(Username_Textbox.Text, password);
+        if (await App.UserSvc!.AuthUserAsync(User))
+        {
+            App.User = User;
+        }
+        SubmitButton.IsEnabled = true;
         this.Close();
     }
 
@@ -39,7 +46,6 @@ public partial class UserFillForm : Window
         {
             MessageBox.Show("Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-        var QuizWindow = new QuizForm.QuizWindow();
-        QuizWindow.ShowDialog();
+
     }
 }
