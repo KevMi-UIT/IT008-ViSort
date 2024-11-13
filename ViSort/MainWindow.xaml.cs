@@ -61,7 +61,6 @@ public partial class MainWindow : Window
                 LogoutButton.Visibility = Visibility.Visible;
             }
         }
-
     }
 
     private void ScoreBoard_Click(object sender, RoutedEventArgs e)
