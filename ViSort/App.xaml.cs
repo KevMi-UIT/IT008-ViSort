@@ -18,11 +18,11 @@ namespace ViSort;
 /// </summary>
 public partial class App : Application
 {
-    internal static IConfiguration Config { get; private set; } = new ConfigurationBuilder()
+    public static IConfiguration Config { get; private set; } = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
             .Build();
-    internal static UserModel? User { get; set; } = null;
-    internal static UserService? UserSvc { get; set; } = null;
+    public static UserModel? User { get; set; } = null;
+    public static UserService? UserSvc { get; set; } = null;
 
     public App()
     {

@@ -5,11 +5,11 @@ using static ViSort.Database.UserExceptions;
 
 namespace ViSort.Database;
 
-internal class UserService
+public class UserService
 {
     private readonly IMongoCollection<UserModel> UsersCollection;
 
-    internal UserService()
+    public UserService()
     {
         var config = App.Config!;
         MongoClient client = new(config["db:connectionString"]);
@@ -34,14 +34,14 @@ internal class UserService
         await UsersCollection.InsertOneAsync(user);
     }
 
-    internal async Task<List<UserModel>> GetAllUsersResultAsync()
+    public async Task<List<UserModel>> GetAllUsersResultAsync()
     {
         FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Ne(static u => u.Score, 0);
         ProjectionDefinition<UserModel>? projection = Builders<UserModel>.Projection.Include(static u => u.Username).Include(static u => u.Score);
         return await UsersCollection.Find(filter).Project<UserModel>(projection).SortByDescending(static u => u.Score).ToListAsync();
     }
 
-    internal async Task AuthUserAsync(UserModel user)
+    public async Task AuthUserAsync(UserModel user)
     {
         FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
         UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
@@ -56,7 +56,7 @@ internal class UserService
         }
     }
 
-    internal async Task UpdateScoreAsync(UserModel user)
+    public async Task UpdateScoreAsync(UserModel user)
     {
         FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
         UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
@@ -65,7 +65,7 @@ internal class UserService
         _ = await UsersCollection.UpdateOneAsync(filter, update);
     }
 
-    internal async Task DeleteUserAsync(UserModel user)
+    public async Task DeleteUserAsync(UserModel user)
     {
         FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
         UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();

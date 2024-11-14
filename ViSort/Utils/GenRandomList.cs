@@ -1,6 +1,6 @@
 ﻿namespace ViSort.Utils;
 
-internal static class GenRandomList
+public static class GenRandomList
 {
     enum RandomGenTypes
     {

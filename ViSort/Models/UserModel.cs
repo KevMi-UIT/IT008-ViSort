@@ -5,19 +5,19 @@ using System.Text;
 
 namespace ViSort.Models;
 
-internal class UserModel
+public class UserModel
 {
     [BsonId]
-    internal ObjectId Id { get; set; }
+    public ObjectId Id { get; set; }
 
     [BsonElement("username")]
-    internal string Username { get; private set; }
+    public string Username { get; private set; }
 
     [BsonElement("password")]
-    internal string EncryptedPassword { get; private set; }
+    public string EncryptedPassword { get; private set; }
 
     private string _password;
-    internal string Password
+    public string Password
     {
         get => _password;
         private set
@@ -28,9 +28,9 @@ internal class UserModel
     }
 
     [BsonElement("score")]
-    internal int Score { get; private set; }
+    public int Score { get; private set; }
 
-    internal UserModel(string username, string password, int score = 0)
+    public UserModel(string username, string password, int score = 0)
     {
         Username = username;
         _password = password;
@@ -38,17 +38,17 @@ internal class UserModel
         Score = score;
     }
 
-    internal void UpdatePassword(string password)
+    public void UpdatePassword(string password)
     {
         Password = password;
     }
 
-    internal void SetScore(int score)
+    public void SetScore(int score)
     {
         Score = score;
     }
 
-    internal static string EncryptPassword(string unencryptedPassword)
+    public static string EncryptPassword(string unencryptedPassword)
     {
         using Aes aes = Aes.Create();
         aes.Key = GetHash(unencryptedPassword); // Create the AES key using the password's hash
@@ -68,7 +68,7 @@ internal class UserModel
         return Convert.ToBase64String(result);
     }
 
-    internal static bool VerifyPassword(string inputPassword, string storedEncryptedPassword)
+    public static bool VerifyPassword(string inputPassword, string storedEncryptedPassword)
     {
         try
         {

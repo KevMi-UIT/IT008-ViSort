@@ -1,6 +1,6 @@
 ﻿namespace ViSort.Database;
 
-internal static class UserExceptions
+public static class UserExceptions
 {
 
     public class PasswordDoesNotMatch(string message) : Exception(message)

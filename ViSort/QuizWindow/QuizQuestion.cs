@@ -8,12 +8,12 @@ using ViSort.Sorts;
 
 namespace ViSort.QuizWindow;
 
-internal class QuizQuestion(string content)
+public class QuizQuestion(string content)
 {
-    internal string Content { get; private set; } = content;
-    internal SortTypes? SelectedAnswer { get; private set; } = null;
+    public string Content { get; private set; } = content;
+    public SortTypes? SelectedAnswer { get; private set; } = null;
 
-    internal void SelectAnswer(SortTypes answer)
+    public void SelectAnswer(SortTypes answer)
     {
         SelectedAnswer = answer;
     }
