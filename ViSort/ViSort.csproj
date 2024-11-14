@@ -26,9 +26,6 @@
     <None Remove="appsettings.json" />
   </ItemGroup>-->
   <ItemGroup>
-    <Content Include="QuizWindow\question.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -31,7 +31,7 @@ public partial class MainWindow : Window
 
     private void OpenQuizWindow(object sender, RoutedEventArgs e)
     {
-        var QuestFilePath = "QuizWindow/question.txt";
+        var QuestFilePath = "QuizWindow/QuizQuestionsList.cs";
         if (!File.Exists(QuestFilePath))
         {
             MessageBox.Show("Không tìm thấy tệp câu hỏi. \nVui lòng kiểm tra lại đường dẫn", "Lỗi nè", MessageBoxButton.OK, MessageBoxImage.Error);
