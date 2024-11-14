@@ -15,7 +15,6 @@ using ViSort.Models;
 using Windows.System;
 using static ViSort.Database.UserExceptions;
 
-
 namespace ViSort;
 
 /// <summary>
