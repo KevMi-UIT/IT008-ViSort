@@ -24,7 +24,6 @@ public partial class UserFillForm : Window
 {
     public UserFillForm()
     {
-        App.EstablishConnection();
         InitializeComponent();
     }
 

@@ -38,11 +38,12 @@ public partial class App : Application
         });
     }
 
-    public static void EstablishConnection()
+    public static async Task<Boolean> EstablishDBConnection()
     {
         try
         {
             UserSvc ??= new();
+            return true;
         }
         catch (Exception)
         {
@@ -51,6 +52,7 @@ public partial class App : Application
                 Title = "Lỗi kết nối",
                 Content = "Không thể khởi tạo kết nối đến máy chủ cơ sở dữ liệu."
             }.ShowDialogAsync();
+            return false;
         }
     }
 }

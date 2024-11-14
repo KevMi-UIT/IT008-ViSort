@@ -26,9 +26,9 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void OpenQuizWindow(object sender, RoutedEventArgs e)
+    private async void OpenQuizWindow(object sender, RoutedEventArgs e)
     {
-        if (App.User == null)
+        if (App.User == null && await App.EstablishDBConnection())
         {
             var UserFillForm = new UserFillForm();
             UserFillForm.ShowDialog();
@@ -53,8 +53,12 @@ public partial class MainWindow : Window
             }
         }
     }
-    private void ScoreBoard_Click(object sender, RoutedEventArgs e)
+    private async void ScoreBoard_Click(object sender, RoutedEventArgs e)
     {
+        if (!await App.EstablishDBConnection())
+        {
+            return;
+        }
         var ScoreBoard = new ScoreBoard.ScoreBoard();
         ScoreBoard.ShowDialog();
     }
