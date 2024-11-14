@@ -32,21 +32,21 @@ public partial class UserFillForm : Window
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
         string password = Password_Passwordbox.Password;
-        UserModel User = new(Username_Textbox.Text, password);
+        UserModel User = new(UsernameTextbox.Text, password);
 
         if (!UserUtils.ValidateUsername(User.Username))
         {
-            ValidateUsername_TextBlock.Visibility = Visibility.Visible;
+            ValidateUsernameTextBlock.Visibility = Visibility.Visible;
             return;
         }
-        ValidateUsername_TextBlock.Visibility = Visibility.Hidden;
+        ValidateUsernameTextBlock.Visibility = Visibility.Hidden;
 
         if (!UserUtils.ValidatePassword(password))
         {
-            ValidatePassword_TextBlock.Visibility = Visibility.Visible;
+            ValidatePasswordTextBlock.Visibility = Visibility.Visible;
             return;
         }
-        ValidatePassword_TextBlock.Visibility = Visibility.Hidden;
+        ValidatePasswordTextBlock.Visibility = Visibility.Hidden;
         SubmitButton.IsEnabled = false;
 
         try
@@ -78,7 +78,7 @@ public partial class UserFillForm : Window
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(Username_Textbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
+        if (string.IsNullOrWhiteSpace(UsernameTextbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
         {
             var result = MessageBox.Show("Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
                                          "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning);

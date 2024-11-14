@@ -26,7 +26,7 @@
     <None Remove="appsettings.json" />
   </ItemGroup>-->
   <ItemGroup>
-    <Content Include="QuizForm\question.txt">
+    <Content Include="QuizWindow\question.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="appsettings.json">

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViSort.QuizForm;
-internal static class QuizzQuestions
+namespace ViSort.QuizWindow;
+internal static class QuizQuestionsList
 {
     internal static List<List<int>> QUESTIONS = [
         [1, 2, 3, 4, 45],

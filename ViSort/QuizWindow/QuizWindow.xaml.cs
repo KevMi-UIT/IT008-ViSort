@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViSort.QuizForm;
+using ViSort.QuizWindow;
 using ViSort.Sorts;
 using Wpf.Ui.Controls;
 using static ViSort.Utils.Utils;
@@ -20,7 +20,7 @@ using MessageBox = Wpf.Ui.Controls.MessageBox;
 using MessageBoxButton = Wpf.Ui.Controls.MessageBoxButton;
 using MessageBoxResult = Wpf.Ui.Controls.MessageBoxResult;
 
-namespace ViSort.QuizForm;
+namespace ViSort.QuizWindow;
 
 /// <summary>
 /// Interaction logic for QuizWindow.xaml
@@ -31,7 +31,7 @@ public partial class QuizWindow : Window
     private int currentQuestionIndex = 0;
     public QuizWindow()
     {
-        foreach (var question in QuizzQuestions.QUESTIONS)
+        foreach (var question in QuizQuestionsList.QUESTIONS)
         {
             var q = new QuizQuestion(string.Join(", ", question));
             QuestionList.Add(q);
@@ -43,8 +43,8 @@ public partial class QuizWindow : Window
 
     private void DisplayCurrentQuestion()
     {
-        PrevQuestion_Button.IsEnabled = currentQuestionIndex > 0;
-        NextQuestion_Button.IsEnabled = currentQuestionIndex < QuestionList.Count - 1;
+        PrevQuestionButton.IsEnabled = currentQuestionIndex > 0;
+        NextQuestionButton.IsEnabled = currentQuestionIndex < QuestionList.Count - 1;
 
         QuestionTextBlock.Text = QuestionList[currentQuestionIndex].Content;
 
@@ -59,13 +59,13 @@ public partial class QuizWindow : Window
         }
     }
 
-    private void PreviousQuestion(object sender, RoutedEventArgs e)
+    private void PrevQuestionButton_Click(object sender, RoutedEventArgs e)
     {
         currentQuestionIndex--;
         DisplayCurrentQuestion();
     }
 
-    private void NextQuestion(object sender, RoutedEventArgs e)
+    private void NextQuestionButton_Click(object sender, RoutedEventArgs e)
     {
         currentQuestionIndex++;
         DisplayCurrentQuestion();

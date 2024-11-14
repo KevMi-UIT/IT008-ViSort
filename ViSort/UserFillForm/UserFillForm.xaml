@@ -26,17 +26,17 @@
 
         <!-- User name -->
         <Label Content="Username" Target="{Binding ElementName=Username_Textbox}" VerticalAlignment="Center" Grid.Row="0" Foreground="Black" Padding="5" />
-        <ui:TextBox x:Name="Username_Textbox" PlaceholderText="Username..." Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TabIndex="0" Margin="5"/>
+        <ui:TextBox x:Name="UsernameTextbox" PlaceholderText="Username..." Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TabIndex="0" Margin="5"/>
 
         <!-- Validate Username -->
-        <ui:TextBlock x:Name="ValidateUsername_TextBlock" Text="Tên người dùng không đúng định dạng. Vui lòng nhập lại" Grid.Row="0" Grid.Column="1" Margin="5" Padding="5" Visibility="Hidden" Foreground="DarkGray" />
+        <ui:TextBlock x:Name="ValidateUsernameTextBlock" Text="Tên người dùng không đúng định dạng. Vui lòng nhập lại" Grid.Row="0" Grid.Column="1" Margin="5" Padding="5" Visibility="Hidden" Foreground="DarkGray" />
         
         <!-- Password -->
         <Label Content="Password" Target="{Binding ElementName=Password_Passwordbox}" VerticalAlignment="Center" Grid.Row="2" Foreground="Black" Padding="5"/>
         <ui:PasswordBox x:Name="Password_Passwordbox" PlaceholderText="Password..."  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" TabIndex="1" Margin="5" />
 
         <!-- Validate Password -->
-        <ui:TextBlock x:Name="ValidatePassword_TextBlock" Text="Mật khẩu không đúng định dạng. Vui lòng nhập lại" Grid.Row="2" Grid.Column="1" Margin="5" Padding="10" Visibility="Hidden" Foreground="DarkGray"/>
+        <ui:TextBlock x:Name="ValidatePasswordTextBlock" Text="Mật khẩu không đúng định dạng. Vui lòng nhập lại" Grid.Row="2" Grid.Column="1" Margin="5" Padding="10" Visibility="Hidden" Foreground="DarkGray"/>
         
         <!-- Nút Submit -->
         <ui:Button x:Name="SubmitButton" Content="Continue" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10" Click="SubmitButton_Click" Cursor="Hand" />

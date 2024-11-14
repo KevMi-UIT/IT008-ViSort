@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViSort.Sorts;
 
-namespace ViSort.QuizForm;
+namespace ViSort.QuizWindow;
 
 internal class QuizQuestion(string content)
 {
