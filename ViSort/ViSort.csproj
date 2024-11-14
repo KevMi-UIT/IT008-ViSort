@@ -62,4 +62,9 @@
   <ItemGroup>
     <Resource Include="assets\*" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="QuizWindow\QuizQuestionsList.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
 </Project>
