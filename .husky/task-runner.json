@@ -5,7 +5,13 @@
       "name": "Dotnet Format",
       "command": "dotnet",
       "cwd": "ViSort",
-      "args": ["format", "ViSort.sln"],
+      "args": [
+        "format",
+        "ViSort.sln",
+        "--no-restore",
+        "--include",
+        "${staged}"
+      ],
       "include": ["**/*.cs", "**/*.xaml"],
       "group": "pre-commit"
     }
