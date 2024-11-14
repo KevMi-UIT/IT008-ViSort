@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ViSort.Models;
+using Windows.System;
+using static ViSort.Database.UserExceptions;
 
 
 namespace ViSort;
@@ -45,24 +47,46 @@ public partial class UserFillForm : Window
             return;
         }
         ValidatePassword_TextBlock.Visibility = Visibility.Hidden;
-
         SubmitButton.IsEnabled = false;
 
-        if (App.User != null)
+        try
         {
             await App.UserSvc!.AuthUserAsync(User);
             App.User = User;
         }
-        SubmitButton.IsEnabled = true;
-        this.Close();
+        catch (PasswordDoesNotMatch)
+        {
+            MessageBox.Show("Mật khẩu không chính xác.", "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        catch (UserNotFound)
+        {
+            MessageBox.Show("Người dùng không tồn tại.", "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            SubmitButton.IsEnabled = true;
+            if (App.User == null)
+            {
+                MessageBox.Show("Đăng nhập không thành công.", "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                this.Close();
+            }
+        }
     }
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
-        string password = Password_Passwordbox.Password;
-        if (Username_Textbox.Text == "" && password == "")
+        if (string.IsNullOrWhiteSpace(Username_Textbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
         {
-            MessageBox.Show("Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
+                                         "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Cancel)
+            {
+                e.Cancel = true;
+            }
         }
     }
+
 }
