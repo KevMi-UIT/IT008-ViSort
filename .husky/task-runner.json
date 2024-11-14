@@ -4,10 +4,9 @@
     {
       "name": "Dotnet Format",
       "command": "dotnet",
-      "cwd": "ViSort",
       "args": [
         "format",
-        "ViSort.sln",
+        "ViSort\\ViSort.sln",
         "--no-restore",
         "--include",
         "${staged}"
