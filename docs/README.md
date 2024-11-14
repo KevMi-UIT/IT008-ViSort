@@ -7,7 +7,7 @@
   <img src="https://hits.sh/github.com/KevMi-UIT/IT008-ViSort.svg?view=today-total&style=for-the-badge&label=hits" alt="Hit">
   <br>
   <br>
-  <a href="https://www.codefactor.io/repository/github/kevinnitrog/VNULIB-Downloader"><img src="https://img.shields.io/codefactor/grade/github/KevMi-UIT/IT008-ViSort?style=for-the-badge" alt="CodeFactor Grade"></a>
+  <a href="https://www.codefactor.io/repository/github/KevMi-UIT/IT008-ViSort"><img src="https://img.shields.io/codefactor/grade/github/KevMi-UIT/IT008-ViSort?style=for-the-badge" alt="CodeFactor Grade"></a>
   <a href="../../../actions/workflows/release.yml"><img src="https://img.shields.io/github/actions/workflow/status/KevMi-UIT/IT008-ViSort/release.yml?style=for-the-badge&label=RELEASE" alt="Release Status"></a>
   <a href="../../../actions/workflows/dotnet_check.yml"><img src="https://img.shields.io/github/actions/workflow/status/KevMi-UIT/IT008-ViSort/dotnet_check.yml?style=for-the-badge&label=DOTNET%20CHECK" alt="Dotnet check status"></a>
   <br>
