@@ -15,9 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Windows.System;
-using Wpf.Ui.Controls;
-using MessageBox = System.Windows.MessageBox;
-using MessageBoxButton = System.Windows.MessageBoxButton;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -51,7 +48,7 @@ public partial class MainWindow : Window
             if (App.User != null)
             {
                 await App.UserSvc!.AuthUserAsync(App.User!);
-                Login_Icon.Symbol = SymbolRegular.PeopleCheckmark24;
+                Login_Icon.Symbol = WpfUiControl.SymbolRegular.PeopleCheckmark24;
                 LogoutButton.Visibility = Visibility.Visible;
             }
         }
@@ -66,7 +63,7 @@ public partial class MainWindow : Window
         if (App.User != null)
         {
             App.User = null;
-            Login_Icon.Symbol = SymbolRegular.ArrowEnter20;
+            Login_Icon.Symbol = WpfUiControl.SymbolRegular.ArrowEnter20;
             LogoutButton.Visibility = Visibility.Hidden;
         }
     }

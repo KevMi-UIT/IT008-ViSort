@@ -46,7 +46,11 @@ public partial class App : Application
         }
         catch (Exception)
         {
-            MessageBox.Show("Không thể khởi tạo kết nối đến máy chủ cơ sở dữ liệu.", "Lỗi kết nối", MessageBoxButton.OK, MessageBoxImage.Error);
+            await new WpfUiControl.MessageBox
+            {
+                Title = "Lỗi kết nối",
+                Content = "Không thể khởi tạo kết nối đến máy chủ cơ sở dữ liệu."
+            }.ShowDialogAsync();
         }
     }
 }

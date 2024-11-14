@@ -55,33 +55,37 @@ public partial class UserFillForm : Window
         }
         catch (PasswordDoesNotMatch)
         {
-            MessageBox.Show("Mật khẩu không chính xác.", "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
+            await new WpfUiControl.MessageBox
+            {
+                Title = "Lỗi đăng nhập",
+                Content = "Mật khẩu không chính xác.",
+                PrimaryButtonText = "OK"
+            }.ShowDialogAsync();
         }
         catch (UserNotFound)
         {
-            MessageBox.Show("Người dùng không tồn tại.", "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-        finally
-        {
-            SubmitButton.IsEnabled = true;
-            if (App.User == null)
+            await new WpfUiControl.MessageBox
             {
-                MessageBox.Show("Đăng nhập không thành công.", "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                this.Close();
-            }
+                Title = "Lỗi đăng nhập",
+                Content = "Người dùng không tồn tại.",
+                PrimaryButtonText = "OK"
+            }.ShowDialogAsync();
         }
+        SubmitButton.IsEnabled = true;
+        Close();
     }
 
-    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(UsernameTextbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
         {
-            var result = MessageBox.Show("Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
-                                         "Warning", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Cancel)
+            WpfUiControl.MessageBoxResult result = await new WpfUiControl.MessageBox
+            {
+                Title = "Warning",
+                Content = "Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
+                PrimaryButtonText = "OK",
+            }.ShowDialogAsync();
+            if (result == WpfUiControl.MessageBoxResult.Primary)
             {
                 e.Cancel = true;
             }

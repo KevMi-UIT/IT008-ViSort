@@ -16,9 +16,6 @@ using ViSort.QuizWindow;
 using ViSort.Sorts;
 using Wpf.Ui.Controls;
 using static ViSort.Utils.Utils;
-using MessageBox = Wpf.Ui.Controls.MessageBox;
-using MessageBoxButton = Wpf.Ui.Controls.MessageBoxButton;
-using MessageBoxResult = Wpf.Ui.Controls.MessageBoxResult;
 
 namespace ViSort.QuizWindow;
 
@@ -133,8 +130,8 @@ public partial class QuizWindow : Window
 
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
-        //TODO: change
-        int score = Utils.Utils.CalcScore(0, QuestionList.Count, CountAnswer());
+        //TODO: change value input to CalcScore
+        int score = CalcScore(0, QuestionList.Count, CountAnswer());
 
         if (App.User != null && App.UserSvc != null)
         {
