@@ -20,7 +20,7 @@ public partial class ScoreBoard : Window
 {
     public ScoreBoard()
     {
-        App.UserSvc ??= new();
+        App.EstablishConnection();
         InitializeComponent();
         _ = SetDataItems();
     }

@@ -24,8 +24,8 @@ public partial class UserFillForm : Window
 {
     public UserFillForm()
     {
+        App.EstablishConnection();
         InitializeComponent();
-        App.UserSvc ??= new();
     }
 
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)

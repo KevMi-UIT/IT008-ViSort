@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -26,5 +26,27 @@ public partial class App : Application
 
     public App()
     {
+        Task.Run(() =>
+        {
+            try
+            {
+                UserSvc = new();
+            }
+            finally
+            {
+            }
+        });
+    }
+
+    public static void EstablishConnection()
+    {
+        try
+        {
+            UserSvc ??= new();
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("Không thể khởi tạo kết nối đến máy chủ cơ sở dữ liệu.", "Lỗi kết nối", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }
