@@ -32,7 +32,7 @@ public partial class App : Application
             {
                 UserSvc = new();
             }
-            catch (Exception)
+            catch (Exception) // skipcq: CS-R1008
             {
             }
         });
