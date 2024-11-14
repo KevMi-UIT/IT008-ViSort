@@ -22,12 +22,12 @@
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
-  <ItemGroup>
+  <!--<ItemGroup>
     <None Remove="appsettings.json" />
-  </ItemGroup>
+  </ItemGroup>-->
   <ItemGroup>
     <Content Include="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="mongocrypt.dll" />
   </ItemGroup>
@@ -55,5 +55,11 @@
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
     <PackageReference Include="WPF-UI" Version="3.0.5" />
     <PackageReference Include="ZstdSharp.Port" Version="0.8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="UserInfoForm.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\*" />
   </ItemGroup>
 </Project>
