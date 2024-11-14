@@ -26,26 +26,26 @@ public partial class App : Application
 
     public App()
     {
-        Task.Run(() =>
+        Task.Run(static () =>
         {
             try
             {
                 UserSvc = new();
             }
-            finally
+            catch (Exception)
             {
             }
         });
     }
 
-    public static async Task<Boolean> EstablishDBConnection()
+    public static async Task<Boolean> EstablishDBConnectionAsync()
     {
         try
         {
             UserSvc ??= new();
             return true;
         }
-        catch (Exception)
+        catch (Exception) // skipcq: CS-R1008
         {
             await new WpfUiControl.MessageBox
             {

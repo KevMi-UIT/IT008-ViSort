@@ -2,7 +2,6 @@
 
 public static class UserExceptions
 {
-
     public class PasswordDoesNotMatch(string message) : Exception(message)
     {
     }

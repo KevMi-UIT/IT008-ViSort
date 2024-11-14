@@ -28,7 +28,7 @@ public partial class MainWindow : Window
 
     private async void OpenQuizWindow(object sender, RoutedEventArgs e)
     {
-        if (App.User == null && await App.EstablishDBConnection())
+        if (App.User == null && await App.EstablishDBConnectionAsync())
         {
             var UserFillForm = new UserFillForm();
             UserFillForm.ShowDialog();
@@ -55,7 +55,7 @@ public partial class MainWindow : Window
     }
     private async void ScoreBoard_Click(object sender, RoutedEventArgs e)
     {
-        if (!await App.EstablishDBConnection())
+        if (!await App.EstablishDBConnectionAsync())
         {
             return;
         }

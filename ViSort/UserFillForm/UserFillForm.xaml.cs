@@ -74,6 +74,7 @@ public partial class UserFillForm : Window
         Close();
     }
 
+    // skipcq: CS-R1005
     private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(UsernameTextbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
