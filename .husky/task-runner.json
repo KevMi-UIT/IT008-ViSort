@@ -1,0 +1,13 @@
+{
+  "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
+  "tasks": [
+    {
+      "name": "Dotnet Format",
+      "command": "dotnet",
+      "cwd": "ViSort",
+      "args": ["format", "ViSort.sln"],
+      "include": ["**/*.cs", "**/*.xaml"],
+      "group": "pre-commit"
+    }
+  ]
+}
