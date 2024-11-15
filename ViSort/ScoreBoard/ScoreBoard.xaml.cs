@@ -20,7 +20,6 @@ public partial class ScoreBoard : Window
 {
     public ScoreBoard()
     {
-        App.EstablishDBConnectionAsync();
         InitializeComponent();
         _ = SetDataItems();
     }
