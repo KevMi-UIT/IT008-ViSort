@@ -85,7 +85,7 @@ public partial class UserFillForm : Window
                 Content = "Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
                 PrimaryButtonText = "OK",
             }.ShowDialogAsync();
-            if (result == WpfUiControl.MessageBoxResult.Primary)
+            if (result != WpfUiControl.MessageBoxResult.Primary)
             {
                 e.Cancel = true;
             }

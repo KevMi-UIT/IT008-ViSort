@@ -138,5 +138,6 @@ public partial class QuizWindow : Window
             App.User.SetScore(score);
             await App.UserSvc.UpdateScoreAsync(App.User);
         }
+        this.Close();
     }
 }

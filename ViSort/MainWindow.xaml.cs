@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViSort.QuizWindow;
 using Windows.System;
 
 /// <summary>
@@ -34,8 +35,10 @@ public partial class MainWindow : Window
             UserFillForm.ShowDialog();
         }
 
+        this.Visibility = Visibility.Hidden;
         var QuizWindow = new QuizWindow.QuizWindow();
-        QuizWindow.ShowDialog();
+        QuizWindow.Closed += (s, args) => this.Visibility = Visibility.Visible;
+        QuizWindow.Show();
     }
 
     private async void CheckUserLogin_Click(object sender, RoutedEventArgs e)

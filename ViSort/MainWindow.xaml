@@ -23,8 +23,6 @@
 
         </Grid>
 
-        <ui:Button Content="WPF UI button" Icon="Fluent24"/>
-
         <ui:Button x:Name="CheckUserLogin" Click="CheckUserLogin_Click" Margin="0,0,0,90">
             <ui:SymbolIcon x:Name="Login_Icon" Symbol="ArrowEnter20" Margin="0,0,0,0"/>
         </ui:Button>
