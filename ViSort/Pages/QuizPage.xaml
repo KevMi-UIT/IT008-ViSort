@@ -1,0 +1,55 @@
+﻿<Page x:Class="ViSort.Pages.QuizPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ViSort.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1300"
+      Title="QuizPage">
+
+    <Grid Margin="20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ui:TextBlock Text="Quiz" FontTypography="TitleLarge" Grid.Row="0" />
+        <Separator Margin="30,10" Grid.Row="1"/>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ui:TextBlock x:Name="QuestionTextBlock" Grid.Row="0" FontTypography="Subtitle" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+            <Canvas x:Name="QuestionCanvas" Grid.Row="1" Background="White" />
+            <WrapPanel x:Name="MultipleChoiceWrapPanel" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="716">
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type RadioButton}">
+                        <Setter Property="Margin" Value="0,10,30,10"/>
+                    </Style>
+                </WrapPanel.Resources>
+                <RadioButton x:Name="BubleRadioButton" Content="Buble Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="BucketRadioButton" Content="Bucket Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="CountingRadioButton" Content="Counting Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="HeapRadioButton" Content="Heap Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="InsertionRadioButton" Content="Insertion Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="QuickRadioButton" Content="Quick Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="RadixRadioButton" Content="Radix Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="SelectionRadioButton" Content="Selection Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="ShellRadioButton" Content="Shell Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="TimRadioButton" Content="Tim Sort" Checked="Answer_Checked"/>
+                <RadioButton x:Name="TreeRadioButton" Content="Tree Sort" Checked="Answer_Checked"/>
+            </WrapPanel>
+            <Grid Grid.Row="3" Margin="0,10">
+                <ui:Button x:Name="PrevQuestionButton" Content="Previous" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90"  Click="PrevQuestionButton_Click" />
+                <ui:Button x:Name="SubmitButton" Content="Kết thúc" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="90" Click="SubmitButton_Click" />
+                <ui:Button x:Name="NextQuestionButton" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Click="NextQuestionButton_Click" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

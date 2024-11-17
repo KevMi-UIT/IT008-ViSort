@@ -1,0 +1,91 @@
+﻿<Window x:Name="ViSort" x:Class="ViSort.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:ViSort"
+        xmlns:pages="clr-namespace:ViSort.Pages"
+        xmlns:profilePages="clr-namespace:ViSort.Pages.ProfilePages"
+        mc:Ignorable="d"
+        d:Width="500" d:Height="450"
+        Icon="Resources/Logo/visort_logo.ico"
+        Title="ViSort" WindowStartupLocation="CenterScreen">
+
+    <ui:NavigationView x:Name="RootNavigation" Grid.Row="1" >
+        <ui:NavigationView.AutoSuggestBox>
+            <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
+                <ui:AutoSuggestBox.Icon>
+                    <ui:IconSourceElement>
+                        <ui:SymbolIconSource Symbol="Search24" />
+                    </ui:IconSourceElement>
+                </ui:AutoSuggestBox.Icon>
+            </ui:AutoSuggestBox>
+        </ui:NavigationView.AutoSuggestBox>
+        <ui:NavigationView.Header>
+            <ui:BreadcrumbBar
+      Margin="42,32,0,0"
+      FontSize="28"
+      FontWeight="DemiBold" />
+        </ui:NavigationView.Header>
+        <ui:NavigationView.MenuItems>
+            <ui:NavigationViewItem Content="Home" TargetPageType="{x:Type pages:HomePage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="Home24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="Visualise" TargetPageType="{x:Type pages:VisualisePage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="DataArea24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="Quiz" TargetPageType="{x:Type pages:QuizPage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="Question24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+        </ui:NavigationView.MenuItems>
+        <ui:NavigationView.FooterMenuItems>
+            <ui:NavigationViewItem Content="Profile" TargetPageType="{x:Type profilePages:ProfileSwitchPage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="People24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="Settings" TargetPageType="{x:Type pages:SettingsPage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="Settings24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+        </ui:NavigationView.FooterMenuItems>
+    </ui:NavigationView>
+
+<!--
+    <WrapPanel >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Width="200" >
+                <ui:Image Source="/assets/visort_full_logo_light.png" />
+            </Grid>
+            <Button x:Name="PracticeGame_Button" Content="Practice Game" Click="OpenQuizWindow" Width="120" Height="40" Margin="62,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+
+        </Grid>
+
+        <ui:Button Content="WPF UI button" Icon="Fluent24"/>
+
+        <ui:Button x:Name="CheckUserLogin" Click="CheckUserLogin_Click" Margin="0,0,0,90">
+            <ui:SymbolIcon x:Name="Login_Icon" Symbol="ArrowEnter20" Margin="0,0,0,0"/>
+        </ui:Button>
+
+        <ui:Button x:Name="LogoutButton" Click="CheckUserLogout_Click" Margin="0,0,0,90" Visibility="Hidden">
+            <ui:SymbolIcon x:Name="Logout_Icon" Symbol="ArrowExit20" Margin="0,0,0,0"/>
+            
+        </ui:Button>
+
+        <ui:Button x:Name="ScoreBoardButton" Click="ScoreBoard_Click" Margin="40" Content="Show Score Board"></ui:Button>
+    </WrapPanel >
+    -->
+</Window>

@@ -19,4 +19,11 @@ public static class Utils
     {
         (list[i], list[j]) = (list[j], list[i]);
     }
+
+    // https://stackoverflow.com/a/3456788/23173098
+    public static IEnumerable<T> Randomize<T>(this IEnumerable<T> source)
+    {
+        Random rnd = new();
+        return source.OrderBy<T, int>((item) => rnd.Next());
+    }
 }

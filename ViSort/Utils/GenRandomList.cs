@@ -76,4 +76,3 @@ public static class GenRandomList
         }
         return list;
     }
-}

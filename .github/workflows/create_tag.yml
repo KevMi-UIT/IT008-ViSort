@@ -14,6 +14,8 @@ jobs:
   create-tag:
     name: Create Tag
     runs-on: ubuntu-latest
+    env:
+      HUSKY: 0
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4

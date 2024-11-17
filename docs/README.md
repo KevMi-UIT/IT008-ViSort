@@ -7,16 +7,16 @@
   <img src="https://hits.sh/github.com/KevMi-UIT/IT008-ViSort.svg?view=today-total&style=for-the-badge&label=hits" alt="Hit">
   <br>
   <br>
-  <a href="https://www.codefactor.io/repository/github/kevinnitrog/VNULIB-Downloader"><img src="https://img.shields.io/codefactor/grade/github/KevMi-UIT/IT008-ViSort?style=for-the-badge" alt="CodeFactor Grade"></a>
+  <a href="https://www.codefactor.io/repository/github/KevMi-UIT/IT008-ViSort"><img src="https://img.shields.io/codefactor/grade/github/KevMi-UIT/IT008-ViSort?style=for-the-badge" alt="CodeFactor Grade"></a>
   <a href="../../../actions/workflows/release.yml"><img src="https://img.shields.io/github/actions/workflow/status/KevMi-UIT/IT008-ViSort/release.yml?style=for-the-badge&label=RELEASE" alt="Release Status"></a>
   <a href="../../../actions/workflows/dotnet_check.yml"><img src="https://img.shields.io/github/actions/workflow/status/KevMi-UIT/IT008-ViSort/dotnet_check.yml?style=for-the-badge&label=DOTNET%20CHECK" alt="Dotnet check status"></a>
   <br>
   <br>
-  <a href="https://app.deepsource.com/gh/KevMi-UIT/IT008-ViSort/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/KevMi-UIT/IT008-ViSort.svg/?label=code+coverage&show_trend=true&token=_ndTeatfi8J31o77zqM2NLYI"/></a>
   <a href="https://app.deepsource.com/gh/KevMi-UIT/IT008-ViSort/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/KevMi-UIT/IT008-ViSort.svg/?label=active+issues&show_trend=true&token=_ndTeatfi8J31o77zqM2NLYI"/></a>
   <a href="https://app.deepsource.com/gh/KevMi-UIT/IT008-ViSort/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/KevMi-UIT/IT008-ViSort.svg/?label=resolved+issues&show_trend=true&token=_ndTeatfi8J31o77zqM2NLYI"/></a>
   <br>
   <br>
+  <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows">
   <img src="https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white" alt="C#">
   <img src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Shell Script">
   <img src="https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white" alt="Powershell">
@@ -39,7 +39,9 @@
 - [🌠 GIỚI THIỆU](#-gi%E1%BB%9Ai-thi%E1%BB%86u)
   - [GIẢNG VIÊN HƯỚNG DẪN](#gi%E1%BA%A2ng-vi%C3%8An-h%C6%AF%E1%BB%9Ang-d%E1%BA%AAn)
   - [THÀNH VIÊN NHÓM](#th%C3%80nh-vi%C3%8An-nh%C3%93m)
-  - [Links](#links)
+  - [DOWNLOAD](#download)
+  - [LINKS](#links)
+  - [DEV](#dev)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -63,7 +65,23 @@
 
 ---
 
-## Links
+## DOWNLOAD
+
+[![Windows x64](https://img.shields.io/badge/Windows_X64-8aadf4?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-x64.exe)
+[![Windows x86](https://img.shields.io/badge/Windows_X86-ed8796?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-x86.exe)
+[![Windows ARM64](https://img.shields.io/badge/Windows_ARM64-5b6078?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-arm64.exe)
+
+---
+
+## LINKS
 
 - Word: https://1drv.ms/w/s!Ak34VOEg_Ui7jUthSJ6y79Rfyi0Y?e=uaVsfT
 - Powerpoint: https://1drv.ms/p/s!Ak34VOEg_Ui7jVEmmZXYQQ4oqKKw?e=F6hdQn
+
+---
+
+## DEV
+
+```ps1
+dotnet restore ".\ViSort\ViSort.csproj"
+```

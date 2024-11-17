@@ -1,0 +1,49 @@
+﻿<Window x:Class="ViSort.QuizWindow.QuizWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViSort.QuizWindow"
+        mc:Ignorable="d"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Quiz Window" WindowState="Maximized" ResizeMode="CanResize">
+    <Grid Margin="10">
+        <Label x:Name="PracticeGame_label" Content="PRACTICE GAME" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3,1" FontSize="32" FontFamily="Lucida Handwriting">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCBF034"/>
+                    <GradientStop Color="#FF38C850" Offset="0.598"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Border BorderBrush="Black" BorderThickness="2" Padding="10" Margin="5,60,5,50" CornerRadius="0">
+            <WrapPanel x:Name="QuestionWrapPanel" Margin="5,5,5,100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!-- Hiển thị câu hỏi -->
+                <TextBlock x:Name="QuestionTextBlock" FontSize="16" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+            </WrapPanel>
+        </Border>
+        <!-- Nút Quay lại -->
+        <Button x:Name="PrevQuestionButton" Content="Quay lại" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Margin="10,0,0,10" Click="PrevQuestionButton_Click" />
+
+        <!-- Nút Tiếp theo -->
+        <Button x:Name="NextQuestionButton" Content="Tiếp theo" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Margin="0,0,10,10" Click="NextQuestionButton_Click" />
+        <!-- Wrap multiple choice-->
+
+        <WrapPanel x:Name="MultipleChoiceWrapPanel" Margin="0,276,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="716">
+            <RadioButton x:Name="BubleRadioButton" Content="Buble Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="BucketRadioButton" Content="Bucket Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="CountingRadioButton" Content="Counting Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="HeapRadioButton" Content="Heap Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="InsertionRadioButton" Content="Insertion Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="QuickRadioButton" Content="Quick Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="RadixRadioButton" Content="Radix Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="SelectionRadioButton" Content="Selection Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="ShellRadioButton" Content="Shell Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="TimRadioButton" Content="Tim Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+            <RadioButton x:Name="TreeRadioButton" Content="Tree Sort" Margin="5,10,30,10" Checked="Answer_Checked"/>
+        </WrapPanel>
+        
+        <!-- Nút Nộp bài -->
+        <Button x:Name="SubmitButton" Content="Kết thúc" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="90" Margin="0,0,0,10" Click="SubmitButton_Click" />
+    </Grid>
+</Window>
