@@ -62,5 +62,9 @@ public partial class MainWindow : Window
         {
             Status_Icon.Symbol = SymbolRegular.PersonAvailable24;
         }
+        else
+        {
+            Status_Icon.Symbol = SymbolRegular.PersonAdd24;
+        }
     }
 }
