@@ -4,11 +4,11 @@ using static ViSort.Database.UserExceptions;
 
 namespace ViSort.Database;
 
-internal class UserService
+public class UserService
 {
     private readonly IMongoCollection<UserModel> UsersCollection;
 
-    internal UserService()
+    public UserService()
     {
         var config = App.Config!;
         var client = new MongoClient(config["db:connectionString"]);
@@ -33,13 +33,13 @@ internal class UserService
         await UsersCollection.InsertOneAsync(user);
     }
 
-    internal async Task<List<UserModel>> GetAllUsersResultAsync()
+    public async Task<List<UserModel>> GetAllUsersResultAsync()
     {
         var projection = Builders<UserModel>.Projection.Include(u => u.Username).Include(u => u.Score != 0);
         return await UsersCollection.Find(_ => true).Project<UserModel>(projection).SortByDescending(u => u.Score).ToListAsync();
     }
 
-    internal async Task<bool> AuthUserAsync(UserModel user)
+    public async Task<bool> AuthUserAsync(UserModel user)
     {
         var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
         var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
@@ -51,7 +51,7 @@ internal class UserService
         return user.EncryptedPassword == existingUser.EncryptedPassword;
     }
 
-    internal async Task UpdateScoreAsync(UserModel user)
+    public async Task UpdateScoreAsync(UserModel user)
     {
         var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
         var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
@@ -60,7 +60,7 @@ internal class UserService
         await UsersCollection.UpdateOneAsync(filter, update);
     }
 
-    internal async Task DeleteUserAsync(UserModel user)
+    public async Task DeleteUserAsync(UserModel user)
     {
         var filter = Builders<UserModel>.Filter.Eq(u => u.Username, user.Username);
         var existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();

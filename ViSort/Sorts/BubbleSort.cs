@@ -1,38 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ViSort.Sorts;
+using System.Windows.Media.Media3D;
+using Visort.Drawing;
+using Windows.UI.Composition.Interactions;
 
 namespace ViSort.Sorts;
 
 class BubbleSort : BaseSort
 {
-    public override int elementCount { get; set; }
+    public override int ElementCount { get; set; }
 
-    public override void SetComplexity()
+    public async override void BeginAlgorithm()
     {
-        timeComplexity = "O(nLog(n))";
-        spaceComplexity = "O(1)";
-    }
-    public override void BeginAlgorithm(List<int> elements)
-    {
-        StartBubbleSort(elements);
-    }
-
-    private void StartBubbleSort(List<int> elements)
-    {
-        for (int i = 0; i < elementCount; i++)
+        for (int i = 0; i < ElementCount; i++)
         {
-            for (int j = 0; j < elementCount - 1; j++)
+            for (int j = 0; j < ElementCount - 1; j++)
             {
-                if (elements[j] > elements[j + 1])
-                {
-                    SwapElements(j, j + 1, elements, 0);
-                }
+                if (Elements[j] > Elements[j + 1])
+                    await SwapElementsAsync(j, j + 1);
             }
         }
     }

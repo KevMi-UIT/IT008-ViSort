@@ -2,7 +2,7 @@
 
 namespace ViSort.Models;
 
-internal static partial class UserUtils
+public static partial class UserUtils
 {
     [GeneratedRegex(@"^[A-Za-z0-9]+$")]
     private static partial Regex UsernameRegex();

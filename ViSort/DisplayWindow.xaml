@@ -5,20 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViSort"
         mc:Ignorable="d"
-                xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="DisplayWindow" Height="600" Width="800" Background="Black">
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="DisplayWindow"
+        Height="600"
+        Width="800"
+        Background="#FFD8FFDD">
     <Grid>
-        <Grid Margin="0,76,0,-33">
-            <Canvas x:Name="SortVisualisation" Height="500" Width="800" Background="#FF767575" Margin="0,10,0,31" />
-            <RichTextBox x:Name="CodeDisplay" Height="80" Width="400" Margin="400,-70,0,531" />
+        <Grid Margin="0,92,0,-9">
+            <Canvas x:Name="SortVisualisation"
+                    Width="780"
+                    Height="Auto"
+                    Background="#FF767575"
+                    Margin="10,0,10,27" />
+            <RichTextBox x:Name="CodeDisplay"
+      
+                         Margin="545,22,25,322"
+                         IsReadOnly="True" />
         </Grid>
-        <Button x:Name="PlayPauseButton" Content="Play" Height="30" Width="60" Margin="10,10,730,544" Click="PlayPauseButton_Click"/>
-        <Slider x:Name="SpeedSlider" Height="30" Width="120" Minimum="1" TickPlacement="BottomRight" Margin="10,46,670,508" ValueChanged="SpeedSlider_ValueChanged"/>
-        <TextBox x:Name="SpeedTextBox" Text="Change" Height="30" Width="30" Margin="143,46,627,508" BorderThickness="2,2,2,2" LostFocus="SpeedTextBox_LostFocus" KeyDown="SpeedTextBox_KeyDown" PreviewTextInput="SpeedTextBox_PreviewTextInput" />
-        <Label x:Name="AlgorithmName" Content="Name" Height="30" Width="60" Foreground="White" Margin="113,10,627,544"/>
-        <Label x:Name="TimeComplexity" Content="Time Complexity:" Height="30" Width="110" Foreground="White" Margin="197,7,493,547"/>
-        <Label x:Name="SpaceComplexity" Content="Space Complexity:" Height="30" Width="110" Foreground="White" Margin="197,46,493,508"/>
-        <Label x:Name="Time" Content="TimeHere" Height="20" Width="30" Margin="307,12,463,552" Foreground="White"/>
-        <Label x:Name="Space" Content="SpaceHere" Height="20" Width="30" Margin="307,51,463,513" Foreground="White"/>
-    </Grid> 
+        <Button x:Name="PlayPauseButton"
+                Content="Play"
+                Height="30"
+                Width="60"
+                Margin="37,50,0,0"
+                Click="PlayButton_Click"
+                VerticalAlignment="Top" />
+        <WrapPanel HorizontalAlignment="Left"
+                   Margin="176,13,0,497"
+                   Height="Auto"
+                   Width="Auto">
+            <Slider x:Name="SpeedSlider"
+                    Height="30"
+                    Width="180"
+                    Minimum="200"
+                    Maximum="800"
+                    TickFrequency="50"
+                    TickPlacement="BottomRight"
+                    ValueChanged="SpeedSlider_ValueChanged"
+                    Foreground="White" LargeChange="100" SmallChange="100" />
+            <ui:NumberBox x:Name="SpeedNumberBox"
+                     PlaceholderText="Speed"
+                     Height="40"
+                     Width="Auto"
+                     HorizontalAlignment="Left"
+                     Margin="10,0,0,0"
+                     FontSize="12"
+                     BorderThickness="2,2,2,2"
+                     LostFocus="SpeedNumberBox_LostFocus"
+                     KeyDown="SpeedNumberBox_KeyDown"
+                     PreviewTextInput="SpeedNumberBox_PreviewTextInput" />
+        </WrapPanel>
+        <Grid Height="100"
+              Width="NaN"
+              VerticalAlignment="Top" Margin="465,0,0,0">
+            <Label x:Name="AlgorithmName"
+                   Content="Name"
+                   Height="30"
+                   Width="Auto"
+                   Foreground="White"
+                   Margin="0,31,246,0" HorizontalAlignment="Right" VerticalAlignment="Top" />
+            <Label x:Name="TimeComplexity"
+                   Content="Time"
+                   Height="30"
+                   Width="Auto"
+                   Foreground="White"
+                   Margin="0,16,156,0" HorizontalAlignment="Right" VerticalAlignment="Top" />
+            <Label x:Name="SpaceComplexity"
+                   Content="Space"
+                   Height="30"
+                   Width="Auto"
+                   Foreground="White"
+                   Margin="0,60,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        </Grid>
+    </Grid>
 </Window>

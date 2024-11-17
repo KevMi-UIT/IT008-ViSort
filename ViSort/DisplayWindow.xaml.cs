@@ -1,8 +1,11 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +18,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using ViSort.Sorts;
 using ViSort.Utils;
+using Windows.Security.Cryptography.Certificates;
 
 namespace ViSort;
 
@@ -23,21 +27,16 @@ namespace ViSort;
 /// </summary>
 public partial class DisplayWindow : Window
 {
-    private int threadDelay;
-    private readonly int elementCount;
-    private readonly SortTypes selectedSortType;
-    private readonly RandomGenTypes selectedArrayGenerationMethod;
-    private List<int> mylist = [];
-    private readonly BaseSort selectedSort;
+    private int ThreadDelay;
+    private readonly SortTypes SelectedSortType;
+    private bool isSorting = false;
+    private readonly BaseSort SelectedSort;
 
-    internal DisplayWindow(int _elementCount, int _threadDelay, SortTypes _selectedSortAlgorithm, RandomGenTypes _selectedArrayGenerationMethod)
+    public DisplayWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, RandomGenTypes _SelectedArrayGenerationMethod)
     {
-        InitializeComponent();
-        elementCount = _elementCount;
-        threadDelay = _threadDelay;
-        selectedSortType = _selectedSortAlgorithm;
-        selectedArrayGenerationMethod = _selectedArrayGenerationMethod;
-        selectedSort = selectedSortType switch
+        ThreadDelay = 100;
+        SelectedSortType = _SelectedSortAlgorithm;
+        SelectedSort = SelectedSortType switch
         {
             SortTypes.Bubble => new BubbleSort(),
             SortTypes.Bucket => throw new NotImplementedException(),
@@ -53,73 +52,66 @@ public partial class DisplayWindow : Window
             SortTypes.Tree => throw new NotImplementedException(),
             _ => throw new NotImplementedException("Sort hasn't been implemented")
         };
-        mylist = GenRandomList.GenList(_elementCount, _selectedArrayGenerationMethod);
+        InitializeComponent();
+        SortVisualisation.Height = GenRandomList.MAX;
+        SelectedSort.MaxWidth = (int)(SortVisualisation.Width / _ElementCount);
+        SelectedSort.MaxHeight = (int)SortVisualisation.Height;
+        SelectedSort.DrawingCanvas = SortVisualisation;
+        SelectedSort.Elements = GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod);
+        SelectedSort.DrawRectangleOnCanvas(SelectedSort.Elements);
     }
-
-    //private void SetUpFormData(string _setModifier)
-    //{
-    //    SortTypes sortType = (SortTypes)Enum.Parse(typeof(SortTypes), selectedSortType);
-    //    //Cập nhật cách sử dụng SortTypes
-    //}
 
     private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
-        // Cập nhật TextBox khi Slider thay đổi
-        if (SpeedTextBox != null && !SpeedTextBox.IsFocused)
+        if (SpeedNumberBox != null && !SpeedNumberBox.IsFocused)
         {
-            threadDelay = (int)e.NewValue;
-            SpeedTextBox.Text = threadDelay.ToString();
+            ThreadDelay = (int)e.NewValue;
+            SpeedNumberBox.Text = ThreadDelay.ToString();
         }
     }
 
-    private void SpeedTextBox_LostFocus(object sender, RoutedEventArgs e)
+    private void SpeedNumberBox_LostFocus(object sender, RoutedEventArgs e)
     {
-        UpdateSliderFromTextBox();
+        UpdateSliderFromNumberBox();
     }
 
-    private void SpeedTextBox_KeyDown(object sender, KeyEventArgs e)
+    private void SpeedNumberBox_KeyDown(object sender, KeyEventArgs e)
     {
-        // Cập nhật khi người dùng nhấn Enter trong TextBox
         if (e.Key == Key.Enter)
         {
-            UpdateSliderFromTextBox();
+            UpdateSliderFromNumberBox();
         }
     }
 
-    private void UpdateSliderFromTextBox()
+    private void UpdateSliderFromNumberBox()
     {
-        // Chuyển đổi TextBox thành số và cập nhật Slider nếu hợp lệ
-        if (int.TryParse(SpeedTextBox.Text, out int value) && value >= SpeedSlider.Minimum && value <= SpeedSlider.Maximum)
+        if (int.TryParse(SpeedNumberBox.Text, out int value) && value >= SpeedSlider.Minimum && value <= SpeedSlider.Maximum)
         {
-            threadDelay = value;
+            ThreadDelay = value;
             SpeedSlider.Value = value;
         }
         else
         {
-            // Thông báo lỗi nếu giá trị không hợp lệ và reset về threadDelay
             MessageBox.Show("Please enter a valid integer within the range.");
-            SpeedTextBox.Text = threadDelay.ToString();
+            SpeedNumberBox.Text = ThreadDelay.ToString();
         }
     }
 
-    private void SpeedTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+    private void SpeedNumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
     {
-        // Kiểm tra nếu ký tự nhập vào là số
         e.Handled = !IsTextNumeric(e.Text);
     }
 
     private static bool IsTextNumeric(string text)
     {
-        // Kiểm tra nếu chuỗi chỉ chứa ký tự số
         return int.TryParse(text, out _);
     }
 
-    private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
+    private void PlayButton_Click(object sender, RoutedEventArgs e)
     {
-        if (selectedSort != null)
-        {
-            selectedSort.elementCount = mylist.Count;
-            selectedSort.BeginAlgorithm(mylist);
-        }
+        SelectedSort.ElementCount = SelectedSort.Elements.Count;
+        SelectedSort.ThreadDelay = ThreadDelay;
+        SelectedSort.BeginSorting();
+
     }
 }
