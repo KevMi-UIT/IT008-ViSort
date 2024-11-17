@@ -53,6 +53,7 @@ public class UserService
         if (user.EncryptedPassword != existingUser.EncryptedPassword)
         {
             throw new PasswordDoesNotMatch("Password does not match");
+            //unhandle exception
         }
     }
 

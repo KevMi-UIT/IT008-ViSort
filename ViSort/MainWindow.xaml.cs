@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.QuizWindow;
 using Windows.System;
+using Wpf.Ui.Controls;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -41,21 +42,6 @@ public partial class MainWindow : Window
         QuizWindow.Show();
     }
 
-    private async void CheckUserLogin_Click(object sender, RoutedEventArgs e)
-    {
-        if (App.User == null)
-        {
-            var loginWindow = new UserFillForm();
-            loginWindow.ShowDialog();
-
-            if (App.User != null)
-            {
-                await App.UserSvc!.AuthUserAsync(App.User!);
-                Login_Icon.Symbol = WpfUiControl.SymbolRegular.PeopleCheckmark24;
-                LogoutButton.Visibility = Visibility.Visible;
-            }
-        }
-    }
     private async void ScoreBoard_Click(object sender, RoutedEventArgs e)
     {
         if (!await App.EstablishDBConnectionAsync())
@@ -64,14 +50,17 @@ public partial class MainWindow : Window
         }
         var ScoreBoard = new ScoreBoard.ScoreBoard();
         ScoreBoard.ShowDialog();
+
     }
-    private void CheckUserLogout_Click(object sender, RoutedEventArgs e)
+
+    private void UserProfileButton_Click(object sender, RoutedEventArgs e)
     {
+        var UserProfile = new UserProfile.UserProfile();
+        UserProfile.ShowDialog();
+
         if (App.User != null)
         {
-            App.User = null;
-            Login_Icon.Symbol = WpfUiControl.SymbolRegular.ArrowEnter20;
-            LogoutButton.Visibility = Visibility.Hidden;
+            Status_Icon.Symbol = SymbolRegular.PersonAvailable24;
         }
     }
 }
