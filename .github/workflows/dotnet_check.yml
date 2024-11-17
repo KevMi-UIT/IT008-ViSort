@@ -5,9 +5,11 @@ on:
     paths:
       - "**/*.cs"
       - "**/.editorconfig"
-    branches:
-      - "main"
   pull_request:
+    types:
+      - ready_for_review
+      - opened
+      - reopened
   workflow_dispatch:
 
 jobs:
