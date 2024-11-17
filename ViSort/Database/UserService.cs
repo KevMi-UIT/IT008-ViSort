@@ -11,7 +11,7 @@ public class UserService
 
     public UserService()
     {
-        var config = App.Config!;
+        var config = App.Config;
         MongoClient client = new(config["db:connectionString"]);
         IMongoDatabase database = client.GetDatabase(config["db:dbName"]);
         UsersCollection = database.GetCollection<UserModel>(config["db:userCollection"]);
