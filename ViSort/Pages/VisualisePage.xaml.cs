@@ -127,7 +127,7 @@ public partial class VisualisePage : Page
 
     private void StartButton_Click(object sender, RoutedEventArgs e)
     {
-        DisplayWindow displayWindow = new(ElementCount, SelectedSortType, selectedGenType);
-        displayWindow.Show();
+        VisualiseWindow visualiseWindow = new(ElementCount, SelectedSortType, selectedGenType);
+        visualiseWindow.Show();
     }
 }

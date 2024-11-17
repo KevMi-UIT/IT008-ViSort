@@ -22,16 +22,13 @@ using Windows.Security.Cryptography.Certificates;
 
 namespace ViSort;
 
-/// <summary>
-/// Interaction logic for DisplayWindow.xaml
-/// </summary>
-public partial class DisplayWindow : Window
+public partial class VisualiseWindow : Window
 {
     private int ThreadDelay;
     private readonly SortTypes SelectedSortType;
     private readonly BaseSort SelectedSort;
 
-    public DisplayWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, RandomGenTypes _SelectedArrayGenerationMethod)
+    public VisualiseWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, RandomGenTypes _SelectedArrayGenerationMethod)
     {
         ThreadDelay = 100;
         SelectedSortType = _SelectedSortAlgorithm;
