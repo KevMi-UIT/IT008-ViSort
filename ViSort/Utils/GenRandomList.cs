@@ -1,21 +1,22 @@
 ﻿namespace ViSort.Utils;
 
+public enum RandomGenTypes
+{
+    Normal,
+    Sorted,
+    SortedReverse,
+    NearlySorted,
+    Mirror
+}
+
 public static class GenRandomList
 {
-    enum RandomGenTypes
-    {
-        Normal,
-        Sorted,
-        SortedReverse,
-        NearlySorted,
-        Mirror
-    }
-    private const int MIN = 0;
-    private const int MAX = 999;
-    private const int NEARLY_SORTED_SENSITIVITY = 10;
+    public const int MIN = 0;
+    public const int MAX = 999;
+    public const int NEARLY_SORTED_SENSITIVITY = 10;
     private static readonly Random RAND = new();
 
-    static List<int> GenList(int length, RandomGenTypes type)
+    public static List<int> GenList(int length, RandomGenTypes type)
     {
         return type switch
         {
@@ -49,10 +50,11 @@ public static class GenRandomList
     static List<int> GenNearlySorted(int length)
     {
         List<int> list = GenSorted(length);
-        for (int i = 0; i < MAX / NEARLY_SORTED_SENSITIVITY; i++)
+        int lim = MAX / NEARLY_SORTED_SENSITIVITY;
+        for (int i = 0; i < lim; i++)
         {
-            int a = RAND.Next(MIN, MAX);
-            int b = RAND.Next(MIN, MAX);
+            int a = RAND.Next(0, length);
+            int b = RAND.Next(0, length);
             (list[b], list[a]) = (list[a], list[b]);
         }
         return list;
@@ -60,7 +62,7 @@ public static class GenRandomList
 
     static List<int> GenMirror(int length)
     {
-        List<int> list = new List<int>(new int[length]);
+        List<int> list = new(new int[length]);
         int limit = length / 2;
         for (int i = 0; i < limit; i++)
         {

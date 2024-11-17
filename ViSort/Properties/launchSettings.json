@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ViSort": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
