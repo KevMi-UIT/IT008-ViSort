@@ -17,7 +17,7 @@ public class UserService
         UsersCollection = database.GetCollection<UserModel>(config["db:userCollection"]);
     }
 
-    private static void CheckUser(UserModel user, UserModel userDB)
+    private static void CheckUser(UserModel user, UserModel? userDB)
     {
         if (userDB == null)
         {
@@ -27,6 +27,12 @@ public class UserService
         {
             throw new PasswordDoesNotMatch("Password does not match.");
         }
+    }
+
+    private async Task<UserModel?> GetUserFromDBAsync(string username)
+    {
+        FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, username);
+        return await UsersCollection.Find(filter).FirstOrDefaultAsync();
     }
 
     private async Task AddUserAsync(UserModel user)
@@ -43,8 +49,7 @@ public class UserService
 
     public async Task AuthUserAsync(UserModel user)
     {
-        FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
-        UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
+        UserModel? existingUser = await GetUserFromDBAsync(user.Username);
         if (existingUser == null)
         {
             await AddUserAsync(user);
@@ -62,14 +67,27 @@ public class UserService
         UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
         CheckUser(user, existingUser);
         UpdateDefinition<UserModel>? update = Builders<UserModel>.Update.Set(static u => u.Score, user.Score);
-        _ = await UsersCollection.UpdateOneAsync(filter, update);
+        await UsersCollection.UpdateOneAsync(filter, update);
     }
 
     public async Task DeleteUserAsync(UserModel user)
     {
         FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
-        UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
-        CheckUser(user, existingUser);
-        _ = await UsersCollection.DeleteOneAsync(filter);
+        await UsersCollection.DeleteOneAsync(filter);
+    }
+
+    public async Task ChangeUserProfileAsync(UserModel oldUser, UserModel newUser)
+    {
+        if (oldUser == newUser)
+        {
+            return;
+        }
+        UserModel? existingUser = await GetUserFromDBAsync(newUser.Username);
+        if (existingUser != null)
+        {
+            throw new UserAlreadyExists("User already exists.");
+        }
+        await DeleteUserAsync(oldUser);
+        await AddUserAsync(newUser);
     }
 }

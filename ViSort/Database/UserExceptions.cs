@@ -9,4 +9,8 @@ public static class UserExceptions
     public class UserNotFound(string message) : Exception(message)
     {
     }
+
+    public class UserAlreadyExists(string message) : Exception(message)
+    {
+    }
 }
