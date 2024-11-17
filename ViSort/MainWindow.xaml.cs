@@ -1,5 +1,4 @@
-﻿namespace ViSort;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,18 +13,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViSort.Pages;
 using Windows.System;
+using Wpf.Ui;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
+namespace ViSort;
+
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
         InitializeComponent();
+
+        Loaded += (sender, args) =>
+        {
+            Wpf.Ui.Appearance.SystemThemeWatcher.Watch(
+                this,                                 // Window class
+                WpfUiControl.WindowBackdropType.Auto, // Background type
+                true                                  // Whether to change accents automatically
+            );
+            RootNavigation.Navigate(typeof(HomePage));
+        };
     }
 
+    /*
     private async void OpenQuizWindow(object sender, RoutedEventArgs e)
     {
         if (App.User == null && await App.EstablishDBConnectionAsync())
@@ -71,4 +82,5 @@ public partial class MainWindow : Window
             LogoutButton.Visibility = Visibility.Hidden;
         }
     }
+    */
 }
