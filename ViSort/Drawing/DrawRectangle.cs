@@ -62,5 +62,4 @@ public class DrawRectangle
             rect.Fill = new SolidColorBrush(color);
         }
     }
-
 }

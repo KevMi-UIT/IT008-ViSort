@@ -111,6 +111,5 @@ public partial class DisplayWindow : Window
         SelectedSort.ElementCount = SelectedSort.Elements.Count;
         SelectedSort.ThreadDelay = ThreadDelay;
         SelectedSort.BeginSorting();
-
     }
 }
