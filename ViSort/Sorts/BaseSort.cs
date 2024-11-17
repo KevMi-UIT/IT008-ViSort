@@ -12,7 +12,7 @@ public abstract class BaseSort
 {
     public string? TimeComplexity { get; set; }
     public string? SpaceComplexity { get; set; }
-    public required Canvas DrawingCanvas { get; set; }
+    public Canvas? DrawingCanvas { get; set; }
     public int MaxWidth;
     public int MaxHeight;
     public int ThreadDelay;
@@ -33,12 +33,9 @@ public abstract class BaseSort
 
     public void ShowAllElementsBlue()
     {
-        int adjustedDelay = ThreadDelay == 200 ? 80 : ThreadDelay == 0 ? 1 : ThreadDelay;
-
         for (int i = 0; i < Elements.Count; i++)
         {
             DrawRectangleOnCanvas(Elements);
-
         }
     }
 
@@ -47,9 +44,7 @@ public abstract class BaseSort
         SetRectangleColor(index1, Colors.Red);
         SetRectangleColor(index2, Colors.Red);
         await Task.Delay(10);
-        int temp = Elements[index1];
-        Elements[index1] = Elements[index2];
-        Elements[index2] = temp;
+        Utils.Utils.Swap(Elements, index1, index2);
         await Application.Current.Dispatcher.InvokeAsync(() =>
         {
             DrawRectangleOnCanvas(Elements);
@@ -67,7 +62,7 @@ public abstract class BaseSort
         double height = DrawingCanvas.Height;
         for (int i = 0; i < Elements.Count; i++)
         {
-            Rectangle rect = new Rectangle
+            Rectangle rect = new()
             {
                 Width = width,
                 Height = (height * Elements[i]) / ViSort.Utils.GenRandomList.MAX,

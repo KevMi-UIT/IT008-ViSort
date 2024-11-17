@@ -29,7 +29,6 @@ public partial class DisplayWindow : Window
 {
     private int ThreadDelay;
     private readonly SortTypes SelectedSortType;
-    private bool isSorting = false;
     private readonly BaseSort SelectedSort;
 
     public DisplayWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, RandomGenTypes _SelectedArrayGenerationMethod)

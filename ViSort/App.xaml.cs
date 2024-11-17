@@ -73,3 +73,4 @@ public partial class App : Application
             return false;
         }
     }
+}

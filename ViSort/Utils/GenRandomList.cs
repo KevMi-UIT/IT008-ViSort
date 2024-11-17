@@ -62,7 +62,7 @@ public static class GenRandomList
 
     static List<int> GenMirror(int length)
     {
-        List<int> list = new List<int>(new int[length]);
+        List<int> list = new(new int[length]);
         int limit = length / 2;
         for (int i = 0; i < limit; i++)
         {
@@ -76,3 +76,4 @@ public static class GenRandomList
         }
         return list;
     }
+}
