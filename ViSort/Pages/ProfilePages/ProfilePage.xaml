@@ -7,6 +7,7 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1300"
+      Background="White"
       Title="ProfilePage">
 
     <Grid Margin="20,0">
@@ -18,5 +19,46 @@
 
         <ui:TextBlock Text="Profile" FontTypography="Title" Grid.Row="0"/>
         <Separator Margin="30,10" Grid.Row="1"/>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="LabelUserProfile" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="100" Margin="10" Grid.ColumnSpan="2" Grid.Row="0">
+                <TextBlock Text="THÔNG TIN NGƯỜI DÙNG" FontSize="25"/>
+            </Label>
+
+            <ui:SymbolIcon x:Name="UserIcon" Symbol="PersonCircle32" Filled="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" FontSize="100"></ui:SymbolIcon>
+
+            <ui:TextBlock x:Name="UsernameTextBlock" Text="Tên đăng nhập:" FontSize="20" Margin="10" Grid.Row="2" Grid.Column="0"></ui:TextBlock>
+            <ui:TextBlock x:Name="UsernameValue" Text="Chưa có thông tin" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="2" Grid.Column="1"></ui:TextBlock>
+
+            <ui:TextBlock x:Name="ScoreTextBlock" Text="Điểm số:"  FontSize="20" Margin="10" Grid.Row="3" Grid.Column="0"></ui:TextBlock>
+            <ui:TextBlock x:Name="ScoreValue" Text="Chưa có thông tin" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="3" Grid.Column="1"></ui:TextBlock>
+
+            <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+
+                <ui:Button x:Name="LoginButton" Click="LoginButton_Click" Visibility="Visible">
+                    <ui:SymbolIcon x:Name="Login_Icon" Symbol="ArrowEnter20" Margin="0,0,0,0" FontSize="50"/>
+                </ui:Button>
+
+                <ui:Button x:Name="LogoutButton" Click="LogoutButton_Click" Visibility="Collapsed">
+                    <ui:SymbolIcon x:Name="Logout_Icon" Symbol="ArrowExit20" Margin="0,0,0,0" FontSize="50"/>
+                </ui:Button>
+
+                <ui:Button x:Name="DeleteProfileButton" Click="DeleteProfileButton_Click" Visibility="Collapsed">
+                    <ui:SymbolIcon x:Name="Delete_Icon" Symbol="PersonDelete24" Margin="0,0,0,0" FontSize="50"/>
+                </ui:Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

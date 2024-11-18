@@ -22,6 +22,7 @@ public partial class UserProfile : Window
     {
         InitializeComponent();
     }
+
     private async void LoginButton_Click(object sender, RoutedEventArgs e)
     {
         if (App.User == null)
