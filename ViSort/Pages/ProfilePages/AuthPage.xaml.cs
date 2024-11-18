@@ -88,4 +88,3 @@ public partial class AuthPage : Page
             }
         }
     }
-}
