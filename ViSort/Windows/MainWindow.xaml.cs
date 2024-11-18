@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Pages;
 
-namespace ViSort;
+namespace ViSort.Windows;
 
 public partial class MainWindow : Window
 {
@@ -26,9 +26,9 @@ public partial class MainWindow : Window
         Loaded += (sender, args) =>
         {
             Wpf.Ui.Appearance.SystemThemeWatcher.Watch(
-                this,                                 // Window class
-                WpfUiControl.WindowBackdropType.Auto, // Background type
-                true                                  // Whether to change accents automatically
+                this,
+                WpfUiControl.WindowBackdropType.None,
+                true
             );
             RootNavigation.Navigate(typeof(HomePage));
         };

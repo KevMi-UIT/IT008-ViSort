@@ -47,7 +47,7 @@ public partial class SettingsPage : Page
                 "Dark" => ApplicationTheme.Dark,
                 _ => ApplicationTheme.Unknown
             };
-            ApplicationThemeManager.Apply(theme);
+            ApplicationThemeManager.Apply(theme, WpfUiControl.WindowBackdropType.None, true);
         }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Sorts;
 using ViSort.Utils;
+using ViSort.Windows;
 
 namespace ViSort.Pages;
 
