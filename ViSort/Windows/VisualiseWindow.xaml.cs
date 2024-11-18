@@ -20,7 +20,7 @@ using ViSort.Sorts;
 using ViSort.Utils;
 using Windows.Security.Cryptography.Certificates;
 
-namespace ViSort;
+namespace ViSort.Windows;
 
 public partial class VisualiseWindow : Window
 {
