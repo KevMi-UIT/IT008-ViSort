@@ -46,6 +46,10 @@ public partial class AuthPage : Page
 
         try
         {
+            if (App.UserSvc == null)
+            {
+                throw new InvalidOperationException("User service is not initialized.");
+            }
             await App.UserSvc!.AuthUserAsync(User);
             App.User = User;
         }

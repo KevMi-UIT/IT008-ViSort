@@ -41,12 +41,12 @@
             <ui:SymbolIcon x:Name="UserIcon" Symbol="PersonCircle32" Filled="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" FontSize="100"></ui:SymbolIcon>
 
             <ui:TextBlock x:Name="UsernameTextBlock" Text="Username:" FontSize="20" Margin="10" Grid.Row="2" Grid.Column="0"></ui:TextBlock>
-            <ui:TextBlock x:Name="UsernameValue" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="2" Grid.Column="1"></ui:TextBlock>
+            <!--<ui:TextBlock x:Name="UsernameValue" Text="Unknown" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="2" Grid.Column="1"></ui:TextBlock>-->
             
             <ui:TextBlock x:Name="PasswordTextBlock" Text="Password:" FontSize="20" Margin="10" Grid.Row="3" Grid.Column="0"></ui:TextBlock>
-            <ui:TextBlock x:Name="PasswordValue" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="3" Grid.Column="1"></ui:TextBlock>
+            <!--<ui:TextBlock x:Name="PasswordValue" Text="Unknown" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="3" Grid.Column="1"></ui:TextBlock>-->
 
-            <ui:TextBox x:Name="EditUsernameTextBox" FontSize="20" Margin="10" Grid.Row="2" Grid.Column="1" TextChanged="EditUsernameTextBox_TextChanged"></ui:TextBox>
+            <ui:TextBox x:Name="EditUsernameTextBox" FontSize="20" Margin="10" Grid.Row="2" Grid.Column="1"></ui:TextBox>
             <ui:TextBox x:Name="EditPasswordTextBox" FontSize="20" Margin="10" Grid.Row="3" Grid.Column="1"></ui:TextBox>
 
             <ui:Button x:Name="UpdateProfileButton" Content="Update" Grid.Row="3" Grid.Column="2" Click="UpdateProfileButton_Click"></ui:Button>
@@ -61,9 +61,9 @@
                     <ui:SymbolIcon x:Name="Logout_Icon" Symbol="ArrowExit20" Margin="0,0,0,0" FontSize="50"/>
                 </ui:Button>
                 
-                <ui:Button x:Name="EditProfileButton" Click="EditProfileButton_Click">
+                <!--<ui:Button x:Name="EditProfileButton" Click="EditProfileButton_Click">
                     <ui:SymbolIcon x:Name="Edit_Icon" Symbol="PersonEdit24" Margin="0,0,0,0" FontSize="50"/>
-                </ui:Button>
+                </ui:Button>-->
 
                 <ui:Button x:Name="DeleteProfileButton" Click="DeleteProfileButton_Click">
                     <ui:SymbolIcon x:Name="Delete_Icon" Symbol="PersonDelete24" Margin="0,0,0,0" FontSize="50"/>

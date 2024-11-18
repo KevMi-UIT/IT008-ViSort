@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViSort.Database;
+using ViSort.Models;
+using static ViSort.Database.UserService;
 
 namespace ViSort.Pages.ProfilePages;
 
@@ -23,7 +26,8 @@ public partial class ProfilePage : Page
     public ProfilePage()
     {
         InitializeComponent();
-        UpdateProfileButton.IsEnabled = false;
+        EditUsernameTextBox.Text = App.User!.Username;
+        EditPasswordTextBox.Text = App.User.Password;
     }
 
     private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -39,39 +43,41 @@ public partial class ProfilePage : Page
         }
     }
 
-    private void DeleteProfileButton_Click(object sender, RoutedEventArgs e)
+    private async void DeleteProfileButton_Click(object sender, RoutedEventArgs e)
     {
+        if (App.User != null)
+        {
+            await App.UserSvc!.DeleteUserAsync(App.User);
+        }
     }
-
     private void UpdateProfile(bool isLoggedIn)
     {
         if (isLoggedIn)
         {
-            UsernameValue.Text = App.User!.Username;
+            EditUsernameTextBox.Text = App.User!.Username;
+            EditPasswordTextBox.Text = App.User.Password;
             ScoreValue.Text = App.User.Score.ToString();
         }
         else
         {
-            UsernameValue.Text = "Unknown";
+            EditUsernameTextBox.Text = "Unknown";
+            EditPasswordTextBox.Text = "Unknown";
             ScoreValue.Text = "Unknown";
         }
     }
 
-    private void EditProfileButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (App.User != null)
-        {
-            EditUsernameTextBox.Select(EditUsernameTextBox.Text.Length, 0);
-            EditPasswordTextBox.Select(EditPasswordTextBox.Text.Length, 0);
-        }
-    }
+    //private void EditProfileButton_Click(object sender, RoutedEventArgs e)
+    //{
+    //    EditUsernameTextBox.Select(EditUsernameTextBox.Text.Length, 0);
+    //    EditPasswordTextBox.Select(EditPasswordTextBox.Text.Length, 0);
+    //}
 
-    private void UpdateProfileButton_Click(object sender, RoutedEventArgs e)
+    private async void UpdateProfileButton_Click(object sender, RoutedEventArgs e)
     {
-
-    }
-    private void EditUsernameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-
+        UpdateProfileButton.IsEnabled = true;
+        string newUsername = EditUsernameTextBox.Text;
+        string newPassword = EditPasswordTextBox.Text;
+        UserModel NewUserModel = new(newUsername, newPassword);
+        await App.UserSvc!.ChangeUserProfileAsync(App.User, NewUserModel);
     }
 }
