@@ -57,7 +57,7 @@ public partial class AuthPage : Page
         }
         catch (PasswordDoesNotMatch)
         {
-            await new WpfUiControl.MessageBox
+            await new WpfUiControls.MessageBox
             {
                 Title = "Lỗi đăng nhập",
                 Content = "Mật khẩu không chính xác",
@@ -72,13 +72,13 @@ public partial class AuthPage : Page
     {
         if (string.IsNullOrWhiteSpace(UsernameTextbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
         {
-            WpfUiControl.MessageBoxResult result = await new WpfUiControl.MessageBox
+            WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
             {
                 Title = "Warning",
                 Content = "Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
                 PrimaryButtonText = "OK",
             }.ShowDialogAsync();
-            if (result == WpfUiControl.MessageBoxResult.Primary)
+            if (result == WpfUiControls.MessageBoxResult.Primary)
             {
                 e.Cancel = true;
             }

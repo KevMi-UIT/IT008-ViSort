@@ -27,7 +27,7 @@ public partial class MainWindow : Window
         {
             Wpf.Ui.Appearance.SystemThemeWatcher.Watch(
                 this,
-                WpfUiControl.WindowBackdropType.None,
+                WpfUiControls.WindowBackdropType.None,
                 true
             );
             RootNavigation.Navigate(typeof(HomePage));
