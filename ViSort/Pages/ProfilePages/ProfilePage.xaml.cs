@@ -23,21 +23,7 @@ public partial class ProfilePage : Page
     public ProfilePage()
     {
         InitializeComponent();
-    }
-
-    private async void LoginButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (App.User == null)
-        {
-            var loginWindow = new UserFillForm();
-            loginWindow.ShowDialog();
-
-            if (App.User != null)
-            {
-                await App.UserSvc!.AuthUserAsync(App.User!);
-                UpdateProfile(true);
-            }
-        }
+        UpdateProfileButton.IsEnabled = false;
     }
 
     private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -61,19 +47,31 @@ public partial class ProfilePage : Page
     {
         if (isLoggedIn)
         {
-            LoginButton.Visibility = Visibility.Collapsed;
-            LogoutButton.Visibility = Visibility.Visible;
-            DeleteProfileButton.Visibility = Visibility.Visible;
             UsernameValue.Text = App.User!.Username;
             ScoreValue.Text = App.User.Score.ToString();
         }
         else
         {
-            LoginButton.Visibility = Visibility.Visible;
-            LogoutButton.Visibility = Visibility.Collapsed;
-            DeleteProfileButton.Visibility = Visibility.Collapsed;
-            UsernameValue.Text = "Chưa có thông tin";
-            ScoreValue.Text = "Chưa có thông tin";
+            UsernameValue.Text = "Unknown";
+            ScoreValue.Text = "Unknown";
         }
+    }
+
+    private void EditProfileButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (App.User != null)
+        {
+            EditUsernameTextBox.Select(EditUsernameTextBox.Text.Length, 0);
+            EditPasswordTextBox.Select(EditPasswordTextBox.Text.Length, 0);
+        }
+    }
+
+    private void UpdateProfileButton_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+    private void EditUsernameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
     }
 }

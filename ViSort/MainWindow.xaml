@@ -48,7 +48,7 @@
         <ui:NavigationView.FooterMenuItems>
             <ui:NavigationViewItem Content="Profile" TargetPageType="{x:Type profilePages:ProfileSwitchPage}">
                 <ui:NavigationViewItem.Icon>
-                    <ui:SymbolIcon Symbol="People24" />
+                    <ui:SymbolIcon Symbol="PersonCircle24" />
                 </ui:NavigationViewItem.Icon>
             </ui:NavigationViewItem>
             <ui:NavigationViewItem Content="Settings" TargetPageType="{x:Type pages:SettingsPage}">
