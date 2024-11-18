@@ -44,6 +44,11 @@
                     <ui:SymbolIcon Symbol="Question24" />
                 </ui:NavigationViewItem.Icon>
             </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="ScoreBoard" TargetPageType="{x:Type pages:ScoreBoardPage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="TextNumberListLtr24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
         </ui:NavigationView.MenuItems>
         <ui:NavigationView.FooterMenuItems>
             <ui:NavigationViewItem Content="Profile" TargetPageType="{x:Type profilePages:ProfileSwitchPage}">

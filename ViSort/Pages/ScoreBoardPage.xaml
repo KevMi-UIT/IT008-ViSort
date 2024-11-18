@@ -19,5 +19,24 @@
 
         <ui:TextBlock Text="ScoreBoard" FontTypography="TitleLarge" Grid.Row="0" />
         <Separator Margin="30,10" Grid.Row="1"/>
+        <Grid Grid.Row="2">
+            <ui:ListView x:Name="ListViewScore" Height="Auto" BorderBrush="{x:Null}" HorizontalAlignment="Center" >
+                <ui:ListView.View>
+                    <GridView >
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="MinWidth" Value="100" />
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}" Width="Auto" />
+                        <GridViewColumn Header="Score" DisplayMemberBinding="{Binding Score}" Width="Auto" />
+                    </GridView>
+                </ui:ListView.View>
+            </ui:ListView>
+        </Grid>
     </Grid>
 </Page>

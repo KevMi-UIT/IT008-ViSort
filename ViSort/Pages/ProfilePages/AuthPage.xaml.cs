@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Models;
-using static ViSort.Database.UserExceptions;
+using ViSort.Pages.ProfilePages;
+using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Pages;
 
@@ -21,6 +22,10 @@ public partial class AuthPage : Page
 {
     public AuthPage()
     {
+        if (!App.EstablishDBConnectionAsync().Result)
+        {
+            return;
+        }
         InitializeComponent();
     }
 
@@ -52,6 +57,7 @@ public partial class AuthPage : Page
             }
             await App.UserSvc!.AuthUserAsync(User);
             App.User = User;
+            NavigationService.Navigate(new ProfilePage());
         }
         catch (PasswordDoesNotMatch)
         {
@@ -59,15 +65,6 @@ public partial class AuthPage : Page
             {
                 Title = "Lỗi đăng nhập",
                 Content = "Mật khẩu không chính xác",
-                PrimaryButtonText = "OK"
-            }.ShowDialogAsync();
-        }
-        catch (UserNotFound)
-        {
-            await new WpfUiControl.MessageBox
-            {
-                Title = "Lỗi đăng nhập",
-                Content = "Người dùng không tồn tại",
                 PrimaryButtonText = "OK"
             }.ShowDialogAsync();
         }
