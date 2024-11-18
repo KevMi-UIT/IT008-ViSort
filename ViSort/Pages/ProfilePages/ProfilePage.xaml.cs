@@ -78,6 +78,6 @@ public partial class ProfilePage : Page
         string newUsername = EditUsernameTextBox.Text;
         string newPassword = EditPasswordTextBox.Text;
         UserModel NewUserModel = new(newUsername, newPassword);
-        await App.UserSvc!.ChangeUserProfileAsync(App.User, NewUserModel);
+        await App.UserSvc!.ChangeUserProfileAsync(App.User!, NewUserModel);
     }
 }

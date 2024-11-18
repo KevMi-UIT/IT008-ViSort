@@ -52,6 +52,6 @@ public class UserModel(string username, string password, int score = 0)
 
     public override int GetHashCode()
     {
-        throw new NotImplementedException();
+        return Username.GetHashCode();
     }
 }

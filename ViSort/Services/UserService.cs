@@ -80,7 +80,7 @@ public class UserService
 
     public async Task ChangeUserProfileAsync(UserModel oldUser, UserModel newUser)
     {
-        if (oldUser == newUser)
+        if (oldUser.Equals(newUser))
         {
             throw new UserNoChanges("No modification on user");
         }
