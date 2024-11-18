@@ -21,6 +21,11 @@
         <Separator Margin="30,10" Grid.Row="1"/>
         <Grid Grid.Row="2">
             <ui:ListView x:Name="ListViewScore" Height="Auto" BorderBrush="{x:Null}" HorizontalAlignment="Center" >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Focusable" Value="false"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ui:ListView.View>
                     <GridView >
                         <GridView.ColumnHeaderContainerStyle>
