@@ -80,7 +80,7 @@ public class UserService
     {
         if (oldUser == newUser)
         {
-            return;
+            throw new UserNoChanges("No modification on user");
         }
         UserModel? existingUser = await GetUserFromDBAsync(newUser.Username);
         if (existingUser != null)
