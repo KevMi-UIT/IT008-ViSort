@@ -10,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ViSort.ScoreBoard;
+namespace ViSort.Pages.ProfilePages;
+
 /// <summary>
-/// Interaction logic for ScoreBoard.xaml
+/// Interaction logic for ProfilePage.xaml
 /// </summary>
-public partial class ScoreBoard : Window
+public partial class ProfilePage : Page
 {
-    public ScoreBoard()
+    public ProfilePage()
     {
         InitializeComponent();
-        _ = SetDataItems();
-    }
-
-    private async Task SetDataItems()
-    {
-        ScoreData.ItemsSource = await App.UserSvc!.GetAllUsersResultAsync();
     }
 }

@@ -21,10 +21,9 @@
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <DebugType>embedded</DebugType>
+    <UseWindowsForms>False</UseWindowsForms>
+	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-  <!--<ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>-->
   <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -57,15 +56,10 @@
     <PackageReference Include="ZstdSharp.Port" Version="0.8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="UserInfoForm.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="assets\*" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="QuizWindow\QuizQuestionsList.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Resource Include="Resources\Logo\visort_full_logo.svg" />
+    <Resource Include="Resources\Logo\visort_full_logo_light.png" />
+    <Resource Include="Resources\Logo\visort_logo.ico" />
+    <Resource Include="Resources\Logo\visort_logo.svg" />
   </ItemGroup>
   <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />

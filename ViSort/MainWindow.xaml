@@ -5,10 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:ViSort"
+        xmlns:pages="clr-namespace:ViSort.Pages"
+        xmlns:profilePages="clr-namespace:ViSort.Pages.ProfilePages"
         mc:Ignorable="d"
-        Icon="/assets/visort_logo.ico"
-        Title="ViSort" WindowState="Maximized">
+        d:Width="500" d:Height="450"
+        Icon="Resources/Logo/visort_logo.ico"
+        Title="ViSort" WindowStartupLocation="CenterScreen">
 
+    <ui:NavigationView x:Name="RootNavigation" Grid.Row="1" >
+        <ui:NavigationView.AutoSuggestBox>
+            <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
+                <ui:AutoSuggestBox.Icon>
+                    <ui:IconSourceElement>
+                        <ui:SymbolIconSource Symbol="Search24" />
+                    </ui:IconSourceElement>
+                </ui:AutoSuggestBox.Icon>
+            </ui:AutoSuggestBox>
+        </ui:NavigationView.AutoSuggestBox>
+        <ui:NavigationView.Header>
+            <ui:BreadcrumbBar
+      Margin="42,32,0,0"
+      FontSize="28"
+      FontWeight="DemiBold" />
+        </ui:NavigationView.Header>
+        <ui:NavigationView.MenuItems>
+            <ui:NavigationViewItem Content="Home" TargetPageType="{x:Type pages:HomePage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="Home24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="Visualise" TargetPageType="{x:Type pages:VisualisePage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="DataArea24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="Quiz" TargetPageType="{x:Type pages:QuizPage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="Question24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+        </ui:NavigationView.MenuItems>
+        <ui:NavigationView.FooterMenuItems>
+            <ui:NavigationViewItem Content="Profile" TargetPageType="{x:Type profilePages:ProfileSwitchPage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="People24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="Settings" TargetPageType="{x:Type pages:SettingsPage}">
+                <ui:NavigationViewItem.Icon>
+                    <ui:SymbolIcon Symbol="Settings24" />
+                </ui:NavigationViewItem.Icon>
+            </ui:NavigationViewItem>
+        </ui:NavigationView.FooterMenuItems>
+    </ui:NavigationView>
+
+<!--
     <WrapPanel >
         <Grid>
             <Grid.RowDefinitions>
@@ -29,6 +80,7 @@
         </ui:Button>
         
     </WrapPanel >
+    -->
 </Window>
 
     
