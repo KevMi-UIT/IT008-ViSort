@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ViSort.Models;
 using Windows.System;
-using static ViSort.Database.UserExceptions;
+using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort;
 
