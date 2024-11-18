@@ -27,8 +27,8 @@
             <Separator Margin="0,20" />
             <ui:TextBlock Text="Info" FontTypography="Subtitle" />
             <Grid Margin="10,0,0,0">
-                <ui:TextBlock>
-                    <Hyperlink NavigateUri="https://github.com/KevMi-UIT/IT008-ViSort">
+                <ui:TextBlock FontTypography="Body">
+                    <Hyperlink x:Name="HyperLinkGithub" NavigateUri="https://github.com/KevMi-UIT/IT008-ViSort" Hyperlink.Click="HyperLinkGithub_Click">
                         Github
                     </Hyperlink>
                 </ui:TextBlock>
