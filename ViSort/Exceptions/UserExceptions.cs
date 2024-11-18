@@ -1,4 +1,4 @@
-﻿namespace ViSort.Database;
+﻿namespace ViSort.Exceptions;
 
 public static class UserExceptions
 {
