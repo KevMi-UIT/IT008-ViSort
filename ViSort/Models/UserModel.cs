@@ -6,38 +6,30 @@ using ViSort.Utils;
 
 namespace ViSort.Models;
 
-public class UserModel
+public class UserModel(string username, string password, int score = 0)
 {
     [BsonId]
     public ObjectId Id { get; set; }
 
     [BsonElement("username")]
-    public string Username { get; private set; }
+    public string Username { get; private set; } = username;
 
     [BsonElement("password")]
-    public string HashedPassword { get; private set; }
+    public string HashedPassword { get; private set; } = Hasher.Hash(password);
 
-    private string _password;
+    [BsonIgnore]
     public string Password
     {
-        get => _password;
-        private set
+        get => password;
+        set
         {
-            _password = value;
+            password = value;
             HashedPassword = Hasher.Hash(value);
         }
     }
 
     [BsonElement("score")]
-    public int Score { get; private set; }
-
-    public UserModel(string username, string password, int score = 0)
-    {
-        Username = username;
-        _password = password;
-        HashedPassword = Hasher.Hash(password);
-        Score = score;
-    }
+    public int Score { get; private set; } = score;
 
     public void UpdatePassword(string password)
     {
