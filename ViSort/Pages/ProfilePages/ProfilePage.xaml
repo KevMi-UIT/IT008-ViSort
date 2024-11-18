@@ -7,7 +7,7 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1300"
-      Background="White"
+      ui:Design.Background="White"
       Title="ProfilePage">
 
     <Grid Margin="20,0">

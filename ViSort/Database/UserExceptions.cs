@@ -13,4 +13,8 @@ public static class UserExceptions
     public class UserAlreadyExists(string message) : Exception(message)
     {
     }
+
+    public class UserNoChanges(string message) : Exception(message)
+    {
+    }
 }
