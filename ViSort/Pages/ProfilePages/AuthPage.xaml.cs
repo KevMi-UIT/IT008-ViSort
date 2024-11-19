@@ -28,6 +28,7 @@ public partial class AuthPage : Page
             return;
         }
         InitializeComponent();
+        UsernameTextbox.Focus();
     }
 
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
