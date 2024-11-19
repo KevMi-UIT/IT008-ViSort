@@ -85,7 +85,7 @@ public class UserService
             throw new UserNoChanges("No modification on user");
         }
         UserModel? existingUser = await GetUserFromDBAsync(newUser.Username);
-        if (existingUser != null)
+        if (existingUser != null && oldUser.Username != newUser.Username)
         {
             throw new UserAlreadyExists("User already exists.");
         }

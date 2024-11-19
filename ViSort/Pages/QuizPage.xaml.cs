@@ -13,8 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Models;
+using ViSort.Pages.ProfilePages;
 using ViSort.Sorts;
 using ViSort.Utils;
+using ViSort.Windows;
 
 namespace ViSort.Pages;
 
@@ -24,6 +26,8 @@ namespace ViSort.Pages;
 public partial class QuizPage : Page
 {
     private readonly List<QuizModel> QuestionList = [];
+    private readonly List<RadioButton> _radioButtons = new();
+
     private int currentQuestionIndex = 0;
 
     public QuizPage()
@@ -137,6 +141,39 @@ public partial class QuizPage : Page
         {
             App.User.SetScore(score);
             await App.UserSvc.UpdateScoreAsync(App.User);
+        }
+
+        // TODO:
+        MainWindow.RootNavigationView.Navigate(typeof(HomePage));
+        MainWindow.RootNavigationView.Navigate(typeof(ScoreBoardPage));
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        foreach (var radioButton in MultipleChoiceWrapPanel.Children.OfType<RadioButton>())
+        {
+            _radioButtons.Add(radioButton);
+        }
+    }
+
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        Keyboard.Focus(_radioButtons[0]);
+        if (e.Key >= Key.D1 && e.Key <= Key.D9) // Phím 1-9
+        {
+            int index = e.Key - Key.D1; // Tính chỉ số dựa trên phím nhấn
+            if (index < _radioButtons.Count)
+            {
+                _radioButtons[index].IsChecked = true;
+            }
+        }
+        else if (e.Key >= Key.NumPad1 && e.Key <= Key.NumPad9) // Phím số trên numpad
+        {
+            int index = e.Key - Key.NumPad1; // Tính chỉ số dựa trên phím nhấn
+            if (index < _radioButtons.Count)
+            {
+                _radioButtons[index].IsChecked = true;
+            }
         }
     }
 }

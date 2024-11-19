@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Database;
 using ViSort.Models;
+using ViSort.Windows;
 using static ViSort.Database.UserService;
 
 namespace ViSort.Pages.ProfilePages;
@@ -48,7 +49,9 @@ public partial class ProfilePage : Page
         if (App.User != null)
         {
             await App.UserSvc!.DeleteUserAsync(App.User);
+            UpdateProfile(false);
         }
+        MainWindow.RootNavigationView.Navigate(typeof(ProfilePage));
     }
     private void UpdateProfile(bool isLoggedIn)
     {
@@ -63,21 +66,24 @@ public partial class ProfilePage : Page
             EditUsernameTextBox.Text = "Unknown";
             EditPasswordTextBox.Text = "Unknown";
             ScoreValue.Text = "Unknown";
+            UpdateProfileButton.IsEnabled = false;
         }
     }
 
-    //private void EditProfileButton_Click(object sender, RoutedEventArgs e)
-    //{
-    //    EditUsernameTextBox.Select(EditUsernameTextBox.Text.Length, 0);
-    //    EditPasswordTextBox.Select(EditPasswordTextBox.Text.Length, 0);
-    //}
-
     private async void UpdateProfileButton_Click(object sender, RoutedEventArgs e)
     {
-        UpdateProfileButton.IsEnabled = true;
+        //UpdateProfileButton.IsEnabled = true;
         string newUsername = EditUsernameTextBox.Text;
         string newPassword = EditPasswordTextBox.Text;
         UserModel NewUserModel = new(newUsername, newPassword);
-        await App.UserSvc!.ChangeUserProfileAsync(App.User, NewUserModel);
+        try
+        {
+            await App.UserSvc!.ChangeUserProfileAsync(App.User!, NewUserModel);
+        }
+        catch (Exception)
+        {
+
+        }
+        MainWindow.RootNavigationView.Navigate(typeof(ProfilePage));
     }
 }

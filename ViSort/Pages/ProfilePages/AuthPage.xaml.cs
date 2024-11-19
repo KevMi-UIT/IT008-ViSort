@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Models;
 using ViSort.Pages.ProfilePages;
+using ViSort.Windows;
 using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Pages;
@@ -57,7 +58,7 @@ public partial class AuthPage : Page
             }
             await App.UserSvc!.AuthUserAsync(User);
             App.User = User;
-            NavigationService.Navigate(new ProfilePage());
+            MainWindow.RootNavigationView.Navigate(typeof(ProfilePage));
         }
         catch (PasswordDoesNotMatch)
         {
@@ -88,3 +89,4 @@ public partial class AuthPage : Page
             }
         }
     }
+}
