@@ -18,7 +18,7 @@ class BubbleSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_
     public override string TimeComplexity { get; } = "";
     public override string SpaceComplexity { get; } = "";
 
-    public async override void BeginAlgorithm()
+    public async override Task BeginAlgorithm()
     {
         for (int i = 0; i < Elements.Count; i++)
         {

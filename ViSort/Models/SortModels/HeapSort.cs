@@ -8,7 +8,7 @@ class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_el
     public override SortTypes SortType { get; } = SortTypes.Bubble;
     public override string TimeComplexity { get; } = "";
     public override string SpaceComplexity { get; } = "";
-    public async override void BeginAlgorithm()
+    public async override Task BeginAlgorithm()
     {
         int N = Elements.Count;
         for (int i = N / 2 - 1; i >= 0; i--)

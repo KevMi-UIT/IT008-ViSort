@@ -23,10 +23,7 @@ public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
         SetRectangleColor(index2, Colors.Red);
         await Task.Delay(ThreadDelay * 2);
         Utils.Utils.Swap(Elements, index1, index2);
-        await Application.Current.Dispatcher.InvokeAsync(() =>
-        {
-            DrawRectangleOnCanvas(Elements);
-        });
+        await Application.Current.Dispatcher.InvokeAsync(() => DrawRectangleOnCanvas(Elements));
         await Task.Delay(ThreadDelay);
         SetRectangleColor(index1, Colors.Black);
         SetRectangleColor(index2, Colors.Black);
@@ -58,7 +55,7 @@ public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
     {
         if (index < 0 || index >= DrawCanvas.Children.Count)
             return;
-        else if (DrawCanvas.Children[index] is Rectangle rect)
+        if (DrawCanvas.Children[index] is Rectangle rect)
         {
             rect.Fill = new SolidColorBrush(color);
         }

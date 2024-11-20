@@ -7,7 +7,7 @@ public class ShellSort(List<int> _element, DrawRectangle _drawRectangle) : SortM
     public override SortTypes SortType { get; } = SortTypes.Shell;
     public override string TimeComplexity { get; } = "";
     public override string SpaceComplexity { get; } = "";
-    public async override void BeginAlgorithm()
+    public async override Task BeginAlgorithm()
     {
         int N = Elements.Count;
         int i, j;

@@ -13,7 +13,7 @@ public class InsertionSort(List<int> _element, DrawRectangle _drawRectangle) : S
     public override SortTypes SortType { get; } = SortTypes.Insertion;
     public override string TimeComplexity { get; } = "";
     public override string SpaceComplexity { get; } = "";
-    public async override void BeginAlgorithm()
+    public async override Task BeginAlgorithm()
     {
         for (int i = 1; i < Elements.Count; i++)
         {

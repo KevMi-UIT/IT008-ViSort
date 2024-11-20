@@ -17,7 +17,7 @@ public abstract class SortModel(List<int> _element, DrawRectangle _drawRectangle
     public int Step { get; protected set; } = 0;
     public List<int> Elements { get; set; } = _element;
     public readonly DrawRectangle DrawRect = _drawRectangle;
-    public abstract void BeginAlgorithm();
+    public abstract Task BeginAlgorithm();
 
     public void BeginSorting()
     {

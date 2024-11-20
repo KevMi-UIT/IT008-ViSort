@@ -10,7 +10,7 @@ public class SelectionSort(List<int> _element, DrawRectangle _drawRectangle) : S
     public override SortTypes SortType { get; } = SortTypes.Selection;
     public override string TimeComplexity { get; } = "";
     public override string SpaceComplexity { get; } = "";
-    public async override void BeginAlgorithm()
+    public async override Task BeginAlgorithm()
     {
         for (int i = 0; i < Elements.Count; i++)
         {
