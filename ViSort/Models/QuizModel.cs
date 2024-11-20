@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViSort.Sorts;
-
+using ViSort.Models.SortModels;
 namespace ViSort.Models;
 
 class QuizModel(int order, string content)

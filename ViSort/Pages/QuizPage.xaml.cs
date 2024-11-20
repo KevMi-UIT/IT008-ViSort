@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Models;
-using ViSort.Sorts;
+using ViSort.Models.SortModels;
 using ViSort.Utils;
 
 namespace ViSort.Pages;
