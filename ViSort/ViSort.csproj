@@ -60,9 +60,6 @@
     <Resource Include="Resources\Logo\*" />
     <Resource Include="Resources\Images\*" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\SortsInfoPages\" />
-  </ItemGroup>
   <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />
     <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory=".." />

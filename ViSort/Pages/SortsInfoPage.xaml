@@ -9,6 +9,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1300"
       ui:Design.Background="White"
+      d:DataContext="{d:DesignInstance local:SortsInfoPage, IsDesignTimeCreatable=False}"
       Title="SortsInfoPage">
 
     <Grid Margin="20,0">
@@ -21,14 +22,7 @@
         <ui:TextBlock Text="Sorts Info" FontTypography="TitleLarge" Grid.Row="0" />
         <Separator Margin="30,10" Grid.Row="1"/>
         <Grid Grid.Row="2" VerticalAlignment="Top">
-            <Grid Margin="80,0,80,50" MaxWidth="400">
-                <ui:AutoSuggestBox
-                    x:Name="AutoSuggestBox"
-                    PlaceholderText="Sort..."
-                    Icon="{ui:SymbolIcon Search24}"
-                    QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
-            </Grid>
-            <views:SortsInfoView x:Name="SortsInfoViewSection" DataContext="{Binding }"/>
+            <views:SortsInfoView/>
         </Grid>
     </Grid>
 </Page>
