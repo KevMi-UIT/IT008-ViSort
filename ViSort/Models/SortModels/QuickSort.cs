@@ -1,15 +1,19 @@
 using System.Diagnostics;
 using ViSort.Draw;
+using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
-class QuickSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
+class QuickSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
 {
-    public override SortTypes SortType { get; } = SortTypes.Quick;
-    public override string TimeComplexity { get; } = "";
-    public override string SpaceComplexity { get; } = "";
+    // TODO: update info
+    public static SortTypes SortType => SortTypes.Quick;
+    public static string TimeComplexity => "O(n^2)";
+    public static string SpaceComplexity => "O(1)";
+    public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
+    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
 
     protected int IntPartiton { get; set; }
-    public async override Task BeginAlgorithm()
+    public override async Task BeginAlgorithm()
     {
         await Recursive(0, Elements.Count - 1);
     }

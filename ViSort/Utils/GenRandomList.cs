@@ -1,6 +1,6 @@
 ﻿namespace ViSort.Utils;
 
-public enum RandomGenTypes
+public enum GenRandomListTypes
 {
     Normal,
     Sorted,
@@ -16,15 +16,15 @@ public static class GenRandomList
     public const int NEARLY_SORTED_SENSITIVITY = 10;
     private static readonly Random RAND = new();
 
-    public static List<int> GenList(int length, RandomGenTypes type)
+    public static List<int> GenList(int length, GenRandomListTypes type)
     {
         return type switch
         {
-            RandomGenTypes.Normal => GenNormal(length),
-            RandomGenTypes.Sorted => GenSorted(length),
-            RandomGenTypes.SortedReverse => GenSortedReverse(length),
-            RandomGenTypes.NearlySorted => GenNearlySorted(length),
-            RandomGenTypes.Mirror => GenMirror(length),
+            GenRandomListTypes.Normal => GenNormal(length),
+            GenRandomListTypes.Sorted => GenSorted(length),
+            GenRandomListTypes.SortedReverse => GenSortedReverse(length),
+            GenRandomListTypes.NearlySorted => GenNearlySorted(length),
+            GenRandomListTypes.Mirror => GenMirror(length),
             _ => throw new ArgumentException("Invalid list type"),
         };
     }

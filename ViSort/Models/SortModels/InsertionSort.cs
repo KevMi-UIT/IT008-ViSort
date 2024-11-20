@@ -4,16 +4,20 @@ using System.Windows.Media;
 using System.Xml.Linq;
 using ViSort.Draw;
 using ViSort.Models;
+using ViSort.Types;
 using static ViSort.Utils.Utils;
 
 namespace ViSort.Models.SortModels;
 
-public class InsertionSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
+public class InsertionSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
 {
-    public override SortTypes SortType { get; } = SortTypes.Insertion;
-    public override string TimeComplexity { get; } = "";
-    public override string SpaceComplexity { get; } = "";
-    public async override Task BeginAlgorithm()
+    public static SortTypes SortType => SortTypes.Insertion;
+    public static string TimeComplexity => "O(n^2)";
+    public static string SpaceComplexity => "O(1)";
+    public static string YoutubeLink => "https://youtu.be/mTNC0ERo-ZI?si=BTaxxQLXZPsRooAq";
+    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/insertion-sort-algorithm/";
+
+    public override async Task BeginAlgorithm()
     {
         for (int i = 1; i < Elements.Count; i++)
         {

@@ -1,11 +1,15 @@
 using ViSort.Draw;
+using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
-class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
+class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
 {
-    public override SortTypes SortType { get; } = SortTypes.Tree;
-    public override string TimeComplexity { get; } = "";
-    public override string SpaceComplexity { get; } = "";
+    // TODO: update info
+    public static SortTypes SortType => SortTypes.Tree;
+    public static string TimeComplexity => "O(n^2)";
+    public static string SpaceComplexity => "O(1)";
+    public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
+    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
     //public TreeSort(Node root = null)
     //{
     //    Root = root;

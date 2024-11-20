@@ -57,10 +57,11 @@
     <PackageReference Include="ZstdSharp.Port" Version="0.8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Logo\visort_full_logo.svg" />
-    <Resource Include="Resources\Logo\visort_full_logo_light.png" />
-    <Resource Include="Resources\Logo\visort_logo.ico" />
-    <Resource Include="Resources\Logo\visort_logo.svg" />
+    <Resource Include="Resources\Logo\*" />
+    <Resource Include="Resources\Images\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\SortsInfoPages\" />
   </ItemGroup>
   <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0">
     <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High" />

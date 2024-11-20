@@ -7,7 +7,6 @@
         xmlns:local="clr-namespace:ViSort.Windows"
         xmlns:pages="clr-namespace:ViSort.Pages"
         xmlns:profilePages="clr-namespace:ViSort.Pages.ProfilePages"
-        xmlns:sortsInfoPages="clr-namespace:ViSort.Pages.SortsInfoPages"
         mc:Ignorable="d"
         d:Width="500" d:Height="450"
         Icon="/Resources/Logo/visort_logo.ico"
@@ -45,7 +44,7 @@
                     <ui:SymbolIcon Symbol="Timer24" />
                 </ui:NavigationViewItem.Icon>
             </ui:NavigationViewItem>
-            <ui:NavigationViewItem Content="Sorts Info" TargetPageType="{x:Type sortsInfoPages:SortsInfoPage}">
+            <ui:NavigationViewItem Content="Sorts Info" TargetPageType="{x:Type pages:SortsInfoPage}">
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="Info24" />
                 </ui:NavigationViewItem.Icon>

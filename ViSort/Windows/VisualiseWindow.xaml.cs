@@ -20,8 +20,10 @@ using System.Xml.Linq;
 using ViSort.Draw;
 using ViSort.Models;
 using ViSort.Models.SortModels;
+using ViSort.Types;
 using ViSort.Utils;
 using Windows.Security.Cryptography.Certificates;
+using static ViSort.Exceptions.SortExceptions;
 
 namespace ViSort.Windows;
 
@@ -30,7 +32,7 @@ public partial class VisualiseWindow : Window
     private readonly SortTypes SelectedSortType;
     private readonly SortModel SelectedSort;
     public DrawRectangle drawRectangle;
-    public VisualiseWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, RandomGenTypes _SelectedArrayGenerationMethod)
+    public VisualiseWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, GenRandomListTypes _SelectedArrayGenerationMethod)
     {
         InitializeComponent();
         SortVisualisation.Height = GenRandomList.MAX;
@@ -52,7 +54,7 @@ public partial class VisualiseWindow : Window
             SortTypes.Shell => new ShellSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
             SortTypes.Tim => throw new NotImplementedException(),
             SortTypes.Tree => throw new NotImplementedException(),
-            _ => throw new NotImplementedException("Sort hasn't been implemented")
+            _ => throw new SortNotImplemented()
         };
 
         SelectedSort.DrawRect.DrawRectangleOnCanvas(SelectedSort.Elements);

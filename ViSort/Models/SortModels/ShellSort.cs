@@ -1,13 +1,16 @@
 using ViSort.Draw;
 using ViSort.Models;
+using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
-public class ShellSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
+public class ShellSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
 {
-    public override SortTypes SortType { get; } = SortTypes.Shell;
-    public override string TimeComplexity { get; } = "";
-    public override string SpaceComplexity { get; } = "";
-    public async override Task BeginAlgorithm()
+    public static SortTypes SortType => SortTypes.Shell;
+    public static string TimeComplexity => "O(n^2)";
+    public static string SpaceComplexity => "O(1)";
+    public static string YoutubeLink => "https://youtu.be/SHcPqUe2GZM?si=61x1MQdsPuX8K345";
+    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/shell-sort/";
+    public override async Task BeginAlgorithm()
     {
         int N = Elements.Count;
         int i, j;

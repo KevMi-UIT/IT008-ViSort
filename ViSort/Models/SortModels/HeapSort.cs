@@ -1,15 +1,17 @@
 using ViSort.Draw;
-using ViSort.Models.SortModels;
+using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
 
-class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
+class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
 {
-    public override SortTypes SortType { get; } = SortTypes.Heap;
-    public override string TimeComplexity { get; } = "";
-    public override string SpaceComplexity { get; } = "";
+    public static SortTypes SortType => SortTypes.Heap;
+    public static string TimeComplexity => "O(n Log n)";
+    public static string SpaceComplexity => "O(n Log n)";
+    public static string YoutubeLink => "https://youtu.be/2DmK_H7IdTo?si=cg1oxWLwzJ3l4TMl";
+    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/heap-sort/";
 
-    public async override Task BeginAlgorithm()
+    public override async Task BeginAlgorithm()
     {
         int N = Elements.Count;
         for (int i = (N / 2) - 1; i >= 0; i--)
