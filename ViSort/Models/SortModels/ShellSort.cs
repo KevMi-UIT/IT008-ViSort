@@ -21,7 +21,6 @@ public class ShellSort(List<int> _element, DrawRectangle _drawRectangle) : SortM
                 temp = Elements[i];
                 while (j >= Increment && Elements[j - Increment].CompareTo(temp) > 0)
                 {
-                    //Elements[j] = Elements[j - Increment]; // => SwapElementsAsync
                     Step++;
                     await DrawRect.SwapElementsAsync(Elements, j, j - Increment);
                     j -= Increment;

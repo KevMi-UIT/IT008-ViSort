@@ -1,59 +1,65 @@
-//public static class BucketSort
-//{
-//    public static void InsertionSort(List<int> list) where T : IComparable
-//    {
-//        int N = list.Count;
-//        for (int i = 1; i < N; ++i)
-//        {
-//            T Key = list[i];
-//            int j = i - 1;
-//            while (j >= 0 && list[j].CompareTo(Key) > 0)
-//            {
-//                list[j + 1] = list[j];
-//                j = j - 1;
-//            }
-//            list[j + 1] = Key;
-//        }
-//    }
+using System.Xml.Linq;
+using ViSort.Draw;
+using Windows.ApplicationModel.Appointments.DataProvider;
 
-//    public static List<int> Sort(List<int> list) where T : IComparable, IConvertible
-//    {
-//        int num_of_bucket = list.Count;
-//        T minValue = list[0];
-//        T maxValue = list[0];
+namespace ViSort.Models.SortModels;
+public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
+{
+    public override SortTypes SortType { get; } = SortTypes.Bucket;
+    public override string TimeComplexity { get; } = "";
+    public override string SpaceComplexity { get; } = "";
 
-//        foreach (var item in list)
-//        {
-//            if (item.CompareTo(minValue) < 0) minValue = item;
-//            if (item.CompareTo(maxValue) > 0) maxValue = item;
-//        }
+    public async override Task BeginAlgorithm()
+    {
+        await StartBucketSort();
+    }
+    public async Task InsertionSort(List<int> elements)
+    {
+        for (int i = 1; i < elements.Count; i++)
+        {
+            int compareIndex = i;
 
-//        List<double>[] buckets = new List<double>[num_of_bucket];
-//        for (int i = 0; i < num_of_bucket; i++)
-//        {
-//            buckets[i] = new List<double>();
-//        }
+            while (elements[compareIndex] < elements[compareIndex - 1])
+            {
+                Step++;
+                await DrawRect.SwapElementsAsync(elements, compareIndex - 1, compareIndex);
+                compareIndex--;
+                if (compareIndex == 0)
+                {
+                    break;
+                }
+            }
+        }
+    }
 
-//        foreach (var item in list)
-//        {
-//            double normalizedValue = (Convert.ToDouble(item) - Convert.ToDouble(minValue)) / 
-//                                    (Convert.ToDouble(maxValue) - Convert.ToDouble(minValue));
-//            int bucket = (int)(normalizedValue * (num_of_bucket - 1));
-//            buckets[bucket].Add(normalizedValue);
-//        }
-
-//        List<int> sortedArray = new List<int>();
-//        for (int i = 0; i < num_of_bucket; i++)
-//        {
-//            InsertionSort(buckets[i]);
-//            foreach (var value in buckets[i])
-//            {
-//                double denormalizedValue = value * (Convert.ToDouble(maxValue) - 
-//                Convert.ToDouble(minValue)) + Convert.ToDouble(minValue);
-//                sortedArray.Add((T)Convert.ChangeType(denormalizedValue, typeof(T)));
-//            }
-//        }
-
-//        return sortedArray;
-//    }
-//}
+    async Task StartBucketSort()
+    {
+        List<int>[] buckets = new List<int>[Elements.Count];
+        for (int i = 0; i < Elements.Count; i++)
+        {
+            Step++;
+            buckets[i] = new List<int>();
+        }
+        for (int i = 0; i < Elements.Count; i++)
+        {
+            Step++;
+            int bi = Elements.Count * Elements[i];
+            buckets[bi].Add(Elements[i]);
+        }
+        for (int i = 0; i < Elements.Count; i++)
+        {
+            Step++;
+            await InsertionSort(buckets[i]);
+        }
+        int index = 0;
+        for (int i = 0; i < Elements.Count; i++)
+        {
+            Step++;
+            for (int j = 0; j < buckets[i].Count; j++)
+            {
+                Step++;
+                Elements[index++] = buckets[i][j];
+            }
+        }
+    }
+}
