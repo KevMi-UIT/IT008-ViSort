@@ -11,7 +11,7 @@ class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_el
     public async override Task BeginAlgorithm()
     {
         int N = Elements.Count;
-        for (int i = N / 2 - 1; i >= 0; i--)
+        for (int i = (N / 2) - 1; i >= 0; i--)
         {
             Heapify(Elements, N, i);
         }
