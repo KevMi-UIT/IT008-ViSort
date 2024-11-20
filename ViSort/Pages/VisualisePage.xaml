@@ -191,7 +191,7 @@
                 <WrapPanel Width="349"  >
                     <Slider x:Name="ElementCountSlider"
             Minimum="100"
-            Maximum="1200"
+            Maximum="500"
             TickPlacement="BottomRight"
             ValueChanged="ElementCountSlider_ValueChanged"
             Height="46"

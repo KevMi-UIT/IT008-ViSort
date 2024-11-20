@@ -36,9 +36,7 @@ public partial class VisualiseWindow : Window
     {
         InitializeComponent();
         SortVisualisation.Height = GenRandomList.MAX;
-        drawRectangle = new(SortVisualisation);
-        // TODO: change thread delay => DONE
-        drawRectangle.ThreadDelay = 10; //default value
+        drawRectangle = new(SortVisualisation, 99);
         SelectedSortType = _SelectedSortAlgorithm;
         SelectedSort = SelectedSortType switch
         {
@@ -64,7 +62,7 @@ public partial class VisualiseWindow : Window
     {
         if (SpeedNumberBox != null && !SpeedNumberBox.IsFocused)
         {
-            drawRectangle.ThreadDelay = (int)e.NewValue;
+            drawRectangle.ThreadDelay = Math.Abs((int)e.NewValue - 90);
             SpeedNumberBox.Text = drawRectangle.ThreadDelay.ToString();
         }
     }
@@ -86,12 +84,12 @@ public partial class VisualiseWindow : Window
     {
         if (int.TryParse(SpeedNumberBox.Text, out int value) && value >= SpeedSlider.Minimum && value <= SpeedSlider.Maximum)
         {
-            drawRectangle.ThreadDelay = value;
+            drawRectangle.ThreadDelay = Math.Abs(value - 100);
             SpeedSlider.Value = value;
         }
         else
         {
-            MessageBox.Show("Please enter a valid integer within the range.");
+            MessageBox.Show("Please enter a valid integer between 10 and 100 ms.");
             SpeedNumberBox.Text = drawRectangle.ThreadDelay.ToString();
         }
     }
@@ -109,6 +107,6 @@ public partial class VisualiseWindow : Window
     private void PlayButton_Click(object sender, RoutedEventArgs e)
     {
         SelectedSort.BeginSorting();
-        IsEnabled = false;
+        PlayButton.IsEnabled = false;
     }
 }

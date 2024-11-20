@@ -23,7 +23,7 @@
                          Margin="545,22,25,322"
                          IsReadOnly="True" />
         </Grid>
-        <Button x:Name="PlayPauseButton"
+        <Button x:Name="PlayButton"
                 Content="Play"
                 Height="30"
                 Width="60"
@@ -38,15 +38,17 @@
                     Height="30"
                     Width="180"
                     Minimum="10"
-                    Maximum="100"
+                    Maximum="105"
                     TickFrequency="10"
                     TickPlacement="BottomRight"
+                    IsEnabled="True"
                     ValueChanged="SpeedSlider_ValueChanged"
                     Foreground="White"
                     LargeChange="10" 
                     SmallChange="10" />
             <ui:NumberBox x:Name="SpeedNumberBox"
-                     PlaceholderText="Speed"
+                     PlaceholderText="ms"
+                     IsEnabled="True"
                      Height="40"
                      Width="Auto"
                      HorizontalAlignment="Left"

@@ -24,13 +24,13 @@ public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
     {
         SetRectangleColor(index1, BrushColor = Colors.Red);
         SetRectangleColor(index2, BrushColor = Colors.Red);
-        await Task.Delay(ThreadDelay * 2);
+        await Task.Delay(ThreadDelay);
         Utils.Utils.Swap(Elements, index1, index2);
         await Application.Current.Dispatcher.InvokeAsync(() => DrawRectangleOnCanvas(Elements));
         await Task.Delay(ThreadDelay);
         SetRectangleColor(index1, BrushColor = Colors.Black);
         SetRectangleColor(index2, BrushColor = Colors.Black);
-        await Task.Delay(ThreadDelay * 2);
+        await Task.Delay(ThreadDelay);
     }
 
     public void DrawRectangleOnCanvas(List<int> Elements)

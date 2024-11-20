@@ -10,22 +10,11 @@ class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_el
     public static string SpaceComplexity => "O(1)";
     public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
     public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
-    //public TreeSort(Node root = null)
-    //{
-    //    Root = root;
-    //} => NEED CONSTRUCTOR TO IMPLEMENT TREE SORT
-    public class Node
+    public class Node(int key, TreeSort.Node? left = null, TreeSort.Node? right = null)
     {
-        public int Key { get; set; }
-        public Node Left { get; set; }
-        public Node Right { get; set; }
-
-        public Node(int key, Node? left = null, Node? right = null)
-        {
-            Key = key;
-            Left = left;
-            Right = right;
-        }
+        public int Key { get; set; } = key;
+        public Node Left { get; set; } = left;
+        public Node Right { get; set; } = right;
     }
 
     public Node? Root { get; private set; }
