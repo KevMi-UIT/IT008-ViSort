@@ -27,9 +27,8 @@ public partial class QuizPage : Page
 {
     private readonly List<QuizModel> QuestionList = [];
     private readonly List<RadioButton> _radioButtons = new();
-
     private int currentQuestionIndex = 0;
-
+    int score = 0;
     public QuizPage()
     {
         List<List<int>> questions = App.QUIZ_LIST.Take(5).Randomize().ToList();
@@ -135,17 +134,51 @@ public partial class QuizPage : Page
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
         //TODO: change value input to CalcScore
-        int score = Utils.Utils.CalcScore(0, QuestionList.Count, CountAnswer());
-
+        try
+        {
+            score = Utils.Utils.CalcScore(0, QuestionList.Count, CountAnswer());
+        }
+        catch (DivideByZeroException)
+        {
+            score = 0;
+        }
         if (App.User != null && App.UserSvc != null)
         {
             App.User.SetScore(score);
             await App.UserSvc.UpdateScoreAsync(App.User);
-        }
 
-        // TODO:
-        MainWindow.RootNavigationView.Navigate(typeof(HomePage));
-        MainWindow.RootNavigationView.Navigate(typeof(ScoreBoardPage));
+            WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
+            {
+                Title = "Info",
+                Content = "Quiz ended.\nChoose 'OK' button to navigate to the ScoreBoard and 'Close' button to navigate to the Homepage.",
+                PrimaryButtonText = "OK",
+            }.ShowDialogAsync();
+            if (result == WpfUiControls.MessageBoxResult.Primary)
+            {
+                MainWindow.RootNavigationView.Navigate(typeof(ScoreBoardPage));
+            }
+            else
+            {
+                MainWindow.RootNavigationView.Navigate(typeof(HomePage));
+            }
+        }
+        else
+        {
+            WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
+            {
+                Title = "Info",
+                Content = "Quiz ended.\nChoose 'OK' button to navigate to the Homepage and 'Close' button to answer quiz again.",
+                PrimaryButtonText = "OK",
+            }.ShowDialogAsync();
+            if (result == WpfUiControls.MessageBoxResult.Primary)
+            {
+                MainWindow.RootNavigationView.Navigate(typeof(HomePage));
+            }
+            else
+            {
+                MainWindow.RootNavigationView.Navigate(typeof(QuizPage));
+            }
+        }
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -158,7 +191,6 @@ public partial class QuizPage : Page
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
-        Keyboard.Focus(_radioButtons[0]);
         if (e.Key >= Key.D1 && e.Key <= Key.D9) // Phím 1-9
         {
             int index = e.Key - Key.D1; // Tính chỉ số dựa trên phím nhấn
@@ -167,13 +199,32 @@ public partial class QuizPage : Page
                 _radioButtons[index].IsChecked = true;
             }
         }
-        else if (e.Key >= Key.NumPad1 && e.Key <= Key.NumPad9) // Phím số trên numpad
+        switch (e.Key)
         {
-            int index = e.Key - Key.NumPad1; // Tính chỉ số dựa trên phím nhấn
-            if (index < _radioButtons.Count)
-            {
-                _radioButtons[index].IsChecked = true;
-            }
+            case Key.D0:
+                _radioButtons[9].IsChecked = true;
+                break;
+            case Key.Delete:
+                _radioButtons[10].IsChecked = true;
+                break;
+            case Key.Escape:
+                _radioButtons[11].IsChecked = true;
+                break;
+            case Key.Left:
+                if (PrevQuestionButton.IsEnabled == true)
+                {
+                    PrevQuestionButton_Click(sender, e);
+                }
+                break;
+            case Key.Right:
+                if (NextQuestionButton.IsEnabled == true)
+                {
+                    NextQuestionButton_Click(sender, e);
+                }
+                break;
+            case Key.Enter:
+                SubmitButton_Click(sender, e);
+                break;
         }
     }
 }

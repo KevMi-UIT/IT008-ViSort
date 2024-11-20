@@ -27,11 +27,11 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="110"/>
             </Grid.ColumnDefinitions>
 
             <Label x:Name="LabelUserProfile" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="100" Margin="10" Grid.ColumnSpan="2" Grid.Row="0">
@@ -40,35 +40,50 @@
 
             <ui:SymbolIcon x:Name="UserIcon" Symbol="PersonCircle32" Filled="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" FontSize="100"></ui:SymbolIcon>
 
-            <ui:TextBlock x:Name="UsernameTextBlock" Text="Username:" FontSize="20" Margin="10" Grid.Row="2" Grid.Column="0"></ui:TextBlock>
-            <!--<ui:TextBlock x:Name="UsernameValue" Text="Unknown" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="2" Grid.Column="1"></ui:TextBlock>-->
-            
-            <ui:TextBlock x:Name="PasswordTextBlock" Text="Password:" FontSize="20" Margin="10" Grid.Row="3" Grid.Column="0"></ui:TextBlock>
-            <!--<ui:TextBlock x:Name="PasswordValue" Text="Unknown" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="3" Grid.Column="1"></ui:TextBlock>-->
+            <ui:TextBlock x:Name="UsernameTextBlock" Text="Username:" FontSize="20" Margin="5" Grid.Row="2" Grid.Column="0" Padding="5" ></ui:TextBlock>
 
-            <ui:TextBox x:Name="EditUsernameTextBox" FontSize="20" Margin="10" Grid.Row="2" Grid.Column="1"></ui:TextBox>
-            <ui:TextBox x:Name="EditPasswordTextBox" FontSize="20" Margin="10" Grid.Row="3" Grid.Column="1"></ui:TextBox>
+            <ui:TextBlock x:Name="PasswordTextBlock" Text="Password:" FontSize="20" Margin="5" Grid.Row="3" Grid.Column="0" Padding="5" ></ui:TextBlock>
 
-            <ui:Button x:Name="UpdateProfileButton" Content="Update" Grid.Row="3" Grid.Column="2" Click="UpdateProfileButton_Click"></ui:Button>
+            <ui:TextBox x:Name="EditUsernameTextBox" FontSize="20" Margin="5" Grid.Row="2" Grid.Column="1" Width="500"></ui:TextBox>
+            <ui:TextBox x:Name="EditPasswordTextBox" FontSize="20" Margin="5" Grid.Row="3" Grid.Column="1" Width="500"></ui:TextBox>
 
+            <ui:TextBlock x:Name="ScoreTextBlock" Text="Score:"  FontSize="20" Margin="5" Grid.Row="4" Grid.Column="0" Padding="5"></ui:TextBlock>
+            <ui:TextBlock x:Name="ScoreValue" FontSize="20" FontStyle="Italic" Margin="5" Grid.Row="4" Grid.Column="1"></ui:TextBlock>
 
-            <ui:TextBlock x:Name="ScoreTextBlock" Text="Score:"  FontSize="20" Margin="10" Grid.Row="4" Grid.Column="0"></ui:TextBlock>
-            <ui:TextBlock x:Name="ScoreValue" FontSize="20" FontStyle="Italic" Margin="10" Grid.Row="4" Grid.Column="1"></ui:TextBlock>
+            <StackPanel x:Name="TextFunctionButton" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
 
-            <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+                <TextBlock Name="UpdateButtonHoverText" FontSize="16"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
+                 UPDATE PROFILE
+                </TextBlock>
 
-                <ui:Button x:Name="LogoutButton" Click="LogoutButton_Click">
-                    <ui:SymbolIcon x:Name="Logout_Icon" Symbol="ArrowExit20" Margin="0,0,0,0" FontSize="50"/>
-                </ui:Button>
-                
-                <!--<ui:Button x:Name="EditProfileButton" Click="EditProfileButton_Click">
-                    <ui:SymbolIcon x:Name="Edit_Icon" Symbol="PersonEdit24" Margin="0,0,0,0" FontSize="50"/>
-                </ui:Button>-->
+                <TextBlock Name="LogoutButtonHoverText" FontSize="16" 
+                    HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
+                LOGOUT
+                </TextBlock>
 
-                <ui:Button x:Name="DeleteProfileButton" Click="DeleteProfileButton_Click">
-                    <ui:SymbolIcon x:Name="Delete_Icon" Symbol="PersonDelete24" Margin="0,0,0,0" FontSize="50"/>
-                </ui:Button>
+                <TextBlock Name="DeleteProfileButtonHoverText" FontSize="16"
+                    HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
+                DELETE PROFILE
+                </TextBlock>
             </StackPanel>
+
+            <StackPanel x:Name="FunctionButton" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
+
+                <ui:Button x:Name="UpdateProfileButton" Click="UpdateProfileButton_Click" MouseEnter="UpdateProfileButton_MouseEnter" MouseLeave="UpdateProfileButton_MouseLeave">
+                    <ui:SymbolIcon x:Name="Update_Icon" Symbol="CloudArrowUp28" Margin="0" FontSize="40"/>
+                </ui:Button>
+
+                <ui:Button x:Name="LogoutButton" Click="LogoutButton_Click" MouseEnter="LogoutButton_MouseEnter" MouseLeave="LogoutButton_MouseLeave"> 
+                    <ui:SymbolIcon x:Name="Logout_Icon" Symbol="ArrowExit20" Margin="0,0,0,0" FontSize="40"/>
+                </ui:Button>
+
+                <ui:Button x:Name="DeleteProfileButton" Click="DeleteProfileButton_Click" MouseEnter="DeleteProfileButton_MouseEnter" MouseLeave="DeleteProfileButton_MouseLeave"> 
+                    <ui:SymbolIcon x:Name="Delete_Icon" Symbol="PersonDelete24" Margin="0,0,0,0" FontSize="40"/>
+                </ui:Button>
+
+            </StackPanel>
+            
         </Grid>
     </Grid>
 </Page>

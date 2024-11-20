@@ -7,7 +7,6 @@
         xmlns:local="clr-namespace:ViSort.Windows"
         xmlns:pages="clr-namespace:ViSort.Pages"
         xmlns:profilePages="clr-namespace:ViSort.Pages.ProfilePages"
-        xmlns:sortsInfoPages="clr-namespace:ViSort.Pages.SortsInfoPages"
         mc:Ignorable="d"
         d:Width="500" d:Height="450"
         Icon="/Resources/Logo/visort_logo.ico"
@@ -40,6 +39,7 @@
                     <ui:SymbolIcon Symbol="DataArea24" />
                 </ui:NavigationViewItem.Icon>
             </ui:NavigationViewItem>
+            <!--
             <ui:NavigationViewItem Content="Big O Cheatsheet" TargetPageType="{x:Type pages:BigOPage}">
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="Timer24" />
@@ -49,7 +49,7 @@
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="Info24" />
                 </ui:NavigationViewItem.Icon>
-            </ui:NavigationViewItem>
+            </ui:NavigationViewItem>-->
             <ui:NavigationViewItem Content="Quiz" TargetPageType="{x:Type pages:QuizPage}">
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="Question24" />

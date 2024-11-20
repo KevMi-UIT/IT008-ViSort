@@ -32,22 +32,20 @@
             <ui:TextBlock x:Name="QuestionTextBlock" Grid.Row="0" FontTypography="Subtitle" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
             <Canvas x:Name="QuestionCanvas" Grid.Row="1" Background="White" />
             <WrapPanel x:Name="MultipleChoiceWrapPanel" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="700">
-                <!--<WrapPanel.Resources>
-                    <Style TargetType="{x:Type RadioButton}">
-                        <Setter Property="Margin" Value="0,10,30,10"/>
-                    </Style>
-                </WrapPanel.Resources>-->
+
                 <RadioButton x:Name="BubleRadioButton" Content="Buble Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="BucketRadioButton" Content="Bucket Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="CountingRadioButton" Content="Counting Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="HeapRadioButton" Content="Heap Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="InsertionRadioButton" Content="Insertion Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="RadixRadioButton" Content="Radix Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
+                <RadioButton x:Name="MergeRadioButton" Content="Merge Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="QuickRadioButton" Content="Quick Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
+                <RadioButton x:Name="RadixRadioButton" Content="Radix Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="SelectionRadioButton" Content="Selection Sort" Checked="Answer_Checked" Margin="0,5,10,3"/>
                 <RadioButton x:Name="ShellRadioButton" Content="Shell Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="TimRadioButton" Content="Tim Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="TreeRadioButton" Content="Tree Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
+                
             </WrapPanel>
             <Grid Grid.Row="3" Margin="0,10">
                 <ui:Button x:Name="PrevQuestionButton" Content="Previous" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90"  Click="PrevQuestionButton_Click" />

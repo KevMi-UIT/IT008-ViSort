@@ -66,8 +66,7 @@ public partial class AuthPage : Page
             await new WpfUiControls.MessageBox
             {
                 Title = "Lỗi đăng nhập",
-                Content = "Mật khẩu không chính xác",
-                PrimaryButtonText = "OK"
+                Content = "Mật khẩu không chính xác"
             }.ShowDialogAsync();
         }
         SubmitButton.IsEnabled = true;

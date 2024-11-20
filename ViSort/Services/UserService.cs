@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using ViSort.Models;
 using ViSort.Utils;
+using Windows.System;
 using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Database;
@@ -27,6 +28,7 @@ public class UserService
         if (user.HashedPassword != userDB.HashedPassword)
         {
             throw new PasswordDoesNotMatch("Password does not match.");
+            //???
         }
     }
 
@@ -59,7 +61,6 @@ public class UserService
         if (!Hasher.Verify(user.Password, existingUser.HashedPassword))
         {
             throw new PasswordDoesNotMatch("Password does not match");
-            //unhandle exception
         }
     }
 
@@ -82,7 +83,7 @@ public class UserService
     {
         if (oldUser.Equals(newUser))
         {
-            throw new UserNoChanges("No modification on user");
+            throw new UserNoChanges("No modification on user.");
         }
         UserModel? existingUser = await GetUserFromDBAsync(newUser.Username);
         if (existingUser != null && oldUser.Username != newUser.Username)

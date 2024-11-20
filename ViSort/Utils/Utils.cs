@@ -9,6 +9,10 @@ public static class Utils
 
     public static int CalcScore(int steps, int questions, int answered)
     {
+        if (answered == 0)
+        {
+            throw new DivideByZeroException();
+        }
         return Convert.ToInt32(MAX_SCORE / (1 + (steps * SCORE_SENSITIVITY * (questions / answered))));
     }
 
