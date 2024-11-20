@@ -9,8 +9,11 @@ public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
 {
     public int ThreadDelay { get; set; } = _threadDelay;
     public Canvas DrawCanvas { get; } = _canvas;
+    public Color BrushColor { get; set; } = Colors.AntiqueWhite;
     public void ShowAllElementsBlue(List<int> Elements)
     {
+        BrushColor = Colors.SteelBlue;
+        DrawCanvas.Children.Clear();
         for (int i = 0; i < Elements.Count; i++)
         {
             DrawRectangleOnCanvas(Elements);
@@ -19,14 +22,14 @@ public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
 
     public async Task SwapElementsAsync(List<int> Elements, int index1, int index2)
     {
-        SetRectangleColor(index1, Colors.Red);
-        SetRectangleColor(index2, Colors.Red);
+        SetRectangleColor(index1, BrushColor = Colors.Red);
+        SetRectangleColor(index2, BrushColor = Colors.Red);
         await Task.Delay(ThreadDelay * 2);
         Utils.Utils.Swap(Elements, index1, index2);
         await Application.Current.Dispatcher.InvokeAsync(() => DrawRectangleOnCanvas(Elements));
         await Task.Delay(ThreadDelay);
-        SetRectangleColor(index1, Colors.Black);
-        SetRectangleColor(index2, Colors.Black);
+        SetRectangleColor(index1, BrushColor = Colors.Black);
+        SetRectangleColor(index2, BrushColor = Colors.Black);
         await Task.Delay(ThreadDelay * 2);
     }
 
@@ -51,7 +54,7 @@ public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
         }
     }
 
-    private void SetRectangleColor(int index, Color color)
+    public void SetRectangleColor(int index, Color color)
     {
         if (index < 0 || index >= DrawCanvas.Children.Count)
             return;

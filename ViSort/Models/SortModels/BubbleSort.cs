@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 using ViSort.Draw;
-using Windows.UI.Composition.Interactions;
 
 namespace ViSort.Models.SortModels;
 

@@ -23,9 +23,7 @@ public class InsertionSort(List<int> _element, DrawRectangle _drawRectangle) : S
             {
                 Step++;
                 await DrawRect.SwapElementsAsync(Elements, compareIndex - 1, compareIndex);
-
                 compareIndex--;
-
                 if (compareIndex == 0)
                 {
                     break;
