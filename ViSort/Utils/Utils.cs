@@ -1,4 +1,6 @@
-﻿namespace ViSort.Utils;
+﻿using System.Diagnostics;
+
+namespace ViSort.Utils;
 
 public static class Utils
 {
@@ -25,5 +27,14 @@ public static class Utils
     {
         Random rnd = new();
         return source.OrderBy<T, int>((item) => rnd.Next());
+    }
+
+    public static void OpenLink(string url)
+    {
+        var sInfo = new ProcessStartInfo(url)
+        {
+            UseShellExecute = true,
+        };
+        Process.Start(sInfo);
     }
 }

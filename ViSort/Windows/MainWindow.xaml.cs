@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,22 +13,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static ViSort.Utils.Utils;
+using ViSort.Pages;
 
-namespace ViSort.Pages;
+namespace ViSort.Windows;
 
-public partial class HomePage : Page
+public partial class MainWindow : Window
 {
-    public HomePage()
+    public MainWindow()
     {
         InitializeComponent();
-    }
 
-    private void HyperLinkGithub_Click(object sender, RoutedEventArgs e)
-    {
-        if (e.OriginalSource is Hyperlink link)
+        Loaded += (sender, args) =>
         {
-            OpenLink(link.NavigateUri.ToString());
-        }
+            Wpf.Ui.Appearance.SystemThemeWatcher.Watch(
+                this,
+                WpfUiControls.WindowBackdropType.None,
+                true
+            );
+            RootNavigation.Navigate(typeof(HomePage));
+        };
     }
 }

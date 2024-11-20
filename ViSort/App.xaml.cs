@@ -65,7 +65,7 @@ public partial class App : Application
         }
         catch (Exception) // skipcq: CS-R1008
         {
-            await new WpfUiControl.MessageBox
+            await new WpfUiControls.MessageBox
             {
                 Title = "Lỗi kết nối",
                 Content = "Không thể khởi tạo kết nối đến máy chủ cơ sở dữ liệu."

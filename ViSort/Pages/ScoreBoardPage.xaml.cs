@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +13,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViSort.Models;
 
 namespace ViSort.Pages;
 
-/// <summary>
-/// Interaction logic for ScoreBoardPage.xaml
-/// </summary>
 public partial class ScoreBoardPage : Page
 {
+    public List<UserModel> Users { set; get; } = [];
     public ScoreBoardPage()
     {
         InitializeComponent();
+        if (!(App.EstablishDBConnectionAsync().Result))
+        {
+            return;
+        }
+        _ = GetListViewScoreAsync();
+    }
+
+    private async Task GetListViewScoreAsync()
+    {
+        ListViewScore.ItemsSource = await App.UserSvc!.GetAllUsersResultAsync();
     }
 }

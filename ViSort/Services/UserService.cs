@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using ViSort.Models;
-using static ViSort.Database.UserExceptions;
+using ViSort.Utils;
+using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Database;
 
@@ -23,7 +24,7 @@ public class UserService
         {
             throw new UserNotFound("User not found.");
         }
-        if (user.EncryptedPassword != userDB.EncryptedPassword)
+        if (user.HashedPassword != userDB.HashedPassword)
         {
             throw new PasswordDoesNotMatch("Password does not match.");
         }
@@ -55,7 +56,7 @@ public class UserService
             await AddUserAsync(user);
             return;
         }
-        if (user.EncryptedPassword != existingUser.EncryptedPassword)
+        if (!Hasher.Verify(user.Password, existingUser.HashedPassword))
         {
             throw new PasswordDoesNotMatch("Password does not match");
         }
@@ -80,7 +81,7 @@ public class UserService
     {
         if (oldUser == newUser)
         {
-            return;
+            throw new UserNoChanges("No modification on user");
         }
         UserModel? existingUser = await GetUserFromDBAsync(newUser.Username);
         if (existingUser != null)

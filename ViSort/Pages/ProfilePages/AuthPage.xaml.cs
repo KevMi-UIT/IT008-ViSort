@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Models;
-using static ViSort.Database.UserExceptions;
+using ViSort.Pages.ProfilePages;
+using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Pages;
 
@@ -21,6 +22,10 @@ public partial class AuthPage : Page
 {
     public AuthPage()
     {
+        if (!App.EstablishDBConnectionAsync().Result)
+        {
+            return;
+        }
         InitializeComponent();
     }
 
@@ -48,22 +53,14 @@ public partial class AuthPage : Page
         {
             await App.UserSvc!.AuthUserAsync(User);
             App.User = User;
+            NavigationService.Navigate(new ProfilePage());
         }
         catch (PasswordDoesNotMatch)
         {
-            await new WpfUiControl.MessageBox
+            await new WpfUiControls.MessageBox
             {
                 Title = "Lỗi đăng nhập",
                 Content = "Mật khẩu không chính xác",
-                PrimaryButtonText = "OK"
-            }.ShowDialogAsync();
-        }
-        catch (UserNotFound)
-        {
-            await new WpfUiControl.MessageBox
-            {
-                Title = "Lỗi đăng nhập",
-                Content = "Người dùng không tồn tại",
                 PrimaryButtonText = "OK"
             }.ShowDialogAsync();
         }
@@ -75,13 +72,13 @@ public partial class AuthPage : Page
     {
         if (string.IsNullOrWhiteSpace(UsernameTextbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
         {
-            WpfUiControl.MessageBoxResult result = await new WpfUiControl.MessageBox
+            WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
             {
                 Title = "Warning",
                 Content = "Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
                 PrimaryButtonText = "OK",
             }.ShowDialogAsync();
-            if (result == WpfUiControl.MessageBoxResult.Primary)
+            if (result == WpfUiControls.MessageBoxResult.Primary)
             {
                 e.Cancel = true;
             }

@@ -7,6 +7,7 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1300"
+      ui:Design.Background="White"
       Title="Settings">
 
     <Grid Margin="20,0">
@@ -22,9 +23,8 @@
             <ui:TextBlock Text="Personalised" FontTypography="Title" Margin="0,5"/>
             <StackPanel Margin="10,0,0,0">
                 <ui:TextBlock Text="Theme" FontTypography="Subtitle" />
-                <RadioButton GroupName="Theme" Content="Auto" Margin="10,0,0,0"/>
-                <RadioButton GroupName="Theme" Content="Light" Margin="10,0,0,0"/>
-                <RadioButton GroupName="Theme" Content="Dark" Margin="10,0,0,0"/>
+                <RadioButton x:Name="LightRadioButton" GroupName="Theme" Content="Light" Margin="10,0,0,0" Checked="ThemeRadioButton_Checked" Tag="Light"/>
+                <RadioButton x:Name="DarkRadioButton" GroupName="Theme" Content="Dark" Margin="10,0,0,0" Checked="ThemeRadioButton_Checked" Tag="Dark"/>
             </StackPanel>
         </StackPanel>
     </Grid>
