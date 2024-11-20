@@ -4,13 +4,13 @@ using ViSort.Types;
 //NOT DONE YET
 namespace ViSort.Models.SortModels;
 
-public class RadixSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+public class RadixSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    public static SortTypes SortType => SortTypes.Radix;
-    public static string TimeComplexity => "O(d*(n+b))";
-    public static string SpaceComplexity => "O(n+b)";
-    public static string YoutubeLink => "https://youtu.be/nu4gDuFabIM?si=EudyVCS6GOlBhLAv";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/radix-sort/";
+    public override SortTypes SortType => SortTypes.Radix;
+    public override string TimeComplexity => "O(d*(n+b))";
+    public override string SpaceComplexity => "O(n+b)";
+    public override string YoutubeLink => "https://youtu.be/nu4gDuFabIM?si=EudyVCS6GOlBhLAv";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/radix-sort/";
     private string[]? elementDuplicates;
     private async Task StartRadixSort(List<int> Elements)
     {

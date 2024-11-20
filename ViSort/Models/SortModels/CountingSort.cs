@@ -6,14 +6,13 @@ using Windows.Devices.PointOfService;
 using Windows.Foundation.Metadata;
 
 namespace ViSort.Models.SortModels;
-public class CountingSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+public class CountingSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    // TODO: update info
-    public static SortTypes SortType => SortTypes.Counting;
-    public static string TimeComplexity => "O(n^2)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
+    public override SortTypes SortType => SortTypes.Counting;
+    public override string TimeComplexity => "O(m+n)";
+    public override string SpaceComplexity => "O(m+n)";
+    public override string YoutubeLink => "https://youtu.be/EItdcGhSLf4?si=BLxR9NVqKJKjXoKO";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/counting-sort/";
 
     public override async Task BeginAlgorithm()
     {

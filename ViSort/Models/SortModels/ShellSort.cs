@@ -3,13 +3,13 @@ using ViSort.Models;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
-public class ShellSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+public class ShellSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    public static SortTypes SortType => SortTypes.Shell;
-    public static string TimeComplexity => "O(n^2)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://youtu.be/SHcPqUe2GZM?si=61x1MQdsPuX8K345";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/shell-sort/";
+    public override SortTypes SortType => SortTypes.Shell;
+    public override string TimeComplexity => "O(n^2)";
+    public override string SpaceComplexity => "O(1)";
+    public override string YoutubeLink => "https://youtu.be/SHcPqUe2GZM?si=61x1MQdsPuX8K345";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/shell-sort/";
     public override async Task BeginAlgorithm()
     {
         int N = Elements.Count;

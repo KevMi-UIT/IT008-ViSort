@@ -4,14 +4,13 @@ using ViSort.Types;
 using Windows.ApplicationModel.Appointments.DataProvider;
 
 namespace ViSort.Models.SortModels;
-public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    // TODO: update info
-    public static SortTypes SortType => SortTypes.Bucket;
-    public static string TimeComplexity => "O(n^2)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
+    public override SortTypes SortType => SortTypes.Bucket;
+    public override string TimeComplexity => "O(n+k)";
+    public override string SpaceComplexity => "O(n+k)";
+    public override string YoutubeLink => "https://youtu.be/VuXbEb5ywrU?si=G_JHV1tPPCvVnceg";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bucket-sort-2/";
 
     public override async Task BeginAlgorithm()
     {

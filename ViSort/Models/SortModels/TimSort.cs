@@ -5,14 +5,13 @@ using ViSort.Types;
 //NOT DONE YET
 
 namespace ViSort.Models.SortModels;
-class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    // TODO: update info
-    public static SortTypes SortType => SortTypes.Tim;
-    public static string TimeComplexity => "O(n^2)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
+    public override SortTypes SortType => SortTypes.Tim;
+    public override string TimeComplexity => "O(n Log n)";
+    public override string SpaceComplexity => "O(n)";
+    public override string YoutubeLink => "https://youtu.be/NVIjHj-lrT4?si=Rlpr2UG8qLMs4c9b";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/timsort/";
     public const int Run = 32;
 
     public void InsertionSort(List<int> list, int left, int right)
