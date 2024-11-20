@@ -27,7 +27,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -48,37 +47,19 @@
             <ui:TextBox x:Name="EditPasswordTextBox" FontSize="20" Margin="5" Grid.Row="3" Grid.Column="1" Width="500"></ui:TextBox>
 
             <ui:TextBlock x:Name="ScoreTextBlock" Text="Score:"  FontSize="20" Margin="5" Grid.Row="4" Grid.Column="0" Padding="5"></ui:TextBlock>
-            <ui:TextBlock x:Name="ScoreValue" FontSize="20" FontStyle="Italic" Margin="5" Grid.Row="4" Grid.Column="1"></ui:TextBlock>
+            <ui:TextBlock x:Name="ScoreValue" FontSize="20" FontStyle="Italic" Margin="5" Grid.Row="4" Grid.Column="1" Width="500"></ui:TextBlock>
 
-            <StackPanel x:Name="TextFunctionButton" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
+            <StackPanel x:Name="FunctionButton" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
 
-                <TextBlock Name="UpdateButtonHoverText" FontSize="16"
-                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
-                 UPDATE PROFILE
-                </TextBlock>
-
-                <TextBlock Name="LogoutButtonHoverText" FontSize="16" 
-                    HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
-                LOGOUT
-                </TextBlock>
-
-                <TextBlock Name="DeleteProfileButtonHoverText" FontSize="16"
-                    HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Hidden">
-                DELETE PROFILE
-                </TextBlock>
-            </StackPanel>
-
-            <StackPanel x:Name="FunctionButton" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
-
-                <ui:Button x:Name="UpdateProfileButton" Click="UpdateProfileButton_Click" MouseEnter="UpdateProfileButton_MouseEnter" MouseLeave="UpdateProfileButton_MouseLeave">
+                <ui:Button x:Name="UpdateProfileButton" Click="UpdateProfileButton_Click" ToolTipService.InitialShowDelay ="30" ToolTip="Update Profile" Cursor="Hand">
                     <ui:SymbolIcon x:Name="Update_Icon" Symbol="CloudArrowUp28" Margin="0" FontSize="40"/>
                 </ui:Button>
 
-                <ui:Button x:Name="LogoutButton" Click="LogoutButton_Click" MouseEnter="LogoutButton_MouseEnter" MouseLeave="LogoutButton_MouseLeave"> 
+                <ui:Button x:Name="LogoutButton" Click="LogoutButton_Click" ToolTipService.InitialShowDelay ="30" ToolTip="Logout Profile" Cursor="Hand"> 
                     <ui:SymbolIcon x:Name="Logout_Icon" Symbol="ArrowExit20" Margin="0,0,0,0" FontSize="40"/>
                 </ui:Button>
 
-                <ui:Button x:Name="DeleteProfileButton" Click="DeleteProfileButton_Click" MouseEnter="DeleteProfileButton_MouseEnter" MouseLeave="DeleteProfileButton_MouseLeave"> 
+                <ui:Button x:Name="DeleteProfileButton" Click="DeleteProfileButton_Click" ToolTipService.InitialShowDelay ="30" ToolTip="Delete Profile" Cursor="Hand">
                     <ui:SymbolIcon x:Name="Delete_Icon" Symbol="PersonDelete24" Margin="0,0,0,0" FontSize="40"/>
                 </ui:Button>
 

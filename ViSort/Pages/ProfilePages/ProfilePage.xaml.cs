@@ -116,34 +116,4 @@ public partial class ProfilePage : Page
         }
         MainWindow.RootNavigationView.Navigate(typeof(ProfileSwitchPage));
     }
-
-    private void UpdateProfileButton_MouseEnter(object sender, MouseEventArgs e)
-    {
-        UpdateButtonHoverText.Visibility = Visibility.Visible;
-    }
-
-    private void UpdateProfileButton_MouseLeave(object sender, MouseEventArgs e)
-    {
-        UpdateButtonHoverText.Visibility = Visibility.Hidden;
-    }
-
-    private void LogoutButton_MouseEnter(object sender, MouseEventArgs e)
-    {
-        LogoutButtonHoverText.Visibility = Visibility.Visible;
-    }
-
-    private void LogoutButton_MouseLeave(object sender, MouseEventArgs e)
-    {
-        LogoutButtonHoverText.Visibility = Visibility.Hidden;
-    }
-
-    private void DeleteProfileButton_MouseEnter(object sender, MouseEventArgs e)
-    {
-        DeleteProfileButtonHoverText.Visibility = Visibility.Visible;
-    }
-
-    private void DeleteProfileButton_MouseLeave(object sender, MouseEventArgs e)
-    {
-        DeleteProfileButtonHoverText.Visibility = Visibility.Hidden;
-    }
 }

@@ -73,20 +73,4 @@ public partial class AuthPage : Page
     }
 
     // skipcq: CS-R1005
-    private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(UsernameTextbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
-        {
-            WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
-            {
-                Title = "Warning",
-                Content = "Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
-                PrimaryButtonText = "OK",
-            }.ShowDialogAsync();
-            if (result == WpfUiControls.MessageBoxResult.Primary)
-            {
-                e.Cancel = true;
-            }
-        }
-    }
 }
