@@ -1,10 +1,14 @@
 using ViSort.Draw;
 using ViSort.Models;
+using ViSort.Models.SortModels;
 
-namespace ViSort.Models.Sorts;
+namespace ViSort.Models.SortModels;
 
 public class RadixSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
+    public override SortTypes SortType { get; } = SortTypes.Bubble;
+    public override string TimeComplexity { get; } = "";
+    public override string SpaceComplexity { get; } = "";
     public static int GetMax(List<int> Elements)
     {
         int N = Elements.Count;

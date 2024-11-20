@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using ViSort.Draw;
 using ViSort.Models;
-using ViSort.Models.Sorts;
+using ViSort.Models.SortModels;
 using ViSort.Utils;
 using Windows.Security.Cryptography.Certificates;
 

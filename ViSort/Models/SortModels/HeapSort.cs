@@ -1,9 +1,13 @@
 using ViSort.Draw;
+using ViSort.Models.SortModels;
 
-namespace ViSort.Models.Sorts;
+namespace ViSort.Models.SortModels;
 
 class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
+    public override SortTypes SortType { get; } = SortTypes.Bubble;
+    public override string TimeComplexity { get; } = "";
+    public override string SpaceComplexity { get; } = "";
     public async override void BeginAlgorithm()
     {
         int N = Elements.Count;

@@ -12,8 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ViSort.Models.SortModels;
 using ViSort.QuizWindow;
-using ViSort.Sorts;
 using Wpf.Ui.Controls;
 using static ViSort.Utils.Utils;
 

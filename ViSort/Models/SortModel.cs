@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using ViSort.Draw;
-using ViSort.Models.Sorts;
+using ViSort.Models.SortModels;
 using ViSort.Utils;
 namespace ViSort.Models;
 
