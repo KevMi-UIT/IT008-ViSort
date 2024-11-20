@@ -1,6 +1,6 @@
 //public static class BucketSort
 //{
-//    public static void InsertionSort<T>(List<T> list) where T : IComparable<T>
+//    public static void InsertionSort(List<int> list) where T : IComparable
 //    {
 //        int N = list.Count;
 //        for (int i = 1; i < N; ++i)
@@ -16,7 +16,7 @@
 //        }
 //    }
 
-//    public static List<T> Sort<T>(List<T> list) where T : IComparable<T>, IConvertible
+//    public static List<int> Sort(List<int> list) where T : IComparable, IConvertible
 //    {
 //        int num_of_bucket = list.Count;
 //        T minValue = list[0];
@@ -42,7 +42,7 @@
 //            buckets[bucket].Add(normalizedValue);
 //        }
 
-//        List<T> sortedArray = new List<T>();
+//        List<int> sortedArray = new List<int>();
 //        for (int i = 0; i < num_of_bucket; i++)
 //        {
 //            InsertionSort(buckets[i]);

@@ -2,7 +2,7 @@
 //{
 //    public const int Run = 32;
 
-//    public static void InsertionSort<T>(List<T> list, int left, int right) where T : IComparable<T> 
+//    public static void InsertionSort(List<int> list, int left, int right) where T : IComparable 
 //    { 
 //        for (int i = left + 1; i <= right; i++) 
 //        { 
@@ -17,7 +17,7 @@
 //        } 
 //    } 
 
-//    public static void Merge<T>(List<T> list, int left, int mid, int right) where T : IComparable<T>
+//    public static void Merge(List<int> list, int left, int mid, int right) where T : IComparable
 //    {
 //        int i, j, k;
 //        int Length1 = mid - left + 1, Length2 = right - mid;
@@ -58,7 +58,7 @@
 //        }
 //    }
 
-//    public static void Sort<T> (List<T> list) where T : IComparable<T>
+//    public static void Sort (List<int> list) where T : IComparable
 //    {
 //        int N = list.Count;
 //        for (int i = 0; i < N; i+= Run)

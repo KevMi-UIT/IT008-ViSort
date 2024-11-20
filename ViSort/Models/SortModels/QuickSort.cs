@@ -1,4 +1,6 @@
-//public class QuickSort
+//using ViSort.Sorts;
+
+//public class QuickSort : SortModel
 //{
 //    private List<int> _List;
 //    private SortCallback _Callback;
@@ -41,7 +43,7 @@
 //        }
 //    }
 
-//    public void Sort()
+//    public async override void BeginAlgorithm()
 //    {
 //        Recursive(0, _List.Count - 1);
 //    }

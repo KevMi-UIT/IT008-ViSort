@@ -37,12 +37,14 @@
             <Slider x:Name="SpeedSlider"
                     Height="30"
                     Width="180"
-                    Minimum="200"
-                    Maximum="800"
-                    TickFrequency="50"
+                    Minimum="10"
+                    Maximum="100"
+                    TickFrequency="10"
                     TickPlacement="BottomRight"
                     ValueChanged="SpeedSlider_ValueChanged"
-                    Foreground="White" LargeChange="100" SmallChange="100" />
+                    Foreground="White"
+                    LargeChange="10" 
+                    SmallChange="10" />
             <ui:NumberBox x:Name="SpeedNumberBox"
                      PlaceholderText="Speed"
                      Height="40"
