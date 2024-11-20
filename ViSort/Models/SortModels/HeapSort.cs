@@ -26,8 +26,8 @@ class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_el
     public async void Heapify(List<int> Elements, int N, int i)
     {
         int largest = i;
-        int l = 2 * i + 1;
-        int r = 2 * i + 2;
+        int l = (2 * i) + 1;
+        int r = (2 * i) + 2;
         if (l < N && Elements[l].CompareTo(Elements[largest]) > 0)
         {
             largest = l;
