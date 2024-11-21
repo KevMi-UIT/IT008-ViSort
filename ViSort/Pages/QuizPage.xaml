@@ -21,6 +21,19 @@
         </Grid.RowDefinitions>
 
         <ui:TextBlock Text="Quiz" FontTypography="TitleLarge" Grid.Row="0" />
+        <ui:Button x:Name="InstructionButton" Content="Hướng dẫn" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Click="InstructionButton_Click" Margin="10"/>
+        <ui:Flyout x:Name="InstructionFlyout" IsOpen="False" Placement="Center" HorizontalAlignment="Center" Margin="0,50,0,100">
+            <ui:PassiveScrollViewer>
+                <StackPanel Margin="10" MaxWidth="780" >
+                <TextBlock Text="Instruction is being completed...Instruction is being completed...
+                           Instruction is being completed...Instruction is being completed..."
+                           TextWrapping="Wrap" Margin="5"  HorizontalAlignment="Center"/>
+                <ui:Button Content="Close" Click="CloseInstructionFlyout_Click" HorizontalAlignment="Right" Margin="5"/>
+                </StackPanel>
+            </ui:PassiveScrollViewer>
+        </ui:Flyout>
+
+
         <Separator Margin="30,10" Grid.Row="1"/>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>

@@ -227,4 +227,12 @@ public partial class QuizPage : Page
                 break;
         }
     }
+    private void InstructionButton_Click(object sender, RoutedEventArgs e)
+    {
+        InstructionFlyout.IsOpen = true;
+    }
+    private void CloseInstructionFlyout_Click(object sender, RoutedEventArgs e)
+    {
+        InstructionFlyout.IsOpen = false;
+    }
 }
