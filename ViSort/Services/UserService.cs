@@ -28,7 +28,6 @@ public class UserService
         if (user.HashedPassword != userDB.HashedPassword)
         {
             throw new PasswordDoesNotMatch("Password does not match.");
-            //???
         }
     }
 

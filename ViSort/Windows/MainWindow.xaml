@@ -39,7 +39,7 @@
                     <ui:SymbolIcon Symbol="DataArea24" />
                 </ui:NavigationViewItem.Icon>
             </ui:NavigationViewItem>
-            <!--
+            
             <ui:NavigationViewItem Content="Big O Cheatsheet" TargetPageType="{x:Type pages:BigOPage}">
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="Timer24" />
@@ -49,7 +49,7 @@
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="Info24" />
                 </ui:NavigationViewItem.Icon>
-            </ui:NavigationViewItem>-->
+            </ui:NavigationViewItem>
             <ui:NavigationViewItem Content="Quiz" TargetPageType="{x:Type pages:QuizPage}">
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="Question24" />

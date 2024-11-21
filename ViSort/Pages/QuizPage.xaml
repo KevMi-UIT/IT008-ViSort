@@ -44,7 +44,7 @@
             </Grid.RowDefinitions>
             <ui:TextBlock x:Name="QuestionTextBlock" Grid.Row="0" FontTypography="Subtitle" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
             <Canvas x:Name="QuestionCanvas" Grid.Row="1" Background="White" />
-            <WrapPanel x:Name="MultipleChoiceWrapPanel" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="700">
+            <WrapPanel x:Name="MultipleChoiceWrapPanel" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Focusable="True">
 
                 <RadioButton x:Name="BubleRadioButton" Content="Buble Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
                 <RadioButton x:Name="BucketRadioButton" Content="Bucket Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>

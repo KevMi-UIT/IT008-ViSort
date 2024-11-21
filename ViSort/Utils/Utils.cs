@@ -11,7 +11,7 @@ public static class Utils
     {
         if (answered == 0)
         {
-            throw new DivideByZeroException();
+            return 0;
         }
         return Convert.ToInt32(MAX_SCORE / (1 + (steps * SCORE_SENSITIVITY * (questions / answered))));
     }

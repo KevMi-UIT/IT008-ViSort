@@ -28,7 +28,6 @@ public partial class QuizPage : Page
     private readonly List<QuizModel> QuestionList = [];
     private readonly List<RadioButton> _radioButtons = new();
     private int currentQuestionIndex = 0;
-    int score = 0;
     public QuizPage()
     {
         List<List<int>> questions = App.QUIZ_LIST.Take(5).Randomize().ToList();
@@ -134,14 +133,8 @@ public partial class QuizPage : Page
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
         //TODO: change value input to CalcScore
-        try
-        {
-            score = Utils.Utils.CalcScore(0, QuestionList.Count, CountAnswer());
-        }
-        catch (DivideByZeroException)
-        {
-            score = 0;
-        }
+        int score = Utils.Utils.CalcScore(0, QuestionList.Count, CountAnswer());
+
         if (App.User != null && App.UserSvc != null)
         {
             App.User.SetScore(score);
@@ -187,6 +180,7 @@ public partial class QuizPage : Page
         {
             _radioButtons.Add(radioButton);
         }
+        Keyboard.Focus(MultipleChoiceWrapPanel);
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -224,6 +218,8 @@ public partial class QuizPage : Page
                 break;
             case Key.Enter:
                 SubmitButton_Click(sender, e);
+                break;
+            default:
                 break;
         }
     }
