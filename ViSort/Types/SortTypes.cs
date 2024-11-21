@@ -1,4 +1,4 @@
-﻿namespace ViSort.Sorts;
+﻿namespace ViSort.Types;
 
 public enum SortTypes
 {

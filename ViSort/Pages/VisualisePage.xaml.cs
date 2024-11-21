@@ -12,9 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViSort.Sorts;
+using ViSort.Types;
 using ViSort.Utils;
 using ViSort.Windows;
+using static ViSort.Exceptions.GenRandomListExceptions;
+using static ViSort.Exceptions.SortExceptions;
 
 namespace ViSort.Pages;
 
@@ -25,7 +27,7 @@ public partial class VisualisePage : Page
 {
     private int ElementCount = 100;
     private SortTypes SelectedSortType = default;
-    private RandomGenTypes selectedGenType = default;
+    private GenRandomListTypes selectedGenType = default;
 
     public VisualisePage()
     {
@@ -52,7 +54,7 @@ public partial class VisualisePage : Page
                 "Shell Sort" => SortTypes.Shell,
                 "Tim Sort" => SortTypes.Tim,
                 "Tree Sort" => SortTypes.Tree,
-                _ => throw new ArgumentException("Unsupported sorting algorithm selected")
+                _ => throw new SortNotImplemented()
             };
             UpdateSelectedSection();
         }
@@ -64,12 +66,12 @@ public partial class VisualisePage : Page
         {
             selectedGenType = radioButton.Content.ToString() switch
             {
-                "Normal" => RandomGenTypes.Normal,
-                "Sorted" => RandomGenTypes.Sorted,
-                "Sorted Reverse" => RandomGenTypes.SortedReverse,
-                "Nearly Sorted" => RandomGenTypes.NearlySorted,
-                "Mirror" => RandomGenTypes.Mirror,
-                _ => throw new ArgumentException("Unsupported random")
+                "Normal" => GenRandomListTypes.Normal,
+                "Sorted" => GenRandomListTypes.Sorted,
+                "Sorted Reverse" => GenRandomListTypes.SortedReverse,
+                "Nearly Sorted" => GenRandomListTypes.NearlySorted,
+                "Mirror" => GenRandomListTypes.Mirror,
+                _ => throw new GenRandomListNotImplemented()
             };
             UpdateSelectedSection();
         }

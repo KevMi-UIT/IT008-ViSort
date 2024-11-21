@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ViSort.Models;
 using ViSort.Pages.ProfilePages;
 using ViSort.Sorts;
+using ViSort.Types;
 using ViSort.Utils;
 using ViSort.Windows;
 

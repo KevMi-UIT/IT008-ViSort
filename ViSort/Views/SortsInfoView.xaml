@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="ViSort.Views.SortsInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ViSort.Views"
+             xmlns:vm="clr-namespace:ViSort.ViewModels"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1300"
+             ui:Design.Background="White" >
+
+    <UserControl.DataContext>
+        <vm:SortsInfoViewModel/>
+    </UserControl.DataContext>
+
+    <StackPanel>
+        <ui:AutoSuggestBox
+                    Margin="80,0,80,20" MaxWidth="400"
+                    OriginalItemsSource="{Binding AutoSuggestBoxItems}"
+                    x:Name="AutoSuggestBox"
+                    PlaceholderText="Sort..."
+                    Icon="{ui:SymbolIcon Search24}"
+                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                    QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
+        <StackPanel Visibility="{Binding Path=Model, TargetNullValue=Hidden}">
+            <ui:TextBlock Text="{Binding Model.SortName}" FontTypography="Subtitle" Margin="0,0,0,10"/>
+            <StackPanel Margin="20,0">
+                <StackPanel.Resources>
+                    <Style TargetType="ui:TextBlock">
+                        <Setter Property="Margin" Value="0,5"/>
+                    </Style>
+                </StackPanel.Resources>
+                <ui:TextBlock FontTypography="Body">
+                    <Run Text="Information: " FontWeight="Bold"/>
+                    <Hyperlink Command="{Binding OpenGeeksForGeeksLinkCommand}">Geeks For Geeks</Hyperlink>
+                </ui:TextBlock>
+                <ui:TextBlock FontTypography="Body">
+                    <Run Text="Video: " FontWeight="Bold"/>
+                    <Hyperlink Command="{Binding OpenYoutubeLinkCommand}">Youtube</Hyperlink>
+                </ui:TextBlock>
+                <ui:TextBlock FontTypography="Body">
+                    <Run Text="Time complexity: " FontWeight="Bold"/>
+                    <Run Text="{Binding Model.TimeComplexity}"/>
+                </ui:TextBlock>
+                <ui:TextBlock FontTypography="Body">
+                    <Run Text="Space complexity: " FontWeight="Bold"/>
+                    <Run Text="{Binding Model.SpaceComplexity}"/>
+                </ui:TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

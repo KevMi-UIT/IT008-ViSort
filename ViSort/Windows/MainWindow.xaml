@@ -45,7 +45,7 @@
                     <ui:SymbolIcon Symbol="Timer24" />
                 </ui:NavigationViewItem.Icon>
             </ui:NavigationViewItem>
-            <ui:NavigationViewItem Content="Sorts Info" TargetPageType="{x:Type sortsInfoPages:SortsInfoPage}">
+            <ui:NavigationViewItem Content="Sorts Info" TargetPageType="{x:Type pages:SortsInfoPage}">
                 <ui:NavigationViewItem.Icon>
                     <ui:SymbolIcon Symbol="Info24" />
                 </ui:NavigationViewItem.Icon>
