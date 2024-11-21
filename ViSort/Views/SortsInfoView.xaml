@@ -23,7 +23,7 @@
                     Icon="{ui:SymbolIcon Search24}"
                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
-        <StackPanel>
+        <StackPanel Visibility="{Binding Path=Model, TargetNullValue=Hidden}">
             <ui:TextBlock Text="{Binding Model.SortName}" FontTypography="Subtitle" Margin="0,0,0,10"/>
             <StackPanel Margin="20,0">
                 <StackPanel.Resources>
@@ -31,46 +31,22 @@
                         <Setter Property="Margin" Value="0,5"/>
                     </Style>
                 </StackPanel.Resources>
-                <ui:TextBlock FontTypography="Body" >
-                    About:
+                <ui:TextBlock FontTypography="Body">
+                    <Run Text="Information: " FontWeight="Bold"/>
                     <Hyperlink Command="{Binding OpenGeeksForGeeksLinkCommand}">Geeks For Geeks</Hyperlink>
                 </ui:TextBlock>
-                <ui:TextBlock FontTypography="Body" >
-                    Video:
+                <ui:TextBlock FontTypography="Body">
+                    <Run Text="Video: " FontWeight="Bold"/>
                     <Hyperlink Command="{Binding OpenYoutubeLinkCommand}">Youtube</Hyperlink>
                 </ui:TextBlock>
-                <FlowDocumentReader>
-                    <FlowDocument>
-                        <Table>
-                            <Table.Columns>
-                                <TableColumn/>
-                                <TableColumn/>
-                            </Table.Columns>
-                            <TableRowGroup>
-                                <TableRow>
-                                    <TableCell TextAlignment="Center">
-                                        <Paragraph FontSize="16" FontWeight="Bold">Time Complexity</Paragraph>
-                                    </TableCell>
-                                    <TableCell TextAlignment="Center">
-                                        <Paragraph FontWeight="Bold">Space Complexity</Paragraph>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell TextAlignment="Center">
-                                        <Paragraph>
-                                            <Run Text="{Binding Model.TimeComplexity}"/>
-                                        </Paragraph>
-                                    </TableCell>
-                                    <TableCell TextAlignment="Center">
-                                        <Paragraph>
-                                            <Run Text="{Binding Model.SpaceComplexity}"/>
-                                        </Paragraph>
-                                    </TableCell>
-                                </TableRow>
-                            </TableRowGroup>
-                        </Table>
-                    </FlowDocument>
-                </FlowDocumentReader>
+                <ui:TextBlock FontTypography="Body">
+                    <Run Text="Time complexity: " FontWeight="Bold"/>
+                    <Run Text="{Binding Model.TimeComplexity}"/>
+                </ui:TextBlock>
+                <ui:TextBlock FontTypography="Body">
+                    <Run Text="Space complexity: " FontWeight="Bold"/>
+                    <Run Text="{Binding Model.SpaceComplexity}"/>
+                </ui:TextBlock>
             </StackPanel>
         </StackPanel>
     </StackPanel>
