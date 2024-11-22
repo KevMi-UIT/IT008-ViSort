@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViSort.Windows;
 using Wpf.Ui.Appearance;
 
 namespace ViSort.Pages;
@@ -41,13 +42,19 @@ public partial class SettingsPage : Page
     {
         if (sender is RadioButton radioButton)
         {
-            ApplicationTheme theme = radioButton.Tag.ToString() switch
+            switch (radioButton.Tag.ToString())
             {
-                "Light" => ApplicationTheme.Light,
-                "Dark" => ApplicationTheme.Dark,
-                _ => ApplicationTheme.Unknown
-            };
-            ApplicationThemeManager.Apply(theme, WpfUiControls.WindowBackdropType.None, true);
+                case "Light":
+                    ApplicationThemeManager.Apply(ApplicationTheme.Light, WpfUiControls.WindowBackdropType.None, true);
+                    MainWindow.IsDarkMode = false;
+                    break;
+                case "Dark":
+                    ApplicationThemeManager.Apply(ApplicationTheme.Dark, WpfUiControls.WindowBackdropType.None, true);
+                    MainWindow.IsDarkMode = true;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

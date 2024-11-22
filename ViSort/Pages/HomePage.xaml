@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ViSort.Pages"
+      xmlns:windows="clr-namespace:ViSort.Windows"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1300"
@@ -21,7 +22,7 @@
         <Separator Margin="30,10" Grid.Row="1"/>
         <StackPanel Margin="50,0" HorizontalAlignment="Center" Grid.Row="1">
             <Grid Margin="80,0" MaxWidth="500">
-                <ui:Image Source="/Resources/Logo/visort_full_logo_light.png"/>
+                <ui:Image x:Name="BannerImage" Source="/Resources/Logo/visort_full_logo_light.png" />
             </Grid>
             <ui:TextBlock HorizontalAlignment="Center" FontTypography="Title" TextWrapping="Wrap" TextAlignment="Center" Text="Chương trình hỗ trợ dạy và minh họa cho các thuật toán sắp xếp" />
             <Separator Margin="0,20" />

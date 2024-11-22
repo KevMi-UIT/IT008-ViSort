@@ -23,7 +23,7 @@
                     Icon="{ui:SymbolIcon Search24}"
                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"/>
-        <StackPanel Visibility="{Binding Path=Model, TargetNullValue=Hidden}">
+        <StackPanel Visibility="{Binding Path=Model, TargetNullValue=Collapsed}">
             <ui:TextBlock Text="{Binding Model.SortName}" FontTypography="Subtitle" Margin="0,0,0,10"/>
             <StackPanel Margin="20,0">
                 <StackPanel.Resources>
