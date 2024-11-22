@@ -71,6 +71,4 @@ public partial class AuthPage : Page
         }
         SubmitButton.IsEnabled = true;
     }
-
-    // skipcq: CS-R1005
 }
