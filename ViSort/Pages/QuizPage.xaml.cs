@@ -13,8 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Models;
+using ViSort.Pages.ProfilePages;
 using ViSort.Types;
 using ViSort.Utils;
+using ViSort.Windows;
 
 namespace ViSort.Pages;
 
@@ -24,8 +26,8 @@ namespace ViSort.Pages;
 public partial class QuizPage : Page
 {
     private readonly List<QuizModel> QuestionList = [];
+    private readonly List<RadioButton> _radioButtons = new();
     private int currentQuestionIndex = 0;
-
     public QuizPage()
     {
         List<List<int>> questions = App.QUIZ_LIST.Take(5).Randomize().ToList();
@@ -137,6 +139,96 @@ public partial class QuizPage : Page
         {
             App.User.SetScore(score);
             await App.UserSvc.UpdateScoreAsync(App.User);
+
+            WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
+            {
+                Title = "Info",
+                Content = "Quiz ended.\nChoose 'OK' button to navigate to the ScoreBoard and 'Close' button to navigate to the Homepage.",
+                PrimaryButtonText = "OK",
+            }.ShowDialogAsync();
+            if (result == WpfUiControls.MessageBoxResult.Primary)
+            {
+                MainWindow.RootNavigationView.Navigate(typeof(ScoreBoardPage));
+            }
+            else
+            {
+                MainWindow.RootNavigationView.Navigate(typeof(HomePage));
+            }
         }
+        else
+        {
+            WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
+            {
+                Title = "Info",
+                Content = "Quiz ended.\nChoose 'OK' button to navigate to the Homepage and 'Close' button to answer quiz again.",
+                PrimaryButtonText = "OK",
+            }.ShowDialogAsync();
+            if (result == WpfUiControls.MessageBoxResult.Primary)
+            {
+                MainWindow.RootNavigationView.Navigate(typeof(HomePage));
+            }
+            else
+            {
+                MainWindow.RootNavigationView.Navigate(typeof(QuizPage));
+            }
+        }
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        foreach (var radioButton in MultipleChoiceWrapPanel.Children.OfType<RadioButton>())
+        {
+            _radioButtons.Add(radioButton);
+        }
+        Keyboard.Focus(MultipleChoiceWrapPanel);
+    }
+
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key >= Key.D1 && e.Key <= Key.D9) // Phím 1-9
+        {
+            int index = e.Key - Key.D1; // Tính chỉ số dựa trên phím nhấn
+            if (index < _radioButtons.Count)
+            {
+                _radioButtons[index].IsChecked = true;
+            }
+        }
+        switch (e.Key)
+        {
+            case Key.D0:
+                _radioButtons[9].IsChecked = true;
+                break;
+            case Key.Delete:
+                _radioButtons[10].IsChecked = true;
+                break;
+            case Key.Escape:
+                _radioButtons[11].IsChecked = true;
+                break;
+            case Key.Left:
+                if (PrevQuestionButton.IsEnabled == true)
+                {
+                    PrevQuestionButton_Click(sender, e);
+                }
+                break;
+            case Key.Right:
+                if (NextQuestionButton.IsEnabled == true)
+                {
+                    NextQuestionButton_Click(sender, e);
+                }
+                break;
+            case Key.Enter:
+                SubmitButton_Click(sender, e);
+                break;
+            default:
+                break;
+        }
+    }
+    private void InstructionButton_Click(object sender, RoutedEventArgs e)
+    {
+        InstructionFlyout.IsOpen = true;
+    }
+    private void CloseInstructionFlyout_Click(object sender, RoutedEventArgs e)
+    {
+        InstructionFlyout.IsOpen = false;
     }
 }

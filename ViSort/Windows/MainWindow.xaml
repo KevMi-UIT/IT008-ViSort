@@ -73,29 +73,6 @@
             </ui:NavigationViewItem>
         </ui:NavigationView.FooterMenuItems>
     </ui:NavigationView>
-
-<!--
-    <WrapPanel >
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Width="200" Grid.Column="0">
-                <ui:Image Source="/assets/visort_full_logo_light.png" />
-                <Button x:Name="PracticeGame_Button" Content="Practice Game" Click="OpenQuizWindow" Width="120" Height="40" Margin="62,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-            </Grid>
-        </Grid>
-        
-        <ui:Button x:Name="ScoreBoardButton" Click="ScoreBoard_Click" Margin="40" Content="Show Score Board"></ui:Button>
-        
-        <ui:Button x:Name="UserProfileButton" Click="UserProfileButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <ui:SymbolIcon x:Name="Status_Icon" Symbol="PersonAdd24" Margin="0,0,0,0"/>
-        </ui:Button>
-        
-    </WrapPanel >
-    -->
 </Window>
 
     

@@ -19,9 +19,11 @@ namespace ViSort.Windows;
 
 public partial class MainWindow : Window
 {
+    public static WpfUiControls.NavigationView RootNavigationView = new();
     public MainWindow()
     {
         InitializeComponent();
+        RootNavigationView = RootNavigation;
 
         Loaded += (sender, args) =>
         {
