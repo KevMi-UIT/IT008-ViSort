@@ -85,7 +85,7 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
             for (int left = 0; left < N; left += size * 2)
             {
                 int mid = left + size - 1;
-                int right = Math.Min(left + size * 2 - 1, N - 1);
+                int right = Math.Min(left + (size * 2) - 1, N - 1);
                 if (mid < right)
                     Merge(Elements, left, mid, right);
             }
