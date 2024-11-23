@@ -1,217 +1,87 @@
 ﻿<Page x:Class="ViSort.Pages.VisualisePage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ViSort.Pages"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1300"
-      ui:Design.Background="White"
-      Title="VisualisePage">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:ViSort.Pages"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    mc:Ignorable="d" 
+    d:DesignHeight="800" d:DesignWidth="1300"
+    ui:Design.Background="White"
+    Title="VisualisePage">
 
     <Grid Margin="20,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            </Grid.RowDefinitions>
 
         <ui:TextBlock Text="Visualise" FontTypography="TitleLarge" Grid.Row="0" />
         <Separator Margin="30,10" Grid.Row="1"/>
         <Grid Grid.Row="2">
             <StackPanel>
-                <Label x:Name="Tittle"
-       Content="VISORT"
-       Height="30"
-       Width="120" />
-                <Label x:Name="ChooseArrayType"
-       Content="ARRAY TYPES"
-       Height="30"
-       Width="120" />
-                <Grid Height="72"
-      Width="756">
+                <Grid HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="FirstColumn"/>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SecondColumn"/>
                     </Grid.ColumnDefinitions>
-                    <RadioButton x:Name="NormalGenButton"
-                 Content="Normal"
-                 Height="30"
-                 Width="60"
-                 Grid.Column="0"
-                 Margin="5"
-                 Checked="ArrayGenerationMethod_Checked" />
-                    <RadioButton x:Name="SortedGenButton"
-                 Content="Sorted"
-                 Height="30"
-                 Width="60"
-                 Grid.Column="1"
-                 Margin="5"
-                 Checked="ArrayGenerationMethod_Checked" />
-                    <RadioButton x:Name="SortedReverseGenButton"
-                 Content="Sorted Reverse"
-                 Height="30"
-                 Width="100"
-                 Grid.Column="2"
-                 Margin="5"
-                 Checked="ArrayGenerationMethod_Checked" />
-                    <RadioButton x:Name="NearlySortedGenButton"
-                 Content="Nearly Sorted"
-                 Height="30"
-                 Width="100"
-                 Grid.Column="3"
-                 Margin="5"
-                 Checked="ArrayGenerationMethod_Checked" />
-                    <RadioButton x:Name="MirrorGenButton"
-                 Content="Mirror"
-                 Height="30"
-                 Width="60"
-                 Grid.Column="4"
-                 Margin="5"
-                 Checked="ArrayGenerationMethod_Checked" />
-                </Grid>
-                <Label x:Name="ChoseAlgorithm"
-       Content="ALGORITHM"
-       Height="30"
-       Width="120" />
-                <Grid x:Name="SortAlgorithms"
-      Width="700"
-      Height="127">
+
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <RadioButton x:Name="BubbleButton"
-                 Content="Bubble Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="0"
-                 Grid.Column="0"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="CountingButton"
-                 Content="Counting Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="1"
-                 Grid.Column="0"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="InsertionButton"
-                 Content="Insertion Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="2"
-                 Grid.Column="0"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="QuickButton"
-                 Content="Quick Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="3"
-                 Grid.Column="0"
-                 Checked="SortAlgorithm_Checked" />
-                    <!-- Cột 2 -->
-                    <RadioButton x:Name="BucketButton"
-                 Content="Bucket Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="0"
-                 Grid.Column="1"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="SelectionButton"
-                 Content="Selection Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="1"
-                 Grid.Column="1"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="MergeButton"
-                 Content="Merge Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="2"
-                 Grid.Column="1"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="HeapButton"
-                 Content="Heap Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="3"
-                 Grid.Column="1"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="RadixButton"
-                 Content="Radix Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="0"
-                 Grid.Column="2"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="ShellButton"
-                 Content="Shell Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="1"
-                 Grid.Column="2"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="TimButton"
-                 Content="Tim Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="2"
-                 Grid.Column="2"
-                 Checked="SortAlgorithm_Checked" />
-                    <RadioButton x:Name="TreeButton"
-                 Content="Tree Sort"
-                 Height="30"
-                 Width="120"
-                 Grid.Row="3"
-                 Grid.Column="2"
-                 Checked="SortAlgorithm_Checked" />
+
+                    <ui:TextBlock Text="Sorting Algorithm" Grid.Column="0" Grid.Row="0" FontTypography="Body" VerticalAlignment="Center" />
+                    <ComboBox x:Name="SortSelectionComboBox" Grid.Column="1"
+                        MinWidth="150"
+                        SelectedIndex="0">
+                        <ComboBoxItem Content="Bubble Sort" />
+                        <ComboBoxItem Content="Bucket Sort" />
+                        <ComboBoxItem Content="Counting Sort" />
+                        <ComboBoxItem Content="Selection Sort" />
+                        <ComboBoxItem Content="Insertion Sort"/>
+                        <ComboBoxItem Content="Merge Sort" />
+                        <ComboBoxItem Content="Quick Sort" />
+                        <ComboBoxItem Content="Heap Sort" />
+                        <ComboBoxItem Content="Radix Sort" />
+                        <ComboBoxItem Content="Shell Sort"/>
+                        <ComboBoxItem Content="Tim Sort" />
+                        <ComboBoxItem Content="Tree Sort" />
+                    </ComboBox>
+
+                    <ui:TextBlock Text="Array Generation Method" Grid.Column="0" Grid.Row="1" FontTypography="Body" VerticalAlignment="Center" Margin="0,0,50,0"/>
+                    <ComboBox x:Name="RandomGenComboBox" Grid.Column="1" Grid.Row="1"
+                        MinWidth="150"
+                        SelectedIndex="0">
+                        <ComboBoxItem Content="Normal" />
+                        <ComboBoxItem Content="Sorted" />
+                        <ComboBoxItem Content="Sorted Reverse" />
+                        <ComboBoxItem Content="Nearly Sorted" />
+                        <ComboBoxItem Content="Mirror"/>
+                        <ComboBoxItem Content="Adjacent" />
+                        <ComboBoxItem Content="Nearly Adjacent" />
+                    </ComboBox>
+
+                    <ui:TextBlock Text="Array Size" Grid.Column="0" Grid.Row="2" FontTypography="Body" VerticalAlignment="Center"/>
+                    <Slider x:Name="ElementCountSlider" Grid.Column="1" Grid.Row="2"
+                        Minimum="100"
+                        Maximum="1200"
+                        TickPlacement="BottomRight"
+                        Height="46"
+                        Width="179"
+                        TickFrequency="100"
+                        IsSnapToTickEnabled="True"/>
                 </Grid>
-                <TextBlock x:Name="SelectedSectionTextBlock"
-           Text="Select array and sorting algorithm !!"
-           Height="30"
-           Width="250" />
                 <Button x:Name="StartButton"
-        Content="Start"
-        Height="30"
-        Width="60"
-        HorizontalAlignment="Center"
-        Click="StartButton_Click" />
-                <WrapPanel Width="349"  >
-                    <Slider x:Name="ElementCountSlider"
-            Minimum="100"
-            Maximum="1200"
-            TickPlacement="BottomRight"
-            ValueChanged="ElementCountSlider_ValueChanged"
-            Height="46"
-            Width="179"
-            TickFrequency="100" />
-                    <ui:NumberBox x:Name="ElementCountNumberBox" 
-                  TextWrapping="Wrap" 
-                  Width="Auto" 
-                  HorizontalAlignment="Left"
-                  Margin="20,0,0,0"
-                  BorderThickness="2,2,2,2"
-                  LostFocus="ElementCountNumberBox_LostFocus"
-                  KeyDown="ElementCountNumberBox_KeyDown" 
-                  MaxLength="4" 
-                  MaxLines="1" 
-                  MinLines="1" 
-                  PreviewTextInput="ElementCountNumberBox_PreviewTextInput" 
-                  PlaceholderText="ArraySize"/>
-                </WrapPanel>
-            </StackPanel>
+                    Content="Start"
+                    Height="30"
+                    Width="60"
+                    HorizontalAlignment="Center"
+                    Click="StartButton_Click" />
+                </StackPanel>
+            </Grid>
         </Grid>
-    </Grid>
-</Page>
+    </Page>
