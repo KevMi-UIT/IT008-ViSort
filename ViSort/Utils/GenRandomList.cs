@@ -6,7 +6,9 @@ public enum GenRandomListTypes
     Sorted,
     SortedReverse,
     NearlySorted,
-    Mirror
+    Mirror,
+    Adjacent,
+    NearlyAdjacent
 }
 
 public static class GenRandomList
@@ -25,42 +27,39 @@ public static class GenRandomList
             GenRandomListTypes.SortedReverse => GenSortedReverse(length),
             GenRandomListTypes.NearlySorted => GenNearlySorted(length),
             GenRandomListTypes.Mirror => GenMirror(length),
+            GenRandomListTypes.Adjacent => GenAdjacent(length),
+            GenRandomListTypes.NearlyAdjacent => GenNearlyAdjacent(length),
             _ => throw new ArgumentException("Invalid list type"),
         };
     }
 
-    static List<int> GenNormal(int length)
+    public static List<int> GenNormal(int length)
     {
-        return Enumerable.Range(0, length).Select(x => RAND.Next(MIN, MAX + 1)).ToList();
+        return Enumerable.Range(0, length).Select(static x => RAND.Next(MIN, MAX + 1)).ToList();
     }
 
-    static List<int> GenSorted(int length)
+    public static List<int> GenSorted(int length)
     {
-        int i = RAND.Next(MIN, MAX - length);
-        return Enumerable.Range(i, i + length + 1).ToList();
+        List<int> list = GenNormal(length);
+        list.Sort();
+        return list;
     }
 
-    static List<int> GenSortedReverse(int length)
+    public static List<int> GenSortedReverse(int length)
     {
         List<int> list = GenSorted(length);
         list.Reverse();
         return list;
     }
 
-    static List<int> GenNearlySorted(int length)
+    public static List<int> GenNearlySorted(int length)
     {
         List<int> list = GenSorted(length);
-        int lim = MAX / NEARLY_SORTED_SENSITIVITY;
-        for (int i = 0; i < lim; i++)
-        {
-            int a = RAND.Next(0, length);
-            int b = RAND.Next(0, length);
-            (list[b], list[a]) = (list[a], list[b]);
-        }
+        ShuffleList(ref list, length);
         return list;
     }
 
-    static List<int> GenMirror(int length)
+    public static List<int> GenMirror(int length)
     {
         List<int> list = new(new int[length]);
         int limit = length / 2;
@@ -75,5 +74,29 @@ public static class GenRandomList
             list[limit] = RAND.Next(MIN, MAX + 1);
         }
         return list;
+    }
+
+    public static List<int> GenAdjacent(int length)
+    {
+        int i = RAND.Next(MIN, MAX - length + 1);
+        return Enumerable.Range(i, length).ToList();
+    }
+
+    public static List<int> GenNearlyAdjacent(int length)
+    {
+        List<int> list = GenAdjacent(length);
+        ShuffleList(ref list, length);
+        return list;
+    }
+
+    private static void ShuffleList(ref List<int> list, int length)
+    {
+        int lim = MAX / NEARLY_SORTED_SENSITIVITY;
+        for (int i = 0; i < lim; i++)
+        {
+            int a = RAND.Next(0, length);
+            int b = RAND.Next(0, length);
+            (list[b], list[a]) = (list[a], list[b]);
+        }
     }
 }
