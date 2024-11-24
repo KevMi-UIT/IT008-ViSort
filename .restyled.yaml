@@ -1,9 +1,5 @@
 restylers:
-  - dotnet-format:
-      command:
-        - "dotnet"
-        - "format"
-        - ".\\ViSort\\ViSort.sln"
+  - "dotnet-format"
   - "shellcheck"
   - "shfmt"
   - "jq"
