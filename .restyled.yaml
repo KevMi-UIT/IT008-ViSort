@@ -1,7 +1,0 @@
-restylers:
-  - "shellcheck"
-  - "shfmt"
-  - "jq"
-  - "taplo"
-  - "prettier-markdown"
-  - "prettier-yaml"
