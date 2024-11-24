@@ -1,0 +1,34 @@
+name: Dotnet Check
+
+on:
+  push:
+    paths:
+      - "**/*.cs"
+      - "**/.editorconfig"
+  pull_request:
+    types:
+      - ready_for_review
+      - opened
+      - reopened
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: windows-latest
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0"
+          cache: true
+          cache-dependency-path: ViSort/packages.lock.json
+
+      - name: Restore deps
+        working-directory: ViSort
+        run: dotnet restore --locked-mode --use-lock-file
+
+      - name: Run dotnet format check
+        run: scripts/dotnet_format_check.ps1 "ViSort/ViSort.sln"
