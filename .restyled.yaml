@@ -1,0 +1,6 @@
+restylers:
+  - "dotnet-format"
+  - "shellcheck"
+  - "shfmt"
+  - "jq"
+  - "taplo"
