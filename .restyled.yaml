@@ -1,9 +1,10 @@
 restylers:
-  - "dotnet-format":
-    arguments:
-      - "ViSort\\Visort.sln"
-      - "--no-restore"
+  - dotnet-format:
+      arguments:
+      - "ViSort/Visort.sln"
   - "shellcheck"
   - "shfmt"
   - "jq"
   - "taplo"
+  - "prettier-markdown"
+  - "prettier-yaml"
