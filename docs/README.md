@@ -83,5 +83,6 @@
 ## DEV
 
 ```ps1
+# dotnet tool restore
 dotnet restore ".\ViSort\ViSort.csproj"
 ```
