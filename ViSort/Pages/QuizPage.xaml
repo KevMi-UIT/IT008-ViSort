@@ -1,69 +1,174 @@
-﻿<Page x:Class="ViSort.Pages.QuizPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ViSort.Pages"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      xmlns:wpfui="http://schemas.lepo.co/wpfui"
-      mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1300"
-      ui:Design.Background="White"
-      Title="QuizPage"
-      Loaded="Window_Loaded"
-      KeyDown="Window_KeyDown">
+﻿<Page
+    x:Class="ViSort.Pages.QuizPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ViSort.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui"
+    Title="QuizPage"
+    d:DesignHeight="800"
+    d:DesignWidth="1300"
+    ui:Design.Background="White"
+    KeyDown="Window_KeyDown"
+    Loaded="Window_Loaded"
+    mc:Ignorable="d">
 
     <Grid Margin="20,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:TextBlock Text="Quiz" FontTypography="TitleLarge" Grid.Row="0" />
-        <ui:Button x:Name="InstructionButton" Content="Hướng dẫn" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Click="InstructionButton_Click" Margin="10"/>
-        <ui:Flyout x:Name="InstructionFlyout" IsOpen="False" Placement="Center" HorizontalAlignment="Center" Margin="0,50,0,100">
+        <ui:TextBlock
+            Grid.Row="0"
+            FontTypography="TitleLarge"
+            Text="Quiz" />
+        <ui:Button
+            x:Name="InstructionButton"
+            Width="110"
+            Margin="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Click="InstructionButton_Click"
+            Content="Hướng dẫn" />
+        <ui:Flyout
+            x:Name="InstructionFlyout"
+            Margin="0,50,0,100"
+            HorizontalAlignment="Center"
+            IsOpen="False"
+            Placement="Center">
             <ui:PassiveScrollViewer>
-                <StackPanel Margin="10" MaxWidth="780" >
-                <TextBlock Text="Instruction is being completed...Instruction is being completed...
-                           Instruction is being completed...Instruction is being completed..."
-                           TextWrapping="Wrap" Margin="5"  HorizontalAlignment="Center"/>
-                <ui:Button Content="Close" Click="CloseInstructionFlyout_Click" HorizontalAlignment="Right" Margin="5"/>
+                <StackPanel MaxWidth="780" Margin="10">
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Text="Instruction is being completed...Instruction is being completed...                            Instruction is being completed...Instruction is being completed..."
+                        TextWrapping="Wrap" />
+                    <ui:Button
+                        Margin="5"
+                        HorizontalAlignment="Right"
+                        Click="CloseInstructionFlyout_Click"
+                        Content="Close" />
                 </StackPanel>
             </ui:PassiveScrollViewer>
         </ui:Flyout>
 
 
-        <Separator Margin="30,10" Grid.Row="1"/>
+        <Separator Grid.Row="1" Margin="30,10" />
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ui:TextBlock x:Name="QuestionTextBlock" Grid.Row="0" FontTypography="Subtitle" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-            <Canvas x:Name="QuestionCanvas" Grid.Row="1" Background="White" />
-            <WrapPanel x:Name="MultipleChoiceWrapPanel" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Focusable="True">
+            <ui:TextBlock
+                x:Name="QuestionTextBlock"
+                Grid.Row="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontTypography="Subtitle"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
+            <Canvas
+                x:Name="QuestionCanvas"
+                Grid.Row="1"
+                Background="White" />
+            <WrapPanel
+                x:Name="MultipleChoiceWrapPanel"
+                Grid.Row="2"
+                Width="700"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Focusable="True">
 
-                <RadioButton x:Name="BubleRadioButton" Content="Buble Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="BucketRadioButton" Content="Bucket Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="CountingRadioButton" Content="Counting Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="HeapRadioButton" Content="Heap Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="InsertionRadioButton" Content="Insertion Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="MergeRadioButton" Content="Merge Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="QuickRadioButton" Content="Quick Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="RadixRadioButton" Content="Radix Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="SelectionRadioButton" Content="Selection Sort" Checked="Answer_Checked" Margin="0,5,10,3"/>
-                <RadioButton x:Name="ShellRadioButton" Content="Shell Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="TimRadioButton" Content="Tim Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                <RadioButton x:Name="TreeRadioButton" Content="Tree Sort" Checked="Answer_Checked" Margin="0,3,10,3"/>
-                
+                <RadioButton
+                    x:Name="BubleRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Buble Sort" />
+                <RadioButton
+                    x:Name="BucketRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Bucket Sort" />
+                <RadioButton
+                    x:Name="CountingRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Counting Sort" />
+                <RadioButton
+                    x:Name="HeapRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Heap Sort" />
+                <RadioButton
+                    x:Name="InsertionRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Insertion Sort" />
+                <RadioButton
+                    x:Name="MergeRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Merge Sort" />
+                <RadioButton
+                    x:Name="QuickRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Quick Sort" />
+                <RadioButton
+                    x:Name="RadixRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Radix Sort" />
+                <RadioButton
+                    x:Name="SelectionRadioButton"
+                    Margin="0,5,10,3"
+                    Checked="Answer_Checked"
+                    Content="Selection Sort" />
+                <RadioButton
+                    x:Name="ShellRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Shell Sort" />
+                <RadioButton
+                    x:Name="TimRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Tim Sort" />
+                <RadioButton
+                    x:Name="TreeRadioButton"
+                    Margin="0,3,10,3"
+                    Checked="Answer_Checked"
+                    Content="Tree Sort" />
+
             </WrapPanel>
             <Grid Grid.Row="3" Margin="0,10">
-                <ui:Button x:Name="PrevQuestionButton" Content="Previous" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90"  Click="PrevQuestionButton_Click" />
-                <ui:Button x:Name="SubmitButton" Content="Kết thúc" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="90" Click="SubmitButton_Click" />
-                <ui:Button x:Name="NextQuestionButton" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Click="NextQuestionButton_Click" />
+                <ui:Button
+                    x:Name="PrevQuestionButton"
+                    Width="90"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Click="PrevQuestionButton_Click"
+                    Content="Previous" />
+                <ui:Button
+                    x:Name="SubmitButton"
+                    Width="90"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Click="SubmitButton_Click"
+                    Content="Kết thúc" />
+                <ui:Button
+                    x:Name="NextQuestionButton"
+                    Width="90"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Click="NextQuestionButton_Click"
+                    Content="Next" />
             </Grid>
         </Grid>
     </Grid>

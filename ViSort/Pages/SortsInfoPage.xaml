@@ -1,28 +1,34 @@
-﻿<Page x:Class="ViSort.Pages.SortsInfoPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ViSort.Pages"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      xmlns:views="clr-namespace:ViSort.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1300"
-      ui:Design.Background="White"
-      d:DataContext="{d:DesignInstance local:SortsInfoPage, IsDesignTimeCreatable=False}"
-      Title="SortsInfoPage">
+﻿<Page
+    x:Class="ViSort.Pages.SortsInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ViSort.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:views="clr-namespace:ViSort.Views"
+    Title="SortsInfoPage"
+    d:DataContext="{d:DesignInstance local:SortsInfoPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="800"
+    d:DesignWidth="1300"
+    ui:Design.Background="White"
+    mc:Ignorable="d">
 
     <Grid Margin="20,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:TextBlock Text="Sorts Info" FontTypography="TitleLarge" Grid.Row="0" />
-        <Separator Margin="30,10" Grid.Row="1"/>
+        <ui:TextBlock
+            Grid.Row="0"
+            FontTypography="TitleLarge"
+            Text="Sorts Info" />
+        <Separator Grid.Row="1" Margin="30,10" />
         <Grid Grid.Row="2" VerticalAlignment="Top">
-            <views:SortsInfoView/>
+            <views:SortsInfoView />
         </Grid>
     </Grid>
 </Page>
