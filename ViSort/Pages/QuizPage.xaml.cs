@@ -180,7 +180,10 @@ public partial class QuizPage : Page
         {
             _radioButtons.Add(radioButton);
         }
-        Keyboard.Focus(MultipleChoiceWrapPanel);
+        if (InstructionFlyout.IsOpen == false)
+        {
+            Keyboard.Focus(MultipleChoiceWrapPanel);
+        }
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)

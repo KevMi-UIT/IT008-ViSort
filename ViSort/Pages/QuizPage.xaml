@@ -36,17 +36,57 @@
             Content="Hướng dẫn" />
         <ui:Flyout
             x:Name="InstructionFlyout"
-            Margin="0,50,0,100"
+            Margin="0,50,0,0"
             HorizontalAlignment="Center"
             IsOpen="False"
             Placement="Center">
             <ui:PassiveScrollViewer>
                 <StackPanel MaxWidth="780" Margin="10">
-                    <TextBlock
+                    <StackPanel
+                        Width="600"
                         Margin="5"
-                        HorizontalAlignment="Center"
-                        Text="Instruction is being completed...Instruction is being completed...                            Instruction is being completed...Instruction is being completed..."
-                        TextWrapping="Wrap" />
+                        HorizontalAlignment="Center">
+                        <!--  Header  -->
+                        <TextBlock
+                            FontWeight="Bold"
+                            Text="HƯỚNG DẪN ÔN TẬP VỚI CÁC THUẬT TOÁN SẮP XẾP"
+                            TextAlignment="Center" />
+
+                        <TextBlock Text="------------------------------------------------------" TextAlignment="Center" />
+                        <!--  Body  -->
+                        <TextBlock TextAlignment="Left" TextWrapping="Wrap">
+                            <Run Text="- Với mỗi câu, màn hình sẽ xuất hiện ngẫu nhiên một dãy số lộn xộn." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Ứng với mỗi dãy số, bạn có thể chọn 1 thuật toán bất kì để sắp xếp lại dãy số đó." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Số điểm của mỗi câu dựa vào số bước thuật toán đã chọn thực hiện để sắp xếp dãy số." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Không có thuật toán nào là cao điểm cho mọi trường hợp, mỗi thuật toán có ưu nhược điểm riêng." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Không có thời gian giới hạn, bạn có thể ôn tập thoải mái." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Sau khi kết thúc bài kiểm tra, bạn sẽ biết được điểm số." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Nhấp chuột hoặc dùng phím mũi tên trái phải để di chuyển qua các câu hỏi, ENTER để kết thúc;                                  các phím ESC, DEL, các phím số từ 0 đến 9 để chọn đáp án." />
+                            <LineBreak />
+                        </TextBlock>
+                        <!--  Footer  -->
+                        <TextBlock Text="------------------------------------------------------" TextAlignment="Center" />
+
+                        <TextBlock
+                            FontWeight="Bold"
+                            Text="CHÚC BẠN ÔN TẬP HIỆU QUẢ!"
+                            TextAlignment="Center" />
+
+                    </StackPanel>
+
+
                     <ui:Button
                         Margin="5"
                         HorizontalAlignment="Right"
