@@ -1,4 +1,4 @@
-name: Dotnet Check
+name: Dotnet Format Check
 
 on:
   push:
@@ -23,12 +23,12 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0"
-          cache: true
-          cache-dependency-path: ViSort/packages.lock.json
-
-      - name: Restore deps
-        working-directory: ViSort
-        run: dotnet restore --locked-mode --use-lock-file
 
       - name: Run dotnet format check
-        run: scripts/dotnet_format_check.ps1 "ViSort/ViSort.sln"
+        run: |
+          dotnet format "ViSort/ViSort.sln" --verbosity detailed --verify-no-changes --no-restore
+          if (! $?)
+          {
+            Write-Error "Please reformat"
+            [Environment]::Exit(1)
+          }

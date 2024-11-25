@@ -9,7 +9,8 @@
   <br>
   <a href="https://www.codefactor.io/repository/github/KevMi-UIT/IT008-ViSort"><img src="https://img.shields.io/codefactor/grade/github/KevMi-UIT/IT008-ViSort?style=for-the-badge" alt="CodeFactor Grade"></a>
   <a href="../../../actions/workflows/release.yml"><img src="https://img.shields.io/github/actions/workflow/status/KevMi-UIT/IT008-ViSort/release.yml?style=for-the-badge&label=RELEASE" alt="Release Status"></a>
-  <a href="../../../actions/workflows/dotnet_check.yml"><img src="https://img.shields.io/github/actions/workflow/status/KevMi-UIT/IT008-ViSort/dotnet_check.yml?style=for-the-badge&label=DOTNET%20CHECK" alt="Dotnet check status"></a>
+  <a href="../../../actions/workflows/dotnet_format_check.yml"><img src="https://img.shields.io/github/actions/workflow/status/KevMi-UIT/IT008-ViSort/dotnet_format_check.yml?style=for-the-badge&label=DOTNET%20FORMAT%20CHECK" alt="Dotnet format check status"></a>
+  <a href="../../../actions/workflows/xstyler_check.yml"><img src="https://img.shields.io/github/actions/workflow/status/KevMi-UIT/IT008-ViSort/xstyler_check.yml?style=for-the-badge&label=XSTYLER%20CHECK" alt="Xstyler check status"></a>
   <br>
   <br>
   <a href="https://app.deepsource.com/gh/KevMi-UIT/IT008-ViSort/" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/KevMi-UIT/IT008-ViSort.svg/?label=active+issues&show_trend=true&token=_ndTeatfi8J31o77zqM2NLYI"/></a>
