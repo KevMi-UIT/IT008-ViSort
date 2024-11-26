@@ -17,7 +17,7 @@ public abstract class SortModel(List<int> _element, DrawRectangle _drawRectangle
     public readonly DrawRectangle DrawRect = _drawRectangle;
     public abstract Task BeginAlgorithm();
 
-    public async Task BeginSorting()
+    public async Task BeginSortingAsync()
     {
         await BeginAlgorithm();
         DrawRect.ShowAllElementsBlue(Elements, Colors.Blue);

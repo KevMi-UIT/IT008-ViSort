@@ -17,7 +17,7 @@ public class CountingSort : SortModel, ISortModels
 
     public CountingSort(List<int> _element, DrawRectangle _drawRectangle) : base(_element.Select(x => x / 10).ToList(), _drawRectangle)
     {
-        _drawRectangle.MaxValueOfElement = _drawRectangle.MaxValueOfElement / 10;
+        _drawRectangle.MaxValueOfElement /= 10;
     }
 
     public override async Task BeginAlgorithm()

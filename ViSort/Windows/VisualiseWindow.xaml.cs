@@ -55,7 +55,6 @@ public partial class VisualiseWindow : Window
             SortTypes.Tree => new TreeSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
             _ => throw new SortNotImplemented()
         };
-
     }
 
     private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -109,7 +108,7 @@ public partial class VisualiseWindow : Window
 
     private void PlayButton_Click(object sender, RoutedEventArgs e)
     {
-        Task task = SelectedSort.BeginSorting();
+        _ = SelectedSort.BeginSortingAsync();
         PlayButton.IsEnabled = false;
     }
 
