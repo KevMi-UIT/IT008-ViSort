@@ -1,10 +1,11 @@
-﻿<Page x:Class="ViSort.Pages.VisualisePage"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ViSort.Pages"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:Utils="clr-namespace:ViSort.Utils" x:Class="ViSort.Pages.VisualisePage"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1300"
       ui:Design.Background="White"
@@ -211,6 +212,11 @@
                   PreviewTextInput="ElementCountNumberBox_PreviewTextInput" 
                   PlaceholderText="ArraySize"/>
                 </WrapPanel>
+                <ui:DropDownButton x:Name="GenTypesDropDown"
+                                   Content="Generation Type"
+                                    Height="Auto"
+                                    Width="Auto">
+                </ui:DropDownButton>
             </StackPanel>
         </Grid>
     </Grid>

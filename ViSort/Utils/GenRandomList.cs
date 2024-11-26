@@ -11,7 +11,7 @@ public enum GenRandomListTypes
 
 public static class GenRandomList
 {
-    public const int MIN = 0;
+    public const int MIN = 10;
     public const int MAX = 999;
     public const int NEARLY_SORTED_SENSITIVITY = 10;
     private static readonly Random RAND = new();

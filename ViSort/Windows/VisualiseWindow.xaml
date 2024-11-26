@@ -10,17 +10,15 @@
         Height="600"
         Width="800"
         Background="#FFD8FFDD" WindowState="Maximized"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Activated="Window_Activated">
     <Grid>
         <Grid Margin="0,92,0,-9">
             <Canvas x:Name="SortVisualisation"
-                    Width="780"
                     Height="Auto"
                     Background="#FF767575"
-                    Margin="10,0,10,27" />
+                    Margin="10,0,14,20" />
             <RichTextBox x:Name="CodeDisplay"
-      
-                         Margin="545,22,25,322"
+                         Margin="517,28,53,316"
                          IsReadOnly="True" />
         </Grid>
         <Button x:Name="PlayButton"
@@ -37,8 +35,8 @@
             <Slider x:Name="SpeedSlider"
                     Height="30"
                     Width="180"
-                    Minimum="10"
-                    Maximum="105"
+                    Minimum="1"
+                    Maximum="100"
                     TickFrequency="10"
                     TickPlacement="BottomRight"
                     IsEnabled="True"

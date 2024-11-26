@@ -1,3 +1,4 @@
+using System.Windows.Media;
 using System.Xml.Linq;
 using ViSort.Draw;
 using ViSort.Types;
@@ -8,10 +9,10 @@ public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : Sort
 {
     // TODO: update info
     public static SortTypes SortType => SortTypes.Bucket;
-    public static string TimeComplexity => "O(n^2)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
+    public static string TimeComplexity => "O(n + k)";
+    public static string SpaceComplexity => "O(n)";
+    public static string YoutubeLink => "https://www.youtube.com/watch?v=GAU102t5n4U";
+    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bucket-sort-2/";
 
     public override async Task BeginAlgorithm()
     {
@@ -38,32 +39,62 @@ public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : Sort
 
     async Task StartBucketSort()
     {
+        // Step 1: Initialize buckets
+
+        int MaxValue = Elements.Max();
         List<int>[] buckets = new List<int>[Elements.Count];
-        for (int i = 0; i < Elements.Count; i++)
+        for (int i = 0; i < buckets.Length; i++)
         {
             Step++;
             buckets[i] = new List<int>();
         }
+
+        // Step 2: Distribute elements into buckets
         for (int i = 0; i < Elements.Count; i++)
         {
             Step++;
-            int bi = Elements.Count * Elements[i];
-            buckets[bi].Add(Elements[i]);
+            int bucketIndex = Elements[i] * buckets.Length / (MaxValue + 1);
+            buckets[bucketIndex].Add(Elements[i]);
+            // Visualize buckets filling
+            DrawRect.DrawRectangleOnCanvas(Elements, Colors.Blue);
+            await Task.Delay(DrawRect.ThreadDelay);
         }
-        for (int i = 0; i < Elements.Count; i++)
+
+        // Step 3: Sort each bucket
+        for (int i = 0; i < buckets.Length; i++)
         {
             Step++;
-            await InsertionSort(buckets[i]);
-        }
-        int index = 0;
-        for (int i = 0; i < Elements.Count; i++)
-        {
-            Step++;
-            for (int j = 0; j < buckets[i].Count; j++)
+            if (buckets[i].Count > 0)
             {
-                Step++;
-                Elements[index++] = buckets[i][j];
+                // Visualize current bucket before sorting
+                DrawRect.DrawRectangleOnCanvas(buckets[i], Colors.Red);
+                await Task.Delay(DrawRect.ThreadDelay * 10);
+
+                // Sort using InsertionSort
+                await InsertionSort(buckets[i]);
+
+                // Visualize sorted bucket
+                DrawRect.DrawRectangleOnCanvas(buckets[i], Colors.Green);
+                await Task.Delay(DrawRect.ThreadDelay * 10);
             }
         }
+
+        // Step 4: Merge buckets back into the main list
+        int index = 0;
+        for (int i = 0; i < buckets.Length; i++)
+        {
+            foreach (var element in buckets[i])
+            {
+                Step++;
+                Elements[index++] = element;
+
+                // Visualize merging sorted buckets
+                DrawRect.DrawRectangleOnCanvas(Elements, Colors.Orange);
+                await Task.Delay(DrawRect.ThreadDelay);
+            }
+        }
+
+        // Step 5: Final visualization of sorted array
+        DrawRect.DrawRectangleOnCanvas(Elements, Colors.Black);
     }
 }

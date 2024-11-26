@@ -1,3 +1,9 @@
+using DnsClient.Protocol;
+using MongoDB.Driver.Core.Authentication;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Xml.Linq;
 using ViSort.Draw;
 using ViSort.Types;
 
@@ -6,60 +12,59 @@ class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_el
 {
     // TODO: update info
     public static SortTypes SortType => SortTypes.Tree;
-    public static string TimeComplexity => "O(n^2)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
-    public class Node(int key, TreeSort.Node? left = null, TreeSort.Node? right = null)
-    {
-        public int Key { get; set; } = key;
-        public Node Left { get; set; } = left;
-        public Node Right { get; set; } = right;
-    }
+    public static string TimeComplexity => "O(nlog(n))";
+    public static string SpaceComplexity => "O(n)";
+    public static string YoutubeLink => "https://www.youtube.com/watch?v=oRhcBqygLos";
+    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/tree-sort/";
 
-    public Node? Root { get; private set; }
-
-    public void Insert(int Key)
+    public async override Task BeginAlgorithm()
     {
-        Root = InsertRecord(Root, Key);
-    }
-
-    Node InsertRecord(Node Root, int Key)
-    {
-        if (Root == null)
+        List<int> currentElements = new();
+        foreach (int element in Elements)
         {
-            Root = new Node(Key);
-            return Root;
+            InsertAsync(element, currentElements);
+            await Task.Delay(DrawRect.ThreadDelay);
         }
-        if (Key.CompareTo(Root.Key) < 0)
-            Root.Left = InsertRecord(Root.Left, Key);
-        else if (Key.CompareTo(Root.Key) > 0)
-            Root.Right = InsertRecord(Root.Right, Key);
-        return Root;
+        List<int> sortedElements = new();
+        InOrderTraversal(_root, sortedElements);
+    }
+    public class Node(int Key)
+    {
+        public int Key { get; } = Key;
+        public Node? Left { get; set; } = null;
+        public Node? Right { get; set; } = null;
     }
 
-    public void TreeInsert(List<int> list)
+    private Node? _root = null;
+
+    public void InsertAsync(int key, List<int> currentElements)
     {
-        for (int i = 0; i < list.Count; i++)
-        {
-            Insert(list[i]);
-        }
+        _root = InsertRec(_root, key);
+        currentElements.Add(key);
+        currentElements.Sort();
+        DrawRect.DrawRectangleOnCanvas(currentElements, Colors.Black);
     }
 
-    private void InOrderTraversal(Node node, List<int> sortedList)
+    private Node InsertRec(Node? root, int key)
     {
-        if (node != null)
-        {
-            InOrderTraversal(node.Left, sortedList);
-            sortedList.Add(node.Key);
-            InOrderTraversal(node.Right, sortedList);
-        }
+        Step++;
+        if (root == null)
+            return new Node(key);
+        if (key < root.Key)
+            root.Left = InsertRec(root.Left, key);
+        else if (key > root.Key)
+            root.Right = InsertRec(root.Right, key);
+
+        return root;
     }
-    public override Task BeginAlgorithm()
+
+    public void InOrderTraversal(Node? root, List<int> sortedElements)
     {
-        List<int> sortedList = new List<int>();
-        InOrderTraversal(Root, sortedList);
-        Elements = new List<int>(sortedList);
-        return Task.CompletedTask;
+        Step++;
+        if (root == null)
+            return;
+        InOrderTraversal(root.Left, sortedElements);
+        sortedElements.Add(root.Key);
+        InOrderTraversal(root.Right, sortedElements);
     }
 }

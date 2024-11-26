@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Conventions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Windows.Shapes;
 using ViSort.Types;
 using ViSort.Utils;
 using ViSort.Windows;
+using Wpf.Ui.Controls;
 using static ViSort.Exceptions.GenRandomListExceptions;
 using static ViSort.Exceptions.SortExceptions;
 
@@ -28,7 +30,6 @@ public partial class VisualisePage : Page
     private int ElementCount = 100;
     private SortTypes SelectedSortType = default;
     private GenRandomListTypes selectedGenType = default;
-
     public VisualisePage()
     {
         InitializeComponent();
@@ -113,7 +114,7 @@ public partial class VisualisePage : Page
         }
         else
         {
-            MessageBox.Show("Please enter a valid integer within the range.");
+            System.Windows.MessageBox.Show("Please enter a valid integer between 100 and 500.");
             ElementCountNumberBox.Text = ElementCount.ToString();
         }
     }
@@ -123,7 +124,7 @@ public partial class VisualisePage : Page
         e.Handled = !IsTextNumeric(e.Text);
     }
 
-    private bool IsTextNumeric(string text)
+    private static bool IsTextNumeric(string text)
     {
         return int.TryParse(text, out _);
     }

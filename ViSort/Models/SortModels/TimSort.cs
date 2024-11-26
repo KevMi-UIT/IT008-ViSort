@@ -9,89 +9,123 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
 {
     // TODO: update info
     public static SortTypes SortType => SortTypes.Tim;
-    public static string TimeComplexity => "O(n^2)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
+    public static string TimeComplexity => "O(nlog(n)";
+    public static string SpaceComplexity => "O(n)";
+    public static string YoutubeLink => "https://www.youtube.com/watch?v=Pxny_TtOnDo";
+    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/timsort/";
     public const int Run = 32;
 
-    public void InsertionSort(List<int> list, int left, int right)
+    public async Task InsertionSortAsync(List<int> list, int left, int right)
     {
         for (int i = left + 1; i <= right; i++)
         {
-            int Temp = list[i];
-            DrawRect.SetRectangleColor(i, Colors.Red);
+            Step++;
+            int temp = list[i];
+            DrawRect.SetOneRectangleColor(i, Colors.Red); // Highlight current element
+            await Task.Delay(DrawRect.ThreadDelay);
             int j = i - 1;
-            while (j >= left && list[j].CompareTo(Temp) > 0)
+
+            while (j >= left && list[j].CompareTo(temp) > 0)
             {
+                Step++;
                 list[j + 1] = list[j];
-                DrawRect.SetRectangleColor(j, Colors.Red);
-                DrawRect.SetRectangleColor(j + 1, Colors.Red);
+                DrawRect.SetOneRectangleColor(j, Colors.Yellow); // Highlight comparison
+                await Task.Delay(DrawRect.ThreadDelay);
+                DrawRect.DrawRectangleOnCanvas(list, Colors.Black);
                 j--;
             }
-            list[j + 1] = Temp;
+
+            list[j + 1] = temp;
+            DrawRect.DrawRectangleOnCanvas(list, Colors.Black); // Update visualization
+            DrawRect.SetOneRectangleColor(i, Colors.Black); // Reset color
         }
     }
 
-    public static void Merge(List<int> list, int left, int mid, int right)
+    public async Task MergeAsync(List<int> list, int left, int mid, int right)
     {
         int i, j, k;
-        int Length1 = mid - left + 1, Length2 = right - mid;
-        int[] LeftArr = new int[Length1];
-        int[] RightArr = new int[Length2];
-        for (i = 0; i < Length1; i++)
-            LeftArr[i] = list[left + i];
-        for (i = 0; i < Length2; i++)
-            RightArr[i] = list[mid + 1 + i];
-        i = 0;
-        j = 0;
-        k = 0;
-        while (i < Length1 && j < Length2)
+        int length1 = mid - left + 1, length2 = right - mid;
+
+        // Temporary arrays
+        int[] leftArr = new int[length1];
+        int[] rightArr = new int[length2];
+        Step++;
+        for (i = 0; i < length1; i++)
+            leftArr[i] = list[left + i];
+        Step++;
+        for (i = 0; i < length2; i++)
+            rightArr[i] = list[mid + 1 + i];
+
+        i = j = 0;
+        k = left;
+
+        // Merge two halves
+        while (i < length1 && j < length2)
         {
-            if (LeftArr[i].CompareTo(RightArr[j]) <= 0)
+            Step++;
+            if (leftArr[i].CompareTo(rightArr[j]) <= 0)
             {
-                list[k] = LeftArr[i];
+                list[k] = leftArr[i];
                 i++;
             }
             else
             {
-                list[k] = RightArr[j];
+                list[k] = rightArr[j];
                 j++;
             }
+
+            DrawRect.SetOneRectangleColor(k, Colors.Green); // Highlight merged position
+            DrawRect.DrawRectangleOnCanvas(list, Colors.Black); // Update canvas
+            await Task.Delay(DrawRect.ThreadDelay);
             k++;
         }
-        while (i < Length1)
+
+        // Copy remaining elements
+        while (i < length1)
         {
-            list[k] = LeftArr[i];
-            k++;
+            Step++;
+            list[k] = leftArr[i];
+            DrawRect.SetOneRectangleColor(k, Colors.Blue); // Highlight remaining
+            await Task.Delay(DrawRect.ThreadDelay);
+            DrawRect.DrawRectangleOnCanvas(list, Colors.Black);
             i++;
-        }
-        while (j < Length2)
-        {
-            list[k] = RightArr[j];
             k++;
+        }
+        Step++;
+        while (j < length2)
+        {
+            list[k] = rightArr[j];
+            DrawRect.SetOneRectangleColor(k, Colors.Blue); // Highlight remaining
+            await Task.Delay(DrawRect.ThreadDelay);
+            DrawRect.DrawRectangleOnCanvas(list, Colors.Black);
             j++;
+            k++;
         }
     }
 
-    public override Task BeginAlgorithm()
+    public override async Task BeginAlgorithm()
     {
-        int N = Elements.Count;
-        for (int i = 0; i < N; i += Run)
+        int n = Elements.Count;
+
+        // Sort subarrays of size `Run` using Insertion Sort
+        for (int i = 0; i < n; i += Run)
         {
-            InsertionSort(Elements, i, Math.Min(i + Run - 1, N - 1));
-        }
-        for (int size = Run; size < N; size = size * 2)
-        {
-            for (int left = 0; left < N; left += size * 2)
-            {
-                int mid = left + size - 1;
-                int right = Math.Min(left + size * 2 - 1, N - 1);
-                if (mid < right)
-                    Merge(Elements, left, mid, right);
-            }
+            await InsertionSortAsync(Elements, i, Math.Min(i + Run - 1, n - 1));
         }
 
-        return Task.CompletedTask;
+        // Merge sorted subarrays
+        for (int size = Run; size < n; size *= 2)
+        {
+            for (int left = 0; left < n; left += size * 2)
+            {
+                int mid = left + size - 1;
+                int right = Math.Min(left + size * 2 - 1, n - 1);
+
+                if (mid < right)
+                {
+                    await MergeAsync(Elements, left, mid, right);
+                }
+            }
+        }
     }
 }
