@@ -14,9 +14,6 @@ public partial class MainWindow : Window
         InitializeComponent();
         RootNavigationView = RootNavigation;
 
-        Loaded += (sender, args) =>
-        {
-            RootNavigation.Navigate(typeof(HomePage));
-        };
+        Loaded += (sender, args) => RootNavigation.Navigate(typeof(HomePage));
     }
 }

@@ -73,8 +73,7 @@ public partial class QuizPage : Page
     private void Answer_Checked(object sender, RoutedEventArgs e)
     {
         // Xác định nút radio nào đã được chọn
-        var selectedRadioButton = sender as RadioButton;
-        if (selectedRadioButton != null)
+        if (sender is RadioButton selectedRadioButton)
         {
             SortTypes sortTypes = selectedRadioButton.Content switch
             {
@@ -208,6 +207,7 @@ public partial class QuizPage : Page
                 SubmitButton_Click(sender, e);
                 break;
             default:
+                // All cases are handled
                 break;
         }
     }
