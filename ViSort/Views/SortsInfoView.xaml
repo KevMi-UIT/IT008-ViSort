@@ -1,36 +1,59 @@
-﻿<UserControl x:Class="ViSort.Views.SortsInfoView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ViSort.Views"
-             xmlns:vm="clr-namespace:ViSort.ViewModels"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1300"
-             ui:Design.Background="White" >
+﻿<UserControl
+    x:Class="ViSort.Views.SortsInfoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ViSort.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:vm="clr-namespace:ViSort.ViewModels"
+    d:DesignHeight="800"
+    d:DesignWidth="1300"
+    ui:Design.Background="White"
+    mc:Ignorable="d">
 
     <UserControl.DataContext>
         <vm:SortsInfoViewModel />
     </UserControl.DataContext>
 
     <StackPanel>
-        <ui:TextBlock Text="Bubble Sort" FontTypography="Subtitle" />
-        <ui:TextBlock FontTypography="Body" >
-            About:
-            <Hyperlink NavigateUri="https://www.youtube.com/watch?v=8Kp-8OGwphY">Bubble Sort</Hyperlink>
-        </ui:TextBlock>
-        <ui:TextBlock FontTypography="Body" >
-            Youtube:
-            <Hyperlink NavigateUri="{Binding YtLink}">Bubble Sort</Hyperlink>
-        </ui:TextBlock>
-        <ui:ListView>
-            <ui:ListView.View>
-                <ui:GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding TimeComplexity}" Header="Time Complexity"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding SpaceComplexity}" Header="Space Complexity"/>
-                </ui:GridView>
-            </ui:ListView.View>
-        </ui:ListView>
+        <ui:AutoSuggestBox
+            x:Name="AutoSuggestBox"
+            MaxWidth="400"
+            Margin="80,0,80,20"
+            Icon="{ui:SymbolIcon Search24}"
+            OriginalItemsSource="{Binding AutoSuggestBoxItems}"
+            PlaceholderText="Sort..."
+            QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+            SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
+        <StackPanel Visibility="{Binding Path=Model, TargetNullValue=Collapsed}">
+            <ui:TextBlock
+                Margin="0,0,0,10"
+                FontTypography="Subtitle"
+                Text="{Binding Model.SortName}" />
+            <StackPanel Margin="20,0">
+                <StackPanel.Resources>
+                    <Style TargetType="ui:TextBlock">
+                        <Setter Property="Margin" Value="0,5" />
+                    </Style>
+                </StackPanel.Resources>
+                <ui:TextBlock FontTypography="Body">
+                    <Run FontWeight="Bold" Text="Information: " />
+                    <Hyperlink Command="{Binding OpenGeeksForGeeksLinkCommand}">Geeks For Geeks</Hyperlink>
+                </ui:TextBlock>
+                <ui:TextBlock FontTypography="Body">
+                    <Run FontWeight="Bold" Text="Video: " />
+                    <Hyperlink Command="{Binding OpenYoutubeLinkCommand}">Youtube</Hyperlink>
+                </ui:TextBlock>
+                <ui:TextBlock FontTypography="Body">
+                    <Run FontWeight="Bold" Text="Time complexity: " />
+                    <Run Text="{Binding Model.TimeComplexity}" />
+                </ui:TextBlock>
+                <ui:TextBlock FontTypography="Body">
+                    <Run FontWeight="Bold" Text="Space complexity: " />
+                    <Run Text="{Binding Model.SpaceComplexity}" />
+                </ui:TextBlock>
+            </StackPanel>
+        </StackPanel>
     </StackPanel>
 </UserControl>

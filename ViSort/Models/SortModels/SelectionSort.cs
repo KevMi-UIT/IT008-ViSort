@@ -6,13 +6,13 @@ using static ViSort.Utils.Utils;
 
 namespace ViSort.Models.SortModels;
 
-public class SelectionSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+public class SelectionSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    public static SortTypes SortType => SortTypes.Selection;
-    public static string TimeComplexity => "O(n^2)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://youtu.be/g-PGLbMth_g?si=z3fP6qlKVSTejlXJ";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/selection-sort-algorithm-2/";
+    public override SortTypes SortType => SortTypes.Selection;
+    public override string TimeComplexity => "O(n^2)";
+    public override string SpaceComplexity => "O(1)";
+    public override string YoutubeLink => "https://youtu.be/g-PGLbMth_g?si=z3fP6qlKVSTejlXJ";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/selection-sort-algorithm-2/";
     public override async Task BeginAlgorithm()
     {
         for (int i = 0; i < Elements.Count; i++)

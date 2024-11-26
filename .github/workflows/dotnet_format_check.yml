@@ -1,4 +1,4 @@
-name: Dotnet Check
+name: Dotnet Format Check
 
 on:
   push:
@@ -31,4 +31,10 @@ jobs:
         run: dotnet restore --locked-mode --use-lock-file
 
       - name: Run dotnet format check
-        run: scripts/dotnet_format_check.ps1 "ViSort/ViSort.sln"
+        run: |
+          dotnet format "ViSort/ViSort.sln" --verbosity detailed --verify-no-changes --no-restore
+          if (! $?)
+          {
+            Write-Error "Please reformat"
+            [Environment]::Exit(1)
+          }

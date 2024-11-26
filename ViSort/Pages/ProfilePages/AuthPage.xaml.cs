@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViSort.Models;
 using ViSort.Pages.ProfilePages;
+using ViSort.Windows;
 using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Pages;
@@ -27,6 +28,7 @@ public partial class AuthPage : Page
             return;
         }
         InitializeComponent();
+        UsernameTextbox.Focus();
     }
 
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -51,37 +53,22 @@ public partial class AuthPage : Page
 
         try
         {
+            if (App.UserSvc == null)
+            {
+                throw new InvalidOperationException("User service is not initialized.");
+            }
             await App.UserSvc!.AuthUserAsync(User);
             App.User = User;
-            NavigationService.Navigate(new ProfilePage());
+            MainWindow.RootNavigationView.Navigate(typeof(ProfilePage));
         }
         catch (PasswordDoesNotMatch)
         {
             await new WpfUiControls.MessageBox
             {
                 Title = "Lỗi đăng nhập",
-                Content = "Mật khẩu không chính xác",
-                PrimaryButtonText = "OK"
+                Content = "Mật khẩu không chính xác"
             }.ShowDialogAsync();
         }
         SubmitButton.IsEnabled = true;
-    }
-
-    // skipcq: CS-R1005
-    private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(UsernameTextbox.Text) && string.IsNullOrWhiteSpace(Password_Passwordbox.Password))
-        {
-            WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
-            {
-                Title = "Warning",
-                Content = "Chưa có thông tin đăng nhập. Tiếp tục mà không đăng nhập?",
-                PrimaryButtonText = "OK",
-            }.ShowDialogAsync();
-            if (result == WpfUiControls.MessageBoxResult.Primary)
-            {
-                e.Cancel = true;
-            }
-        }
     }
 }

@@ -8,13 +8,13 @@ using Windows.Media.MediaProperties;
 using static System.Net.WebRequestMethods;
 
 namespace ViSort.Models.SortModels;
-class MergeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+class MergeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    public static SortTypes SortType => SortTypes.Merge;
-    public static string TimeComplexity => "O(nlog(n))";
-    public static string SpaceComplexity => "O(n)";
-    public static string YoutubeLink => "https://www.youtube.com/watch?v=ZRPoEKHXTJg";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/merge-sort/";
+    public override SortTypes SortType => SortTypes.Merge;
+    public override string TimeComplexity => "O(nlog(n))";
+    public override string SpaceComplexity => "O(n)";
+    public override string YoutubeLink => "https://www.youtube.com/watch?v=ZRPoEKHXTJg";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/merge-sort/";
 
     public override async Task BeginAlgorithm()
     {

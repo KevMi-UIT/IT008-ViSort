@@ -8,24 +8,23 @@ using ViSort.Draw;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
-class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    // TODO: update info
-    public static SortTypes SortType => SortTypes.Tree;
-    public static string TimeComplexity => "O(nlog(n))";
-    public static string SpaceComplexity => "O(n)";
-    public static string YoutubeLink => "https://www.youtube.com/watch?v=oRhcBqygLos";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/tree-sort/";
+    public override SortTypes SortType => SortTypes.Tree;
+    public override string TimeComplexity => "O(n log n)";
+    public override string SpaceComplexity => "O(n)";
+    public override string YoutubeLink => "https://youtu.be/n2MLjGeK7qA?si=Ov_zhktEzWWcbZMp";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/tree-sort/";
 
     public async override Task BeginAlgorithm()
     {
-        List<int> currentElements = new();
+        List<int> currentElements = [];
         foreach (int element in Elements)
         {
             InsertAsync(element, currentElements);
             await Task.Delay(DrawRect.ThreadDelay);
         }
-        List<int> sortedElements = new();
+        List<int> sortedElements = [];
         InOrderTraversal(_root, sortedElements);
     }
     public class Node(int Key)

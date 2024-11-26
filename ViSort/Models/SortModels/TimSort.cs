@@ -5,14 +5,13 @@ using ViSort.Types;
 //NOT DONE YET
 
 namespace ViSort.Models.SortModels;
-class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    // TODO: update info
-    public static SortTypes SortType => SortTypes.Tim;
-    public static string TimeComplexity => "O(nlog(n)";
-    public static string SpaceComplexity => "O(n)";
-    public static string YoutubeLink => "https://www.youtube.com/watch?v=Pxny_TtOnDo";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/timsort/";
+    public override SortTypes SortType => SortTypes.Tim;
+    public override string TimeComplexity => "O(n Log n)";
+    public override string SpaceComplexity => "O(n)";
+    public override string YoutubeLink => "https://youtu.be/NVIjHj-lrT4?si=Rlpr2UG8qLMs4c9b";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/timsort/";
     public const int Run = 32;
 
     public async Task InsertionSortAsync(List<int> list, int left, int right)
@@ -119,7 +118,7 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
             for (int left = 0; left < n; left += size * 2)
             {
                 int mid = left + size - 1;
-                int right = Math.Min(left + size * 2 - 1, n - 1);
+                int right = Math.Min(left + (size * 2) - 1, n - 1);
 
                 if (mid < right)
                 {

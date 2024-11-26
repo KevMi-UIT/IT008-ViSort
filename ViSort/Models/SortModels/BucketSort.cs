@@ -5,14 +5,13 @@ using ViSort.Types;
 using Windows.ApplicationModel.Appointments.DataProvider;
 
 namespace ViSort.Models.SortModels;
-public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    // TODO: update info
-    public static SortTypes SortType => SortTypes.Bucket;
-    public static string TimeComplexity => "O(n + k)";
-    public static string SpaceComplexity => "O(n)";
-    public static string YoutubeLink => "https://www.youtube.com/watch?v=GAU102t5n4U";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bucket-sort-2/";
+    public override SortTypes SortType => SortTypes.Bucket;
+    public override string TimeComplexity => "O(n+k)";
+    public override string SpaceComplexity => "O(n+k)";
+    public override string YoutubeLink => "https://youtu.be/VuXbEb5ywrU?si=G_JHV1tPPCvVnceg";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bucket-sort-2/";
 
     public override async Task BeginAlgorithm()
     {
@@ -46,7 +45,7 @@ public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : Sort
         for (int i = 0; i < buckets.Length; i++)
         {
             Step++;
-            buckets[i] = new List<int>();
+            buckets[i] = [];
         }
 
         // Step 2: Distribute elements into buckets

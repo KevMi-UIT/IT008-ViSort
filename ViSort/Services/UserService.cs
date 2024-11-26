@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using ViSort.Models;
 using ViSort.Utils;
+using Windows.System;
 using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Database;
@@ -79,12 +80,12 @@ public class UserService
 
     public async Task ChangeUserProfileAsync(UserModel oldUser, UserModel newUser)
     {
-        if (oldUser == newUser)
+        if (oldUser.Equals(newUser))
         {
-            throw new UserNoChanges("No modification on user");
+            throw new UserNoChanges("No modification on user.");
         }
         UserModel? existingUser = await GetUserFromDBAsync(newUser.Username);
-        if (existingUser != null)
+        if (existingUser != null && oldUser.Username != newUser.Username)
         {
             throw new UserAlreadyExists("User already exists.");
         }

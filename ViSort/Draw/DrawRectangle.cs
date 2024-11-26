@@ -12,7 +12,6 @@ public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
     public int MaxValueOfElement { get; set; } = ViSort.Utils.GenRandomList.MAX;
     public int ThreadDelay { get; set; } = _threadDelay;
     public Canvas DrawCanvas { get; } = _canvas;
-    private Color BrushColor { get; set; }
 
     public void ShowAllElementsBlue(List<int> Elements, Color BrushColor)
     {

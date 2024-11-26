@@ -1,26 +1,37 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.DataContracts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using ViSort.Models;
+using static ViSort.Utils.Utils;
 
 namespace ViSort.ViewModels;
 
-public partial class SortsInfoViewModel(string _sortName, string _g4gLink, string _ytLink, string _timeComplexity, string _spaceComplexity) : ObservableObject
+public partial class SortsInfoViewModel() : ObservableObject
 {
     [ObservableProperty]
-    public required string sortName = _sortName;
+    public required SortsInfoModel model;
 
-    [ObservableProperty]
-    public required string g4gLink = _g4gLink;
+    public IEnumerable<string> AutoSuggestBoxItems => [
+        "Bubble Sort",
+        "Bucket Sort",
+        "Counting Sort",
+        "Heap Sort",
+        "Insertion Sort",
+        "Merge Sort",
+        "Quick Sort",
+        "Radix Sort",
+        "Selection Sort",
+        "Shell Sort",
+        "Tim Sort",
+        "Tree Sort"
+    ];
 
-    [ObservableProperty]
-    public required string ytLink = _ytLink;
-
-    [ObservableProperty]
-    public required string timeComplexity = _timeComplexity;
-
-    [ObservableProperty]
-    public required string spaceComplexity = _spaceComplexity;
+    public ICommand OpenGeeksForGeeksLinkCommand => new RelayCommand(() => OpenLink(Model.GeeksForGeeksLink));
+    public ICommand OpenYoutubeLinkCommand => new RelayCommand(() => OpenLink(Model.YoutubeLink));
 }

@@ -5,13 +5,13 @@ using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
 
-class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle), ISortModels
+class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
-    public static SortTypes SortType => SortTypes.Heap;
-    public static string TimeComplexity => "O(n Log n)";
-    public static string SpaceComplexity => "O(1)";
-    public static string YoutubeLink => "https://www.youtube.com/watch?v=MtQL_ll5KhQ";
-    public static string GeeksForGeeksLink => "https://www.geeksforgeeks.org/heap-sort/";
+    public override SortTypes SortType => SortTypes.Heap;
+    public override string TimeComplexity => "O(n Log n)";
+    public override string SpaceComplexity => "O(n Log n)";
+    public override string YoutubeLink => "https://youtu.be/2DmK_H7IdTo?si=cg1oxWLwzJ3l4TMl";
+    public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/heap-sort/";
 
     public override async Task BeginAlgorithm()
     {
