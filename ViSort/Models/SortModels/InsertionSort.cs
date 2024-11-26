@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Windows.Media;
-using System.Xml.Linq;
 using ViSort.Draw;
-using ViSort.Models;
 using ViSort.Types;
-using static ViSort.Utils.Utils;
 
 namespace ViSort.Models.SortModels;
 

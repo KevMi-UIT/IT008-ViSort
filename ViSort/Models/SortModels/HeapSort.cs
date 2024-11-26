@@ -1,4 +1,3 @@
-using System.Windows.Controls;
 using System.Windows.Media;
 using ViSort.Draw;
 using ViSort.Types;

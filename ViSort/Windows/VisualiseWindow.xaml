@@ -11,60 +11,63 @@
     Height="600"
     Activated="Window_Activated"
     Background="#FFD8FFDD"
-    WindowState="Maximized"
     mc:Ignorable="d">
     <Grid>
-        <Grid Margin="0,92,0,-9">
-            <Canvas
-                x:Name="SortVisualisation"
-                Height="Auto"
-                Margin="10,0,14,20"
-                Background="#FF767575" />
-            <RichTextBox
-                x:Name="CodeDisplay"
-                Margin="517,28,53,316"
-                IsReadOnly="True" />
-        </Grid>
-        <Button
-            x:Name="PlayButton"
-            Width="60"
-            Height="30"
-            Margin="37,50,0,0"
-            VerticalAlignment="Top"
-            Click="PlayButton_Click"
-            Content="Play" />
-        <WrapPanel
-            Width="Auto"
-            Height="Auto"
-            Margin="176,13,0,497"
-            HorizontalAlignment="Left">
-            <Slider
-                x:Name="SpeedSlider"
-                Width="180"
-                Height="30"
-                Foreground="White"
-                IsEnabled="True"
-                LargeChange="10"
-                Maximum="100"
-                Minimum="1"
-                SmallChange="10"
-                TickFrequency="10"
-                TickPlacement="BottomRight"
-                ValueChanged="SpeedSlider_ValueChanged" />
-            <ui:NumberBox
-                x:Name="SpeedNumberBox"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Margin="20">
+            <Button
+                x:Name="PlayButton"
+                Padding="10,5"
+                VerticalAlignment="Center"
+                Click="PlayButton_Click"
+                Content="Play" />
+            <WrapPanel
                 Width="Auto"
-                Height="40"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                BorderThickness="2,2,2,2"
-                FontSize="12"
-                IsEnabled="True"
-                KeyDown="SpeedNumberBox_KeyDown"
-                LostFocus="SpeedNumberBox_LostFocus"
-                PlaceholderText="ms"
-                PreviewTextInput="SpeedNumberBox_PreviewTextInput" />
+                Height="Auto"
+                VerticalAlignment="Center">
+                <Slider
+                    x:Name="SpeedSlider"
+                    Width="180"
+                    Height="30"
+                    Foreground="White"
+                    IsEnabled="True"
+                    LargeChange="10"
+                    Maximum="100"
+                    Minimum="1"
+                    SmallChange="10"
+                    TickFrequency="10"
+                    TickPlacement="BottomRight"
+                    ValueChanged="SpeedSlider_ValueChanged" />
+                <ui:NumberBox
+                    x:Name="SpeedNumberBox"
+                    Width="Auto"
+                    Height="40"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    BorderThickness="2,2,2,2"
+                    FontSize="12"
+                    IsEnabled="True"
+                    KeyDown="SpeedNumberBox_KeyDown"
+                    LostFocus="SpeedNumberBox_LostFocus"
+                    PlaceholderText="ms"
+                    PreviewTextInput="SpeedNumberBox_PreviewTextInput" />
+            </WrapPanel>
         </WrapPanel>
+        <Canvas
+            x:Name="SortVisualisation"
+            Grid.Row="1"
+            Margin="20"
+            Background="#FF767575" />
+
+        <!--
+            <RichTextBox x:Name="CodeDisplay"
+                         Margin="517,28,53,316"
+                         IsReadOnly="True" />
+        -->
+        <!--
         <Grid
             Width="NaN"
             Height="100"
@@ -98,5 +101,6 @@
                 Content="Space"
                 Foreground="White" />
         </Grid>
+        -->
     </Grid>
 </Window>

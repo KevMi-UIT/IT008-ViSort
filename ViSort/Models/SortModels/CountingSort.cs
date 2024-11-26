@@ -1,9 +1,6 @@
 using System.Windows.Media;
-using System.Windows.Shapes;
 using ViSort.Draw;
 using ViSort.Types;
-using Windows.Devices.PointOfService;
-using Windows.Foundation.Metadata;
 
 namespace ViSort.Models.SortModels;
 public class CountingSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)

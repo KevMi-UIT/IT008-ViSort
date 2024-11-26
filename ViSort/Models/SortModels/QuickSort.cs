@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using ViSort.Draw;
 using ViSort.Types;
 
