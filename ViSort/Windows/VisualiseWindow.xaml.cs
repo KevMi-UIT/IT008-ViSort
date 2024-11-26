@@ -32,39 +32,37 @@ public partial class VisualiseWindow : Window
     private readonly SortTypes SelectedSortType;
     private readonly SortModel SelectedSort;
     public DrawRectangle drawRectangle;
+
     public VisualiseWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, GenRandomListTypes _SelectedArrayGenerationMethod)
     {
         InitializeComponent();
         SortVisualisation.Height = GenRandomList.MAX;
-        drawRectangle = new(SortVisualisation);
-        // TODO: change thread delay => DONE
-        drawRectangle.ThreadDelay = 10; //default value
+        drawRectangle = new(SortVisualisation, 100);
         SelectedSortType = _SelectedSortAlgorithm;
         SelectedSort = SelectedSortType switch
         {
             SortTypes.Bubble => new BubbleSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
-            SortTypes.Bucket => throw new NotImplementedException(),
-            SortTypes.Counting => throw new NotImplementedException(),
+            SortTypes.Bucket => new BucketSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
+            SortTypes.Counting => new CountingSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
             SortTypes.Selection => new SelectionSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
             SortTypes.Insertion => new InsertionSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
-            SortTypes.Merge => throw new NotImplementedException(),
-            SortTypes.Quick => throw new NotImplementedException(),
+            SortTypes.Merge => new MergeSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
+            SortTypes.Quick => new QuickSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
             SortTypes.Heap => new HeapSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
-            SortTypes.Radix => new RadixSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle), //Chua thay doi phan Swap => Chua visualise duoc
+            SortTypes.Radix => new RadixSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
             SortTypes.Shell => new ShellSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
-            SortTypes.Tim => throw new NotImplementedException(),
-            SortTypes.Tree => throw new NotImplementedException(),
+            SortTypes.Tim => new TimSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
+            SortTypes.Tree => new TreeSort(GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle),
             _ => throw new SortNotImplemented()
         };
-
-        SelectedSort.DrawRect.DrawRectangleOnCanvas(SelectedSort.Elements);
     }
 
     private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
         if (SpeedNumberBox != null && !SpeedNumberBox.IsFocused)
         {
-            drawRectangle.ThreadDelay = (int)e.NewValue;
+            int temp = Math.Abs((int)e.NewValue - 100);
+            drawRectangle.ThreadDelay = (temp != 0) ? temp : 1;
             SpeedNumberBox.Text = drawRectangle.ThreadDelay.ToString();
         }
     }
@@ -86,12 +84,14 @@ public partial class VisualiseWindow : Window
     {
         if (int.TryParse(SpeedNumberBox.Text, out int value) && value >= SpeedSlider.Minimum && value <= SpeedSlider.Maximum)
         {
-            drawRectangle.ThreadDelay = value;
-            SpeedSlider.Value = value;
+            int temp = Math.Abs(value - 100);
+            drawRectangle.ThreadDelay = (temp != 0) ? temp : 1;
+            SpeedSlider.Value = 101 - temp;
+            SpeedNumberBox.Text = drawRectangle.ThreadDelay.ToString();
         }
         else
         {
-            MessageBox.Show("Please enter a valid integer within the range.");
+            MessageBox.Show("Please enter a valid integer between 1 and 100 ms.");
             SpeedNumberBox.Text = drawRectangle.ThreadDelay.ToString();
         }
     }
@@ -108,7 +108,13 @@ public partial class VisualiseWindow : Window
 
     private void PlayButton_Click(object sender, RoutedEventArgs e)
     {
-        SelectedSort.BeginSorting();
-        IsEnabled = false;
+        _ = SelectedSort.BeginSortingAsync();
+        PlayButton.IsEnabled = false;
+    }
+
+    private void Window_Activated(object sender, EventArgs e)
+    {
+        SortVisualisation.Width = this.ActualWidth - 20;
+        SelectedSort.DrawRect.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Black);
     }
 }

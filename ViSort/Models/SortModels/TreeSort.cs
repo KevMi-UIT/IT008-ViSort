@@ -1,3 +1,9 @@
+using DnsClient.Protocol;
+using MongoDB.Driver.Core.Authentication;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Xml.Linq;
 using ViSort.Draw;
 using ViSort.Types;
 
@@ -9,67 +15,55 @@ class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_el
     public override string SpaceComplexity => "O(n)";
     public override string YoutubeLink => "https://youtu.be/n2MLjGeK7qA?si=Ov_zhktEzWWcbZMp";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/tree-sort/";
-    //public TreeSort(Node root = null)
-    //{
-    //    Root = root;
-    //} => NEED CONSTRUCTOR TO IMPLEMENT TREE SORT
-    public class Node
-    {
-        public int Key { get; set; }
-        public Node Left { get; set; }
-        public Node Right { get; set; }
 
-        public Node(int key, Node? left = null, Node? right = null)
+    public async override Task BeginAlgorithm()
+    {
+        List<int> currentElements = [];
+        foreach (int element in Elements)
         {
-            Key = key;
-            Left = left;
-            Right = right;
+            InsertAsync(element, currentElements);
+            await Task.Delay(DrawRect.ThreadDelay);
         }
+        List<int> sortedElements = [];
+        InOrderTraversal(_root, sortedElements);
+    }
+    public class Node(int Key)
+    {
+        public int Key { get; } = Key;
+        public Node? Left { get; set; } = null;
+        public Node? Right { get; set; } = null;
     }
 
-    public Node? Root { get; private set; }
+    private Node? _root = null;
 
-    public void Insert(int Key)
+    public void InsertAsync(int key, List<int> currentElements)
     {
-        Root = InsertRecord(Root, Key);
+        _root = InsertRec(_root, key);
+        currentElements.Add(key);
+        currentElements.Sort();
+        DrawRect.DrawRectangleOnCanvas(currentElements, Colors.Black);
     }
 
-    Node InsertRecord(Node Root, int Key)
+    private Node InsertRec(Node? root, int key)
     {
-        if (Root == null)
-        {
-            Root = new Node(Key);
-            return Root;
-        }
-        if (Key.CompareTo(Root.Key) < 0)
-            Root.Left = InsertRecord(Root.Left, Key);
-        else if (Key.CompareTo(Root.Key) > 0)
-            Root.Right = InsertRecord(Root.Right, Key);
-        return Root;
+        Step++;
+        if (root == null)
+            return new Node(key);
+        if (key < root.Key)
+            root.Left = InsertRec(root.Left, key);
+        else if (key > root.Key)
+            root.Right = InsertRec(root.Right, key);
+
+        return root;
     }
 
-    public void TreeInsert(List<int> list)
+    public void InOrderTraversal(Node? root, List<int> sortedElements)
     {
-        for (int i = 0; i < list.Count; i++)
-        {
-            Insert(list[i]);
-        }
-    }
-
-    private void InOrderTraversal(Node node, List<int> sortedList)
-    {
-        if (node != null)
-        {
-            InOrderTraversal(node.Left, sortedList);
-            sortedList.Add(node.Key);
-            InOrderTraversal(node.Right, sortedList);
-        }
-    }
-    public override Task BeginAlgorithm()
-    {
-        List<int> sortedList = new List<int>();
-        InOrderTraversal(Root, sortedList);
-        Elements = new List<int>(sortedList);
-        return Task.CompletedTask;
+        Step++;
+        if (root == null)
+            return;
+        InOrderTraversal(root.Left, sortedElements);
+        sortedElements.Add(root.Key);
+        InOrderTraversal(root.Right, sortedElements);
     }
 }
