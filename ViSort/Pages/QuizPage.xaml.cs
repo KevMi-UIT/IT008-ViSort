@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ViSort.Models;
-using ViSort.Pages.ProfilePages;
 using ViSort.Types;
 using ViSort.Utils;
 using ViSort.Windows;
@@ -85,8 +73,7 @@ public partial class QuizPage : Page
     private void Answer_Checked(object sender, RoutedEventArgs e)
     {
         // Xác định nút radio nào đã được chọn
-        var selectedRadioButton = sender as RadioButton;
-        if (selectedRadioButton != null)
+        if (sender is RadioButton selectedRadioButton)
         {
             SortTypes sortTypes = selectedRadioButton.Content switch
             {
@@ -223,6 +210,7 @@ public partial class QuizPage : Page
                 SubmitButton_Click(sender, e);
                 break;
             default:
+                // All cases are handled
                 break;
         }
     }

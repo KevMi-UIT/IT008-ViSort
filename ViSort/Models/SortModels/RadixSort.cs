@@ -1,7 +1,7 @@
+using System.Windows.Media;
 using ViSort.Draw;
-using ViSort.Models;
 using ViSort.Types;
-//NOT DONE YET
+
 namespace ViSort.Models.SortModels;
 
 public class RadixSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
@@ -11,43 +11,52 @@ public class RadixSort(List<int> _element, DrawRectangle _drawRectangle) : SortM
     public override string SpaceComplexity => "O(n+b)";
     public override string YoutubeLink => "https://youtu.be/nu4gDuFabIM?si=EudyVCS6GOlBhLAv";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/radix-sort/";
-    private string[]? elementDuplicates;
+    public async override Task BeginAlgorithm()
+    {
+        await StartRadixSort(Elements);
+    }
     private async Task StartRadixSort(List<int> Elements)
     {
-        for (int i = 1; i < 4; i++)
+        // Number of digits in the largest number
+        int maxDigits = Elements.Max().ToString().Length;
+        Step++;
+        // Perform radix sort, one digit at a time
+        for (int i = 1; i <= maxDigits; i++)
         {
-            await Task.Delay(700);
-            CountSort(Elements, i);
-            await ReDrawDisplay(Elements);
+            await Task.Delay(DrawRect.ThreadDelay); // Pause before sorting the next digit
+            Step++;
+            CountSort(Elements, i); // Sort based on the current digit
+            DrawRect.DrawRectangleOnCanvas(Elements, Colors.Red); // Visualize current sorting step
         }
 
-        await Task.Delay(220);
+        await Task.Delay(220); // Small pause after sorting completes
+        DrawRect.DrawRectangleOnCanvas(Elements, Colors.Black); // Final visualization with sorted array
     }
 
     private void CountSort(List<int> Elements, int LengthToMinus)
     {
-        elementDuplicates = new string[10];
-
+        // Temporary buckets for counting sort based on the current digit
+        string[] elementDuplicates = new string[10];
+        Step++;
         for (int i = 0; i < Elements.Count; i++)
         {
             string currentElement = Elements[i].ToString();
 
-            switch (currentElement.Length)
+            // Pad numbers with leading zeros for consistent digit lengths
+            while (currentElement.Length < 3)
             {
-                case 2:
-                    currentElement = $"0{currentElement}";
-                    break;
-                case 1:
-                    currentElement = $"00{currentElement}";
-                    break;
+                currentElement = $"0{currentElement}";
             }
 
-            int currentIndex = Convert.ToInt32(currentElement[currentElement.Length - LengthToMinus].ToString());
-            elementDuplicates[currentIndex] = elementDuplicates[currentIndex] + $"{currentElement},";
+            // Find the digit to sort by (LengthToMinus determines the position)
+            int currentIndex = Convert.ToInt32(currentElement[^LengthToMinus].ToString());
+            elementDuplicates[currentIndex] += $"{currentElement},";
         }
 
         int ElementsIndex = 0;
 
+        // Rebuild the elements list in sorted order based on the current digit
+        Step++;
         for (int i = 0; i < 10; i++)
         {
             if (elementDuplicates[i] != null)
@@ -61,24 +70,5 @@ public class RadixSort(List<int> _element, DrawRectangle _drawRectangle) : SortM
                 }
             }
         }
-    }
-
-    private void ClearDisplay()
-    {
-        DrawRect.DrawCanvas.Children.Clear();
-    }
-
-    private async Task ReDrawDisplay(List<int> Elements)
-    {
-        ClearDisplay();
-        for (int i = 0; i < Elements.Count; i++)
-        {
-            DrawRect.DrawRectangleOnCanvas(Elements);
-            await Task.Delay(DrawRect.ThreadDelay);
-        }
-    }
-    public async override Task BeginAlgorithm()
-    {
-        await StartRadixSort(Elements);
     }
 }

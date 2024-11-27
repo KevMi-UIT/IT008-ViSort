@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using ViSort.Draw;
+﻿using ViSort.Draw;
 using ViSort.Types;
-using static ViSort.Utils.Utils;
 
 namespace ViSort.Models.SortModels;
 

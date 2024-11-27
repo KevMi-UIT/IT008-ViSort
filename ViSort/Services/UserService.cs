@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using ViSort.Models;
 using ViSort.Utils;
-using Windows.System;
 using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Database;

@@ -1,13 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Shapes;
+﻿using System.Windows.Media;
 using ViSort.Draw;
-using ViSort.Models.SortModels;
 using ViSort.Types;
-using ViSort.Utils;
 
 namespace ViSort.Models;
 
@@ -24,9 +17,9 @@ public abstract class SortModel(List<int> _element, DrawRectangle _drawRectangle
     public readonly DrawRectangle DrawRect = _drawRectangle;
     public abstract Task BeginAlgorithm();
 
-    public void BeginSorting()
+    public async Task BeginSortingAsync()
     {
-        BeginAlgorithm();
-        DrawRect.ShowAllElementsBlue(Elements);
+        await BeginAlgorithm();
+        DrawRect.ShowAllElementsBlue(Elements, Colors.Blue);
     }
 }

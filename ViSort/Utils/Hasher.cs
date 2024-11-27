@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
 namespace ViSort.Utils;
 
@@ -41,15 +36,18 @@ public static class Hasher
         string[] segments = hashString.Split(segmentDelimiter);
         byte[] hash = Convert.FromHexString(segments[0]);
         byte[] salt = Convert.FromHexString(segments[1]);
-        int iterations = int.Parse(segments[2]);
-        HashAlgorithmName algorithm = new HashAlgorithmName(segments[3]);
-        byte[] inputHash = Rfc2898DeriveBytes.Pbkdf2(
-            input,
-            salt,
-            iterations,
-            algorithm,
-            hash.Length
-        );
-        return CryptographicOperations.FixedTimeEquals(inputHash, hash);
+        if (int.TryParse(segments[2], out int iterations))
+        {
+            HashAlgorithmName algorithm = new(segments[3]);
+            byte[] inputHash = Rfc2898DeriveBytes.Pbkdf2(
+                input,
+                salt,
+                iterations,
+                algorithm,
+                hash.Length
+            );
+            return CryptographicOperations.FixedTimeEquals(inputHash, hash);
+        }
+        return false;
     }
 }

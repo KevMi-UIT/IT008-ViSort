@@ -13,7 +13,7 @@ public enum GenRandomListTypes
 
 public static class GenRandomList
 {
-    public const int MIN = 0;
+    public const int MIN = 10;
     public const int MAX = 999;
     public const int NEARLY_SORTED_SENSITIVITY = 10;
     private static readonly Random RAND = new();
@@ -55,7 +55,7 @@ public static class GenRandomList
     public static List<int> GenNearlySorted(int length)
     {
         List<int> list = GenSorted(length);
-        ShuffleList(ref list, length);
+        ShuffleList(length, ref list);
         return list;
     }
 
@@ -85,11 +85,11 @@ public static class GenRandomList
     public static List<int> GenNearlyAdjacent(int length)
     {
         List<int> list = GenAdjacent(length);
-        ShuffleList(ref list, length);
+        ShuffleList(length, ref list);
         return list;
     }
 
-    private static void ShuffleList(ref List<int> list, int length)
+    private static void ShuffleList(int length, ref List<int> list)
     {
         int lim = MAX / NEARLY_SORTED_SENSITIVITY;
         for (int i = 0; i < lim; i++)

@@ -6,65 +6,68 @@
     xmlns:local="clr-namespace:ViSort.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="ViSort - Visualise"
+    Title="Visualise Window"
     Width="800"
     Height="600"
+    Activated="Window_Activated"
     Background="#FFD8FFDD"
-    Icon="/Resources/Logo/visort_logo.ico"
-    ResizeMode="NoResize"
-    WindowState="Maximized"
     mc:Ignorable="d">
     <Grid>
-        <Grid Margin="0,92,0,-9">
-            <Canvas
-                x:Name="SortVisualisation"
-                Width="780"
-                Height="Auto"
-                Margin="10,0,10,27"
-                Background="#FF767575" />
-            <RichTextBox
-                x:Name="CodeDisplay"
-                Margin="545,22,25,322"
-                IsReadOnly="True" />
-        </Grid>
-        <Button
-            x:Name="PlayPauseButton"
-            Width="60"
-            Height="30"
-            Margin="37,50,0,0"
-            VerticalAlignment="Top"
-            Click="PlayButton_Click"
-            Content="Play" />
-        <WrapPanel
-            Width="Auto"
-            Height="Auto"
-            Margin="176,13,0,497"
-            HorizontalAlignment="Left">
-            <Slider
-                x:Name="SpeedSlider"
-                Width="180"
-                Height="30"
-                Foreground="White"
-                LargeChange="10"
-                Maximum="100"
-                Minimum="10"
-                SmallChange="10"
-                TickFrequency="10"
-                TickPlacement="BottomRight"
-                ValueChanged="SpeedSlider_ValueChanged" />
-            <ui:NumberBox
-                x:Name="SpeedNumberBox"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Margin="20">
+            <Button
+                x:Name="PlayButton"
+                Padding="10,5"
+                VerticalAlignment="Center"
+                Click="PlayButton_Click"
+                Content="Play" />
+            <WrapPanel
                 Width="Auto"
-                Height="40"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Left"
-                BorderThickness="2,2,2,2"
-                FontSize="12"
-                KeyDown="SpeedNumberBox_KeyDown"
-                LostFocus="SpeedNumberBox_LostFocus"
-                PlaceholderText="Speed"
-                PreviewTextInput="SpeedNumberBox_PreviewTextInput" />
+                Height="Auto"
+                VerticalAlignment="Center">
+                <Slider
+                    x:Name="SpeedSlider"
+                    Width="180"
+                    Height="30"
+                    Foreground="White"
+                    IsEnabled="True"
+                    LargeChange="10"
+                    Maximum="100"
+                    Minimum="1"
+                    SmallChange="10"
+                    TickFrequency="10"
+                    TickPlacement="BottomRight"
+                    ValueChanged="SpeedSlider_ValueChanged" />
+                <ui:NumberBox
+                    x:Name="SpeedNumberBox"
+                    Width="Auto"
+                    Height="40"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    BorderThickness="2,2,2,2"
+                    FontSize="12"
+                    IsEnabled="True"
+                    KeyDown="SpeedNumberBox_KeyDown"
+                    LostFocus="SpeedNumberBox_LostFocus"
+                    PlaceholderText="ms"
+                    PreviewTextInput="SpeedNumberBox_PreviewTextInput" />
+            </WrapPanel>
         </WrapPanel>
+        <Canvas
+            x:Name="SortVisualisation"
+            Grid.Row="1"
+            Margin="20"
+            Background="#FF767575" />
+
+        <!--
+            <RichTextBox x:Name="CodeDisplay"
+                         Margin="517,28,53,316"
+                         IsReadOnly="True" />
+        -->
+        <!--
         <Grid
             Width="NaN"
             Height="100"
@@ -98,5 +101,6 @@
                 Content="Space"
                 Foreground="White" />
         </Grid>
+        -->
     </Grid>
 </Window>

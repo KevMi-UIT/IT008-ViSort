@@ -1,5 +1,4 @@
 using ViSort.Draw;
-using ViSort.Models;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
