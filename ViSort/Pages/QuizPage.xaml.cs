@@ -91,7 +91,6 @@ public partial class QuizPage : Page
                 "Tree Sort" => SortTypes.Tree,
                 _ => default
             };
-
             QuestionList[currentQuestionIndex].SelectAnswer(sortTypes);
         }
     }
@@ -167,10 +166,7 @@ public partial class QuizPage : Page
         {
             _radioButtons.Add(radioButton);
         }
-        if (InstructionFlyout.IsOpen == false)
-        {
-            Keyboard.Focus(MultipleChoiceWrapPanel);
-        }
+        Keyboard.Focus(MultipleChoiceWrapPanel);
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -217,9 +213,11 @@ public partial class QuizPage : Page
     private void InstructionButton_Click(object sender, RoutedEventArgs e)
     {
         InstructionFlyout.IsOpen = true;
+        Keyboard.ClearFocus();
     }
     private void CloseInstructionFlyout_Click(object sender, RoutedEventArgs e)
     {
         InstructionFlyout.IsOpen = false;
+        Keyboard.Focus(MultipleChoiceWrapPanel);
     }
 }
