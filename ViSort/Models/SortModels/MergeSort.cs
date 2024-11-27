@@ -1,5 +1,5 @@
-using System.Xml.Linq;
 using System.Windows.Media;
+using System.Xml.Linq;
 using ViSort.Draw;
 using ViSort.Types;
 
