@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using ViSort.Draw;
 using ViSort.Models;
 using ViSort.Types;
 using ViSort.Utils;

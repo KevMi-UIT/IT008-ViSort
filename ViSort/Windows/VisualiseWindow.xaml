@@ -7,100 +7,132 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Visualise Window"
-    Width="800"
-    Height="600"
-    Activated="Window_Activated"
-    Background="#FFD8FFDD"
+    d:DesignHeight="800"
+    d:DesignWidth="1300"
+    Icon="/Resources/Logo/visort_logo.ico"
+    SizeToContent="Width"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
-    <Grid>
+    <Grid
+        Width="Auto"
+        Height="Auto"
+        Margin="10">
+        <!--  Set res cố định thì set width và margin để canvas không bị dính border  -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0" Margin="20">
-            <Button
-                x:Name="PlayButton"
-                Padding="10,5"
-                VerticalAlignment="Center"
-                Click="PlayButton_Click"
-                Content="Play" />
-            <WrapPanel
-                Width="Auto"
-                Height="Auto"
-                VerticalAlignment="Center">
-                <Slider
-                    x:Name="SpeedSlider"
-                    Width="180"
-                    Height="30"
-                    Foreground="White"
-                    IsEnabled="True"
-                    LargeChange="10"
-                    Maximum="100"
-                    Minimum="1"
-                    SmallChange="10"
-                    TickFrequency="10"
-                    TickPlacement="BottomRight"
-                    ValueChanged="SpeedSlider_ValueChanged" />
-                <ui:NumberBox
-                    x:Name="SpeedNumberBox"
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <WrapPanel Grid.Column="0" Margin="10">
+                <Button
+                    x:Name="PlayButton"
+                    Margin="10"
+                    Padding="10"
+                    VerticalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    Click="PlayButton_Click"
+                    Content="Play"
+                    FontWeight="Black" />
+                <WrapPanel
                     Width="Auto"
-                    Height="40"
-                    Margin="10,0,0,0"
-                    HorizontalAlignment="Left"
-                    BorderThickness="2,2,2,2"
-                    FontSize="12"
-                    IsEnabled="True"
-                    KeyDown="SpeedNumberBox_KeyDown"
-                    LostFocus="SpeedNumberBox_LostFocus"
-                    PlaceholderText="ms"
-                    PreviewTextInput="SpeedNumberBox_PreviewTextInput" />
+                    Height="Auto"
+                    Margin="10"
+                    VerticalAlignment="Stretch">
+                    <Slider
+                        x:Name="SpeedSlider"
+                        Width="180"
+                        Height="30"
+                        Margin="5,5,50,0"
+                        IsEnabled="True"
+                        LargeChange="10"
+                        Maximum="100"
+                        Minimum="1"
+                        SmallChange="10"
+                        TickFrequency="10"
+                        TickPlacement="BottomRight"
+                        ValueChanged="SpeedSlider_ValueChanged" />
+                    <ui:NumberBox
+                        x:Name="SpeedNumberBox"
+                        Width="120"
+                        Height="Auto"
+                        Padding="5"
+                        HorizontalAlignment="Right"
+                        BorderThickness="2"
+                        FontSize="12"
+                        IsEnabled="True"
+                        KeyDown="SpeedNumberBox_KeyDown"
+                        LostFocus="SpeedNumberBox_LostFocus"
+                        PlaceholderText="ms"
+                        PreviewTextInput="SpeedNumberBox_PreviewTextInput" />
+                </WrapPanel>
             </WrapPanel>
-        </WrapPanel>
-        <Canvas
-            x:Name="SortVisualisation"
+            <WrapPanel Grid.Column="1">
+                <Grid
+                    Width="Auto"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        x:Name="AlgorithmName"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Width="Auto"
+                        Height="Auto"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="NAME"
+                        FontWeight="Bold"
+                        Foreground="Black" />
+                    <Label
+                        x:Name="TimeComplexity"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Content="Time"
+                        FontWeight="Bold"
+                        Foreground="Black" />
+                    <Label
+                        x:Name="SpaceComplexity"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Content="Space"
+                        FontWeight="Bold"
+                        Foreground="Black" />
+                </Grid>
+            </WrapPanel>
+        </Grid>
+        <Border
+            x:Name="CanvasBorder"
             Grid.Row="1"
-            Margin="20"
-            Background="#FF767575" />
-
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="2">
+            <Canvas
+                x:Name="SortVisualisation"
+                Width="Auto"
+                HorizontalAlignment="Stretch"
+                Loaded="SortVisualisation_Loaded"
+                SizeChanged="SortVisualisation_SizeChanged" />
+        </Border>
         <!--
             <RichTextBox x:Name="CodeDisplay"
                          Margin="517,28,53,316"
                          IsReadOnly="True" />
-        -->
-        <!--
-        <Grid
-            Width="NaN"
-            Height="100"
-            Margin="465,0,0,0"
-            VerticalAlignment="Top">
-            <Label
-                x:Name="AlgorithmName"
-                Width="Auto"
-                Height="30"
-                Margin="0,31,246,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Content="Name"
-                Foreground="White" />
-            <Label
-                x:Name="TimeComplexity"
-                Width="Auto"
-                Height="30"
-                Margin="0,16,156,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Content="Time"
-                Foreground="White" />
-            <Label
-                x:Name="SpaceComplexity"
-                Width="Auto"
-                Height="30"
-                Margin="0,60,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Content="Space"
-                Foreground="White" />
-        </Grid>
         -->
     </Grid>
 </Window>

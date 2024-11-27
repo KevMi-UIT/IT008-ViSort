@@ -1,5 +1,4 @@
 using System.Windows.Media;
-using ViSort.Draw;
 using ViSort.Types;
 // Creat DrawOneRectangle funct
 //NOT DONE YET
@@ -8,7 +7,7 @@ namespace ViSort.Models.SortModels;
 class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
     public override SortTypes SortType => SortTypes.Tim;
-    public override string TimeComplexity => "O(n Log n)";
+    public override string TimeComplexity => "O(nLog(n))";
     public override string SpaceComplexity => "O(n)";
     public override string YoutubeLink => "https://youtu.be/NVIjHj-lrT4?si=Rlpr2UG8qLMs4c9b";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/timsort/";
@@ -20,7 +19,7 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
         {
             Step++;
             int temp = list[i];
-            DrawRect.SetOneRectangleColor(i, Colors.Red); // Highlight current element
+            DrawRect.SetOneRectangleColor(i, Colors.Red);
             await Task.Delay(DrawRect.ThreadDelay);
             int j = i - 1;
 
@@ -28,15 +27,15 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
             {
                 Step++;
                 list[j + 1] = list[j];
-                DrawRect.SetOneRectangleColor(j, Colors.Yellow); // Highlight comparison
+                DrawRect.SetOneRectangleColor(j, Colors.Yellow);
                 await Task.Delay(DrawRect.ThreadDelay);
-                DrawRect.DrawRectangleOnCanvas(list, Colors.Black);
+                DrawRect.DrawRectangleOnCanvas(list, Colors.Gray);
                 j--;
             }
 
             list[j + 1] = temp;
-            DrawRect.DrawRectangleOnCanvas(list, Colors.Black); // Update visualization
-            DrawRect.SetOneRectangleColor(i, Colors.Black); // Reset color
+            DrawRect.DrawRectangleOnCanvas(list, Colors.Gray);
+            DrawRect.SetOneRectangleColor(i, Colors.Gray);
         }
     }
 
@@ -44,8 +43,6 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
     {
         int i, j, k;
         int length1 = mid - left + 1, length2 = right - mid;
-
-        // Temporary arrays
         int[] leftArr = new int[length1];
         int[] rightArr = new int[length2];
         Step++;
@@ -57,8 +54,6 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
 
         i = j = 0;
         k = left;
-
-        // Merge two halves
         while (i < length1 && j < length2)
         {
             Step++;
@@ -73,20 +68,19 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
                 j++;
             }
 
-            DrawRect.SetOneRectangleColor(k, Colors.Green); // Highlight merged position
-            DrawRect.DrawRectangleOnCanvas(list, Colors.Black); // Update canvas
+            DrawRect.SetOneRectangleColor(k, Colors.Green);
+            DrawRect.DrawRectangleOnCanvas(list, Colors.Gray);
             await Task.Delay(DrawRect.ThreadDelay);
             k++;
         }
 
-        // Copy remaining elements
         while (i < length1)
         {
             Step++;
             list[k] = leftArr[i];
-            DrawRect.SetOneRectangleColor(k, Colors.Blue); // Highlight remaining
+            DrawRect.SetOneRectangleColor(k, Colors.Blue);
             await Task.Delay(DrawRect.ThreadDelay);
-            DrawRect.DrawRectangleOnCanvas(list, Colors.Black);
+            DrawRect.DrawRectangleOnCanvas(list, Colors.Gray);
             i++;
             k++;
         }
@@ -94,25 +88,21 @@ class TimSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_ele
         while (j < length2)
         {
             list[k] = rightArr[j];
-            DrawRect.SetOneRectangleColor(k, Colors.Blue); // Highlight remaining
+            DrawRect.SetOneRectangleColor(k, Colors.Blue);
             await Task.Delay(DrawRect.ThreadDelay);
-            DrawRect.DrawRectangleOnCanvas(list, Colors.Black);
+            DrawRect.DrawRectangleOnCanvas(list, Colors.Gray);
             j++;
             k++;
         }
     }
 
-    public override async Task BeginAlgorithm()
+    public override async Task BeginAlgorithmAsync()
     {
         int n = Elements.Count;
-
-        // Sort subarrays of size `Run` using Insertion Sort
         for (int i = 0; i < n; i += Run)
         {
             await InsertionSortAsync(Elements, i, Math.Min(i + Run - 1, n - 1));
         }
-
-        // Merge sorted subarrays
         for (int size = Run; size < n; size *= 2)
         {
             for (int left = 0; left < n; left += size * 2)

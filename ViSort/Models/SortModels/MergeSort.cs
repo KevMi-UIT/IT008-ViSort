@@ -1,5 +1,4 @@
 ﻿using System.Windows.Media;
-using ViSort.Draw;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
@@ -11,7 +10,7 @@ class MergeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_e
     public override string YoutubeLink => "https://www.youtube.com/watch?v=ZRPoEKHXTJg";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/merge-sort/";
 
-    public override async Task BeginAlgorithm()
+    public override async Task BeginAlgorithmAsync()
     {
         await StartMergeSort(0, Elements.Count - 1);
     }
@@ -45,7 +44,7 @@ class MergeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_e
                 Elements[k] = R[j];
                 j++;
             }
-            DrawRect.DrawRectangleOnCanvas(Elements, Colors.Black);
+            DrawRect.DrawRectangleOnCanvas(Elements, Colors.Gray);
             DrawRect.SetOneRectangleColor(k, Colors.Red);
             k++;
         }
@@ -54,7 +53,7 @@ class MergeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_e
         {
             Elements[k] = L[i];
             i++;
-            DrawRect.DrawRectangleOnCanvas(Elements, Colors.Black);
+            DrawRect.DrawRectangleOnCanvas(Elements, Colors.Gray);
             DrawRect.SetOneRectangleColor(k, Colors.Red);
             k++;
         }
@@ -63,7 +62,7 @@ class MergeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_e
         {
             Elements[k] = R[j];
             j++;
-            DrawRect.DrawRectangleOnCanvas(Elements, Colors.Black);
+            DrawRect.DrawRectangleOnCanvas(Elements, Colors.Gray);
             DrawRect.SetOneRectangleColor(k, Colors.Red);
             k++;
         }

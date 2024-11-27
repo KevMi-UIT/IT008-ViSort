@@ -1,23 +1,22 @@
 using System.Windows.Media;
-using ViSort.Draw;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
 class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
     public override SortTypes SortType => SortTypes.Tree;
-    public override string TimeComplexity => "O(n log n)";
+    public override string TimeComplexity => "O(nlog(n))";
     public override string SpaceComplexity => "O(n)";
     public override string YoutubeLink => "https://youtu.be/n2MLjGeK7qA?si=Ov_zhktEzWWcbZMp";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/tree-sort/";
 
-    public async override Task BeginAlgorithm()
+    public async override Task BeginAlgorithmAsync()
     {
         List<int> currentElements = [];
         foreach (int element in Elements)
         {
             InsertAsync(element, currentElements);
-            await Task.Delay(DrawRect.ThreadDelay);
+            await Task.Delay(DrawRect.ThreadDelay + 50);
         }
         List<int> sortedElements = [];
         InOrderTraversal(_root, sortedElements);
@@ -36,7 +35,7 @@ class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_el
         _root = InsertRec(_root, key);
         currentElements.Add(key);
         currentElements.Sort();
-        DrawRect.DrawRectangleOnCanvas(currentElements, Colors.Black);
+        DrawRect.DrawRectangleOnCanvas(currentElements, Colors.Gray);
     }
 
     private Node InsertRec(Node? root, int key)
