@@ -1,7 +1,5 @@
-using System.Windows.Controls;
 using System.Windows.Media;
 using ViSort.Draw;
-using ViSort.Models;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;

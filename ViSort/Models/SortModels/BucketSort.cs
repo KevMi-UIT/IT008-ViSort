@@ -1,8 +1,6 @@
 using System.Windows.Media;
-using System.Xml.Linq;
 using ViSort.Draw;
 using ViSort.Types;
-using Windows.ApplicationModel.Appointments.DataProvider;
 
 namespace ViSort.Models.SortModels;
 public class BucketSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)

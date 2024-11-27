@@ -1,11 +1,7 @@
-using Amazon.Runtime;
-using System.Windows.Media;
 using System.Xml.Linq;
+using System.Windows.Media;
 using ViSort.Draw;
 using ViSort.Types;
-using Windows.Media.Devices;
-using Windows.Media.MediaProperties;
-using static System.Net.WebRequestMethods;
 
 namespace ViSort.Models.SortModels;
 class MergeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
