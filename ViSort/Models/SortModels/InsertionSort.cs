@@ -1,4 +1,3 @@
-using ViSort.Draw;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
@@ -11,7 +10,7 @@ public class InsertionSort(List<int> _element, DrawRectangle _drawRectangle) : S
     public override string YoutubeLink => "https://youtu.be/mTNC0ERo-ZI?si=BTaxxQLXZPsRooAq";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/insertion-sort-algorithm/";
 
-    public override async Task BeginAlgorithm()
+    public override async Task BeginAlgorithmAsync()
     {
         for (int i = 1; i < Elements.Count; i++)
         {

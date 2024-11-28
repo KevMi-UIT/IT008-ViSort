@@ -99,7 +99,7 @@
                         Width="179"
                         Height="46"
                         IsSnapToTickEnabled="True"
-                        Maximum="1200"
+                        Maximum="500"
                         Minimum="100"
                         TickFrequency="100"
                         TickPlacement="BottomRight" />

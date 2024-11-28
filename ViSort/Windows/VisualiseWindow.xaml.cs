@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using ViSort.Draw;
 using ViSort.Models;
 using ViSort.Types;
 using ViSort.Utils;
@@ -17,10 +16,12 @@ public partial class VisualiseWindow : Window
     public VisualiseWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, GenRandomListTypes _SelectedArrayGenerationMethod)
     {
         InitializeComponent();
-        SortVisualisation.Height = GenRandomList.MAX;
         drawRectangle = new(SortVisualisation, 100);
         SelectedSortType = _SelectedSortAlgorithm;
         SelectedSort = SortUtils.InstantiateSort(SelectedSortType, GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle);
+        AlgorithmName.Content = SelectedSort.SortType.ToString() + " Sort";
+        TimeComplexity.Content = "Time complexity: " + SelectedSort.TimeComplexity;
+        SpaceComplexity.Content = "Space complexity: " + SelectedSort.SpaceComplexity;
     }
 
     private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -78,9 +79,14 @@ public partial class VisualiseWindow : Window
         PlayButton.IsEnabled = false;
     }
 
-    private void Window_Activated(object sender, EventArgs e)
+    private void SortVisualisation_Loaded(object sender, RoutedEventArgs e)
     {
-        SortVisualisation.Width = this.ActualWidth - 20;
-        SelectedSort.DrawRect.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Black);
+        drawRectangle.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Gray);
+    }
+
+    private void SortVisualisation_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        SortVisualisation.Children.Clear();
+        drawRectangle.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Gray);
     }
 }

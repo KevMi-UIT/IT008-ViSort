@@ -1,17 +1,16 @@
-using ViSort.Draw;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
 class QuickSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
     public override SortTypes SortType => SortTypes.Quick;
-    public override string TimeComplexity => "O(n Log n)";
+    public override string TimeComplexity => "O(nLog(n))";
     public override string SpaceComplexity => "O(n)";
     public override string YoutubeLink => "https://youtu.be/WprjBK0p6rw?si=G14ohw6siZ3qa7xC";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/quick-sort-algorithm/";
 
     protected int IntPartiton { get; set; }
-    public override async Task BeginAlgorithm()
+    public override async Task BeginAlgorithmAsync()
     {
         await Recursive(0, Elements.Count - 1);
     }

@@ -1,5 +1,4 @@
-﻿using ViSort.Draw;
-using ViSort.Types;
+﻿using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
 
@@ -10,8 +9,7 @@ class BubbleSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_
     public override string SpaceComplexity => "O(1)";
     public override string YoutubeLink => "https://youtu.be/9I2oOAr2okY?si=GZlYC7Ab1bvFht59";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/bubble-sort-algorithm/";
-
-    public override async Task BeginAlgorithm()
+    public override async Task BeginAlgorithmAsync()
     {
         for (int i = 0; i < Elements.Count; i++)
         {

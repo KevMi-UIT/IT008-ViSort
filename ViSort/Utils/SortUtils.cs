@@ -1,5 +1,4 @@
-﻿using ViSort.Draw;
-using ViSort.Models;
+﻿using ViSort.Models;
 using ViSort.Models.SortModels;
 using ViSort.Types;
 using static ViSort.Exceptions.SortExceptions;
@@ -44,6 +43,7 @@ public static class SortUtils
             "Selection Sort" => SortTypes.Selection,
             "Shell Sort" => SortTypes.Shell,
             "Tim Sort" => SortTypes.Tim,
+            "Tree Sort" => SortTypes.Tree,
             _ => throw new SortUdefined()
         };
     }
