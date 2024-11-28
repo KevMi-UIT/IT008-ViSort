@@ -82,22 +82,8 @@ public partial class QuizPage : Page
         // Xác định nút radio nào đã được chọn
         if (sender is RadioButton selectedRadioButton)
         {
-            SortTypes sortTypes = selectedRadioButton.Content switch
-            {
-                "A. Bubble Sort" => SortTypes.Bubble,
-                "B. Bucket Sort" => SortTypes.Bucket,
-                "C. Counting Sort" => SortTypes.Counting,
-                "I. Selection Sort" => SortTypes.Selection,
-                "E. Insertion Sort" => SortTypes.Insertion,
-                "F. Merge Sort" => SortTypes.Merge,
-                "G. Quick Sort" => SortTypes.Quick,
-                "D. Heap Sort" => SortTypes.Heap,
-                "H. Radix Sort" => SortTypes.Radix,
-                "J. Shell Sort" => SortTypes.Shell,
-                "K. Tim Sort" => SortTypes.Tim,
-                "L. Tree Sort" => SortTypes.Tree,
-                _ => default
-            };
+            string selectedSortName = selectedRadioButton.Tag.ToString()!;
+            SortTypes sortTypes = SortUtils.GetSortType(selectedSortName);
             QuestionList[currentQuestionIndex].SelectedSort = SortUtils.InstantiateSort(sortTypes, QuestionList[currentQuestionIndex].Items, new DrawRectangle(new Canvas()));
             _ = QuestionList[currentQuestionIndex].SelectedSort!.BeginSortingAsync();
         }

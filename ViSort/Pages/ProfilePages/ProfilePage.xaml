@@ -50,7 +50,6 @@
                 <ui:TextBlock
                     x:Name="UserProfileTitle"
                     FontTypography="Title"
-                    Foreground="Black"
                     Text="USER PROFILE" />
             </Label>
 
