@@ -137,7 +137,7 @@ public partial class QuizPage : Page
             WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
             {
                 Title = "Info",
-                Content = "Quiz ended.\nChoose 'OK' button to navigate to the ScoreBoard and 'Close' button to navigate to the Homepage.",
+                Content = $"CONGRATS! YOU GOT {score} points!\n\nChoose 'OK' button to navigate to the ScoreBoard \nand 'Close' button to navigate to the Homepage.",
                 PrimaryButtonText = "OK",
             }.ShowDialogAsync();
             if (result == WpfUiControls.MessageBoxResult.Primary)
@@ -154,7 +154,7 @@ public partial class QuizPage : Page
             WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
             {
                 Title = "Info",
-                Content = "Quiz ended.\nChoose 'OK' button to navigate to the Homepage and 'Close' button to answer quiz again.",
+                Content = $"CONGRATS! YOU GOT {score} points!\n\nChoose 'OK' button to navigate to the Homepage \nand 'Close' button to answer quiz again.",
                 PrimaryButtonText = "OK",
             }.ShowDialogAsync();
             if (result == WpfUiControls.MessageBoxResult.Primary)
