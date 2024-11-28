@@ -28,35 +28,48 @@
   <a href="../../../releases/latest"><img alt="Download Count" src="https://img.shields.io/github/downloads/KevMi-UIT/IT008-ViSort/total?style=for-the-badge&color=89dceb"></a>
 </div>
 
-- Chương trình hỗ trợ dạy và minh họa cho các thuật toán sắp xếp
-- IT008.P13
-- [Danh sách đồ án & thành viên](https://docs.google.com/spreadsheets/d/1fhE7mMagXvfal4vOdhkRucCs-nvcMe3Jw-MJa18PLK4/edit?gid=0#gid=0)
+---
 
 ## TABLE OF CONTENTS
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [⬇️ DOWNLOAD](#-download)
 - [🌠 GIỚI THIỆU](#-gi%E1%BB%9Ai-thi%E1%BB%86u)
   - [GIẢNG VIÊN HƯỚNG DẪN](#gi%E1%BA%A2ng-vi%C3%8An-h%C6%AF%E1%BB%9Ang-d%E1%BA%AAn)
   - [THÀNH VIÊN NHÓM](#th%C3%80nh-vi%C3%8An-nh%C3%93m)
-  - [DOWNLOAD](#download)
-  - [LINKS](#links)
-  - [DEV](#dev)
+  - [REPORTS](#reports)
+- [👨‍💻 DEV](#-dev)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ---
 
-# 🌠 GIỚI THIỆU
+## ⬇️ DOWNLOAD
 
-## GIẢNG VIÊN HƯỚNG DẪN
+[![Windows x64](https://img.shields.io/badge/X64-8aadf4?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-x64.exe)
+[![Windows x86](https://img.shields.io/badge/X86-ed8796?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-x86.exe)
+[![Windows ARM64](https://img.shields.io/badge/ARM64-5b6078?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-arm64.exe)
+
+> [!NOTE]
+> Windows only
+
+---
+
+## 🌠 GIỚI THIỆU
+
+- Chương trình hỗ trợ dạy và minh họa cho các thuật toán sắp xếp
+- IT008.P13
+- [Danh sách đồ án & thành viên](https://docs.google.com/spreadsheets/d/1fhE7mMagXvfal4vOdhkRucCs-nvcMe3Jw-MJa18PLK4/edit?gid=0#gid=0)
+
+### GIẢNG VIÊN HƯỚNG DẪN
 
 | Họ tên                | Email               |
 | --------------------- | ------------------- |
 | Nguyễn Thị Xuân Hương | huongntx@uit.edu.vn |
 
-## THÀNH VIÊN NHÓM
+### THÀNH VIÊN NHÓM
 
 | Họ tên                | MSSV     | Github                                         | Ghi chú     |
 | --------------------- | -------- | ---------------------------------------------- | ----------- |
@@ -64,24 +77,15 @@
 | Phan Lê Minh          | 23520952 | [leminionn](https://github.com/leminionn/)     |             |
 | Phạm Nguyên Cảnh      | 23520167 | [PNCanh](https://github.com/PNCanh/)           |             |
 
----
-
-## DOWNLOAD
-
-[![Windows x64](https://img.shields.io/badge/Windows_X64-8aadf4?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-x64.exe)
-[![Windows x86](https://img.shields.io/badge/Windows_X86-ed8796?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-x86.exe)
-[![Windows ARM64](https://img.shields.io/badge/Windows_ARM64-5b6078?style=for-the-badge&logo=windows&logoColor=white)](../../../releases/latest/download/ViSort-arm64.exe)
-
----
-
-## LINKS
+### REPORTS
 
 - Word: https://1drv.ms/w/s!Ak34VOEg_Ui7jUthSJ6y79Rfyi0Y?e=uaVsfT
+- PDF: [ViSort.pdf](../report/ViSort/ViSort.pdf)
 - Powerpoint: https://1drv.ms/p/s!Ak34VOEg_Ui7jVEmmZXYQQ4oqKKw?e=F6hdQn
 
 ---
 
-## DEV
+## 👨‍💻 DEV
 
 ```ps1
 # dotnet tool restore
