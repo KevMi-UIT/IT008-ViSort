@@ -41,7 +41,7 @@ public partial class SettingsPage : Page
                     MainWindow.IsDarkMode = true;
                     break;
                 default:
-                    break;
+                    throw new ArgumentException("Invalid theme");
             }
         }
     }

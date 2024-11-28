@@ -4,16 +4,11 @@ namespace ViSort.Utils;
 
 public static class Utils
 {
-    public const int MAX_SCORE = 999;
-    public const double SCORE_SENSITIVITY = 0.01;
+    public const int SCORE_SENSITIVITY = 9999;
 
     public static int CalcScore(int steps, int questions, int answered)
     {
-        if (answered == 0)
-        {
-            return 0;
-        }
-        return Convert.ToInt32(MAX_SCORE / (1 + (steps * SCORE_SENSITIVITY * (questions / answered))));
+        return Convert.ToInt32(answered / questions / (steps + 1) * SCORE_SENSITIVITY);
     }
 
     public static void Swap<T>(ref T a, ref T b)
