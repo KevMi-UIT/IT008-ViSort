@@ -10,7 +10,7 @@ class TreeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_el
     public override string YoutubeLink => "https://youtu.be/n2MLjGeK7qA?si=Ov_zhktEzWWcbZMp";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/tree-sort/";
 
-    public async override Task BeginAlgorithmAsync()
+    public override async Task BeginAlgorithmAsync()
     {
         List<int> currentElements = [];
         foreach (int element in Elements)

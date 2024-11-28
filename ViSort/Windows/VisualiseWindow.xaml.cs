@@ -11,12 +11,11 @@ public partial class VisualiseWindow : Window
 {
     private readonly SortTypes SelectedSortType;
     private readonly SortModel SelectedSort;
-    public DrawRectangle drawRectangle;
 
     public VisualiseWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, GenRandomListTypes _SelectedArrayGenerationMethod)
     {
         InitializeComponent();
-        drawRectangle = new(SortVisualisation, 100);
+        DrawRectangle drawRectangle = new(SortVisualisation, 100);
         SelectedSortType = _SelectedSortAlgorithm;
         SelectedSort = SortUtils.InstantiateSort(SelectedSortType, GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle);
         AlgorithmName.Content = SelectedSort.SortType.ToString() + " Sort";
@@ -29,8 +28,8 @@ public partial class VisualiseWindow : Window
         if (SpeedNumberBox != null && !SpeedNumberBox.IsFocused)
         {
             int temp = Math.Abs((int)e.NewValue - 100);
-            drawRectangle.ThreadDelay = (temp != 0) ? temp : 1;
-            SpeedNumberBox.Text = drawRectangle.ThreadDelay.ToString();
+            SelectedSort.DrawRect.ThreadDelay = (temp != 0) ? temp : 1;
+            SpeedNumberBox.Text = SelectedSort.DrawRect.ThreadDelay.ToString();
         }
     }
 
@@ -52,14 +51,14 @@ public partial class VisualiseWindow : Window
         if (int.TryParse(SpeedNumberBox.Text, out int value) && value >= SpeedSlider.Minimum && value <= SpeedSlider.Maximum)
         {
             int temp = Math.Abs(value - 100);
-            drawRectangle.ThreadDelay = (temp != 0) ? temp : 1;
+            SelectedSort.DrawRect.ThreadDelay = (temp != 0) ? temp : 1;
             SpeedSlider.Value = 101 - temp;
-            SpeedNumberBox.Text = drawRectangle.ThreadDelay.ToString();
+            SpeedNumberBox.Text = SelectedSort.DrawRect.ThreadDelay.ToString();
         }
         else
         {
             MessageBox.Show("Please enter a valid integer between 1 and 100 ms.");
-            SpeedNumberBox.Text = drawRectangle.ThreadDelay.ToString();
+            SpeedNumberBox.Text = SelectedSort.DrawRect.ThreadDelay.ToString();
         }
     }
 
@@ -81,12 +80,12 @@ public partial class VisualiseWindow : Window
 
     private void SortVisualisation_Loaded(object sender, RoutedEventArgs e)
     {
-        drawRectangle.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Gray);
+        SelectedSort.DrawRect.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Gray);
     }
 
     private void SortVisualisation_SizeChanged(object sender, SizeChangedEventArgs e)
     {
         SortVisualisation.Children.Clear();
-        drawRectangle.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Gray);
+        SelectedSort.DrawRect.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Gray);
     }
 }

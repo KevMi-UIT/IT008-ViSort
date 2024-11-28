@@ -10,7 +10,7 @@ public class RadixSort(List<int> _element, DrawRectangle _drawRectangle) : SortM
     public override string SpaceComplexity => "O(n+b)";
     public override string YoutubeLink => "https://youtu.be/nu4gDuFabIM?si=EudyVCS6GOlBhLAv";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/radix-sort/";
-    public async override Task BeginAlgorithmAsync()
+    public override async Task BeginAlgorithmAsync()
     {
         await StartRadixSort(Elements);
     }

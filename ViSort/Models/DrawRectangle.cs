@@ -6,39 +6,39 @@ namespace ViSort.Models;
 
 public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
 {
-    public int MaxValueOfElement { get; set; } = Utils.GenRandomList.MAX;
     public int ThreadDelay { get; set; } = _threadDelay;
     public Canvas DrawCanvas { get; } = _canvas;
 
-    public void ShowAllElementsBlue(List<int> Elements, Color BrushColor)
+    public void ShowAllElementsBlue(List<int> elements, Color brushColor)
     {
-        SetAllRectangleColor(Elements, BrushColor);
+        SetAllRectangleColor(elements, brushColor);
     }
 
-    public async Task SwapElementsAsync(List<int> Elements, int index1, int index2)
+    public async Task SwapElementsAsync(List<int> elements, int index1, int index2)
     {
         SetOneRectangleColor(index1, Colors.Red);
         SetOneRectangleColor(index2, Colors.Red);
         await Task.Delay(ThreadDelay);
-        Utils.Utils.Swap(Elements, index1, index2);
+        Utils.Utils.Swap(elements, index1, index2);
         await Task.Delay(ThreadDelay);
-        DrawRectangleOnCanvas(Elements, Colors.Gray);
+        DrawRectangleOnCanvas(elements, Colors.Gray);
         SetOneRectangleColor(index1, Colors.Gray);
         SetOneRectangleColor(index2, Colors.Gray);
     }
 
-    public void DrawRectangleOnCanvas(List<int> Elements, Color BrushColor)
+    public void DrawRectangleOnCanvas(List<int> elements, Color brushColor)
     {
+        int maxValueOfElement = elements.Max();
         DrawCanvas.Children.Clear();
-        double width = DrawCanvas.ActualWidth / Elements.Count;
+        double width = DrawCanvas.ActualWidth / elements.Count;
         double height = DrawCanvas.ActualHeight;
-        for (int i = 0; i < Elements.Count; i++)
+        for (int i = 0; i < elements.Count; i++)
         {
             Rectangle rect = new()
             {
                 Width = width,
-                Height = height * Elements[i] / MaxValueOfElement,
-                Fill = new SolidColorBrush(BrushColor),
+                Height = height * elements[i] / maxValueOfElement,
+                Fill = new SolidColorBrush(brushColor),
                 Stroke = new SolidColorBrush(Colors.White),
                 StrokeThickness = 0.5
             };
@@ -58,9 +58,9 @@ public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
         }
     }
 
-    public void SetAllRectangleColor(List<int> Elements, Color color)
+    public void SetAllRectangleColor(List<int> elements, Color color)
     {
-        for (int i = 0; i < Elements.Count; i++)
+        for (int i = 0; i < elements.Count; i++)
         {
             SetOneRectangleColor(i, color);
         }

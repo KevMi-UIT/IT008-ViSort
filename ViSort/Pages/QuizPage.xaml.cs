@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using ViSort.Models;
 using ViSort.Types;
 using ViSort.Utils;
@@ -14,17 +15,20 @@ namespace ViSort.Pages;
 public partial class QuizPage : Page
 {
     private readonly List<QuizModel> QuestionList = [];
-    private readonly List<RadioButton> _radioButtons = new();
+    private readonly List<RadioButton> RadioButtons = [];
+    private readonly DrawRectangle DrawRect;
     private int currentQuestionIndex = 0;
+
     public QuizPage()
     {
         List<List<int>> questions = App.QUIZ_LIST.Take(5).Randomize().ToList();
         for (int i = 0; i < questions.Count; ++i)
         {
-            QuizModel q = new(i + 1, string.Join(", ", questions[i]));
+            QuizModel q = new(i + 1, string.Join(", ", questions[i]), questions[i]);
             QuestionList.Add(q);
         }
         InitializeComponent();
+        DrawRect = new(QuestionCanvas);
         DisplayCurrentQuestion();
     }
 
@@ -35,7 +39,10 @@ public partial class QuizPage : Page
 
         QuestionTextBlock.Text = QuestionList[currentQuestionIndex].Content;
 
+        DrawRect.DrawRectangleOnCanvas(QuestionList[currentQuestionIndex].Items, Colors.Gray);
+
         var selectedAnswer = QuestionList[currentQuestionIndex].SelectedAnswer;
+
         if (selectedAnswer != null)
         {
             SetSelectedRadioButton(selectedAnswer);
@@ -62,7 +69,7 @@ public partial class QuizPage : Page
         int count = 0;
         foreach (var q in QuestionList)
         {
-            if (q.SelectedAnswer != null)
+            if (q.SelectedSort != null)
             {
                 count++;
             }
@@ -77,22 +84,22 @@ public partial class QuizPage : Page
         {
             SortTypes sortTypes = selectedRadioButton.Content switch
             {
-                "Bubble Sort" => SortTypes.Bubble,
-                "Bucket Sort" => SortTypes.Bucket,
-                "Counting Sort" => SortTypes.Counting,
-                "Selection Sort" => SortTypes.Selection,
-                "Insertion Sort" => SortTypes.Insertion,
-                "Merge Sort" => SortTypes.Merge,
-                "Quick Sort" => SortTypes.Quick,
-                "Heap Sort" => SortTypes.Heap,
-                "Radix Sort" => SortTypes.Radix,
-                "Shell Sort" => SortTypes.Shell,
-                "Tim Sort" => SortTypes.Tim,
-                "Tree Sort" => SortTypes.Tree,
+                "A. Bubble Sort" => SortTypes.Bubble,
+                "B. Bucket Sort" => SortTypes.Bucket,
+                "C. Counting Sort" => SortTypes.Counting,
+                "I. Selection Sort" => SortTypes.Selection,
+                "E. Insertion Sort" => SortTypes.Insertion,
+                "F. Merge Sort" => SortTypes.Merge,
+                "G. Quick Sort" => SortTypes.Quick,
+                "D. Heap Sort" => SortTypes.Heap,
+                "H. Radix Sort" => SortTypes.Radix,
+                "J. Shell Sort" => SortTypes.Shell,
+                "K. Tim Sort" => SortTypes.Tim,
+                "L. Tree Sort" => SortTypes.Tree,
                 _ => default
             };
-
-            QuestionList[currentQuestionIndex].SelectAnswer(sortTypes);
+            QuestionList[currentQuestionIndex].SelectedSort = SortUtils.InstantiateSort(sortTypes, QuestionList[currentQuestionIndex].Items, new DrawRectangle(new Canvas()));
+            _ = QuestionList[currentQuestionIndex].SelectedSort!.BeginSortingAsync();
         }
     }
 
@@ -119,8 +126,8 @@ public partial class QuizPage : Page
 
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
-        //TODO: change value input to CalcScore
-        int score = Utils.Utils.CalcScore(0, QuestionList.Count, CountAnswer());
+        int totalSteps = QuestionList.Sum(static q => q.SelectedSort != null ? q.SelectedSort.Step : 0);
+        int score = Utils.Utils.CalcScore(totalSteps, QuestionList.Count, CountAnswer());
 
         if (App.User != null && App.UserSvc != null)
         {
@@ -130,7 +137,7 @@ public partial class QuizPage : Page
             WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
             {
                 Title = "Info",
-                Content = "Quiz ended.\nChoose 'OK' button to navigate to the ScoreBoard and 'Close' button to navigate to the Homepage.",
+                Content = $"CONGRATS! YOU GOT {score} points!\n\nChoose 'OK' button to navigate to the ScoreBoard \nand 'Close' button to navigate to the Homepage.",
                 PrimaryButtonText = "OK",
             }.ShowDialogAsync();
             if (result == WpfUiControls.MessageBoxResult.Primary)
@@ -147,7 +154,7 @@ public partial class QuizPage : Page
             WpfUiControls.MessageBoxResult result = await new WpfUiControls.MessageBox
             {
                 Title = "Info",
-                Content = "Quiz ended.\nChoose 'OK' button to navigate to the Homepage and 'Close' button to answer quiz again.",
+                Content = $"CONGRATS! YOU GOT {score} points!\n\nChoose 'OK' button to navigate to the Homepage \nand 'Close' button to answer quiz again.",
                 PrimaryButtonText = "OK",
             }.ShowDialogAsync();
             if (result == WpfUiControls.MessageBoxResult.Primary)
@@ -165,31 +172,51 @@ public partial class QuizPage : Page
     {
         foreach (var radioButton in MultipleChoiceWrapPanel.Children.OfType<RadioButton>())
         {
-            _radioButtons.Add(radioButton);
+            RadioButtons.Add(radioButton);
         }
         Keyboard.Focus(MultipleChoiceWrapPanel);
+        DrawRect.DrawRectangleOnCanvas(QuestionList[currentQuestionIndex].Items, Colors.Gray);
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key >= Key.D1 && e.Key <= Key.D9) // Phím 1-9
-        {
-            int index = e.Key - Key.D1; // Tính chỉ số dựa trên phím nhấn
-            if (index < _radioButtons.Count)
-            {
-                _radioButtons[index].IsChecked = true;
-            }
-        }
         switch (e.Key)
         {
-            case Key.D0:
-                _radioButtons[9].IsChecked = true;
+            case Key.A:
+                RadioButtons[0].IsChecked = true;
                 break;
-            case Key.Delete:
-                _radioButtons[10].IsChecked = true;
+            case Key.B:
+                RadioButtons[1].IsChecked = true;
                 break;
-            case Key.Escape:
-                _radioButtons[11].IsChecked = true;
+            case Key.C:
+                RadioButtons[2].IsChecked = true;
+                break;
+            case Key.D:
+                RadioButtons[3].IsChecked = true;
+                break;
+            case Key.E:
+                RadioButtons[4].IsChecked = true;
+                break;
+            case Key.F:
+                RadioButtons[5].IsChecked = true;
+                break;
+            case Key.G:
+                RadioButtons[6].IsChecked = true;
+                break;
+            case Key.H:
+                RadioButtons[7].IsChecked = true;
+                break;
+            case Key.I:
+                RadioButtons[8].IsChecked = true;
+                break;
+            case Key.J:
+                RadioButtons[9].IsChecked = true;
+                break;
+            case Key.K:
+                RadioButtons[10].IsChecked = true;
+                break;
+            case Key.L:
+                RadioButtons[11].IsChecked = true;
                 break;
             case Key.Left:
                 if (PrevQuestionButton.IsEnabled == true)
@@ -214,9 +241,11 @@ public partial class QuizPage : Page
     private void InstructionButton_Click(object sender, RoutedEventArgs e)
     {
         InstructionFlyout.IsOpen = true;
+        Keyboard.ClearFocus();
     }
     private void CloseInstructionFlyout_Click(object sender, RoutedEventArgs e)
     {
         InstructionFlyout.IsOpen = false;
+        Keyboard.Focus(MultipleChoiceWrapPanel);
     }
 }

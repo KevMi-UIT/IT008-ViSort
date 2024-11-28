@@ -33,20 +33,61 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Click="InstructionButton_Click"
-            Content="Hướng dẫn" />
+            Content="Hướng dẫn"
+            Cursor="Hand" />
         <ui:Flyout
             x:Name="InstructionFlyout"
-            Margin="0,50,0,100"
+            Margin="0,50,0,0"
             HorizontalAlignment="Center"
             IsOpen="False"
             Placement="Center">
             <ui:PassiveScrollViewer>
                 <StackPanel MaxWidth="780" Margin="10">
-                    <TextBlock
+                    <StackPanel
+                        Width="600"
                         Margin="5"
-                        HorizontalAlignment="Center"
-                        Text="Instruction is being completed...Instruction is being completed...                            Instruction is being completed...Instruction is being completed..."
-                        TextWrapping="Wrap" />
+                        HorizontalAlignment="Center">
+                        <!--  Header  -->
+                        <TextBlock
+                            FontWeight="Bold"
+                            Text="HƯỚNG DẪN ÔN TẬP VỚI CÁC THUẬT TOÁN SẮP XẾP"
+                            TextAlignment="Center" />
+
+                        <TextBlock Text="------------------------------------------------------" TextAlignment="Center" />
+                        <!--  Body  -->
+                        <TextBlock TextAlignment="Left" TextWrapping="Wrap">
+                            <Run Text="- Với mỗi câu, màn hình sẽ xuất hiện ngẫu nhiên một dãy số lộn xộn." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Ứng với mỗi dãy số, bạn có thể chọn 1 thuật toán bất kì để sắp xếp lại dãy số đó." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Số điểm của mỗi câu dựa vào số bước thuật toán đã chọn thực hiện để sắp xếp dãy số." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Không có thuật toán nào là cao điểm cho mọi trường hợp, mỗi thuật toán có ưu nhược điểm riêng." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Không có thời gian giới hạn, bạn có thể ôn tập thoải mái." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Sau khi kết thúc bài kiểm tra, bạn sẽ biết được điểm số." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="- Nhấp chuột hoặc dùng phím mũi tên trái phải để di chuyển qua các câu hỏi, ENTER để kết thúc; nhấn các phím theo đáp án A, B, C... để chọn đáp án." />
+                            <LineBreak />
+                        </TextBlock>
+                        <!--  Footer  -->
+                        <TextBlock Text="------------------------------------------------------" TextAlignment="Center" />
+
+                        <TextBlock
+                            FontWeight="Bold"
+                            Text="CHÚC BẠN ÔN TẬP HIỆU QUẢ!"
+                            TextAlignment="Center" />
+
+                    </StackPanel>
+
+
                     <ui:Button
                         Margin="5"
                         HorizontalAlignment="Right"
@@ -73,10 +114,16 @@
                 FontTypography="Subtitle"
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
-            <Canvas
-                x:Name="QuestionCanvas"
+            <Border
                 Grid.Row="1"
-                Background="White" />
+                Margin="5"
+                BorderBrush="Black"
+                BorderThickness="2">
+                <Canvas
+                    x:Name="QuestionCanvas"
+                    Grid.Row="1"
+                    Background="White" />
+            </Border>
             <WrapPanel
                 x:Name="MultipleChoiceWrapPanel"
                 Grid.Row="2"
@@ -89,62 +136,62 @@
                     x:Name="BubleRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Buble Sort" />
+                    Content="a. Buble Sort" />
                 <RadioButton
                     x:Name="BucketRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Bucket Sort" />
+                    Content="b. Bucket Sort" />
                 <RadioButton
                     x:Name="CountingRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Counting Sort" />
+                    Content="c. Counting Sort" />
                 <RadioButton
                     x:Name="HeapRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Heap Sort" />
+                    Content="d. Heap Sort" />
                 <RadioButton
                     x:Name="InsertionRadioButton"
-                    Margin="0,3,10,3"
+                    Margin="5,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Insertion Sort" />
+                    Content="e. Insertion Sort" />
                 <RadioButton
                     x:Name="MergeRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Merge Sort" />
+                    Content="f. Merge Sort" />
                 <RadioButton
                     x:Name="QuickRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Quick Sort" />
+                    Content="g. Quick Sort" />
                 <RadioButton
                     x:Name="RadixRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Radix Sort" />
+                    Content="h. Radix Sort" />
                 <RadioButton
                     x:Name="SelectionRadioButton"
-                    Margin="0,5,10,3"
+                    Margin="10,5,10,3"
                     Checked="Answer_Checked"
-                    Content="Selection Sort" />
+                    Content="i. Selection Sort" />
                 <RadioButton
                     x:Name="ShellRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Shell Sort" />
+                    Content="j. Shell Sort" />
                 <RadioButton
                     x:Name="TimRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Tim Sort" />
+                    Content="k. Tim Sort" />
                 <RadioButton
                     x:Name="TreeRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Tree Sort" />
+                    Content="l. Tree Sort" />
 
             </WrapPanel>
             <Grid Grid.Row="3" Margin="0,10">
@@ -154,21 +201,24 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
                     Click="PrevQuestionButton_Click"
-                    Content="Previous" />
+                    Content="Previous"
+                    Cursor="Hand" />
                 <ui:Button
                     x:Name="SubmitButton"
                     Width="90"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Click="SubmitButton_Click"
-                    Content="Kết thúc" />
+                    Content="Kết thúc"
+                    Cursor="Hand" />
                 <ui:Button
                     x:Name="NextQuestionButton"
                     Width="90"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Click="NextQuestionButton_Click"
-                    Content="Next" />
+                    Content="Next"
+                    Cursor="Hand" />
             </Grid>
         </Grid>
     </Grid>
