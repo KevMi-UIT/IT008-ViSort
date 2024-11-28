@@ -172,23 +172,42 @@ public partial class QuizPage : Page
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key >= Key.D1 && e.Key <= Key.D9) // Phím 1-9
-        {
-            int index = e.Key - Key.D1; // Tính chỉ số dựa trên phím nhấn
-            if (index < _radioButtons.Count)
-            {
-                _radioButtons[index].IsChecked = true;
-            }
-        }
         switch (e.Key)
         {
-            case Key.D0:
+            case Key.A:
+                _radioButtons[0].IsChecked = true;
+                break;
+            case Key.B:
+                _radioButtons[1].IsChecked = true;
+                break;
+            case Key.C:
+                _radioButtons[2].IsChecked = true;
+                break;
+            case Key.D:
+                _radioButtons[3].IsChecked = true;
+                break;
+            case Key.E:
+                _radioButtons[4].IsChecked = true;
+                break;
+            case Key.F:
+                _radioButtons[5].IsChecked = true;
+                break;
+            case Key.G:
+                _radioButtons[6].IsChecked = true;
+                break;
+            case Key.H:
+                _radioButtons[7].IsChecked = true;
+                break;
+            case Key.I:
+                _radioButtons[8].IsChecked = true;
+                break;
+            case Key.J:
                 _radioButtons[9].IsChecked = true;
                 break;
-            case Key.Delete:
+            case Key.K:
                 _radioButtons[10].IsChecked = true;
                 break;
-            case Key.Escape:
+            case Key.L:
                 _radioButtons[11].IsChecked = true;
                 break;
             case Key.Left:

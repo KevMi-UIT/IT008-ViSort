@@ -33,7 +33,8 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Click="InstructionButton_Click"
-            Content="Hướng dẫn" />
+            Content="Hướng dẫn"
+            Cursor="Hand" />
         <ui:Flyout
             x:Name="InstructionFlyout"
             Margin="0,50,0,0"
@@ -73,7 +74,7 @@
                             <Run Text="- Sau khi kết thúc bài kiểm tra, bạn sẽ biết được điểm số." />
                             <LineBreak />
                             <LineBreak />
-                            <Run Text="- Nhấp chuột hoặc dùng phím mũi tên trái phải để di chuyển qua các câu hỏi, ENTER để kết thúc;                                  các phím ESC, DEL, các phím số từ 0 đến 9 để chọn đáp án." />
+                            <Run Text="- Nhấp chuột hoặc dùng phím mũi tên trái phải để di chuyển qua các câu hỏi, ENTER để kết thúc; nhấn các phím theo đáp án A, B, C... để chọn đáp án." />
                             <LineBreak />
                         </TextBlock>
                         <!--  Footer  -->
@@ -129,62 +130,62 @@
                     x:Name="BubleRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Buble Sort" />
+                    Content="A. Buble Sort" />
                 <RadioButton
                     x:Name="BucketRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Bucket Sort" />
+                    Content="B. Bucket Sort" />
                 <RadioButton
                     x:Name="CountingRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Counting Sort" />
+                    Content="C. Counting Sort" />
                 <RadioButton
                     x:Name="HeapRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Heap Sort" />
+                    Content="D. Heap Sort" />
                 <RadioButton
                     x:Name="InsertionRadioButton"
-                    Margin="0,3,10,3"
+                    Margin="5,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Insertion Sort" />
+                    Content="E. Insertion Sort" />
                 <RadioButton
                     x:Name="MergeRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Merge Sort" />
+                    Content="F. Merge Sort" />
                 <RadioButton
                     x:Name="QuickRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Quick Sort" />
+                    Content="G. Quick Sort" />
                 <RadioButton
                     x:Name="RadixRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Radix Sort" />
+                    Content="H. Radix Sort" />
                 <RadioButton
                     x:Name="SelectionRadioButton"
-                    Margin="0,5,10,3"
+                    Margin="10,5,10,3"
                     Checked="Answer_Checked"
-                    Content="Selection Sort" />
+                    Content="I. Selection Sort" />
                 <RadioButton
                     x:Name="ShellRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Shell Sort" />
+                    Content="J. Shell Sort" />
                 <RadioButton
                     x:Name="TimRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Tim Sort" />
+                    Content="K. Tim Sort" />
                 <RadioButton
                     x:Name="TreeRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="Tree Sort" />
+                    Content="L. Tree Sort" />
 
             </WrapPanel>
             <Grid Grid.Row="3" Margin="0,10">
@@ -194,21 +195,24 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
                     Click="PrevQuestionButton_Click"
-                    Content="Previous" />
+                    Content="Previous"
+                    Cursor="Hand" />
                 <ui:Button
                     x:Name="SubmitButton"
                     Width="90"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Click="SubmitButton_Click"
-                    Content="Kết thúc" />
+                    Content="Kết thúc"
+                    Cursor="Hand" />
                 <ui:Button
                     x:Name="NextQuestionButton"
                     Width="90"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Click="NextQuestionButton_Click"
-                    Content="Next" />
+                    Content="Next"
+                    Cursor="Hand" />
             </Grid>
         </Grid>
     </Grid>
