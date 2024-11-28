@@ -84,7 +84,7 @@ public partial class QuizPage : Page
         {
             string selectedSortName = selectedRadioButton.Tag.ToString()!;
             SortTypes sortTypes = SortUtils.GetSortType(selectedSortName);
-            QuestionList[currentQuestionIndex].SelectedSort = SortUtils.InstantiateSort(sortTypes, QuestionList[currentQuestionIndex].Items, new DrawRectangle(new Canvas()));
+            QuestionList[currentQuestionIndex].SelectedSort = SortUtils.InstantiateSort(sortTypes, QuestionList[currentQuestionIndex].Items);
             _ = QuestionList[currentQuestionIndex].SelectedSort!.BeginSortingAsync();
         }
     }

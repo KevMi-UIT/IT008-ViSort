@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Wpf.Ui.Appearance;
+
 namespace ViSort.Models;
 
-public class DrawRectangle(Canvas _canvas, int _threadDelay = 0)
+public class DrawRectangle(Canvas? canvas = null, int threadDelay = 0)
 {
-    public int ThreadDelay { get; set; } = _threadDelay;
-    public Canvas DrawCanvas { get; } = _canvas;
+    public int ThreadDelay { get; set; } = threadDelay;
+    public Canvas DrawCanvas { get; } = canvas ?? new();
 
     public void ShowAllElementsBlue(List<int> elements, Color brushColor)
     {

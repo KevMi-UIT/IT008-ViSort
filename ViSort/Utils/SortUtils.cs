@@ -7,9 +7,10 @@ namespace ViSort.Utils;
 
 public static class SortUtils
 {
-    public static SortModel InstantiateSort(SortTypes sortType, List<int> elements, DrawRectangle drawRectangle)
+    public static SortModel InstantiateSort(SortTypes sortType, List<int>? elements = null, DrawRectangle? drawRectangle = null)
     {
-        // TODO: Readd Merge sort
+        elements ??= [];
+        drawRectangle ??= new();
         return sortType switch
         {
             SortTypes.Bubble => new BubbleSort(elements, drawRectangle),
