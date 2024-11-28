@@ -69,7 +69,7 @@ public partial class QuizPage : Page
         int count = 0;
         foreach (var q in QuestionList)
         {
-            if (q.SelectedAnswer != null)
+            if (q.SelectedSort != null)
             {
                 count++;
             }
@@ -98,7 +98,8 @@ public partial class QuizPage : Page
                 "L. Tree Sort" => SortTypes.Tree,
                 _ => default
             };
-            QuestionList[currentQuestionIndex].SelectedSort = SortUtils.InstantiateSort(sortTypes, QuestionList[currentQuestionIndex].Items, DrawRect);
+            QuestionList[currentQuestionIndex].SelectedSort = SortUtils.InstantiateSort(sortTypes, QuestionList[currentQuestionIndex].Items, new DrawRectangle(new Canvas()));
+            _ = QuestionList[currentQuestionIndex].SelectedSort!.BeginSortingAsync();
         }
     }
 
@@ -125,8 +126,7 @@ public partial class QuizPage : Page
 
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
-        //TODO: change value input to CalcScore
-        int totalSteps = QuestionList.Sum(q => q.Steps);
+        int totalSteps = QuestionList.Sum(static q => q.SelectedSort != null ? q.SelectedSort.Step : 0);
         int score = Utils.Utils.CalcScore(totalSteps, QuestionList.Count, CountAnswer());
 
         if (App.User != null && App.UserSvc != null)

@@ -8,7 +8,7 @@ public static class Utils
 
     public static int CalcScore(int steps, int questions, int answered)
     {
-        return Convert.ToInt32(answered / questions / (steps + 1) * SCORE_SENSITIVITY);
+        return Convert.ToInt32((double)answered / questions / (steps + 1) * SCORE_SENSITIVITY);
     }
 
     public static void Swap<T>(ref T a, ref T b)
