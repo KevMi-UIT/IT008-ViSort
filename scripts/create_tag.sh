@@ -6,12 +6,6 @@
 }
 
 version="$1"
-
-[[ $version == '0.1.0' ]] && {
-  echo "The init version, no create tag"
-  exit 0
-}
-
 current_tag="v${version}"
 
 tags=$(git tag)
