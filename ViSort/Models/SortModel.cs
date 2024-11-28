@@ -22,4 +22,10 @@ public abstract class SortModel(List<int> _element, DrawRectangle _drawRectangle
         await BeginAlgorithm();
         DrawRect.ShowAllElementsBlue(Elements, Colors.Blue);
     }
+    public async Task<int> SortAndGetSteps()
+    {
+        Step = 0;
+        await BeginAlgorithm();
+        return Step;
+    }
 }

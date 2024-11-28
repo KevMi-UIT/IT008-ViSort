@@ -91,7 +91,7 @@ public partial class QuizPage : Page
                 "Tree Sort" => SortTypes.Tree,
                 _ => default
             };
-            QuestionList[currentQuestionIndex].SelectAnswer(sortTypes);
+            QuestionList[currentQuestionIndex].SelectAnswer(sortTypes, new Canvas());
         }
     }
 
@@ -119,7 +119,8 @@ public partial class QuizPage : Page
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
         //TODO: change value input to CalcScore
-        int score = Utils.Utils.CalcScore(0, QuestionList.Count, CountAnswer());
+        int totalSteps = QuestionList.Sum(q => q.Steps);
+        int score = Utils.Utils.CalcScore(totalSteps, QuestionList.Count, CountAnswer());
 
         if (App.User != null && App.UserSvc != null)
         {
