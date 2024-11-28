@@ -17,18 +17,6 @@ public class UserService
         UsersCollection = database.GetCollection<UserModel>(config["db:userCollection"]);
     }
 
-    private static void CheckUser(UserModel user, UserModel? userDB)
-    {
-        if (userDB == null)
-        {
-            throw new UserNotFound("User not found.");
-        }
-        if (user.HashedPassword != userDB.HashedPassword)
-        {
-            throw new PasswordDoesNotMatch("Password does not match.");
-        }
-    }
-
     private async Task<UserModel?> GetUserFromDBAsync(string username)
     {
         FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, username);
@@ -65,7 +53,10 @@ public class UserService
     {
         FilterDefinition<UserModel>? filter = Builders<UserModel>.Filter.Eq(static u => u.Username, user.Username);
         UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
-        CheckUser(user, existingUser);
+        if (!Hasher.Verify(user.Password, existingUser.HashedPassword))
+        {
+            throw new PasswordDoesNotMatch("Password does not match");
+        }
         UpdateDefinition<UserModel>? update = Builders<UserModel>.Update.Set(static u => u.Score, user.Score);
         await UsersCollection.UpdateOneAsync(filter, update);
     }
