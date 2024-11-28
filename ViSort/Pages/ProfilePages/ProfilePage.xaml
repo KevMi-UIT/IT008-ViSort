@@ -21,7 +21,7 @@
 
         <ui:TextBlock
             Grid.Row="0"
-            FontTypography="Title"
+            FontTypography="TitleLarge"
             Text="Profile" />
         <Separator Grid.Row="1" Margin="30,10" />
         <Grid Grid.Row="2">
@@ -47,7 +47,11 @@
                 VerticalAlignment="Top"
                 FontSize="100"
                 FontWeight="Bold">
-                <TextBlock FontSize="25" Text="THÔNG TIN NGƯỜI DÙNG" />
+                <ui:TextBlock
+                    x:Name="UserProfileTitle"
+                    FontTypography="Title"
+                    Foreground="Black"
+                    Text="USER PROFILE" />
             </Label>
 
             <ui:SymbolIcon
@@ -68,7 +72,7 @@
                 Grid.Column="0"
                 Margin="5"
                 Padding="5"
-                FontSize="20"
+                FontTypography="Title"
                 Text="Username:" />
 
             <ui:TextBlock
@@ -77,7 +81,7 @@
                 Grid.Column="0"
                 Margin="5"
                 Padding="5"
-                FontSize="20"
+                FontTypography="Title"
                 Text="Password:" />
 
             <ui:TextBox
@@ -101,7 +105,7 @@
                 Grid.Column="0"
                 Margin="5"
                 Padding="5"
-                FontSize="20"
+                FontTypography="Title"
                 Text="Score:" />
             <ui:TextBlock
                 x:Name="ScoreValue"
@@ -109,8 +113,8 @@
                 Grid.Column="1"
                 Width="500"
                 Margin="5"
-                FontSize="20"
-                FontStyle="Italic" />
+                FontStyle="Italic"
+                FontTypography="Title" />
 
             <StackPanel
                 x:Name="FunctionButton"

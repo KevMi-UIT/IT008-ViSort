@@ -118,6 +118,11 @@
                 x:Name="QuestionCanvas"
                 Grid.Row="1"
                 Background="White" />
+            <Canvas
+                x:Name="QuestionVisualization"
+                Grid.Row="1"
+                Background="White"
+                Visibility="Hidden" />
             <WrapPanel
                 x:Name="MultipleChoiceWrapPanel"
                 Grid.Row="2"
@@ -130,62 +135,62 @@
                     x:Name="BubleRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="A. Buble Sort" />
+                    Content="a. Buble Sort" />
                 <RadioButton
                     x:Name="BucketRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="B. Bucket Sort" />
+                    Content="b. Bucket Sort" />
                 <RadioButton
                     x:Name="CountingRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="C. Counting Sort" />
+                    Content="c. Counting Sort" />
                 <RadioButton
                     x:Name="HeapRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="D. Heap Sort" />
+                    Content="d. Heap Sort" />
                 <RadioButton
                     x:Name="InsertionRadioButton"
                     Margin="5,3,10,3"
                     Checked="Answer_Checked"
-                    Content="E. Insertion Sort" />
+                    Content="e. Insertion Sort" />
                 <RadioButton
                     x:Name="MergeRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="F. Merge Sort" />
+                    Content="f. Merge Sort" />
                 <RadioButton
                     x:Name="QuickRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="G. Quick Sort" />
+                    Content="g. Quick Sort" />
                 <RadioButton
                     x:Name="RadixRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="H. Radix Sort" />
+                    Content="h. Radix Sort" />
                 <RadioButton
                     x:Name="SelectionRadioButton"
                     Margin="10,5,10,3"
                     Checked="Answer_Checked"
-                    Content="I. Selection Sort" />
+                    Content="i. Selection Sort" />
                 <RadioButton
                     x:Name="ShellRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="J. Shell Sort" />
+                    Content="j. Shell Sort" />
                 <RadioButton
                     x:Name="TimRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="K. Tim Sort" />
+                    Content="k. Tim Sort" />
                 <RadioButton
                     x:Name="TreeRadioButton"
                     Margin="0,3,10,3"
                     Checked="Answer_Checked"
-                    Content="L. Tree Sort" />
+                    Content="l. Tree Sort" />
 
             </WrapPanel>
             <Grid Grid.Row="3" Margin="0,10">

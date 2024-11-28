@@ -21,7 +21,7 @@ public partial class QuizPage : Page
         List<List<int>> questions = App.QUIZ_LIST.Take(5).Randomize().ToList();
         for (int i = 0; i < questions.Count; ++i)
         {
-            QuizModel q = new(i + 1, string.Join(", ", questions[i]));
+            QuizModel q = new(i + 1, string.Join(", ", questions[i]), questions[i]);
             QuestionList.Add(q);
         }
         InitializeComponent();
@@ -77,21 +77,21 @@ public partial class QuizPage : Page
         {
             SortTypes sortTypes = selectedRadioButton.Content switch
             {
-                "Bubble Sort" => SortTypes.Bubble,
-                "Bucket Sort" => SortTypes.Bucket,
-                "Counting Sort" => SortTypes.Counting,
-                "Selection Sort" => SortTypes.Selection,
-                "Insertion Sort" => SortTypes.Insertion,
-                "Merge Sort" => SortTypes.Merge,
-                "Quick Sort" => SortTypes.Quick,
-                "Heap Sort" => SortTypes.Heap,
-                "Radix Sort" => SortTypes.Radix,
-                "Shell Sort" => SortTypes.Shell,
-                "Tim Sort" => SortTypes.Tim,
-                "Tree Sort" => SortTypes.Tree,
+                "A. Bubble Sort" => SortTypes.Bubble,
+                "B. Bucket Sort" => SortTypes.Bucket,
+                "C. Counting Sort" => SortTypes.Counting,
+                "I. Selection Sort" => SortTypes.Selection,
+                "E. Insertion Sort" => SortTypes.Insertion,
+                "F. Merge Sort" => SortTypes.Merge,
+                "G. Quick Sort" => SortTypes.Quick,
+                "D. Heap Sort" => SortTypes.Heap,
+                "H. Radix Sort" => SortTypes.Radix,
+                "J. Shell Sort" => SortTypes.Shell,
+                "K. Tim Sort" => SortTypes.Tim,
+                "L. Tree Sort" => SortTypes.Tree,
                 _ => default
             };
-            QuestionList[currentQuestionIndex].SelectAnswer(sortTypes, new Canvas());
+            QuestionList[currentQuestionIndex].SelectAnswer(sortTypes, new Draw.DrawRectangle(QuestionCanvas, 0));
         }
     }
 

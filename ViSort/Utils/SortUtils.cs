@@ -18,7 +18,7 @@ public static class SortUtils
             SortTypes.Counting => new CountingSort(elements, drawRectangle),
             SortTypes.Heap => new HeapSort(elements, drawRectangle),
             SortTypes.Insertion => new InsertionSort(elements, drawRectangle),
-            // SortTypes.Merge => new MergeSort(elements, drawRectangle),
+            SortTypes.Merge => new MergeSort(elements, drawRectangle),
             SortTypes.Quick => new QuickSort(elements, drawRectangle),
             SortTypes.Radix => new RadixSort(elements, drawRectangle),
             SortTypes.Selection => new SelectionSort(elements, drawRectangle),
