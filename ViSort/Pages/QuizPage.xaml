@@ -114,15 +114,16 @@
                 FontTypography="Subtitle"
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
-            <Canvas
-                x:Name="QuestionCanvas"
+            <Border
                 Grid.Row="1"
-                Background="White" />
-            <Canvas
-                x:Name="QuestionVisualization"
-                Grid.Row="1"
-                Background="White"
-                Visibility="Hidden" />
+                Margin="5"
+                BorderBrush="Black"
+                BorderThickness="2">
+                <Canvas
+                    x:Name="QuestionCanvas"
+                    Grid.Row="1"
+                    Background="White" />
+            </Border>
             <WrapPanel
                 x:Name="MultipleChoiceWrapPanel"
                 Grid.Row="2"

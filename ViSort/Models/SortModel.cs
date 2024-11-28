@@ -14,7 +14,7 @@ public abstract class SortModel(List<int> _element, DrawRectangle _drawRectangle
     public int Step { get; protected set; } = 0;
     public List<int> Elements { get; set; } = _element;
 
-    public readonly DrawRectangle DrawRect = _drawRectangle;
+    public DrawRectangle DrawRect = _drawRectangle;
     public abstract Task BeginAlgorithmAsync();
 
     public async Task BeginSortingAsync()
@@ -24,8 +24,7 @@ public abstract class SortModel(List<int> _element, DrawRectangle _drawRectangle
     }
     public async Task<int> SortAndGetSteps()
     {
-        Step = 0;
-        await BeginAlgorithm();
+        await BeginAlgorithmAsync();
         return Step;
     }
 }

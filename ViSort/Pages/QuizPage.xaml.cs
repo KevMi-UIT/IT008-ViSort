@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using ViSort.Models;
 using ViSort.Types;
 using ViSort.Utils;
@@ -14,8 +15,10 @@ namespace ViSort.Pages;
 public partial class QuizPage : Page
 {
     private readonly List<QuizModel> QuestionList = [];
-    private readonly List<RadioButton> _radioButtons = new();
+    private readonly List<RadioButton> RadioButtons = [];
+    private readonly DrawRectangle DrawRect;
     private int currentQuestionIndex = 0;
+
     public QuizPage()
     {
         List<List<int>> questions = App.QUIZ_LIST.Take(5).Randomize().ToList();
@@ -25,6 +28,7 @@ public partial class QuizPage : Page
             QuestionList.Add(q);
         }
         InitializeComponent();
+        DrawRect = new(QuestionCanvas);
         DisplayCurrentQuestion();
     }
 
@@ -35,7 +39,10 @@ public partial class QuizPage : Page
 
         QuestionTextBlock.Text = QuestionList[currentQuestionIndex].Content;
 
+        DrawRect.DrawRectangleOnCanvas(QuestionList[currentQuestionIndex].Items, Colors.Gray);
+
         var selectedAnswer = QuestionList[currentQuestionIndex].SelectedAnswer;
+
         if (selectedAnswer != null)
         {
             SetSelectedRadioButton(selectedAnswer);
@@ -91,7 +98,7 @@ public partial class QuizPage : Page
                 "L. Tree Sort" => SortTypes.Tree,
                 _ => default
             };
-            QuestionList[currentQuestionIndex].SelectAnswer(sortTypes, new Draw.DrawRectangle(QuestionCanvas, 0));
+            QuestionList[currentQuestionIndex].SelectedSort = SortUtils.InstantiateSort(sortTypes, QuestionList[currentQuestionIndex].Items, DrawRect);
         }
     }
 
@@ -165,9 +172,10 @@ public partial class QuizPage : Page
     {
         foreach (var radioButton in MultipleChoiceWrapPanel.Children.OfType<RadioButton>())
         {
-            _radioButtons.Add(radioButton);
+            RadioButtons.Add(radioButton);
         }
         Keyboard.Focus(MultipleChoiceWrapPanel);
+        DrawRect.DrawRectangleOnCanvas(QuestionList[currentQuestionIndex].Items, Colors.Gray);
     }
 
     private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -175,40 +183,40 @@ public partial class QuizPage : Page
         switch (e.Key)
         {
             case Key.A:
-                _radioButtons[0].IsChecked = true;
+                RadioButtons[0].IsChecked = true;
                 break;
             case Key.B:
-                _radioButtons[1].IsChecked = true;
+                RadioButtons[1].IsChecked = true;
                 break;
             case Key.C:
-                _radioButtons[2].IsChecked = true;
+                RadioButtons[2].IsChecked = true;
                 break;
             case Key.D:
-                _radioButtons[3].IsChecked = true;
+                RadioButtons[3].IsChecked = true;
                 break;
             case Key.E:
-                _radioButtons[4].IsChecked = true;
+                RadioButtons[4].IsChecked = true;
                 break;
             case Key.F:
-                _radioButtons[5].IsChecked = true;
+                RadioButtons[5].IsChecked = true;
                 break;
             case Key.G:
-                _radioButtons[6].IsChecked = true;
+                RadioButtons[6].IsChecked = true;
                 break;
             case Key.H:
-                _radioButtons[7].IsChecked = true;
+                RadioButtons[7].IsChecked = true;
                 break;
             case Key.I:
-                _radioButtons[8].IsChecked = true;
+                RadioButtons[8].IsChecked = true;
                 break;
             case Key.J:
-                _radioButtons[9].IsChecked = true;
+                RadioButtons[9].IsChecked = true;
                 break;
             case Key.K:
-                _radioButtons[10].IsChecked = true;
+                RadioButtons[10].IsChecked = true;
                 break;
             case Key.L:
-                _radioButtons[11].IsChecked = true;
+                RadioButtons[11].IsChecked = true;
                 break;
             case Key.Left:
                 if (PrevQuestionButton.IsEnabled == true)

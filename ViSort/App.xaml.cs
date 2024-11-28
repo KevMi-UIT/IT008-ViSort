@@ -16,7 +16,7 @@ public partial class App : Application
     public static UserModel? User { get; set; } = null;
     public static UserService? UserSvc { get; set; } = null;
     public static readonly List<List<int>> QUIZ_LIST = [
-    [12, 45, 7, 89, 23, 3, 99, 54, 31, 20, 76, 18, 67, 12, 34, 50, 29, 41], //quick, tree?
+    [17, 45, 7, 89, 23, 3, 99, 54, 31, 20, 76, 18, 67, 12, 34, 50, 29, 41], //quick, tree?
     [1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 5, 10, 15, 20, 25, 30],
     [1, 2, 4, 3, 5, 10, 12, 11, 14, 15, 20, 22, 21, 24, 25, 26, 27],
     [1, 2, 3, 4, 3, 2, 1, 10, 20, 30, 40, 30, 20, 10, 5, 10, 15, 20, 15, 10, 5], //counting

@@ -1,5 +1,4 @@
-﻿using ViSort.Draw;
-using ViSort.Types;
+﻿using ViSort.Types;
 using ViSort.Utils;
 namespace ViSort.Models;
 
@@ -10,6 +9,7 @@ class QuizModel(int order, string content, List<int> items)
     public string Content { get; private set; } = content;
     public SortTypes? SelectedAnswer { get; private set; } = null;
     public int Steps { get; private set; } = 0;
+    public SortModel? SelectedSort { get; set; } = null;
 
     public void SelectAnswer(SortTypes answer, DrawRectangle drawRectangle)
     {

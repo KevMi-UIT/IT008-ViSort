@@ -1,6 +1,5 @@
 using System.Windows.Media;
 using System.Xml.Linq;
-using ViSort.Draw;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
@@ -84,3 +83,4 @@ class MergeSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_e
             Merge(l, m, r);
         }
     }
+}
