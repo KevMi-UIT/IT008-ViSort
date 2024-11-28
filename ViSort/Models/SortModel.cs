@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
-using ViSort.Draw;
 using ViSort.Types;
+using Wpf.Ui.Appearance;
 
 namespace ViSort.Models;
 
@@ -15,11 +15,11 @@ public abstract class SortModel(List<int> _element, DrawRectangle _drawRectangle
     public List<int> Elements { get; set; } = _element;
 
     public readonly DrawRectangle DrawRect = _drawRectangle;
-    public abstract Task BeginAlgorithm();
+    public abstract Task BeginAlgorithmAsync();
 
     public async Task BeginSortingAsync()
     {
-        await BeginAlgorithm();
-        DrawRect.ShowAllElementsBlue(Elements, Colors.Blue);
+        await BeginAlgorithmAsync();
+        DrawRect.ShowAllElementsBlue(Elements, ApplicationAccentColorManager.PrimaryAccent);
     }
 }

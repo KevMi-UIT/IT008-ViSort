@@ -1,4 +1,3 @@
-using ViSort.Draw;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
@@ -9,7 +8,7 @@ public class ShellSort(List<int> _element, DrawRectangle _drawRectangle) : SortM
     public override string SpaceComplexity => "O(1)";
     public override string YoutubeLink => "https://youtu.be/SHcPqUe2GZM?si=61x1MQdsPuX8K345";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/shell-sort/";
-    public override async Task BeginAlgorithm()
+    public override async Task BeginAlgorithmAsync()
     {
         int N = Elements.Count;
         int i, j;

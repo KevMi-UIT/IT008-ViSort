@@ -1,5 +1,4 @@
 using System.Windows.Media;
-using ViSort.Draw;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;
@@ -7,58 +6,46 @@ namespace ViSort.Models.SortModels;
 class HeapSort(List<int> _element, DrawRectangle _drawRectangle) : SortModel(_element, _drawRectangle)
 {
     public override SortTypes SortType => SortTypes.Heap;
-    public override string TimeComplexity => "O(n Log n)";
-    public override string SpaceComplexity => "O(n Log n)";
+    public override string TimeComplexity => "O(nLog(n))";
+    public override string SpaceComplexity => "O(nLog(n))";
     public override string YoutubeLink => "https://youtu.be/2DmK_H7IdTo?si=cg1oxWLwzJ3l4TMl";
     public override string GeeksForGeeksLink => "https://www.geeksforgeeks.org/heap-sort/";
 
-    public override async Task BeginAlgorithm()
+    public override async Task BeginAlgorithmAsync()
     {
         int n = Elements.Count;
-
-        // Build the max heap
         for (int i = (n / 2) - 1; i >= 0; i--)
         {
             await HeapifyAsync(Elements, n, i);
         }
-
-        // Extract elements one by one from the heap
         for (int i = n - 1; i > 0; i--)
         {
             Step++;
-            await DrawRect.SwapElementsAsync(Elements, 0, i); // Move current root to the end
-            await HeapifyAsync(Elements, i, 0); // Call heapify on the reduced heap
+            await DrawRect.SwapElementsAsync(Elements, 0, i);
+            await HeapifyAsync(Elements, i, 0);
         }
     }
 
     public async Task HeapifyAsync(List<int> elements, int n, int i)
     {
-        int largest = i; // Initialize largest as root
-        int l = (2 * i) + 1; // Left child index
-        int r = (2 * i) + 2; // Right child index
-
-        // Check if left child exists and is larger than root
+        int largest = i;
+        int l = (2 * i) + 1;
+        int r = (2 * i) + 2;
         if (l < n && elements[l].CompareTo(elements[largest]) > 0)
         {
             largest = l;
         }
-
-        // Check if right child exists and is larger than largest so far
         if (r < n && elements[r].CompareTo(elements[largest]) > 0)
         {
             largest = r;
         }
-
-        // If the largest is not root, swap and continue heapifying
         if (largest != i)
         {
             Step++;
-            await DrawRect.SwapElementsAsync(elements, i, largest); // Swap root with largest
-            await HeapifyAsync(elements, n, largest); // Recursively heapify the affected subtree
+            await DrawRect.SwapElementsAsync(elements, i, largest);
+            await HeapifyAsync(elements, n, largest);
         }
-
-        // Visualize the current state of the heap
-        DrawRect.DrawRectangleOnCanvas(elements, Colors.Black);
+        DrawRect.DrawRectangleOnCanvas(elements, Colors.Gray);
         await Task.Delay(DrawRect.ThreadDelay);
     }
 }

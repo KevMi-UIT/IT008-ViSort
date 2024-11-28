@@ -1,5 +1,4 @@
-﻿using ViSort.Draw;
-using ViSort.Models;
+﻿using ViSort.Models;
 using ViSort.Models.SortModels;
 using ViSort.Types;
 using static ViSort.Exceptions.SortExceptions;
@@ -18,7 +17,7 @@ public static class SortUtils
             SortTypes.Counting => new CountingSort(elements, drawRectangle),
             SortTypes.Heap => new HeapSort(elements, drawRectangle),
             SortTypes.Insertion => new InsertionSort(elements, drawRectangle),
-            // SortTypes.Merge => new MergeSort(elements, drawRectangle),
+            SortTypes.Merge => new MergeSort(elements, drawRectangle),
             SortTypes.Quick => new QuickSort(elements, drawRectangle),
             SortTypes.Radix => new RadixSort(elements, drawRectangle),
             SortTypes.Selection => new SelectionSort(elements, drawRectangle),
@@ -44,6 +43,7 @@ public static class SortUtils
             "Selection Sort" => SortTypes.Selection,
             "Shell Sort" => SortTypes.Shell,
             "Tim Sort" => SortTypes.Tim,
+            "Tree Sort" => SortTypes.Tree,
             _ => throw new SortUdefined()
         };
     }

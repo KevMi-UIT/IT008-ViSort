@@ -35,7 +35,7 @@ public static class GenRandomList
 
     public static List<int> GenNormal(int length)
     {
-        return Enumerable.Range(0, length).Select(static x => RAND.Next(MIN, MAX + 1)).ToList();
+        return Enumerable.Range(0, length).Select(static x => RAND.Next(MIN, MAX + 1)).ToList(); //Change in Range(0, length)
     }
 
     public static List<int> GenSorted(int length)
@@ -94,8 +94,8 @@ public static class GenRandomList
         int lim = MAX / NEARLY_SORTED_SENSITIVITY;
         for (int i = 0; i < lim; i++)
         {
-            int a = RAND.Next(0, length);
-            int b = RAND.Next(0, length);
+            int a = RAND.Next(MIN, length);// Change from a = RAND.NEXT(0, LENGTH) to a = RAND.NEXT(MIN, LENGTH)
+            int b = RAND.Next(MIN, length);// Change from b = RAND.NEXT(0, LENGTH) to b = RAND.NEXT(MIN, LENGTH)
             (list[b], list[a]) = (list[a], list[b]);
         }
     }
