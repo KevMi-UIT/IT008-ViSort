@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using ViSort.Models;
 using ViSort.Types;
@@ -7,17 +6,26 @@ using ViSort.Utils;
 
 namespace ViSort.Windows;
 
+enum ButtonState
+{
+    Play,
+    End,
+    Restart
+}
+
 public partial class VisualiseWindow : Window
 {
-    private readonly SortTypes SelectedSortType;
     private readonly SortModel SelectedSort;
+    private readonly List<int> OriginalElements;
+    private ButtonState CurrentState = ButtonState.Play;
 
-    public VisualiseWindow(int _ElementCount, SortTypes _SelectedSortAlgorithm, GenRandomListTypes _SelectedArrayGenerationMethod)
+    public VisualiseWindow(int elementCount, SortTypes sortType, GenRandomListTypes genRandType)
     {
         InitializeComponent();
-        DrawRectangle drawRectangle = new(SortVisualisation, 100);
-        SelectedSortType = _SelectedSortAlgorithm;
-        SelectedSort = SortUtils.InstantiateSort(SelectedSortType, GenRandomList.GenList(_ElementCount, _SelectedArrayGenerationMethod), drawRectangle);
+        DrawRectangle drawRectangle = new(SortVisualisation, 250);
+        OriginalElements = GenRandomList.GenList(elementCount, genRandType);
+        SelectedSort = SortUtils.InstantiateSort(sortType, new(OriginalElements), drawRectangle);
+
         AlgorithmName.Content = SelectedSort.SortType.ToString() + " Sort";
         TimeComplexity.Content = "Time complexity: " + SelectedSort.TimeComplexity;
         SpaceComplexity.Content = "Space complexity: " + SelectedSort.SpaceComplexity;
@@ -25,67 +33,60 @@ public partial class VisualiseWindow : Window
 
     private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
-        if (SpeedNumberBox != null && !SpeedNumberBox.IsFocused)
+        if (SelectedSort != null)
         {
-            int temp = Math.Abs((int)e.NewValue - 100);
-            SelectedSort.DrawRect.ThreadDelay = (temp != 0) ? temp : 1;
-            SpeedNumberBox.Text = SelectedSort.DrawRect.ThreadDelay.ToString();
+            SelectedSort.DrawRect.ThreadDelay = (int)e.NewValue;
         }
     }
 
-    private void SpeedNumberBox_LostFocus(object sender, RoutedEventArgs e)
+    private void PlayEndRestartButton_Click(object sender, RoutedEventArgs e)
     {
-        UpdateSliderFromNumberBox();
-    }
-
-    private void SpeedNumberBox_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Enter)
+        switch (CurrentState)
         {
-            UpdateSliderFromNumberBox();
+            case ButtonState.Play:
+                PlayEndRestartButton.Content = "End";
+                CurrentState = ButtonState.End;
+                _ = SelectedSort.BeginSortingAsync(QuickEndAction);
+                break;
+            case ButtonState.End:
+                SelectedSort.DrawRect.ThreadDelay = 0;
+                PlayEndRestartButton.Content = "Restart";
+                CurrentState = ButtonState.Restart;
+                break;
+            case ButtonState.Restart:
+                SpeedSlider.Value = 250;
+                SelectedSort.DrawRect.ThreadDelay = 250;
+                SelectedSort.Elements = new(OriginalElements);
+                PlayEndRestartButton.Content = "End";
+                CurrentState = ButtonState.End;
+                DrawOnCanvas();
+                _ = SelectedSort.BeginSortingAsync(QuickEndAction);
+                break;
+            default:
+                // Handled
+                break;
         }
-    }
-
-    private void UpdateSliderFromNumberBox()
-    {
-        if (int.TryParse(SpeedNumberBox.Text, out int value) && value >= SpeedSlider.Minimum && value <= SpeedSlider.Maximum)
-        {
-            int temp = Math.Abs(value - 100);
-            SelectedSort.DrawRect.ThreadDelay = (temp != 0) ? temp : 1;
-            SpeedSlider.Value = 101 - temp;
-            SpeedNumberBox.Text = SelectedSort.DrawRect.ThreadDelay.ToString();
-        }
-        else
-        {
-            MessageBox.Show("Please enter a valid integer between 1 and 100 ms.");
-            SpeedNumberBox.Text = SelectedSort.DrawRect.ThreadDelay.ToString();
-        }
-    }
-
-    private void SpeedNumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-    {
-        e.Handled = !IsTextNumeric(e.Text);
-    }
-
-    private static bool IsTextNumeric(string text)
-    {
-        return int.TryParse(text, out _);
-    }
-
-    private void PlayButton_Click(object sender, RoutedEventArgs e)
-    {
-        _ = SelectedSort.BeginSortingAsync();
-        PlayButton.IsEnabled = false;
     }
 
     private void SortVisualisation_Loaded(object sender, RoutedEventArgs e)
     {
-        SelectedSort.DrawRect.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Gray);
+        DrawOnCanvas();
     }
 
     private void SortVisualisation_SizeChanged(object sender, SizeChangedEventArgs e)
     {
         SortVisualisation.Children.Clear();
+        DrawOnCanvas();
+    }
+
+    private void QuickEndAction()
+    {
+        PlayEndRestartButton.Content = "Restart";
+        CurrentState = ButtonState.Restart;
+    }
+
+    private void DrawOnCanvas()
+    {
         SelectedSort.DrawRect.DrawRectangleOnCanvas(SelectedSort.Elements, Colors.Gray);
     }
 }

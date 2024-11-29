@@ -19,60 +19,41 @@
         Width="Auto"
         Height="Auto"
         Margin="10">
-        <!--  Set res cố định thì set width và margin để canvas không bị dính border  -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <WrapPanel Grid.Column="0" Margin="10">
+            <WrapPanel
+                Grid.Column="0"
+                Margin="10"
+                VerticalAlignment="Center">
                 <Button
-                    x:Name="PlayButton"
-                    Margin="10"
-                    Padding="10"
+                    x:Name="PlayEndRestartButton"
+                    MinWidth="80"
+                    Margin="0,0,10,0"
                     VerticalAlignment="Center"
-                    Background="LightGray"
-                    BorderBrush="Black"
-                    BorderThickness="2"
-                    Click="PlayButton_Click"
-                    Content="Play"
-                    FontWeight="Black" />
-                <WrapPanel
-                    Width="Auto"
-                    Height="Auto"
-                    Margin="10"
-                    VerticalAlignment="Stretch">
-                    <Slider
-                        x:Name="SpeedSlider"
-                        Width="180"
-                        Height="30"
-                        Margin="5,5,50,0"
-                        IsEnabled="True"
-                        LargeChange="10"
-                        Maximum="100"
-                        Minimum="1"
-                        SmallChange="10"
-                        TickFrequency="10"
-                        TickPlacement="BottomRight"
-                        ValueChanged="SpeedSlider_ValueChanged" />
-                    <ui:NumberBox
-                        x:Name="SpeedNumberBox"
-                        Width="120"
-                        Height="Auto"
-                        Padding="5"
-                        HorizontalAlignment="Right"
-                        BorderThickness="2"
-                        FontSize="12"
-                        IsEnabled="True"
-                        KeyDown="SpeedNumberBox_KeyDown"
-                        LostFocus="SpeedNumberBox_LostFocus"
-                        PlaceholderText="ms"
-                        PreviewTextInput="SpeedNumberBox_PreviewTextInput" />
-                </WrapPanel>
+                    Click="PlayEndRestartButton_Click"
+                    Content="Play" />
+                <Slider
+                    x:Name="SpeedSlider"
+                    Width="200"
+                    VerticalAlignment="Center"
+                    IsDirectionReversed="True"
+                    IsEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    LargeChange="10"
+                    Maximum="500"
+                    Minimum="1"
+                    SmallChange="50"
+                    TickFrequency="50"
+                    TickPlacement="BottomRight"
+                    ValueChanged="SpeedSlider_ValueChanged"
+                    Value="250" />
             </WrapPanel>
             <WrapPanel Grid.Column="1">
                 <Grid
@@ -103,16 +84,12 @@
                         x:Name="TimeComplexity"
                         Grid.Row="0"
                         Grid.Column="1"
-                        Content="Time"
-                        FontWeight="Bold"
-                        Foreground="Black" />
+                        Content="Time" />
                     <Label
                         x:Name="SpaceComplexity"
                         Grid.Row="2"
                         Grid.Column="1"
-                        Content="Space"
-                        FontWeight="Bold"
-                        Foreground="Black" />
+                        Content="Space" />
                 </Grid>
             </WrapPanel>
         </Grid>
@@ -129,10 +106,5 @@
                 Loaded="SortVisualisation_Loaded"
                 SizeChanged="SortVisualisation_SizeChanged" />
         </Border>
-        <!--
-            <RichTextBox x:Name="CodeDisplay"
-                         Margin="517,28,53,316"
-                         IsReadOnly="True" />
-        -->
     </Grid>
 </Window>

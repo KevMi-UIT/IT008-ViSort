@@ -1,5 +1,4 @@
 using System.Windows.Media;
-using System.Xml.Linq;
 using ViSort.Types;
 
 namespace ViSort.Models.SortModels;

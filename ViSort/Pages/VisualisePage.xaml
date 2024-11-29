@@ -96,12 +96,10 @@
                         x:Name="ElementCountSlider"
                         Grid.Row="2"
                         Grid.Column="1"
-                        Width="179"
-                        Height="46"
                         IsSnapToTickEnabled="True"
                         Maximum="500"
-                        Minimum="100"
-                        TickFrequency="100"
+                        Minimum="50"
+                        TickFrequency="50"
                         TickPlacement="BottomRight" />
                 </Grid>
                 <Button
