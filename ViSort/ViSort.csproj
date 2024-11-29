@@ -20,7 +20,7 @@
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-    <DebugType>embedded</DebugType>
+    <DebugType>portable</DebugType>
     <UseWindowsForms>False</UseWindowsForms>
 	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
