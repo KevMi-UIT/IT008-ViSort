@@ -87,7 +87,11 @@
 
 ## 👨‍💻 DEV
 
+- Requirements:
+  - Nodejs
+  - Dotnet 8.0
+  - Dotnet 6.0 (For XamlStyler)
+
 ```ps1
-# dotnet tool restore
-dotnet restore ".\ViSort\ViSort.csproj"
+npm i
 ```
