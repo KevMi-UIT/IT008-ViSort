@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+dotnet husky run --name "Commitlint" --args "$1"
+
+# vim: set fileformat=unix filetype=sh:

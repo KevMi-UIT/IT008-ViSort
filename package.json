@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0"
+  },
+  "scripts": {
+    "prepare": "dotnet restore --use-lock-file && dotnet tool restore && dotnet husky install",
+    "commitlint": "commitlint --edit"
+  }
+}

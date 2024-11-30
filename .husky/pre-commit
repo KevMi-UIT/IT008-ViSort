@@ -20,3 +20,5 @@
 #echo 'Husky.Net is awesome!'
 
 dotnet husky run --group pre-commit
+
+# vim: set fileformat=unix filetype=sh:

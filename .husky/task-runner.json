@@ -20,6 +20,11 @@
       "args": ["xstyler", "--file", "${staged}"],
       "include": ["**/*.xaml"],
       "group": "pre-commit"
+    },
+    {
+      "name": "Commitlint",
+      "command": "npm",
+      "args": ["run", "commitlint", "${args}"]
     }
   ]
 }
