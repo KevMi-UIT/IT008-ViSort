@@ -4,13 +4,7 @@
     {
       "name": "Dotnet Format - Format C#",
       "command": "dotnet",
-      "args": [
-        "format",
-        "ViSort\\ViSort.sln",
-        "--no-restore",
-        "--include",
-        "${staged}"
-      ],
+      "args": ["format", "--no-restore", "--include", "${staged}"],
       "include": ["**/*.cs"],
       "group": "pre-commit"
     },
