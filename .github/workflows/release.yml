@@ -44,7 +44,7 @@ jobs:
         id: get_publish_path
         shell: bash
         run: |
-          path=$(compgen -G 'bin/Release/*/win-${{ matrix.arch }}/publish/')
+          path=$(compgen -G 'ViSort/bin/Release/*/win-${{ matrix.arch }}/publish/')
           echo "PUBLISH_PATH=$path" >> "$GITHUB_OUTPUT"
 
       - name: Rename for each arch
