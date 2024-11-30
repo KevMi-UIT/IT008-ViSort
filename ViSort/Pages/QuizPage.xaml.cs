@@ -18,6 +18,7 @@ public partial class QuizPage : Page
     private readonly List<RadioButton> RadioButtons = [];
     private readonly DrawRectangle DrawRect;
     private int currentQuestionIndex = 0;
+    private readonly List<List<int>> OriginalItemsList = new();
 
     public QuizPage()
     {
@@ -26,6 +27,7 @@ public partial class QuizPage : Page
         {
             QuizModel q = new(i + 1, string.Join(", ", questions[i]), questions[i]);
             QuestionList.Add(q);
+            OriginalItemsList.Add(new List<int>(questions[i]));
         }
         InitializeComponent();
         DrawRect = new(QuestionCanvas);
@@ -39,7 +41,7 @@ public partial class QuizPage : Page
 
         QuestionTextBlock.Text = QuestionList[currentQuestionIndex].Content;
 
-        DrawRect.DrawRectangleOnCanvas(QuestionList[currentQuestionIndex].Items, Colors.Gray);
+        DrawRect.DrawRectangleOnCanvas(OriginalItemsList[currentQuestionIndex], Colors.Gray);
 
         var selectedAnswer = QuestionList[currentQuestionIndex].SelectedAnswer;
 
@@ -79,11 +81,11 @@ public partial class QuizPage : Page
 
     private void Answer_Checked(object sender, RoutedEventArgs e)
     {
-        // Xác định nút radio nào đã được chọn
         if (sender is RadioButton selectedRadioButton)
         {
             string selectedSortName = selectedRadioButton.Tag.ToString()!;
             SortTypes sortTypes = SortUtils.GetSortType(selectedSortName);
+            QuestionList[currentQuestionIndex].SelectedAnswer = sortTypes;
             QuestionList[currentQuestionIndex].SelectedSort = SortUtils.InstantiateSort(sortTypes, QuestionList[currentQuestionIndex].Items);
             _ = QuestionList[currentQuestionIndex].SelectedSort!.BeginSortingAsync();
         }
@@ -102,7 +104,7 @@ public partial class QuizPage : Page
         string selectedAnswerString = $"{selectedAnswer.ToString() as string} Sort";
         foreach (var radioButton in MultipleChoiceWrapPanel.Children.OfType<RadioButton>())
         {
-            if (radioButton.Content.ToString() == selectedAnswerString)
+            if (radioButton.Tag.ToString() == selectedAnswerString)
             {
                 radioButton.IsChecked = true;
                 break;
