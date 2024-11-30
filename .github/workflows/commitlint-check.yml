@@ -12,6 +12,9 @@ jobs:
 
       - uses: actions/setup-node@v4
 
+      - name: Install deps
+        run: npm install --save-dev @commitlint/{cli,config-conventional}
+
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push'
         run: npx commitlint --last --verbose
