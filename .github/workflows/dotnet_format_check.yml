@@ -27,12 +27,11 @@ jobs:
           cache-dependency-path: ViSort/packages.lock.json
 
       - name: Restore deps
-        working-directory: ViSort
         run: dotnet restore --locked-mode --use-lock-file
 
       - name: Run dotnet format check
         run: |
-          dotnet format "ViSort/ViSort.sln" --verbosity detailed --verify-no-changes --no-restore
+          dotnet format --verbosity detailed --verify-no-changes --no-restore
           if (! $?)
           {
             Write-Error "Please reformat"
