@@ -35,7 +35,7 @@ public class UserService
         return await UsersCollection.Find(filter).Project<UserModel>(projection).SortByDescending(static u => u.Score).ToListAsync();
     }
 
-    public async Task AuthUserAsync(UserModel user)
+    public async Task SignUpAsync(UserModel user)
     {
         UserModel? existingUser = await GetUserFromDBAsync(user.Username);
         if (existingUser == null)
@@ -45,7 +45,20 @@ public class UserService
         }
         if (!Hasher.Verify(user.Password, existingUser.HashedPassword))
         {
-            throw new PasswordDoesNotMatch("Password does not match");
+            throw new UserAlreadyExists();
+        }
+    }
+
+    public async Task SignInAsync(UserModel user)
+    {
+        UserModel? existingUser = await GetUserFromDBAsync(user.Username);
+        if (existingUser == null)
+        {
+            throw new UserNotFound();
+        }
+        if (!Hasher.Verify(user.Password, existingUser.HashedPassword))
+        {
+            throw new PasswordDoesNotMatch();
         }
     }
 
@@ -55,7 +68,7 @@ public class UserService
         UserModel? existingUser = await UsersCollection.Find(filter).FirstOrDefaultAsync();
         if (!Hasher.Verify(user.Password, existingUser.HashedPassword))
         {
-            throw new PasswordDoesNotMatch("Password does not match");
+            throw new PasswordDoesNotMatch();
         }
         UpdateDefinition<UserModel>? update = Builders<UserModel>.Update.Set(static u => u.Score, user.Score);
         await UsersCollection.UpdateOneAsync(filter, update);
@@ -71,12 +84,12 @@ public class UserService
     {
         if (oldUser.Equals(newUser))
         {
-            throw new UserNoChanges("No modification on user.");
+            throw new UserNoChanges();
         }
         UserModel? existingUser = await GetUserFromDBAsync(newUser.Username);
         if (existingUser != null && oldUser.Username != newUser.Username)
         {
-            throw new UserAlreadyExists("User already exists.");
+            throw new UserAlreadyExists();
         }
         await DeleteUserAsync(oldUser);
         await AddUserAsync(newUser);
