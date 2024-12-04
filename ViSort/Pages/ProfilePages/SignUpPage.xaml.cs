@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using ViSort.Models;
 using ViSort.Pages.ProfilePages;
@@ -44,7 +44,6 @@ public partial class SignUpPage : Page
             ValidatePasswordTextBlock.Text = "Mật khẩu xác nhận không khớp. Vui lòng kiểm tra lại.";
             ValidatePasswordTextBlock.Visibility = Visibility.Visible;
             return;
-
         }
         ValidatePasswordTextBlock.Visibility = Visibility.Hidden;
         SubmitButton.IsEnabled = false;
