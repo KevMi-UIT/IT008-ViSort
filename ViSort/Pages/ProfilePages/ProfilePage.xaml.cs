@@ -24,7 +24,7 @@ public partial class ProfilePage : Page
         if (App.User != null)
         {
             App.User = null;
-            MainWindow.RootNavigationView.Navigate(typeof(AuthPage));
+            MainWindow.RootNavigationView.Navigate(typeof(SignInPage));
         }
         else
         {

@@ -12,7 +12,7 @@ public partial class ProfileSwitchPage : Page
         {
             if (App.User == null)
             {
-                NavigationService.Navigate(new AuthPage());
+                NavigationService.Navigate(new SignInPage());
             }
             else
             {

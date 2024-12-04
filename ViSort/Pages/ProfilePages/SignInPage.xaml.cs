@@ -7,9 +7,9 @@ using static ViSort.Exceptions.UserExceptions;
 
 namespace ViSort.Pages;
 
-public partial class AuthPage : Page
+public partial class SignInPage : Page
 {
-    public AuthPage()
+    public SignInPage()
     {
         if (!App.EstablishDBConnectionAsync().Result)
         {
@@ -45,7 +45,7 @@ public partial class AuthPage : Page
             {
                 throw new InvalidOperationException("User service is not initialized.");
             }
-            await App.UserSvc!.AuthUserAsync(User);
+            await App.UserSvc!.SignInAsync(User);
             App.User = User;
             MainWindow.RootNavigationView.Navigate(typeof(ProfilePage));
         }
@@ -57,6 +57,19 @@ public partial class AuthPage : Page
                 Content = "Mật khẩu không chính xác"
             }.ShowDialogAsync();
         }
+        catch (UserNotFound)
+        {
+            await new WpfUiControls.MessageBox
+            {
+                Title = "Lỗi đăng nhập",
+                Content = "Không tìm thấy username. Vui lòng kiểm tra lại hoặc đăng kí tài khoản mới."
+            }.ShowDialogAsync();
+        }
         SubmitButton.IsEnabled = true;
+    }
+
+    private void SignUpLink_Click(object sender, RoutedEventArgs e)
+    {
+        MainWindow.RootNavigationView.Navigate(typeof(SignUpPage));
     }
 }
