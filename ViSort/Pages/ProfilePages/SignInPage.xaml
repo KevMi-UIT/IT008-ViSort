@@ -99,16 +99,16 @@
                 Click="SubmitButton_Click"
                 Content="Continue"
                 Cursor="Hand" />
-                <ui:TextBlock
+            <ui:TextBlock
                 Grid.Row="6"
                 Grid.ColumnSpan="2"
                 Margin="10"
                 HorizontalAlignment="Center">
-                    <Run Text="Don't have an account?" />
+                <Run Text="Don't have an account?" />
                 <Hyperlink Click="SignUpLink_Click" Cursor="Hand">
                     <Run Text="Sign up" />
                 </Hyperlink>
-                </ui:TextBlock>
+            </ui:TextBlock>
         </Grid>
     </Grid>
 </Page>
