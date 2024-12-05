@@ -99,6 +99,6 @@ public partial class ProfilePage : Page
                 }.ShowDialogAsync();
             }
         }
-        MainWindow.RootNavigationView.Navigate(typeof(ProfileSwitchPage));
+        App.User = NewUserModel;
     }
 }
