@@ -53,16 +53,16 @@ public partial class SignInPage : Page
         {
             await new WpfUiControls.MessageBox
             {
-                Title = "Lỗi đăng nhập",
-                Content = "Mật khẩu không chính xác"
+                Title = "Sign in error.",
+                Content = "Password is incorrect."
             }.ShowDialogAsync();
         }
         catch (UserNotFound)
         {
             await new WpfUiControls.MessageBox
             {
-                Title = "Lỗi đăng nhập",
-                Content = "Không tìm thấy username. Vui lòng kiểm tra lại hoặc đăng kí tài khoản mới."
+                Title = "Sign in error.",
+                Content = "Username not found. Recheck spellings or create new account."
             }.ShowDialogAsync();
         }
         SubmitButton.IsEnabled = true;
