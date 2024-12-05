@@ -70,6 +70,6 @@ public partial class SignInPage : Page
 
     private void SignUpLink_Click(object sender, RoutedEventArgs e)
     {
-        MainWindow.RootNavigationView.Navigate(typeof(SignUpPage));
+        NavigationService.Navigate(new SignUpPage());
     }
 }
