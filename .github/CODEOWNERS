@@ -1,11 +1,11 @@
 /** @KevinNitroG
 
-ViSort/Models/SortModels/ @PNCanh
-ViSort/Models/DrawRectangle.cs @PNCanh
-ViSort/Models/SortModel.cs @PNCanh
-ViSort/Pages/VisualisePage.xaml* @PNCanh
-ViSort/Windows/VisualiseWindow.xaml* @PNCanh
+ViSort/Models/SortModels/ @PNCanh @KevinNitroG
+ViSort/Models/DrawRectangle.cs @PNCanh @KevinNitroG
+ViSort/Models/SortModel.cs @PNCanh @KevinNitroG
+ViSort/Pages/VisualisePage.xaml* @PNCanh @KevinNitroG
+ViSort/Windows/VisualiseWindow.xaml* @PNCanh @KevinNitroG
 
-ViSort/Models/QuizModel.cs @leminionn
-ViSort/Pages/ProfilePages/ @leminionn
-ViSort/Pages/QuizPage.xaml* @leminionn
+ViSort/Models/QuizModel.cs @leminionn @KevinNitroG
+ViSort/Pages/ProfilePages/ @leminionn @KevinNitroG
+ViSort/Pages/QuizPage.xaml* @leminionn @KevinNitroG
