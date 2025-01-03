@@ -31,7 +31,7 @@ public class DrawRectangle(Canvas? canvas = null, int threadDelay = 0)
     private void DrawOne(List<int> elements, int index, Color brushColor)
     {
         int maxValueOfElement = elements.Max();
-        DrawCanvas.Children.RemoveAt(index);    
+        DrawCanvas.Children.RemoveAt(index);
         double width = DrawCanvas.ActualWidth / elements.Count;
         double height = DrawCanvas.ActualHeight;
         Rectangle rect = new()
